@@ -1,0 +1,53 @@
+/* 공지사항 상세 페이지 스타일 */
+.notice-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    background-color: #f5f8fa; /* 푸른 계열 */
+    padding: 20px;
+}
+
+.notice-box {
+    max-width: 600px;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.notice-box h1 {
+    color: #0074D9; /* 푸른 계열 */
+    margin-bottom: 20px;
+}
+
+.notice-box p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.notice-box img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #0074D9; /* 푸른 계열 */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3; /* 어두운 푸른 계열 */
+}

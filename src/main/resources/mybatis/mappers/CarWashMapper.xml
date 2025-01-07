@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mySpring.myapp.mapper.CarWashMapper">
+
+    <!-- 추천 세차장 조회 -->
+    <select id="getRecommendedCarWashes" resultType="com.mySpring.myapp.carwash.model.CarWash">
+        SELECT washesid AS id,
+               washesname AS name,
+               washesaddress AS address,
+               washesnumber AS phone
+        FROM CarWashes
+        WHERE ROWNUM &lt;= 10
+    </select>
+
+    <!-- 모든 세차장 조회 -->
+    <select id="getAllCarWashes" resultType="com.mySpring.myapp.carwash.model.CarWash">
+        SELECT washesid AS id,
+               washesname AS name,
+               washesaddress AS address,
+               washesnumber AS phone
+        FROM CarWashes
+    </select>
+
+</mapper>

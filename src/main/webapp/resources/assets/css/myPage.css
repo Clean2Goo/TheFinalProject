@@ -1,0 +1,61 @@
+main {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px 0;
+    width: 1519px;
+    min-height: calc(100vh - 200px); /* header + footer 제외 높이 */
+}
+
+.mypage-container {
+    width: 60%;
+    margin: 0 auto;
+    max-width: 1200px; /* 최대 폭 제한 */
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mypage-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2467bf;
+    font-size: 24px;
+}
+
+.reservation-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.reservation-table th {
+    background-color: #2467bf;
+    color: white;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+.reservation-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.cancel-btn {
+    background-color: #ff5c5c;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cancel-btn:hover {
+    background-color: #e03e3e;
+}
+
+.cancel-btn:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}

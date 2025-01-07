@@ -1,0 +1,47 @@
+.background {
+    width: 100%; /* 화면 너비에 맞게 */
+    height: 85vh; /* 화면 높이의 85% */
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.menu {
+    width: 100%; /* 메뉴가 화면 전체를 차지 */
+    background: rgba(255, 255, 255, 0.7); /* 약간 투명한 배경 */
+    padding: 10px 0; /* 상하 간격 */
+}
+
+.menu ul {
+    display: flex; /* 메뉴를 가로로 나열 */
+    justify-content: space-around; /* 메뉴 아이템 사이에 간격 */
+    margin: 0 5%; /* 좌우 여백을 화면의 5%로 설정 */
+    padding: 0;
+    list-style: none;
+}
+
+.menu li {
+    text-align: center;
+    flex: 1; /* 아이템이 균등한 크기 */
+}
+
+.menu img {
+    width: 150px; /* 이미지 크기 조정 */
+    height: auto;
+}
+
+.menu .ment {
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color:#333;
+    text-decoration : none;
+}
+
+.menu .ment:hover {
+    color: #2467bf;
+}

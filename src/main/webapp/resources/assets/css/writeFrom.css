@@ -1,0 +1,116 @@
+/* 공통 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f8fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #0074D9;
+    margin-top: 50px;
+}
+
+/* 작성 페이지 스타일 */
+.notice-form {
+    margin: 30px 400px;
+}
+
+.notice-form form {
+    margin: 0;
+}
+
+/* 공지사항 작성 폼 스타일 */
+.notice-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: inline-block;
+    width: 120px; /* label 너비를 지정하여 왼쪽에 고정되도록 함 */
+    text-align: right; /* label의 텍스트를 오른쪽 정렬 */
+}
+
+.notice-form input[type="text"], 
+.notice-form textarea, 
+.notice-form input[type="file"] {
+    width: calc(100% - 130px); /* label의 너비를 제외한 나머지 부분을 차지하도록 함 */
+    padding: 10px;
+    margin: 10px 0px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* textarea 전용 스타일 */
+.notice-form textarea {
+    vertical-align: top; /* 상단 정렬 */
+    height: 150px; /* 고정 높이 설정 */
+}
+
+/* 버튼 스타일 */
+.notice-form button {
+    margin-top: 10px;
+}
+
+/* 제출 버튼 스타일 */
+.notice-form button, 
+.notice-form a.button {
+    display: inline-block;
+    background-color: #0074D9;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.notice-form button:hover, 
+.notice-form a.button:hover {
+    background-color: #0056b3;
+}
+
+/* 링크 스타일 */
+.notice-form a {
+    color: #0074D9;
+    text-decoration: none;
+}
+
+.notice-form a:hover {
+    text-decoration: underline;
+}
+
+/* 표 스타일 */
+.notice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.notice-table th, 
+.notice-table td {
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.notice-table th {
+    background-color: #e0f7fa;
+    color: #0074D9;
+}
+
+/* 이미지 스타일 */
+.notice-detail img {
+    margin-top: 20px;
+}
+
+/* 상세보기 페이지 */
+.notice-detail {
+    margin-top: 20px;
+}
+
+.redo {
+	margin-bottom: 50px;
+}

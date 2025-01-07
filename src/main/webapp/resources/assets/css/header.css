@@ -1,0 +1,173 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e7f2ff;
+    padding: 15px 100px 5px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    justify-content: right;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    margin-right: 20px;
+}
+
+.nav-menu li {
+    position: relative;
+    margin-right: 20px;
+}
+
+.nav-menu a {
+    color: #515b5f;
+    text-decoration: none;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.nav-menu a:hover {
+    color: #2467bf; 
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    background-color: #e7f2ff;
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+    border-radius: 5px;
+    z-index: 1;
+    white-space: nowrap; 
+}
+
+.dropdown li {
+    margin: 0;
+}
+
+.dropdown li a {
+    padding: 10px 20px;
+    display: inline-block; 
+}
+
+.dropdown li a:hover {
+    text-decoration: underline;
+    color: #2467bf; 
+}
+
+.services:hover .dropdown,
+.customer-support:hover .dropdown {
+    display: block;
+}
+
+.user-menu {
+    position: relative;
+    display: flex; /* Flexbox 활성화 */
+    justify-content: center;
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 20px; /* 아이콘 간의 간격을 10px로 설정 */
+}
+
+.user_icon, .notification_icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.dropdown-menu {
+    display: none;  /* 기본적으로 숨김 */
+    position: absolute;
+    top: 50px; /* 아이콘 아래로 위치 */
+    left: -50px;
+    background-color: #e9eef6;
+    border: 1px solid #d9e3e8;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 10px 0;
+    min-width: 180px; /* 드롭다운 메뉴 최소 너비 설정 */
+    text-align: center;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+
+/* 드롭다운 사용자 아이콘 */
+.dropdown-user-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* 환영 메시지 스타일 */
+.welcome-message {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* 마이페이지 버튼 */
+.mypage-button {
+    display: inline-block;
+    background-color: transparent; /* 투명 배경 */
+    border: 1px solid black; /* 검정 테두리 */
+    color: black;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.mypage-button:hover {
+    background-color: #d9d9d9; /* 호버 시 연한 회색 */
+}
+
+/* 로그아웃 버튼 */
+.logout-button {
+    display: inline-block;
+    background-color: white; /* 흰색 배경 */
+    border: none; /* 테두리 없음 */
+    color: black;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: #e6e6e6; /* 호버 시 약간 어두운 흰색 */
+}
+
+/* 로그아웃 상태의 로그인 버튼 */
+.login-button {
+    background-color: #0074D9;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login-button a {
+    text-decoration: none;
+    color: white;
+}
+
+.login-button:hover {
+    background-color: #005a9e;
+}
