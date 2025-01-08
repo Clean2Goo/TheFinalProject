@@ -91,14 +91,17 @@ public class FavoriteController {
 
     // 모든 유저의 즐겨찾기 목록 조회
     @GetMapping
-    public ResponseEntity<List<FavoriteVO>> getAllFavorites() {
+    public ResponseEntity<List<FavoriteVO>> getFavorites(HttpServletRequest request) {
         try {
-            logger.info("Fetching all favorites");
-            List<FavoriteVO> favorites = favoriteService.getAllFavorites();
-            logger.info("Fetched favorites: {}", favorites); // 로그 추가
+            String userId = getLoggedInUserId(request); // 현재 로그인한 사용자 ID 가져오기
+            logger.info("Fetching favorites for userId: {}", userId);
+            List<FavoriteVO> favorites = favoriteService.getFavoritesByUserId(userId);
             return ResponseEntity.ok(favorites);
+        } catch (IllegalArgumentException e) {
+            logger.error("Invalid data: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         } catch (Exception e) {
-            logger.error("Error fetching all favorites", e); // 예외 로그
+            logger.error("Error fetching favorites", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }

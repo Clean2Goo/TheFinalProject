@@ -160,6 +160,12 @@ document.querySelector('.close-btn').addEventListener('click', closePopup);
 
 // 리뷰 작성 및 제출
 document.getElementById("submit-review-button").addEventListener("click", async () => {
+    const sessionMember = document.querySelector('meta[name="sessionMember"]')?.getAttribute('content');
+    if (!sessionMember) {
+        alert("로그인이 필요합니다.");
+        return;
+    }
+
     const reviewContent = document.getElementById("review-content").value;
     const reviewScore = document.getElementById("review-score").value;
     const carWashId = document.getElementById("popup-carwash-name").getAttribute("data-id");
@@ -226,13 +232,15 @@ function updateReviewList() {
     const reviewsToDisplay = currentReviews.slice(startIndex, endIndex);
 
     reviewsToDisplay.forEach(review => {
+        const userImg = review.userImg || `${contextPath}/resources/assets/images/profile.png`;
+
         const reviewItem = document.createElement("div");
         reviewItem.classList.add("review-item");
         reviewItem.innerHTML = `
             <div class="review-header">
-                <img src="/resources/images/default-profile.jpg" alt="프로필 이미지" class="profile-img">
+                <img src="${userImg}" alt="프로필 이미지" class="profile-img">
                 <div>
-                    <p class="username">사용자 이름</p>
+                    <p class="username">${review.userId || "익명 사용자"}</p>
                     <p class="review-date">${new Date(review.crtDate).toLocaleString()}</p>
                 </div>
             </div>
@@ -249,6 +257,7 @@ function updateReviewList() {
     // 페이지 정보 업데이트
     document.getElementById("review-page-info").innerText = `${currentReviewPage} / ${totalPages}`;
 }
+
 
 // 이전 리뷰 페이지로 이동
 document.getElementById("prev-review-button").addEventListener("click", () => {
@@ -270,12 +279,21 @@ document.getElementById("next-review-button").addEventListener("click", () => {
 // 추천 세차장 리스트를 업데이트하는 함수
 function updateRecommendedList(carWashList) {
     const recommendedList = document.getElementById("recommended-list");
-    recommendedList.innerHTML = ''; // 기존 리스트 초기화
+    recommendedList.innerHTML = ''; 
 
-    const totalPages = Math.ceil(carWashList.length / itemsPerPage);
+    const sortedCarWashList = carWashList.sort((a, b) => {
+        if (a.washImg && !b.washImg) {
+            return -1; 
+        } else if (!a.washImg && b.washImg) {
+            return 1; 
+        }
+        return 0; 
+    });
+
+    const totalPages = Math.ceil(sortedCarWashList.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentCarWashes = carWashList.slice(startIndex, endIndex);
+    const currentCarWashes = sortedCarWashList.slice(startIndex, endIndex);
 
     currentCarWashes.forEach(carWash => {
         const carWashCard = document.createElement("div");
@@ -291,7 +309,6 @@ function updateRecommendedList(carWashList) {
                 <p>주소: ${carWash.washAddr}</p>
                 <p>전화번호: ${carWash.washTel}</p>
                 <p>영업시간: ${carWash.openHrs || "정보 없음"}</p>
-                <button class="reserve-button" onclick="redirectToReservation('${carWash.washId}')">예약하기</button>
                 <button id="favorite-${carWash.washId}" class="favorite-button ${isFavorite}">
                     <span class="star-icon">★</span>
                 </button>
@@ -305,7 +322,8 @@ function updateRecommendedList(carWashList) {
         });
 
         // 세차장 카드를 클릭했을 때 팝업 열기
-        carWashCard.addEventListener('click', () => {
+        carWashCard.addEventListener('click', (e) => {
+            e.preventDefault();
             map.setCenter(new kakao.maps.LatLng(carWash.washLat, carWash.washLng));
             openPopup(carWash);
         });
@@ -340,12 +358,12 @@ function setupPaginationEvents() {
 
 // 초기화 및 데이터 로드
 document.addEventListener("DOMContentLoaded", async () => {
-    // 즐겨찾기 상태 로드
     try {
+        // 로그인된 사용자의 즐겨찾기 데이터 불러오기
         const response = await fetch(`${contextPath}/api/favorites`);
         if (response.ok) {
             const favorites = await response.json();
-            favoriteList = new Set(favorites.map(fav => fav.washId)); // 즐겨찾기 데이터 로드
+            favoriteList = new Set(favorites.map(fav => fav.washId)); // 현재 사용자 즐겨찾기 로드
             updateFavoriteUI(); // UI 업데이트
         } else {
             console.error("Failed to load favorites");
@@ -357,7 +375,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 세차장 데이터 로드
     await fetchCarWashes();
 });
-
 
 // 즐겨찾기 토글 함수
 async function toggleFavorite(washId) {
@@ -393,7 +410,6 @@ async function toggleFavorite(washId) {
     }
 }
 
-
 // 즐겨찾기 버튼 UI 업데이트
 function updateFavoriteButton(washId) {
     const favoriteButton = document.getElementById(`favorite-${washId}`);
@@ -407,17 +423,6 @@ function updateFavoriteButton(washId) {
 }
 
 // 초기화 시 전체 즐겨찾기 상태 UI 반영
-function updateFavoriteUI() {
-    allCarWashes.forEach(carWash => {
-        const favoriteButton = document.getElementById(`favorite-${carWash.washId}`);
-        if (favoriteButton) {
-            updateFavoriteButton(carWash.washId);
-        }
-    });
-}
-
-
-// 전체 즐겨찾기 UI 업데이트
 function updateFavoriteUI() {
     allCarWashes.forEach(carWash => {
         const favoriteButton = document.getElementById(`favorite-${carWash.washId}`);

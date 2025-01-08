@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -30,34 +31,51 @@ public class ReviewService {
     }
 
     // 리뷰 저장
-    public void saveReview(Review review) {
+    public void saveReview(Review review, String userId) {
         if (review.getRwId() == null || review.getRwId().isEmpty()) {
             review.setRwId(UUID.randomUUID().toString());
         }
-        logger.info("Saving review: " + review);
+        review.setUserId(userId); // 작성자 ID 설정
+        logger.info("Saving review for userId: " + userId + " with data: " + review);
         reviewRepository.save(review);
     }
 
-    // 특정 리뷰 삭제
-    public void deleteReviewByRwId(String rwId) {
-        logger.info("Deleting review with ID: " + rwId);
-        if (reviewRepository.existsByRwId(rwId)) {
-            reviewRepository.deleteByRwId(rwId);
-        } else {
+    // 특정 리뷰 조회
+    public Review getReviewByRwId(String rwId) {
+        logger.info("Fetching review with ID: " + rwId);
+        return reviewRepository.findByRwId(rwId).orElseThrow(() -> {
             logger.warning("Review with ID " + rwId + " not found.");
-            throw new RuntimeException("Review not found.");
+            return new RuntimeException("Review not found.");
+        });
+    }
+
+    // 특정 리뷰 삭제
+    public void deleteReviewByRwId(String rwId, String userId) {
+        logger.info("Deleting review with ID: " + rwId + " by userId: " + userId);
+        Review review = getReviewByRwId(rwId);
+
+        // 작성자 검증
+        if (!review.getUserId().equals(userId)) {
+            logger.warning("User ID mismatch. User " + userId + " tried to delete review owned by " + review.getUserId());
+            throw new RuntimeException("본인의 리뷰만 삭제할 수 있습니다.");
         }
+
+        reviewRepository.deleteByRwId(rwId);
     }
 
     // 리뷰 수정
-    public void updateReview(String rwId, Review updatedReview) {
-        logger.info("Updating review with ID: " + rwId);
-        if (reviewRepository.existsByRwId(rwId)) {
-            updatedReview.setRwId(rwId);
-            reviewRepository.save(updatedReview);
-        } else {
-            logger.warning("Review with ID " + rwId + " not found.");
-            throw new RuntimeException("Review not found.");
+    public void updateReview(String rwId, Review updatedReview, String userId) {
+        logger.info("Updating review with ID: " + rwId + " by userId: " + userId);
+        Review existingReview = getReviewByRwId(rwId);
+
+        // 작성자 검증
+        if (!existingReview.getUserId().equals(userId)) {
+            logger.warning("User ID mismatch. User " + userId + " tried to update review owned by " + existingReview.getUserId());
+            throw new RuntimeException("본인의 리뷰만 수정할 수 있습니다.");
         }
+
+        updatedReview.setRwId(rwId);
+        updatedReview.setUserId(userId); // 작성자 ID 유지
+        reviewRepository.save(updatedReview);
     }
 }
