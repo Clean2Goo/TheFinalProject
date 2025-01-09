@@ -9,20 +9,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WashWise - 세차장 탐색</title>
-    <link rel="stylesheet" href="${contextPath}/resources/assets/css/explore.css"/>">
+    <link rel="stylesheet" href="${contextPath}/resources/assets/css/explore.css"/>
     <meta name="contextPath" content="${contextPath}" />
 </head>
 <body>
 
-    <!-- 사용자 아이콘 및 드롭다운 -->
-    <div class="user-icon">☰</div>
-    <div class="dropdown-menu">
-        <a href="#">프로필</a>
-        <a href="#">설정</a>
-        <a href="#">로그아웃</a>
-    </div>
 
-    <main>
+    <main class="ui-search-map">
         <div class="map-container">
             <section class="recommend-section">
                 <h2>추천 세차장</h2>

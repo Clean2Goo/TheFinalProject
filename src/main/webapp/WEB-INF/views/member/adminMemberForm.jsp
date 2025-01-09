@@ -1,22 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%request.setCharacterEncoding("UTF-8");%>
-
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
 <main>
 	<section>
 		<article>
 			<div class="sign-container">
-				<h1 class="text_center">회원가입</h1>
-				<form method="post" action="${contextPath}/member/addMember.do">
+				<h1 class="text_center">어드민 회원가입</h1>
+				<form method="post" action="${contextPath}/member/adminAddMember.do">
 					<table class="memF_table">
-						<tr style="display: none;">
+						<tr>
 							<td class="memF_td" ><p align="right">가입 구분</p></td>
 							<td class="memF_td">
 								<select name="userType">
-								<option value="customer" selected>고객</option>
+									<option value="washAdmin">세차장 관리자</option>
+									<option value="washStaff">세차장 직원</option>
+									<option value="washVisitor">출장세차업자</option>
+									<!-- <option value="systemOperator">시스템운영자</option> -->
 								</select>
 							</td>
 						</tr>
@@ -53,4 +55,3 @@
 		</article>
 	</section>
 </main>
-

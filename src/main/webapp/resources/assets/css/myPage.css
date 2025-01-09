@@ -1,15 +1,8 @@
-main {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px 0;
-    width: 1519px;
-    min-height: calc(100vh - 200px); /* header + footer 제외 높이 */
-}
+@charset "utf-8";
 
 .mypage-container {
-    width: 60%;
-    margin: 0 auto;
     max-width: 1200px; /* 최대 폭 제한 */
+    margin: 0 auto;
     background-color: white;
     padding: 30px;
     border-radius: 10px;

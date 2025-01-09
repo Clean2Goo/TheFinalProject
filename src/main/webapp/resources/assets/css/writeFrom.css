@@ -1,21 +1,9 @@
-/* 공통 스타일 */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f5f8fa;
-    margin: 0;
-    padding: 0;
-    color: #333;
-}
+@charset "utf-8";
 
-h1 {
-    text-align: center;
-    color: #0074D9;
-    margin-top: 50px;
-}
+.notice-titleh {margin-top: 50px;text-align: center;color: #0074D9;}
 
 /* 작성 페이지 스타일 */
 .notice-form {
-    margin: 30px 400px;
 }
 
 .notice-form form {
@@ -31,8 +19,8 @@ h1 {
     text-align: right; /* label의 텍스트를 오른쪽 정렬 */
 }
 
-.notice-form input[type="text"], 
-.notice-form textarea, 
+.notice-form input[type="text"],
+.notice-form textarea,
 .notice-form input[type="file"] {
     width: calc(100% - 130px); /* label의 너비를 제외한 나머지 부분을 차지하도록 함 */
     padding: 10px;
@@ -54,7 +42,7 @@ h1 {
 }
 
 /* 제출 버튼 스타일 */
-.notice-form button, 
+.notice-form button,
 .notice-form a.button {
     display: inline-block;
     background-color: #0074D9;
@@ -67,7 +55,7 @@ h1 {
     transition: background-color 0.3s;
 }
 
-.notice-form button:hover, 
+.notice-form button:hover,
 .notice-form a.button:hover {
     background-color: #0056b3;
 }
@@ -89,7 +77,7 @@ h1 {
     margin: 20px 0;
 }
 
-.notice-table th, 
+.notice-table th,
 .notice-table td {
     text-align: left;
     padding: 12px;

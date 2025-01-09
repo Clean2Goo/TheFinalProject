@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    isELIgnored="false" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<%
-   request.setCharacterEncoding("UTF-8");
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="if" uri="http://java.sun.com/jsp/jstl/core"%>
+<% request.setCharacterEncoding("UTF-8");%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <c:choose>
 	<c:when test="${result=='loginFailed' }">
@@ -23,9 +20,9 @@
 		<article>
 			<div class="sign-container">
 				<div class="login-header">
-					<h1>로그인</h1> <!-- WashWise 로고 -->
+					<h1>어드민 로그인</h1>
 				</div>
-				<form name="frmLogin" method="post" action="${contextPath}/member/login.do">
+				<form name="frmLogin" method="post" action="${contextPath}/member/adminLoginForm.do">
 					<table>
 						<tr>
 							<td>아이디</td>
@@ -45,12 +42,11 @@
 				</form>
 
 				<div class="signup-link">
-					<p>회원이 아니신가요? <a href="${contextPath}/member/memberForm.do">회원가입</a></p>
+					<p>회원이 아니신가요? <a href="${contextPath}/member/adminMemberForm.do">회원가입</a></p>
 				</div>
 			</div>
+
 		</article>
 	</section>
 </main>
-
-
 
