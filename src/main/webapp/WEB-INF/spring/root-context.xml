@@ -18,8 +18,8 @@
     <!-- 1) 컴포넌트 스캔 -->
     <context:component-scan base-package="com.mySpring.myapp" />
     <jpa:repositories base-package="com.mySpring.myapp.reviews.repository" />
-	
-    <!-- 2) JPA 리포지토리 스캔 -->
+    
+    <!-- 2) 추가 JPA 리포지토리 스캔 -->
     <jpa:repositories base-package="com.mySpring.myapp.carwash.repository" />
 
     <!-- 3) DataSource 설정 -->
@@ -36,7 +36,7 @@
         <!-- DB 연결 -->
         <property name="dataSource" ref="dataSource" />
         <!-- 엔티티 클래스가 위치한 패키지 -->
-        <property name="packagesToScan" value="com.mySpring.myapp.carwash.model, com.mySpring.myapp.reviews.model" />
+        <property name="packagesToScan" value="com.mySpring.myapp.carwash.model, com.mySpring.myapp.reviews.model, com.mySpring.myapp.member.vo" />
 
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -47,7 +47,7 @@
             </bean>
         </property>
 
-        <!-- Dialect, 등 추가 JPA 설정 -->
+        <!-- Dialect, 추가 JPA 설정 -->
         <property name="jpaProperties">
             <props>
                 <!-- Oracle 11g → Oracle10gDialect 사용 -->

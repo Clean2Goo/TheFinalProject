@@ -12,6 +12,7 @@
         <result property="phone" column="USERPHONE" />
         <result property="userType" column="USERTYPE" />
         <result property="joinDate" column="JOINDATE" />
+        <result property="img" column="USERIMG" />
 	</resultMap> 
 	
     <!-- 회원 전체 목록 조회 -->
@@ -60,4 +61,12 @@
             WHERE USERID = #{id} AND USERPWD = #{pwd}
         ]]>
     </select>
+    
+    <!-- member-mapper.xml -->
+	<update id="updateProfileImage">
+	    UPDATE Users
+	    SET USERIMG = #{userImg}
+	    WHERE USERID = #{id}
+	</update>
+    
 </mapper>

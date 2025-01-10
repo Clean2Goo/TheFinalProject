@@ -1,8 +1,9 @@
 @charset "utf-8";
 
 .mypage-container {
-    max-width: 1200px; /* 최대 폭 제한 */
-    margin: 0 auto;
+    width: 60%;
+    margin: 50px auto; /* 위 아래 여백을 주기 위해 margin 수정 */
+    max-width: 1200px;
     background-color: white;
     padding: 30px;
     border-radius: 10px;
@@ -16,39 +17,66 @@
     font-size: 24px;
 }
 
-.reservation-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.reservation-table th {
+.user-info .info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.user-info .info-item:last-child {
+    border-bottom: none; /* 마지막 항목의 border-bottom 제거 */
+}
+
+.user-info .info-item span {
+    font-size: 16px;
+}
+
+.user-info .info-item .label {
+    color: #888;
+    font-weight: bold;
+    width: 150px;  /* 항목명 고정 너비 */
+}
+
+.user-info .info-item .value {
+    color: #333;
+    width: calc(100% - 160px);  /* 항목명 너비를 제외한 나머지 공간을 value에 할당 */
+    text-align: left;
+}
+
+.user-info .info-item .value a {
+    color: #2467bf;
+    text-decoration: none;
+}
+
+.user-info .info-item .value a:hover {
+    text-decoration: underline;
+}
+
+/* 수정 버튼 스타일 */
+.edit-btn {
     background-color: #2467bf;
     color: white;
-    padding: 10px;
-    text-transform: uppercase;
-}
-
-.reservation-table td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ddd;
-}
-
-.cancel-btn {
-    background-color: #ff5c5c;
-    color: white;
     padding: 5px 10px;
-    border: none;
     border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
     transition: background-color 0.3s;
+    text-align: center;
+    white-space: nowrap; /* 텍스트가 한 줄로 유지되도록 설정 */
+    display: inline-block; /* 텍스트가 한 줄로 유지되도록 설정 */
 }
 
-.cancel-btn:hover {
-    background-color: #e03e3e;
+.edit-btn:hover {
+    background-color: #1a4f88;
 }
 
-.cancel-btn:disabled {
-    background-color: #ddd;
-    cursor: not-allowed;
+.edit-btn:focus {
+    outline: none;
 }
