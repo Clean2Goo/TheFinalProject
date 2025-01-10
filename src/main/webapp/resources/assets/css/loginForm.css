@@ -1,21 +1,10 @@
-/* 로그인 페이지 스타일 */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f7fc; /* 밝은 배경 */
-    display: flex;
-    justify-content: center;
-    width: 100%; /* 화면 크기에 맞게 확장 */
-  
-}
-
+@charset "utf-8";
 
 /* 로그인 컨테이너 */
-.login-container {
+.sign-container {
     width: 100%; /* 전체 화면 너비에 맞춰 확장 */
     max-width: 400px; /* 최대 너비 */
-    margin: 100px auto; /* 상단 여백 100px, 자동으로 좌우 정렬 */
+    margin: 0 auto; 
     padding: 20px;
     background-color: white;
     border-radius: 10px;
@@ -39,7 +28,7 @@ form table {
 }
 
 /* 입력 필드 */
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], select {
     width: 100%;
     padding: 12px;
     margin: 10px 0;

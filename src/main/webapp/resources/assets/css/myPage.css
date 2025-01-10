@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 .mypage-container {
     width: 60%;
     margin: 50px auto; /* 위 아래 여백을 주기 위해 margin 수정 */

@@ -27,6 +27,8 @@
     </div>
 
     <main>
+
+    <main class="ui-search-map">
         <div class="map-container">
             <section class="recommend-section">
                 <h2>추천 세차장</h2>
