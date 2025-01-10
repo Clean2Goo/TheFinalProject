@@ -8,11 +8,14 @@ import java.util.Date;
 public class Review {
 
     @Id
-    @Column(name = "RVWID") // 스크린샷에서 RVWID로 확인
-    private String rwId; // 리뷰 ID
+    @Column(name = "RVWID") // 리뷰 ID
+    private String rwId;
 
     @Column(name = "RSVNID") // 예약 ID
     private String rsvId;
+
+    @Column(name = "USERID", nullable = false) // 작성자 ID
+    private String userId;
 
     @Column(name = "RVWSCORE") // 리뷰 점수
     private int rwvScore;
@@ -45,6 +48,14 @@ public class Review {
 
     public void setRsvId(String rsvId) {
         this.rsvId = rsvId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public int getRwvScore() {
