@@ -50,7 +50,7 @@ public class MemberControllerImpl   implements MemberController {
 		return mav;
 	}
 	
-    / 프로필 이미지 업데이트 처리 메서드
+    // 프로필 이미지 업데이트 처리 메서드
     @RequestMapping("/updateProfileImage")
     public ModelAndView updateProfileImage(
             @RequestParam("profileImage") MultipartFile profileImage,
