@@ -12,11 +12,21 @@ import com.mySpring.myapp.member.vo.MemberVO;
 
 
 public interface MemberController {
-	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView addMember(@ModelAttribute("info") MemberVO memberVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView login(@ModelAttribute("member") MemberVO member,
                               RedirectAttributes rAttr,
                               HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	//	어드민
+	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView adminListMembers(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView adminAddMember(@ModelAttribute("info") MemberVO memberVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView adminLoginForm(@ModelAttribute("member") MemberVO member,
+            RedirectAttributes rAttr,
+            HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView adminLogout(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	
 }
