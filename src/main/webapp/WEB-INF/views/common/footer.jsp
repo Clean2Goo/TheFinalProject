@@ -4,19 +4,45 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
 <footer>
-	<section>
+	<section class="footer-pc">
 		<article>
-			  <div class="footer-content">
-			    <div class="footer-logo">
-			      <img src="${contextPath}/resources/assets/images/logo2.png" alt="Logo" height="80">
-			    </div>
-			    <div class="team-info">
-			      <p><strong>팀장:</strong> 김현서</p>
-			      <p><strong>팀원:</strong> 김정오, 임재필, 하석준</p>
-			      <p><strong>훈련과정명:</strong> 멀티캠퍼스 채용연계 풀스택 개발자 부트캠프(스프링&리액트) 26회차</p>
-			      <p><strong>훈련기간:</strong> 2024-09-02 ~ 2025-03-03</p>
-			    </div>
-			  </div>
+			<div class="link-list">
+				<ul>
+					<li><a href="" class="ux-link bold">개인정보처리방침</a></li>
+					<li><a href="" class="ux-link">회사소개</a></li>
+					<li><a href="" class="ux-link">공지사항</a></li>
+					<li><a href="" class="ux-link">고객정보취급방침</a></li>
+				</ul>
+			</div>
+			<div class="company-info">
+				<h1><a href="${contextPath}/main.do" class="ux-link h1">Clean2Go</a></h1>
+				<ul>
+					<li>
+						<dl>
+							<dt>대표이사 : </dt>
+							<dd><span class="value">김이하임</span></dd>
+						</dl>
+					</li>
+					<li>
+						<dl>
+							<dt>본점 : </dt>
+							<dd><span class="value">멀티캠퍼스 final-pj-ZOOM/2025-2호</span></dd>
+						</dl>
+					</li>
+					<li>
+						<dl>
+							<dt>고객센터 : </dt>
+							<dd><span class="value">2025-ABCD (AM.09:10 ~ PM.17:51)</span></dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+			<div class="copyright-info">
+				<dl>
+					<dt><span class="label">COPYRIGHT© 2025</span></dt>
+					<dd><span class="value">CAMPROAD CO., LTD All rights reserved.</span></dd>
+				</dl>
+			</div>
 		</article>
 	</section>
 </footer>
