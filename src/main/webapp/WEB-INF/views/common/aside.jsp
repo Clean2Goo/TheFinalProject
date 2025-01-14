@@ -17,10 +17,10 @@
 				</c:choose>
 				<ul>
 					<li>
-						<a href="" class="ux-link">공지사항 목록</a>
+						<a href="" class="ux-link">내 정보</a>
 					</li>
 					<li>
-						<a href="" class="ux-link">이벤트 목록</a>
+						<a href="${contextPath}/favorites.do" class="ux-link">즐겨찾기 목록</a>
 					</li>
 				</ul>
 			</div>
