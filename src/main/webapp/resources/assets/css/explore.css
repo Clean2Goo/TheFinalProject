@@ -686,7 +686,7 @@
 
 
 
-/* explore.jsp 임시 재정의*/
+/* 임시 재정의*/
 .sliding-popup {width: 400px;left:430px; transform: translateX(0);z-index: 100;}
 
 main.ui-search-map {padding: 132px 0 100px;}
