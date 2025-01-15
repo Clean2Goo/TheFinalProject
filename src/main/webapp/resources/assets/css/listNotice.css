@@ -78,6 +78,21 @@
     background-color: #e64a19;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+/* 임시 재정의*/
+.notice-list-container {width:100%;padding:0;}
+
 /* 페이지네이션 */
 .pagination {
     display: flex;

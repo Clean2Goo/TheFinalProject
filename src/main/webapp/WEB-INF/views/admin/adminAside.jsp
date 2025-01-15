@@ -7,50 +7,50 @@
 
 <section>
 	<article>
-		<div class="admin-menu">
-			<div class="menu-list">
-				<c:choose>
-					<c:when test="${isLogOn == true  && member!= null}">
-						<h4>이름: ${member.name}님!</h4>
-						<h4>구분: ${member.userType}</h4>
-					</c:when>
-				</c:choose>
-				<ul>
-					<c:if test="${isLogOn && member.userType == 'systemOperator'}">
-						<li>
-							<a href="${contextPath}/member/adminListMembers.do" class="ux-link">전체회원목록창</a>
-						</li>
-					</c:if>
+		<div class="content admin-menu">
+			<c:choose>
+				<c:when test="${isLogOn == true  && member!= null}">
+					<div class="user-info-wrap">
+						<h5>${member.name}님!</h5>
+						<h6>${member.userType}</h6>
+					</div>
+				</c:when>
+			</c:choose>
+			<ul class="menu-list">
+				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
 					<li>
-						<a href="${contextPath}/notice/adminListNotices.do" class="ux-link">공지사항 목록</a>
+						<a href="${contextPath}/member/adminListMembers.do" class="ux-button text-button"><span class="label">전체회원 리스트</span></a>
 					</li>
-					<c:if test="${isLogOn && member.userType == 'systemOperator'}">
-						<li>
-							<a href="${contextPath}/notice/adminWriteForm.do" class="ux-link">공지사항 작성</a>
-						</li>
-					</c:if>
+				</c:if>
+				<li>
+					<a href="${contextPath}/notice/adminListNotices.do" class="ux-button text-button"><span class="label">공지사항</span></a>
+				</li>
+				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
 					<li>
-						<a href="" class="ux-link">이벤트 목록</a>
+						<a href="${contextPath}/notice/adminWriteForm.do" class="ux-button text-button"><span class="label">공지사항 작성</span></a>
 					</li>
-					<c:if test="${isLogOn && member.userType == 'systemOperator'}">
-						<li>
-							<a href="" class="ux-link">이벤트 작성</a>
-						</li>
-					</c:if>
+				</c:if>
+				<li>
+					<a href="#" class="ux-button text-button"><span class="label">이벤트</span></a>
+				</li>
+				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
 					<li>
-						<a href="" class="ux-link">자주묻는질문 목록</a>
+						<a href="" class="ux-button text-button"><span class="label">이벤트 작성</span></a>
 					</li>
-					<c:if test="${isLogOn && member.userType == 'systemOperator'}">
-						<li>
-							<a href="" class="ux-link">자주묻는질문 작성</a>
-						</li>
-					</c:if>
-				</ul>
-			</div>
-			<div class="button-bar">
-				<button type="button" class="ux-button button-logout button-rang"
+				</c:if>
+				<li>
+					<a href="#" class="ux-button text-button"><span class="label">자주묻는질문</span></a>
+				</li>
+				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
+					<li>
+						<a href="#" class="ux-button text-button"><span class="label">자주묻는질문 작성</span></a>
+					</li>
+				</c:if>
+			</ul>
+			<div class="ux-button-bar">
+				<button type="button" class="ux-button outlined"
 					onclick="location.href='${contextPath}/member/adminLogout.do'">
-					<span class="label">어드민-로그아웃</span><span class="icon"></span>
+					<span class="label">어드민-로그아웃</span>
 				</button>
 			</div>
 		</div>

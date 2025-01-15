@@ -11,6 +11,104 @@
     max-width: 500px;
 }
 
+.profile-img {
+    width: 50px; /* 원하는 크기로 설정 */
+    height: 50px;
+    border-radius: 50%; /* 원형으로 표시 */
+    margin-right: 10px; /* 텍스트와 간격 */
+    object-fit: cover; /* 이미지 비율 유지하며 채우기 */
+}
+
+
+/* 추천 리스트에 있는 이미지 스타일 */
+/* 팝업 내부 이미지 스타일 */
+.popup-image {
+    width: 100%; /* 팝업의 너비에 맞게 조정 */
+    max-width: 300px; /* 원하는 최대 너비 설정 */
+    max-height: 200px; /* 원하는 최대 높이 설정 */
+    height: auto; /* 비율 유지 */
+    object-fit: cover; /* 이미지 비율 유지하면서 잘라내기 */
+    border-radius: 5px; /* 모서리를 둥글게 (옵션) */
+}
+
+
+
+/* 팝업 이미지와 스크롤 스타일 */
+.popup-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* 팝업 전체 스크롤 가능 */
+.sliding-popup {
+    max-height: 80%;
+    overflow-y: auto;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+/* 추천 리스트 아이템 스타일 */
+.recommend-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+.recommend-item img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+/* 추천 리스트 텍스트 컨테이너 */
+.recommend-item-content {
+    flex: 1;
+}
+
+/* 버튼 스타일 */
+.reserve-button {
+    padding: 0.5rem 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.reserve-button:hover {
+    background-color: #0056b3;
+}
+
+.detail-button {
+    padding: 0.5rem 1rem;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+.detail-button:hover {
+    background-color: #218838;
+}
+
+
+
 /* 리뷰 섹션 스타일 */
 #review-section {
     margin-top: 20px;
@@ -403,6 +501,15 @@
     font-size: 0.9rem;
 }
 
+/* 팝업 버튼 컨테이너 */
+.popup-buttons {
+    display: flex;
+    justify-content: center; /* 버튼을 중앙 정렬 */
+    gap: 10px; /* 버튼 간격 */
+    margin-top: 20px; /* 위 내용과의 간격 */
+}
+
+/* 버튼 스타일 공통 */
 .reserve-button {
     padding: 0.5rem 1rem;
     color: #fff;
@@ -411,24 +518,27 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 0.9rem;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
+/* 버튼 호버 효과 */
 .reserve-button:hover {
     background-color: #0056b3;
 }
 
+/* 버튼 비활성화 상태 */
 .reserve-button:disabled {
     background-color: #6c757d;
     cursor: not-allowed;
     opacity: 0.7;
 }
 
+
 /* 슬라이딩 팝업 스타일 */
 .sliding-popup {
     position: fixed;
     left: 50%;
-    top: 100px;
+    top: 160px;
     transform: translateX(-50%);
     width: 450px;
     background-color: #fff;
@@ -557,3 +667,37 @@
     }
    /* 즐겨찾기 버튼 스타일 */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 임시 재정의*/
+.sliding-popup {width: 400px;left:430px; transform: translateX(0);z-index: 100;}
+
+main.ui-search-map {padding: 132px 0 100px;}
+.map-container {width: 100%;}
+.map-container section{gap: 20px;}
+input[type="text"].search-bar {border:1px solid var(--line-02);}
+
+
+.recommend-section {flex:0 1 auto;}
+.search-filter-container {width: 100%;}
+.recommend-item-content h3 {font-size: 1.25rem;}
+#recommended-list {width: 100%;}
+
+

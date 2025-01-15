@@ -10,7 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WashWise - 세차장 탐색</title>
     <link rel="stylesheet" href="${contextPath}/resources/assets/css/explore.css"/>
-    <meta name="contextPath" content="${contextPath}" />
+    <!-- <meta name="contextPath" content="${contextPath}" /> layout.jsp 에서 단 한번 선언-->
+    <meta name="sessionMember" content="${sessionScope.member.id}">
+    <meta name="description" content="WashWise에서 세차장을 탐색하고 예약하세요.">
+    <meta property="og:title" content="WashWise - 세차장 탐색">
+    <meta property="og:description" content="WashWise에서 세차장을 탐색하고 예약하세요.">
+    <meta property="og:image" content="${contextPath}/resources/images/logo.png">
 </head>
 <body>
 
@@ -47,10 +52,15 @@
         <!-- 슬라이딩 팝업 -->
         <div id="sliding-popup" class="sliding-popup">
             <span class="close-btn">×</span>
-            <img id="popup-carwash-image" src="" alt="세차장 이미지" style="width: 100%; height: auto; border-radius: 10px;" />
+            <img id="popup-carwash-image" src="" alt="세차장 이미지" class="popup-image" />
             <h3 id="popup-carwash-name">데이터없음</h3>
             <p><strong>주소:</strong> <span id="popup-carwash-address">데이터없음</span></p>
             <p><strong>전화번호:</strong> <span id="popup-carwash-phone">데이터없음</span></p>
+
+            <div class="popup-buttons">
+                <button id="popup-reserve-button" class="reserve-button" aria-label="예약하기">예약하기</button>
+                <button id="popup-detail-button" class="detail-button" aria-label="상세 보기">상세 보기</button>
+            </div>
 
             <!-- 리뷰 섹션 -->
             <div id="review-section">

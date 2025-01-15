@@ -13,18 +13,20 @@ public class MemberVO {
 	private String phone; 
     private String userType; 
     private Date joinDate; 
+    private String img; 
 
 	public MemberVO() {
 		
 	}
 
-	public MemberVO(String id, String pwd, String name, String email, String phone, String userType) {
+	public MemberVO(String id, String pwd, String name, String email, String phone, String userType, String img) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.userType = userType;
+        this.img = img;
     }
 
 	public String getId() {
@@ -81,5 +83,13 @@ public class MemberVO {
 
     public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
+    }
+    
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

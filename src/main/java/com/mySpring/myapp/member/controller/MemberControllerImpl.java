@@ -1,18 +1,21 @@
 package com.mySpring.myapp.member.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -36,8 +39,8 @@ public class MemberControllerImpl implements MemberController {
         if (isLogOn != null && isLogOn) {
         	 // 로그인정보 가져오기
             MemberVO member = (MemberVO) session.getAttribute("member");
-            mav.addObject("member", member); 
-            
+            mav.addObject("member", member);
+
             mav.setViewName("adminAfter");
         } else {
             mav.setViewName("adminBefore");
@@ -52,14 +55,14 @@ public class MemberControllerImpl implements MemberController {
 		                       HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		memberVO = memberService.login(member);
-		
+
 		if (memberVO != null) {
 	        HttpSession session = request.getSession();
 	        session.setAttribute("member", memberVO);
 	        session.setAttribute("isLogOn", true);
-	        
+
 		      mav.addObject("member", memberVO);
-		      System.out.println("될꺼냐");
+		      System.out.println("되는군");
 		      mav.setViewName("adminAfter");
 	    } else {
 	        rAttr.addAttribute("result", "loginFailed");
@@ -79,7 +82,7 @@ public class MemberControllerImpl implements MemberController {
 //		      mav.addObject("membersList", membersList);
 //		      System.out.println(" 어드민 로그인하면서 멤버정보가져와");
 //		      System.out.println(membersList);
-//		      
+//
 //		       mav.setViewName("adminAfter");
 //		       System.out.println(" 어드민 로그인되서 adminAfter");
 //		    }
@@ -90,7 +93,7 @@ public class MemberControllerImpl implements MemberController {
 //		}
 		return mav;
 	}
-	
+
 	// 어드민 로그아웃
 	@Override
 	@RequestMapping(value = "/member/adminLogout.do", method =  RequestMethod.GET)
@@ -103,7 +106,7 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName("redirect:/admin.do");
 		return mav;
 	}
-	
+
 	// 어드민 가입
 		@Override
 		@RequestMapping(value="/member/adminAddMember.do" ,method = RequestMethod.POST)
@@ -117,7 +120,7 @@ public class MemberControllerImpl implements MemberController {
 			System.out.println("어드민 가입했다");
 			return mav;
 		}
-	
+
 	//어드민 회원목록
 	@Override
 	@RequestMapping(value="/member/adminListMembers.do" ,method = RequestMethod.GET)
@@ -129,7 +132,7 @@ public class MemberControllerImpl implements MemberController {
 		mav.addObject("membersList", membersList);
 		return mav;
 	}
-	
+
 	//어드민 회원 삭제
 	@Override
 	@RequestMapping(value="/member/removeMember.do" ,method = RequestMethod.GET)
@@ -141,9 +144,9 @@ public class MemberControllerImpl implements MemberController {
 		ModelAndView mav = new ModelAndView("redirect:/member/adminListMembers.do");
 		return mav;
 	}
-	
-	
-	
+
+
+
 	// 고객 메인
 	@RequestMapping(value = { "/","/main.do"}, method = RequestMethod.GET)
 	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
@@ -153,7 +156,7 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
+
 	// 고객 마이페이지
 	@RequestMapping(value =  "/member/myPage.do", method = RequestMethod.GET)
 	private ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -165,7 +168,52 @@ public class MemberControllerImpl implements MemberController {
 		mav.addObject("member", member);
 		return mav;
 	}
-	
+
+    // 프로필 이미지 업데이트 처리 메서드
+    @RequestMapping("/updateProfileImage")
+    public ModelAndView updateProfileImage(
+            @RequestParam("profileImage") MultipartFile profileImage,
+            @RequestParam("id") String id,
+            HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        // 1. ServletContext 가져오기
+        ServletContext context = request.getSession().getServletContext();  // 수정된 부분
+
+        // 2. 파일을 저장할 실제 경로 가져오기
+        String realPath = context.getRealPath("/resources/assets/images/");
+
+        // 3. 이미지 디렉토리가 없으면 생성
+        File uploadDir = new File(realPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+
+        // 4. 파일이 존재하면 저장
+        if (!profileImage.isEmpty()) {
+            // 업로드된 파일의 파일명
+            String fileName = profileImage.getOriginalFilename();
+
+            // 파일을 저장할 경로
+            File file = new File(uploadDir, fileName);
+
+            // 파일 저장
+            profileImage.transferTo(file);
+
+            // MemberVO 객체에 이미지 파일 경로 저장
+            MemberVO member = new MemberVO();
+            member.setId(id);
+            member.setImg("/resources/assets/images/" + fileName);
+
+            // DB에 이미지 경로 업데이트
+            memberService.updateMemberProfileImage(member);
+        }
+
+        // 프로필 이미지 업데이트 성공 메시지와 함께 myPage로 리다이렉트
+        ModelAndView modelAndView = new ModelAndView("redirect:/myPage");
+        return modelAndView;
+    }
+
+
 	// !고객은 회원목록 조회 불가능
 //	@Override
 //	@RequestMapping(value="/member/listMembers.do" ,method = RequestMethod.GET)
@@ -191,8 +239,8 @@ public class MemberControllerImpl implements MemberController {
 		System.out.println("고객 가입했다");
 		return mav;
 	}
-	
-	
+
+
 	/*
 	@RequestMapping(value = { "/member/loginForm.do", "/member/memberForm.do" }, method =  RequestMethod.GET)
 	@RequestMapping(value = "/member/*Form.do", method =  RequestMethod.GET)
@@ -203,7 +251,7 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	*/
-	
+
 	// 고객 로그인
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
@@ -216,6 +264,7 @@ public class MemberControllerImpl implements MemberController {
 	    HttpSession session = request.getSession();
 	    session.setAttribute("member", memberVO);
 	    session.setAttribute("isLogOn", true);
+        session.setAttribute("userId", memberVO.getId()); // userId 저장
 	    //mav.setViewName("redirect:/member/listMembers.do");
 	    String action = (String)session.getAttribute("action");
 	    session.removeAttribute("action");
@@ -232,17 +281,18 @@ public class MemberControllerImpl implements MemberController {
 	return mav;
 	}
 
-	// 고객 로그아웃
+    // 고객 로그아웃
 	@Override
-	@RequestMapping(value = "/member/logout.do", method =  RequestMethod.GET)
-	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
-		session.removeAttribute("member");
-		session.removeAttribute("isLogOn");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/main.do");
-		return mav;
-	}
+    @RequestMapping(value = "/member/logout.do", method = RequestMethod.GET)
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
+        session.removeAttribute("member");
+        session.removeAttribute("isLogOn");
+        session.removeAttribute("userId"); // userId 제거
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("redirect:/main.do");
+        return mav;
+    }
 
 	@RequestMapping(value = "/member/*Form.do", method =  RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value= "result", required=false) String result,
@@ -259,26 +309,26 @@ public class MemberControllerImpl implements MemberController {
 	}
 
 
-	private String getViewName(HttpServletRequest request) throws Exception {
-		String contextPath = request.getContextPath();
-		String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
-		if (uri == null || uri.trim().equals("")) {
-			uri = request.getRequestURI();
-		}
+    private String getViewName(HttpServletRequest request) throws Exception {
+        String contextPath = request.getContextPath();
+        String uri = (String) request.getAttribute("javax.servlet.include.request_uri");
+        if (uri == null || uri.trim().equals("")) {
+            uri = request.getRequestURI();
+        }
 
-		int begin = 0;
-		if (!((contextPath == null) || ("".equals(contextPath)))) {
-			begin = contextPath.length();
-		}
+        int begin = 0;
+        if (!((contextPath == null) || ("".equals(contextPath)))) {
+            begin = contextPath.length();
+        }
 
-		int end;
-		if (uri.indexOf(";") != -1) {
-			end = uri.indexOf(";");
-		} else if (uri.indexOf("?") != -1) {
-			end = uri.indexOf("?");
-		} else {
-			end = uri.length();
-		}
+        int end;
+        if (uri.indexOf(";") != -1) {
+            end = uri.indexOf(";");
+        } else if (uri.indexOf("?") != -1) {
+            end = uri.indexOf("?");
+        } else {
+            end = uri.length();
+        }
 
 		String viewName = uri.substring(begin, end);
 		if (viewName.indexOf(".") != -1) {
@@ -289,7 +339,7 @@ public class MemberControllerImpl implements MemberController {
 		}
 		return viewName;
 	}
-	
+
 
 
 }

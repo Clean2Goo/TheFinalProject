@@ -12,16 +12,27 @@ let currentReviewPage = 1;
 const reviewsPerPage = 3;
 let currentReviews = []; // 현재 팝업에 표시할 리뷰 데이터
 
-// contextPath를 동적으로 가져오기
-const contextPath = document.querySelector('meta[name="contextPath"]')?.getAttribute("content") || "";
+// contextPath를 동적으로 가져오기  !! layout.jsp 에서 단 한번 선언
+// const contextPath = document.querySelector('meta[name="contextPath"]')?.getAttribute('content') || '';
+
+// 로컬 스토리지에서 즐겨찾기 로드
+function loadFavoritesFromLocalStorage() {
+	const storedFavorites = JSON.parse(localStorage.getItem("favoriteList"));
+	if (storedFavorites) {
+		favoriteList = new Set(storedFavorites);
+	}
+}
+
+// 로컬 스토리지에 즐겨찾기 저장
+function saveFavoritesToLocalStorage() {
+	localStorage.setItem("favoriteList", JSON.stringify([...favoriteList]));
+}
 
 // 세차장 데이터를 API로부터 가져오는 함수
 async function fetchCarWashes() {
 	try {
 		const response = await fetch(`${contextPath}/api/carwashes`);
-		if (!response.ok) {
-			throw new Error(`HTTP error! Status: ${response.status}`);
-		}
+		if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 		allCarWashes = await response.json();
 		initMap(); // 데이터를 가져온 후 맵 초기화
 	} catch (error) {
@@ -39,9 +50,7 @@ function initMap() {
 
 	try {
 		map = new kakao.maps.Map(container, options);
-		if (!map) {
-			throw new Error("Map failed to initialize.");
-		}
+		if (!map) throw new Error("Map failed to initialize.");
 
 		// 마커 표시
 		displayCarWashMarkers(allCarWashes);
@@ -148,6 +157,12 @@ document.querySelector(".close-btn").addEventListener("click", closePopup);
 
 // 리뷰 작성 및 제출
 document.getElementById("submit-review-button").addEventListener("click", async () => {
+	const sessionMember = document.querySelector('meta[name="sessionMember"]')?.getAttribute("content");
+	if (!sessionMember) {
+		alert("로그인이 필요합니다.");
+		return;
+	}
+
 	const reviewContent = document.getElementById("review-content").value;
 	const reviewScore = document.getElementById("review-score").value;
 	const carWashId = document.getElementById("popup-carwash-name").getAttribute("data-id");
@@ -193,9 +208,7 @@ document.getElementById("submit-review-button").addEventListener("click", async 
 async function fetchReviewsForCarWash(carWashId) {
 	try {
 		const response = await fetch(`${contextPath}/api/reviews/${carWashId}`);
-		if (!response.ok) {
-			throw new Error(`Failed to fetch reviews: ${response.status}`);
-		}
+		if (!response.ok) throw new Error(`Failed to fetch reviews: ${response.status}`);
 
 		currentReviews = await response.json(); // 전체 리뷰 데이터를 클라이언트에 저장
 		currentReviewPage = 1; // 리뷰 페이지 초기화
@@ -216,13 +229,15 @@ function updateReviewList() {
 	const reviewsToDisplay = currentReviews.slice(startIndex, endIndex);
 
 	reviewsToDisplay.forEach((review) => {
+		const userImg = review.userImg || `${contextPath}/resources/assets/images/profile.png`;
+
 		const reviewItem = document.createElement("div");
 		reviewItem.classList.add("review-item");
 		reviewItem.innerHTML = `
             <div class="review-header">
-                <img src="/resources/assets/images/default-profile.jpg" alt="프로필 이미지" class="profile-img">
+                <img src="${userImg}" alt="프로필 이미지" class="profile-img">
                 <div>
-                    <p class="username">사용자 이름</p>
+                    <p class="username">${review.userId || "익명 사용자"}</p>
                     <p class="review-date">${new Date(review.crtDate).toLocaleString()}</p>
                 </div>
             </div>
@@ -260,12 +275,21 @@ document.getElementById("next-review-button").addEventListener("click", () => {
 // 추천 세차장 리스트를 업데이트하는 함수
 function updateRecommendedList(carWashList) {
 	const recommendedList = document.getElementById("recommended-list");
-	recommendedList.innerHTML = ""; // 기존 리스트 초기화
+	recommendedList.innerHTML = "";
 
-	const totalPages = Math.ceil(carWashList.length / itemsPerPage);
+	const sortedCarWashList = carWashList.sort((a, b) => {
+		if (a.washImg && !b.washImg) {
+			return -1;
+		} else if (!a.washImg && b.washImg) {
+			return 1;
+		}
+		return 0;
+	});
+
+	const totalPages = Math.ceil(sortedCarWashList.length / itemsPerPage);
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
-	const currentCarWashes = carWashList.slice(startIndex, endIndex);
+	const currentCarWashes = sortedCarWashList.slice(startIndex, endIndex);
 
 	currentCarWashes.forEach((carWash) => {
 		const carWashCard = document.createElement("div");
@@ -281,13 +305,21 @@ function updateRecommendedList(carWashList) {
                 <p>주소: ${carWash.washAddr}</p>
                 <p>전화번호: ${carWash.washTel}</p>
                 <p>영업시간: ${carWash.openHrs || "정보 없음"}</p>
-                <button class="reserve-button" onclick="redirectToReservation('${carWash.washId}')">예약하기</button>
-                <button id="favorite-${carWash.washId}" class="favorite-button ${isFavorite}" onclick="toggleFavorite('${carWash.washId}')">
+                <button id="favorite-${carWash.washId}" class="favorite-button ${isFavorite}">
                     <span class="star-icon">★</span>
                 </button>
             </div>`;
 
-		carWashCard.addEventListener("click", () => {
+		// 즐겨찾기 버튼의 클릭 이벤트 처리
+		const favoriteButton = carWashCard.querySelector(`#favorite-${carWash.washId}`);
+		favoriteButton.addEventListener("click", (event) => {
+			event.stopPropagation(); // 클릭 이벤트 버블링 중단
+			toggleFavorite(carWash.washId); // 즐겨찾기 토글
+		});
+
+		// 세차장 카드를 클릭했을 때 팝업 열기
+		carWashCard.addEventListener("click", (e) => {
+			e.preventDefault();
 			map.setCenter(new kakao.maps.LatLng(carWash.washLat, carWash.washLng));
 			openPopup(carWash);
 		});
@@ -320,4 +352,78 @@ function setupPaginationEvents() {
 	document.getElementById("nextPage").addEventListener("click", () => changePage(1));
 }
 
-document.addEventListener("DOMContentLoaded", fetchCarWashes);
+// 초기화 및 데이터 로드
+document.addEventListener("DOMContentLoaded", async () => {
+	try {
+		// 로그인된 사용자의 즐겨찾기 데이터 불러오기
+		const response = await fetch(`${contextPath}/api/favorites`);
+		if (response.ok) {
+			const favorites = await response.json();
+			favoriteList = new Set(favorites.map((fav) => fav.washId)); // 현재 사용자 즐겨찾기 로드
+			updateFavoriteUI(); // UI 업데이트
+		} else {
+			console.error("Failed to load favorites");
+		}
+	} catch (error) {
+		console.error("Error loading favorites:", error);
+	}
+
+	// 세차장 데이터 로드
+	await fetchCarWashes();
+});
+
+// 즐겨찾기 토글 함수
+async function toggleFavorite(washId) {
+	const isFavorite = favoriteList.has(washId);
+	const endpoint = isFavorite ? `${contextPath}/api/favorites/remove` : `${contextPath}/api/favorites/add`;
+
+	try {
+		const response = await fetch(endpoint, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ washId }),
+			credentials: "include", // 세션 쿠키 포함
+		});
+
+		if (response.ok) {
+			if (isFavorite) {
+				favoriteList.delete(washId);
+			} else {
+				favoriteList.add(washId);
+			}
+			updateFavoriteButton(washId); // UI 업데이트
+			alert(isFavorite ? "즐겨찾기가 삭제되었습니다." : "즐겨찾기가 추가되었습니다.");
+		} else if (response.status === 401) {
+			alert("로그인이 필요합니다. 로그인 후 다시 시도해주세요.");
+		} else {
+			const errorMsg = await response.text();
+			console.error("Error toggling favorite:", errorMsg);
+			alert("즐겨찾기 작업 중 문제가 발생했습니다.");
+		}
+	} catch (error) {
+		console.error("Error toggling favorite:", error);
+		alert("네트워크 오류가 발생했습니다.");
+	}
+}
+
+// 즐겨찾기 버튼 UI 업데이트
+function updateFavoriteButton(washId) {
+	const favoriteButton = document.getElementById(`favorite-${washId}`);
+	if (favoriteList.has(washId)) {
+		favoriteButton.classList.add("active");
+		favoriteButton.innerText = "★";
+	} else {
+		favoriteButton.classList.remove("active");
+		favoriteButton.innerText = "☆";
+	}
+}
+
+// 초기화 시 전체 즐겨찾기 상태 UI 반영
+function updateFavoriteUI() {
+	allCarWashes.forEach((carWash) => {
+		const favoriteButton = document.getElementById(`favorite-${carWash.washId}`);
+		if (favoriteButton) {
+			updateFavoriteButton(carWash.washId);
+		}
+	});
+}
