@@ -16,8 +16,8 @@
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/loginForm.css">
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/memberForm.css">
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/myPage.css">
-	<link rel="stylesheet" href="${contextPath}/resources/assets/css/listNotice.css">
-	<link rel="stylesheet" href="${contextPath}/resources/assets/css/viewNotice.css">
+	
+ 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/viewNotice.css"> 
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/writeFrom.css">
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/explore.css">
 

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-
+<link rel="stylesheet" href="${contextPath}/resources/assets/css/listNotice.css">
 
 <main>
 	<section>
 		<article>
 			<div class="notice-list-container">
-				<h1>공지사항 목록</h1>
+				<h1>공지사항</h1>
 				<!-- 공지사항 작성 버튼 (관리자만 보임) -->
 				<c:if test="${member.userType == 'systemOperator'}">
 					<a href="${contextPath}/notice/adminWriteForm.do"" class="notice-write-btn">공지사항 작성</a>
@@ -19,7 +19,7 @@
 							<th>번호</th>
 							<th>제목</th>
 							<th>작성자</th>
-							<th>작성일</th>
+							<th>등록일</th>
 							<c:if test="${member.userType == 'systemOperator'}">
 								<th>게시물관리</th>
 							</c:if>
@@ -59,6 +59,19 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<!-- 페이지네이션 -->
+					<div class="pagination">
+					<c:forEach var="page" begin="1" end="${totalPages}">
+						<c:choose>
+							<c:when test="${currentPage == page}">
+								<a href="${contextPath}/notice/listNotices.do?page=${page}" class="page-link active">${page}</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${contextPath}/notice/listNotices.do?page=${page}" class="page-link">${page}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</div>
 			</div>
 		</article>
 	</section>
