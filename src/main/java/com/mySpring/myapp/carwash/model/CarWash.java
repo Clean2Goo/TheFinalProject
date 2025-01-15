@@ -54,9 +54,6 @@ public class CarWash {
     @Column(name = "NEWYN", length = 1)
     private String newYn; // 새 필드
 
-    @Column(name = "FAVYN", length = 1)
-    private String favYn; // 새 필드
-
     @Column(name = "RVWCOUNT")
     private Integer rvwCount; // 새 필드
 
@@ -185,14 +182,6 @@ public class CarWash {
 
     public void setNewYn(String newYn) {
         this.newYn = newYn;
-    }
-
-    public String getFavYn() {
-        return favYn;
-    }
-
-    public void setFavYn(String favYn) {
-        this.favYn = favYn;
     }
 
     public Integer getRvwCount() {
