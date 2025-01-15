@@ -8,8 +8,10 @@
 <main>
 	<section>
 		<article>
-			<div>
-				<h1 class="notice-title">새 공지사항 작성</h1>
+			<div class="h3-title">
+				<h3>새 공지사항 작성</h3>
+			</div>
+			<div class="content">
 				<div class="notice-form">
 					<form action="${pageContext.request.contextPath}/notice/addNotice.do" method="post" enctype="multipart/form-data">
 					   <label for="title">제목</label>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WashWise - 세차장 탐색</title>
     <link rel="stylesheet" href="${contextPath}/resources/assets/css/explore.css"/>
-    <meta name="contextPath" content="${contextPath}" />
+    <!-- <meta name="contextPath" content="${contextPath}" /> layout.jsp 에서 단 한번 선언-->
     <meta name="sessionMember" content="${sessionScope.member.id}">
     <meta name="description" content="WashWise에서 세차장을 탐색하고 예약하세요.">
     <meta property="og:title" content="WashWise - 세차장 탐색">
@@ -18,15 +18,7 @@
     <meta property="og:image" content="${contextPath}/resources/images/logo.png">
 </head>
 <body>
-    <!-- 사용자 아이콘 및 드롭다운 -->
-    <div class="user-icon">☰</div>
-    <div class="dropdown-menu">
-        <a href="#">프로필</a>
-        <a href="#">설정</a>
-        <a href="#">로그아웃</a>
-    </div>
 
-    <main>
 
     <main class="ui-search-map">
         <div class="map-container">
@@ -64,7 +56,7 @@
             <h3 id="popup-carwash-name">데이터없음</h3>
             <p><strong>주소:</strong> <span id="popup-carwash-address">데이터없음</span></p>
             <p><strong>전화번호:</strong> <span id="popup-carwash-phone">데이터없음</span></p>
-            
+
             <div class="popup-buttons">
                 <button id="popup-reserve-button" class="reserve-button" aria-label="예약하기">예약하기</button>
                 <button id="popup-detail-button" class="detail-button" aria-label="상세 보기">상세 보기</button>

@@ -15,38 +15,60 @@
 	</c:when>
 </c:choose>
 
-<main>
+<main class="ui-sign">
 	<section>
 		<article>
-			<div class="sign-container">
-				<div class="login-header">
-					<h1>어드민 로그인</h1>
-				</div>
-				<form name="frmLogin" method="post" action="${contextPath}/member/adminLoginForm.do">
-					<table>
-						<tr>
-							<td>아이디</td>
-							<td><input type="text" name="id" value="" placeholder="아이디를 입력하세요" required></td>
-						</tr>
-						<tr>
-							<td>비밀번호</td>
-							<td><input type="password" name="pwd" value="" placeholder="비밀번호를 입력하세요" required></td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<input type="submit" value="로그인">
-								<input type="reset" value="다시입력">
-							</td>
-						</tr>
-					</table>
-				</form>
-
-				<div class="signup-link">
-					<p>회원이 아니신가요? <a href="${contextPath}/member/adminMemberForm.do">회원가입</a></p>
-				</div>
+			<div class="h3-title">
+				<h3>어드민 로그인</h3>
 			</div>
-
+			<div class="content">
+				<form class="ui-form sign" name="frmLogin" method="post" action="${contextPath}/member/adminLoginForm.do">
+					<fieldset>
+						<ul>
+							<li>
+								<div class="field ">
+									<label class="label clipped" for="id">아이디 입력</label>
+									<div class="ui-input">
+										<div class="input outlined">
+											<input name="id" type="text" class="custom-text" placeholder="아이디를 입력하세요." required>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="field">
+									<label class="label clipped" for="pwd">비밀번호 입력</label>
+									<div class="ui-input">
+										<div class="input outlined">
+											<input name="pwd" type="password" class="custom-text" placeholder="비밀번호를 입력해주세요." required>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="ux-button-bar">
+									<button class="ux-button contained primary" type="submit">
+										<span class="label">로그인</span>
+									</button>
+								</div>
+							</li>
+							<li>
+								<div class="ux-button-bar center">
+									<a href="#" class="ux-button text-button" type="button">
+										<span class="label">아이디 찾기</span>
+									</a>
+									<a href="#" class="ux-button text-button" type="button">
+										<span class="label">비밀번호 찾기</span>
+									</a>
+									<a href="${contextPath}/member/adminMemberForm.do" class="ux-button text-button" type="button">
+										<span class="label bold">회원가입</span>
+									</a>
+								</div>
+							</li>
+						</ul>
+					</fieldset>
+				</form>
+			</div>
 		</article>
 	</section>
 </main>
-

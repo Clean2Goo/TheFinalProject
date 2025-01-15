@@ -80,3 +80,10 @@
 .edit-btn:focus {
     outline: none;
 }
+
+
+
+
+/* 임시 재정의*/
+.user-info {width:100%;}
+

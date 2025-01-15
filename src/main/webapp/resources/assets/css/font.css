@@ -1,0 +1,71 @@
+@charset "utf-8";
+
+@font-face {
+	font-family: "NanumSquareNeo";font-weight: 400;
+	font-style: normal;
+	src: url('../fonts/NanumSquareNeo-bRg.woff2') format('woff2'),
+	url('../fonts/NanumSquareNeo-bRg.woff') format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-family: "NanumSquareNeo";font-weight: 700;
+	font-style: normal;
+	src: url('../fonts/NanumSquareNeo-cBd.woff2') format('woff2'),
+	url('../fonts/NanumSquareNeo-cBd.woff') format('woff');
+	font-display: swap;
+}
+@font-face {
+	font-family: "NanumSquareNeo";font-weight: 800;
+	font-style: normal;
+	src: url('../fonts/NanumSquareNeo-dEb.woff2') format('woff2'),
+	url('../fonts/NanumSquareNeo-dEb.woff') format('woff');
+	font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';font-weight: 400;
+    font-style: normal;
+    src: url('../fonts/Montserrat-Regular.woff2') format('woff2'),
+        url('../fonts/Montserrat-Regular.woff') format('woff');
+	font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';font-weight: 500;
+    font-style: normal;
+    src: url('../fonts/Montserrat-Medium.woff2') format('woff2'),
+        url('../fonts/Montserrat-Medium.woff') format('woff');
+	font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';font-weight: 600;
+    font-style: normal;
+    src: url('../fonts/Montserrat-SemiBold.woff2') format('woff2'),
+        url('../fonts/Montserrat-SemiBold.woff') format('woff');
+	font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';font-weight: 700;
+    font-style: normal;
+    src: url('../fonts/Montserrat-Bold.woff2') format('woff2'),
+        url('../fonts/Montserrat-Bold.woff') format('woff');
+	font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';font-weight: 800;
+    font-style: normal;
+    src: url('../fonts/Montserrat-ExtraBold.woff2') format('woff2'),
+        url('../fonts/Montserrat-ExtraBold.woff') format('woff');
+	font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';font-weight: 900;
+    font-style: normal;
+    src: url('../fonts/Montserrat-Black.woff2') format('woff2'),
+        url('../fonts/Montserrat-Black.woff') format('woff');
+	font-display: swap;
+}
