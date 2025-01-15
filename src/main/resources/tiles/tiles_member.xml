@@ -36,6 +36,11 @@
       <put-attribute name="title" value="고객-마이페이지" />
       <put-attribute name="body" value="/WEB-INF/views/member/myPage.jsp" />
    </definition>
+   
+   <definition name="favorites" extends="asideLayout">
+      <put-attribute name="title" value="고객-마이페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/favorites.jsp" />
+   </definition>
 
    <definition name="/member/listMembers" extends="baseLayout">
       <put-attribute name="title" value="고객-회원목록창" />
