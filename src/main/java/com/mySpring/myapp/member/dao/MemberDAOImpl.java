@@ -39,5 +39,11 @@ public class MemberDAOImpl implements MemberDAO {
 		  MemberVO vo = sqlSession.selectOne("mapper.member.loginById",memberVO);
 		return vo;
 	}
+	
+	@Override
+    public void updateProfileImage(MemberVO member) {
+        // MyBatis 쿼리를 사용해 프로필 이미지를 업데이트합니다.
+        sqlSession.update("mapper.member.updateProfileImage", member);
+    }
 
 }

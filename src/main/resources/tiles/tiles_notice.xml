@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
 <!DOCTYPE tiles-definitions PUBLIC
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
 <tiles-definitions>
-  
-  
-  <definition name="/notice/listNotices" extends="baseLayout">
-	      <put-attribute name="title" value="공지목록창" />
+	<!-- 고객- 공지 목록 -->
+  	<definition name="/notice/listNotices" extends="baseLayout">
+	      <put-attribute name="title" value="고객-공지목록창" />
 	      <put-attribute name="body" value="/WEB-INF/views/notice/listNotices.jsp" />
 	</definition>
-	
+
+	<!-- 고객- 공지 상세 -->
 	 <definition name="/notice/viewNotice" extends="baseLayout">
-	      <put-attribute name="title" value="공지상세창" />
+	      <put-attribute name="title" value="고객-공지상세창" />
 	      <put-attribute name="body" value="/WEB-INF/views/notice/viewNotice.jsp" />
 	</definition>
-	
-	 <definition name="/notice/writeForm" extends="baseLayout">
-	      <put-attribute name="title" value="공지쓰기창" />
-	      <put-attribute name="body" value="/WEB-INF/views/notice/writeForm.jsp" />
+
+	<!-- 어드민- 공지 목록 -->
+  	<definition name="/notice/adminListNotices" extends="adminLayout">
+	      <put-attribute name="title" value="어드민-공지목록창" />
+	      <put-attribute name="body" value="/WEB-INF/views/notice/listNotices.jsp" />
 	</definition>
-	
+
+	<!-- 어드민- 공지 상세 -->
+  	<definition name="/notice/adminViewNotice" extends="adminLayout">
+	      <put-attribute name="title" value="어드민-공지상세창" />
+	      <put-attribute name="body" value="/WEB-INF/views/notice/viewNotice.jsp" />
+	</definition>
+
+	<!-- 어드민- 공지 작성 -->
+	 <definition name="/notice/adminWriteForm" extends="adminLayout">
+	      <put-attribute name="title" value="어드민-공지쓰기창" />
+	      <put-attribute name="body" value="/WEB-INF/views/notice/adminWriteForm.jsp" />
+	</definition>
 </tiles-definitions>

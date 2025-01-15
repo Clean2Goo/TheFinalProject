@@ -8,80 +8,86 @@
 %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="${contextPath}/resources/assets/css/header.css">
-<title>헤더</title>
-</head>
-<body>
 <header>
-<table border=0 width="100%">
-  <tr>
-     <td width="30%">
-		<a href="${contextPath}/main.do">
-			<img src="${contextPath}/resources/assets/images/logo.png" height="80"/>
-		</a>
-     </td>
-
-     <td>
-	      <nav>
-            <ul class="nav-menu">
-                <li><a href="#">시스템소개</a></li>
-                <li class="services">
-                    <a href="#">서비스</a>
-                    <ul class="dropdown">
-                        <li><a href="${contextPath}/explore.do">기계 세차</a></li>
-                        <li><a href="#">셀프 세차</a></li>
-                        <li><a href="#">전문가 세차</a></li>
-                        <li><a href="#">출장 세차</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">쇼핑몰</a></li>
-                <li><a href="#">혜택 이벤트</a></li>
-                <li class="customer-support">
-                    <a href="#">고객지원</a>
-                    <ul class="dropdown">
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">고객센터</a></li>
-                        <li><a href="${contextPath}/notice/listNotices.do">공지사항</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-     </td>
-
-
-
-
-
-
-   <!-- <a href="#"><h3>로그인</h3></a> -->
-     <td width="10%">
-     <c:choose>
-     <c:when test="${isLogOn == true  && member!= null}">
-     <div class="user-menu">
-     	<img src="${contextPath}/resources/assets/images/notification_icon.png" height="40" class="notification_icon">
-        <img src="${contextPath}/resources/assets/images/user_icon.png" height="40"alt="User Menu" class="user_icon">
-        <ul class="dropdown-menu">
-        	<li>${member.id}</li>
-        	<li><img src="${contextPath}/resources/assets/images/user_icon.png" alt="User Icon" class="dropdown-user-icon"></li>
-            <li class="welcome-message">환영합니다, ${member.name}님.</li>
-            <li><a href="${contextPath}/member/myPage.do" class="mypage-button">마이페이지</a></li>
-            <li><a href="${contextPath}/member/logout.do" class="logout-button">로그아웃</a></li>
-        </ul>
-     </div>
-     </c:when>
-          <c:otherwise>
-          <button class="login-button">
-	        <a href="${contextPath}/member/loginForm.do">로그인</a></li>
-	      </c:otherwise>
-	   </c:choose>
-     </td>
-  </tr>
-</table>
-
+	<section class="header-pc">
+		<article>
+			<div>
+				<div class="logo">
+					<a href="${contextPath}/main.do" class="ux-link h1">Clean2Go</a>
+					<a href="${contextPath}/explore.do" class="ux-button custom-search" role="button">
+						<i class="icon fa-solid fa-magnifying-glass"></i>
+						<span class="label hidden">가고 싶은 세차장을 검색하세요!</span>
+						<span id="typeItTitle" class="label">어느 세차장을 가볼까요?</span>
+					</a>
+				</div>
+			</div>
+			<div class="gnb">
+				<nav>
+					<ul>
+						<li><a href="#" role="button" class="gnb-menu"><span class="label">회사소개</span></a></li>
+						<li><a href="${contextPath}/notice/listNotices.do" role="button" class="gnb-menu"><span class="label">공지사항</span></a></li>
+						<li><a href="#" role="button" class="gnb-menu"><span class="label">이벤트</span></a></li>
+						<li><a href="#" role="button" class="gnb-menu"><span class="label">자주묻는질문</span></a></li>
+					</ul>
+				</nav>
+				<div class="menu-bar">
+					<ul>
+						<c:choose>
+							<c:when test="${isLogOn == true  && member!= null}">
+								<li>
+									<a href="#" class="ux-button icon-menu bell noti-msg" role="button">
+										<i class="icon fa-regular fa-bell"></i>
+										<span class="label">알림</span>
+										<div class="badge"><span class="count">3</span></div>
+									</a>
+								</li>
+								<li>
+									<button class="ux-button custom-profile">
+										<div class="user-profile-wrap">
+											<div class="user-profile-img">
+												<img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
+											</div>
+										</div>
+										<span class="label">퀵메뉴 열기</span>
+									</button>
+									<div class="dropdown-wrap">
+										<div class="user-profile-wrap">
+											<div class="user-profile-img dropdown">
+												<img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
+											</div>
+											<div class="user-profile-info">
+												<p class="user-name">${member.name}</p>
+												<p class="user-id">${member.id}</p>
+											</div>
+										</div>
+										<ul class="dropdown-menu">
+											<li>
+												<a href="${contextPath}/member/myPage.do" role="button" class="ux-button text-button"><i class="icon fa-regular fa-user"></i><span class="label">마이페이지</span></a>
+											</li>
+											<li>
+												<a href="#" role="button" class="ux-button text-button"><i class="icon fa-regular fa-calendar-check"></i><span class="label">예약내역</span></a>
+											</li>
+											<li>
+												<a href="#" role="button" class="ux-button text-button"><i class="icon fa-regular fa-star"></i><span class="label">즐겨찾기</span></a>
+											</li>
+											<!-- <li>
+												<a href="#" role="button" class="ux-button text-button"><i class="icon fa-regular fa-bell"></i></i><span class="label">알림</span></a>
+											</li> -->
+											<li>
+												<a href="${contextPath}/member/logout.do" role="button" class="ux-button text-button"><i class="icon fa-solid fa-arrow-right-from-bracket"></i><span class="label">로그아웃</span></a>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="${contextPath}/member/loginForm.do" role="button" class="ux-button button-sign"><span class="label">로그인</span></a></li>
+								<li><a href="${contextPath}/member/memberForm.do" role="button" class="ux-button button-sign"><span class="label">회원가입</span></a></li>
+							</c:otherwise>
+						</c:choose>
+					</ul>
+				</div>
+			</div>
+		</article>
+	</section>
 </header>
-</body>
-</html>

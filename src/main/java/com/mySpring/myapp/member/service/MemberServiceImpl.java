@@ -40,5 +40,10 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO login(MemberVO memberVO) throws Exception{
 		return memberDAO.loginById(memberVO);
 	}
+	
+	@Override
+    public void updateMemberProfileImage(MemberVO member) {
+        memberDAO.updateProfileImage(member); // DAO에서 처리
+    }
 
 }

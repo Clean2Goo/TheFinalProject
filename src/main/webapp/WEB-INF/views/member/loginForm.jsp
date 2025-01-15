@@ -7,12 +7,7 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="${contextPath}/resources/assets/css/loginForm.css">
-<title>로그인창</title>
+
 <c:choose>
 	<c:when test="${result=='loginFailed' }">
 	  <script>
@@ -22,35 +17,78 @@
 	  </script>
 	</c:when>
 </c:choose>
-</head>
 
-<body>
-<div class="login-container">
-        <div class="login-header">
-            <h1>로그인</h1> <!-- WashWise 로고 -->
-        </div>
-        <form name="frmLogin" method="post" action="${contextPath}/member/login.do">
-            <table>
-                <tr>
-                    <td>아이디</td>
-                    <td><input type="text" name="id" value="" placeholder="아이디를 입력하세요" required></td>
-                </tr>
-                <tr>
-                    <td>비밀번호</td>
-                    <td><input type="password" name="pwd" value="" placeholder="비밀번호를 입력하세요" required></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" value="로그인">
-                        <input type="reset" value="다시입력">
-                    </td>
-                </tr>
-            </table>
-        </form>
+<main class="ui-sign">
+	<section>
+		<article>
+			<div class="h3-title">
+				<h3>로그인</h3>
+			</div>
+			<div class="content">
+				<form class="ui-form sign" name="frmLogin" method="post" action="${contextPath}/member/login.do">
+					<fieldset>
+						<ul>
+							<li>
+								<div class="field ">
+									<label class="label clipped" for="id">아이디 입력</label>
+									<div class="ui-input">
+										<div class="input outlined">
+											<input name="id" type="text" class="custom-text" placeholder="아이디를 입력하세요." required>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="field">
+									<label class="label clipped" for="pwd">비밀번호 입력</label>
+									<div class="ui-input">
+										<div class="input outlined">
+											<input name="pwd" type="password" class="custom-text" placeholder="비밀번호를 입력해주세요." required>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="ux-button-bar">
+									<button class="ux-button contained primary" type="submit">
+										<span class="label">로그인</span>
+									</button>
+								</div>
+							</li>
+							<li>
+								<div class="ux-button-bar center">
+									<a href="#" class="ux-button text-button" type="button">
+										<span class="label">아이디 찾기</span>
+									</a>
+									<a href="#" class="ux-button text-button" type="button">
+										<span class="label">비밀번호 찾기</span>
+									</a>
+									<a href="${contextPath}/member/memberForm.do" class="ux-button text-button" type="button">
+										<span class="label bold">회원가입</span>
+									</a>
+								</div>
+							</li>
+							<!-- <li>
+								<div class="ux-divider"></div>
+							</li>
+							<li>
+								<div class="ux-button-bar column">
+									<button class="ux-button outlined social google">
+										<span class="icon"></span><span class="label">구글 로그인</span>
+									</button>
+									<button class="ux-button contained social naver">
+										<span class="icon"></span><span class="label">네이버 로그인</span>
+									</button>
+									<button class="ux-button contained social kakao">
+										<span class="icon"></span><span class="label">카카오 로그인</span>
+									</button>
+								</div>
+							</li> -->
+						</ul>
+					</fieldset>
+				</form>
+			</div>
+		</article>
+	</section>
+</main>
 
-        <div class="signup-link">
-            <p>회원이 아니신가요? <a href="${contextPath}/member/memberForm.do">회원가입</a></p>
-        </div>
-    </div>
-</body>
-</html>

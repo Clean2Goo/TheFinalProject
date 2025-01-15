@@ -1,0 +1,40 @@
+/* 기본 레이아웃 */
+#content-area {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+#aside {
+    width: 250px;
+    background-color: #f0f0f5;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    margin: 0;
+}
+
+#content {
+    flex-grow: 1;
+    padding: 40px 160px;
+}
+
+/* 메뉴 스타일 */
+#aside ul {
+    list-style: none;
+    padding: 0;
+}
+
+#aside ul li {
+    margin-bottom: 15px;
+}
+
+#aside ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#aside ul li a:hover {
+    color: #007bff;
+}
