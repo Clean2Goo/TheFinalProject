@@ -8,36 +8,65 @@
 <header>
 	<section>
 		<article>
-			<ul>
-				<li>
-		  			<a href="${contextPath}/admin.do"><h1>Clean2go 관리자메인</h1></a>
-				</li>
-			</ul>
-			<ul>
-				<li>
-			 		<c:choose>
+			<div>
+				<div class="logo">
+					<a href="${contextPath}/admin.do" class="ux-link h1">Clean2Go admin system</a>
+				</div>
+			</div>
+			<div class="menu-bar">
+				<ul>
+					<c:choose>
 						<c:when test="${isLogOn == true  && member!= null}">
-							<div class="user-menu">
-								<img src="${contextPath}/resources/assets/images/user_icon.png" height="40"alt="User Menu" class="user_icon">
-								<ul class="dropdown-menu">
-									<li>${member.id}</li>
-									<li><img src="${contextPath}/resources/assets/images/user_icon.png" alt="User Icon" class="dropdown-user-icon"></li>
-									<li class="welcome-message">환영합니다, ${member.name}님.</li>
-									<li>구분: ${member.userType}</li>
-									<!--
-									<li><a href="${contextPath}/member/myPage.do" >관리자-마이페이지</a></li>
-									-->
-									<li><a href="${contextPath}/member/adminLogout.do" class="logout-button">로그아웃</a></li>
-								</ul>
-							</div>
+							<li>
+								<a href="#" class="ux-button icon-menu bell noti-msg" role="button">
+									<i class="icon fa-regular fa-bell"></i>
+									<span class="label">알림</span>
+									<div class="badge"><span class="count">3</span></div>
+								</a>
+							</li>
+							<li>
+								<button class="ux-button custom-profile">
+									<div class="user-profile-wrap">
+										<div class="user-profile-img">
+											<img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
+										</div>
+									</div>
+									<span class="label">퀵메뉴 열기</span>
+								</button>
+								<div class="dropdown-wrap">
+									<div class="user-profile-wrap">
+										<div class="user-profile-img dropdown">
+											<img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
+										</div>
+										<div class="user-profile-info">
+											<p class="user-name">${member.name}</p>
+											<p class="user-id">${member.id}</p>
+										</div>
+									</div>
+									<ul class="dropdown-menu">
+										<!-- <li>
+											<a href="${contextPath}/member/myPage.do" role="button" class="ux-button text-button"><i class="icon fa-regular fa-user"></i><span class="label">마이페이지</span></a>
+										</li>
+										<li>
+											<a href="#" role="button" class="ux-button text-button"><i class="icon fa-regular fa-calendar-check"></i><span class="label">예약내역</span></a>
+										</li>
+										<li>
+											<a href="#" role="button" class="ux-button text-button"><i class="icon fa-regular fa-star"></i><span class="label">즐겨찾기</span></a>
+										</li>
+										<li>
+											<a href="#" role="button" class="ux-button text-button"><i class="icon fa-regular fa-bell"></i></i><span class="label">알림</span></a>
+										</li> -->
+										<li>
+											<a href="${contextPath}/member/adminLogout.do" role="button" class="ux-button text-button"><i class="icon fa-solid fa-arrow-right-from-bracket"></i><span class="label">로그아웃</span></a>
+										</li>
+									</ul>
+								</div>
+							</li>
 						</c:when>
 					</c:choose>
-			  	</li>
-			  	<li>
-			  		<a href="${contextPath}/main.do">Clean2go 홈</a>
-			  	</li>
-		  </ul>
+					<li><a href="${contextPath}/main.do">HOME</a></li>
+				</ul>
+			</div>
 		</article>
 	</section>
 </header>
-
