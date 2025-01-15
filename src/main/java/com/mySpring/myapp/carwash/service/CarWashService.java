@@ -91,7 +91,6 @@ public class CarWashService {
                     carWash.setMaxCar(10);
                     carWash.setVacancy(5);
                     carWash.setNewYn("Y");
-                    carWash.setFavYn("N");
                     carWash.setRvwCount(0);
                     carWash.setRating(new BigDecimal("0.0"));
                     carWash.setCrtDate(new java.sql.Date(System.currentTimeMillis()));
