@@ -47,8 +47,8 @@
 
 	<!-- 백엔드 취합 후 수정 필요한 css -->
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/myPage.css">
-	<link rel="stylesheet" href="${contextPath}/resources/assets/css/listNotice.css">
-	<link rel="stylesheet" href="${contextPath}/resources/assets/css/viewNotice.css">
+	
+ 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/viewNotice.css"> 
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/writeFrom.css">
 
 	<!-- <link rel="stylesheet" href="${contextPath}/resources/assets/css/explore.css"> 임시주석 : 현재 expolore.jsp에서 다이렉트 로드 중 추후 병합예정 -->

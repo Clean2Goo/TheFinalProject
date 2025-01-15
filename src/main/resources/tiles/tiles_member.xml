@@ -12,6 +12,15 @@
       <put-attribute name="body" value="" />
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
+   
+   <!-- 고객 asideLayout -->
+   <definition name="asideLayout"  template="/WEB-INF/views/common/asideLayout.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+      <put-attribute name="aside" value="/WEB-INF/views/common/aside.jsp" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
 
    <definition name="" extends="baseLayout">
       <put-attribute name="title" value="고객-메인페이지" />
@@ -23,9 +32,14 @@
       <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
    </definition>
 
-   <definition name="myPage" extends="baseLayout">
+   <definition name="myPage" extends="asideLayout">
       <put-attribute name="title" value="고객-마이페이지" />
       <put-attribute name="body" value="/WEB-INF/views/member/myPage.jsp" />
+   </definition>
+   
+   <definition name="favorites" extends="asideLayout">
+      <put-attribute name="title" value="고객-마이페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/favorites.jsp" />
    </definition>
 
    <definition name="/member/listMembers" extends="baseLayout">
