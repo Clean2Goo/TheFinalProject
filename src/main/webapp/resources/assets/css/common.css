@@ -1,5 +1,5 @@
 @charset "utf-8";
-
+@import url("beaver.css"); /*비버 작업용 css*/
 
 :root {
 	--primary-blue:#004bd5; /*36,103,191*/
@@ -630,77 +630,19 @@ footer .copyright-info dl {gap: 8px;}
 footer .copyright-info {opacity: .8;}
 
 
-/* ************************************ 메인페이지 ************************************ */
-/* ************************************ 메인페이지 ************************************ */
-
-main.ui-index {}
-main.ui-index section {min-height: 30vh;}
-main.ui-index section > article,
-main.ui-index section article .section-title,
-main.ui-index section article .content {align-items: flex-start;}
-main.ui-index section article .section-title.fdr {display: flex;flex-direction: row;justify-content: space-between;align-items: center;}
-
-main.ui-index article {width: calc(100vw - 380px);align-items: flex-start;gap: 40px;outline: 1px solid #0ff;}
-main.ui-index article.has-swiper {width: 100vw;}
-main.ui-index article.has-swiper .section-title {padding-left: 190px;}
-
-main.ui-index .section-title {width: 100%;}
-main.ui-index .section-title h3{font-size: 4.75rem;font-weight: 700;}
-
-/* 섹션1 카피라이트*/
-
-/* 섹션2 신규세차장 */
-
-main.ui-index .section2{height: 800px;} /* 임시 */
-.recommand-swiper {position: relative;width: 100%;height: auto;}
-/* .recommand-swiper .swiper-wrapper{position: absolute;left: 190px;} */
-.swiper-slide.recommand-slide {width: calc(100vw - 80px);height: auto;}
-.recommand-swiper .recommand {display: flex;flex-direction: column;gap:20px;}
-.recommand-swiper .recommand .item-image {width:100%;height: auto;border-radius: 8px;overflow: hidden;transition: all 0.3s ease;}
-.recommand-swiper .recommand .item-image .img {width: 100%; height: 100%;object-fit: cover;transition: all 0.3s ease;}
-.recommand-swiper .recommand:hover .item-image .img {transform: scale(1.2);}
-.recommand-swiper .recommand .item-info {flex:1;display: flex;flex-direction : column;flex-wrap:nowrap;}
-.recommand-swiper .recommand .item-info .info-title {transition: all 0.3s ease;}
-.recommand-swiper .recommand:hover .item-info .info-title {color: var(--primary-blue);}
-
-.item-info .info-location {font-size: 12px;font-weight: 400;color: var(--primary-blue);}
-.item-info .info-location .icon{width: 12px;height: 16px;background: url('../images/common/pin.png') center center no-repeat;background-size: cover;}
-.item-info .info-location .label{margin-left: 4px;}
-
-/* 섹션4 회사소개 */
-
-/* 섹션4 이벤트 */
-.event-swiper {width: 100%;height: auto;}
-.event-swiper .event {display: flex;flex-direction: column;gap:20px;}
-.event-swiper .event .item-image {border-radius: 8px;overflow: hidden;transition: all 0.3s ease;}
-.event-swiper .event .item-image .img {width: 100%; height: 100%;object-fit: cover;transition: all 0.3s ease;}
-.event-swiper .event:hover .item-image .img {transform: scale(1.2);}
-
-/* 섹션5 FAQ */
-
-
-
-
-
-
-
-
-
-
-/* ************************************ z-index **************************************** */
-/* ************************************ z-index **************************************** */
-header,
-.header-pc {z-index: 30;}
-main {z-index: 10;}
-aside {z-index: 20;}
 
 
 /* ************************************ 어드민 레이아웃 **************************************** */
 /* ************************************ 어드민 레이아웃 **************************************** */
 
-.admin-container #content {display:flex;min-height: calc(100vh - 168px);padding-top :112px;}
-.admin-container header article {width: calc(100vw - 80px);}
+.admin-container #content {display:flex;min-height: calc(100vh - 138px);padding-top :112px;}
+.admin-container header article,
+.admin-container footer article {width: calc(100vw - 80px);}
+
 .admin-container header .logo .h1 {font-size: 1.8rem;}
+
+.admin-container footer article {align-items: center;gap: 12px;padding: 40px 0;}
+.admin-container footer .company-info .h1{font-size: 1.25rem;}
 
 aside {padding:40px;background-color: var(--bg-01);border: 1px solid var(--line-02);}
 aside section article {width: auto;}
@@ -716,5 +658,14 @@ aside .admin-menu .menu-list .ux-button.text-button {padding: 0;font-weight: 700
 .admin-container main:not(.ui-sign) > section > article {width:100%;}
 .admin-container main > section > article div {width:100%}
 
+
+
+
+/* ************************************ z-index **************************************** */
+/* ************************************ z-index **************************************** */
+header,
+.header-pc {z-index: 30;}
+main {z-index: 10;}
+aside {z-index: 20;}
 
 /* 이하 화면 작업중 */
