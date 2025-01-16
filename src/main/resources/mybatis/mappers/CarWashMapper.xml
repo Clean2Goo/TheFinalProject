@@ -23,4 +23,20 @@
         FROM CarWashes
     </select>
 
+	<!-- 강남구 특정 조건 세차장 조회 -->
+    <select id="selectCarWashesInGangnam" resultType="com.mySpring.myapp.carwash.model.CarWash">
+        SELECT *
+		FROM CARWASHES
+		WHERE washaddr LIKE '%강남구%'
+		AND washtel IS NOT NULL
+		AND newyn = 'Y'
+    </select>
+
+	<!-- 해당 아이디 세차장 정보 조회 -->
+    <select id="selectCarWasheById" resultType="com.mySpring.myapp.carwash.model.CarWash">
+        SELECT *
+		FROM CARWASHES
+		WHERE washId = #{washId}
+    </select>
+
 </mapper>

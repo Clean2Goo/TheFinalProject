@@ -30,63 +30,29 @@
 	<section class="section2">
 		<article class="has-swiper">
 			<div class="section-title">
-				<h3>섹션2222 신규 세차장</h3>
+				<h3>섹션2222 강남구 세차장 추전</h3>
 			</div>
 			<div class="content recommand">
 				<div class="swiper-container recommand-swiper">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide recommand-slide s1">
-							<a class="recommand" href="/pages/detail.html">
-								<div class="item-image">
-									<img class="img" src="${contextPath}/resources/assets/images/carwashes/temp.jpg" alt="세차장대표사진">
-								</div>
-								<div class="item-info">
-									<h4 class="info-title">세차장명1111</h4>
-									<p class="info-location">
-										<span class="icon"></span><span class="label">세차장 주소</span>
-									</p>
-								</div>
-							</a>
-						</div>
-						<div class="swiper-slide recommand-slide s2">
-							<a class="recommand" href="/pages/detail.html">
-								<div class="item-image">
-									<img class="img" src="${contextPath}/resources/assets/images/carwashes/temp.jpg" alt="세차장대표사진">
-								</div>
-								<div class="item-info">
-									<h4 class="info-title">세차장명2222</h4>
-									<p class="info-location">
-										<span class="icon"></span><span class="label">세차장 주소</span>
-									</p>
-								</div>
-							</a>
-						</div>
-						<div class="swiper-slide recommand-slide s3">
-							<a class="recommand" href="/pages/detail.html">
-								<div class="item-image">
-									<img class="img" src="${contextPath}/resources/assets/images/carwashes/temp.jpg" alt="세차장대표사진">
-								</div>
-								<div class="item-info">
-									<h4 class="info-title">세차장명3333</h4>
-									<p class="info-location">
-										<span class="icon"></span><span class="label">세차장 주소</span>
-									</p>
-								</div>
-							</a>
-						</div>
-						<div class="swiper-slide recommand-slide s4">
-							<a class="recommand" href="/pages/detail.html">
-								<div class="item-image">
-									<img class="img" src="${contextPath}/resources/assets/images/carwashes/temp.jpg" alt="세차장대표사진">
-								</div>
-								<div class="item-info">
-									<h4 class="info-title">세차장명4444</h4>
-									<p class="info-location">
-										<span class="icon"></span><span class="label">세차장 주소</span>
-									</p>
-								</div>
-							</a>
-						</div>
+						<c:if test="${not empty carWashesListInGangnam}">
+							<c:forEach var="item" items="${carWashesListInGangnam}">
+							<div class="swiper-slide recommand-slide">
+								<a class="recommand" href="${contextPath}/carwash/detail.do?washId=${item.washId}">
+									<div class="item-image">
+										<img class="img" src="${contextPath}/resources/assets/images/carwashes/temp.jpg" alt="세차장대표사진">
+									</div>
+									<div class="item-info">
+										<h4 class="info-title">${item.washName}</h4>
+										<p class="info-location">
+											<span class="icon"></span><span class="label">${item.washAddr}</span>
+										</p>
+									</div>
+								</a>
+							</div>
+
+							</c:forEach>
+						</c:if>
 					</div>
 					<!-- <div class="swiper-button-next"></div>
 					<div class="swiper-button-prev"></div> -->
