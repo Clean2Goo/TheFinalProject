@@ -6,12 +6,15 @@
 <main>
 	<section>
 		<article>
-			<div class="notice-list-container">
-				<h1>공지사항</h1>
+			<div class="h3-title">
+				<h3>공지사항</h3>
+			</div>
+			<div class="notice-list-container content">
+				
 				<!-- 공지사항 작성 버튼 (관리자만 보임) -->
-				<c:if test="${member.userType == 'systemOperator'}">
+			<%-- 	<c:if test="${member.userType == 'systemOperator'}">
 					<a href="${contextPath}/notice/adminWriteForm.do"" class="notice-write-btn">공지사항 작성</a>
-				</c:if>
+				</c:if> --%>
 				<!-- 공지사항 테이블 -->
 				<table class="notice-table">
 					<thead>
@@ -60,7 +63,7 @@
 					</tbody>
 				</table>
 				<!-- 페이지네이션 -->
-					<div class="pagination">
+<%-- 					<div class="pagination">
 					<c:forEach var="page" begin="1" end="${totalPages}">
 						<c:choose>
 							<c:when test="${currentPage == page}">
@@ -71,7 +74,7 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-				</div>
+				</div> --%>
 			</div>
 		</article>
 	</section>
