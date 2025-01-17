@@ -106,7 +106,9 @@ em {color: var(--primary-blue);font-style: normal;}
 .dsf {display: flex;}
 .dsif {display: inline-flex;}
 .fdc {flex-direction: column !important;}
+.fdr {flex-direction: row !important;}
 .jcc {justify-content: center !important;}
+.jcsb {justify-content: space-between !important;}
 .jcfs {justify-content: flex-start !important;}
 .jcfe {justify-content: flex-end !important;}
 .aic {align-items: center !important;}
@@ -473,16 +475,15 @@ main {
 section,
 article {display:flex;flex-direction: column;align-items: center;}
 
-/* 공통 아티클 가로 너비 정의 : 요청시 수정 */
-article {width: calc(100vw - 820px);} /* 1100px*/
-
 main section {gap:60px;}
 
-main section:only-of-type{min-height: calc(100vh - 112px - 313px);} /*전체높이 - 헤더높이 - 푸터높이*/
+main section:only-of-type{min-height: calc(100vh - 112px - 313px - 200px);} /*전체높이 - 헤더높이 - 푸터높이 - 메인(위아래패딩)*/
 main section:only-of-type,
 main section:first-of-type {}
 
-main section article {gap: 60px;flex-grow: 1;flex-shrink: 1;flex-basis: auto;}
+/* 공통 아티클 가로 너비 정의 : 요청시 수정 */
+main section article {width: calc(100vw - 820px);gap: 60px;flex-grow: 1;flex-shrink: 1;flex-basis: auto;}
+main:not(.ui-sign) section article {min-width: 1100px;}
 
 main section article .h3-title,
 main section article .content,
@@ -497,7 +498,7 @@ main section article > .content > .h4  .content {gap: 24px;flex-grow: 1;flex-shr
 main.ui-sign section {justify-content: center;}
 main.ui-sign section article {flex-grow:0;width: 740px;padding: 60px 0;border: 1px solid var(--line-02);border-radius: 24px;}
 main.ui-sign section article > .content {flex-grow:0;}
-main.ui-sign section article > .content .ux-button-bar{width: 100%;}
+main.ui-sign .ux-button-bar{width: 100%;}
 
 
 .ux-divider { width: 100%;margin: 20px 0;border: 1px solid var(--line-03);}
@@ -550,23 +551,33 @@ header .logo .h1 {display: flex;align-items: center;width: auto;color: var(--pri
 .ux-button.button-sign {height: 24px;padding: 0 8px;color:var(--fc-black);transition: all 0.3s ease;}
 .ux-button.button-sign:hover .label {color:var(--primary-blue);font-weight: 700;}
 
-/* 폰트어썸 아이콘 종 버튼 */
-.ux-button.icon-menu {--w: 24px;--h: 24px;width: var(--w); height: var(--h);text-align: center;padding: 8px;}
-.ux-button.icon-menu .icon {width: var(--w); height: var(--h);font-size: 24px;color:var(--fc-333);transition: opacity .3s ease;}
+/* 아이콘메뉴 버튼 - 즐겨찾기 */
+.ux-button.icon-menu {width: 32px;height: 32px;}
+.ux-button.icon-menu .icon {
+	display: flex; align-items: center; justify-content: center;width: 32px;height: 32px;
+	font-size: 1.5rem;color:var(--fc-333);transition: opacity .3s ease;outline: 1px solid #0ff;
+}
 .ux-button.icon-menu .label {position: absolute!important;width: 1px;height: 1px;overflow: hidden;margin: -1px;clip: rect(0, 0, 0, 0);}
 
 /* 폰트어썸 아이콘 종버튼 - 알림 있을 때 .noti-msg*/
 .ux-button.icon-menu.bell {width: 48px;height: 48px;border-radius: 50%;transition: all .3s ease;}
 .ux-button.icon-menu.bell:hover {background-color:rgba(0,0,0,.07);}
-.ux-button.icon-menu.bell .badge {display: none;position: absolute;right: 4px;top: 10px;width: 18px;height: 18px;border-radius: 50%;background-color: var(--primary-blue);color:var(--fc-fff);font-size: 0.8rem;font-weight: 600;box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);z-index: 10;}
+.ux-button.icon-menu.bell .icon {font-size: 1.5rem;}
+
+.ux-button.icon-menu.bell .badge {
+	display: none;position: absolute;right: 4px;top: 10px;width: 18px;height: 18px;
+	color:var(--fc-fff);font-size: 0.8rem;font-weight: 600;text-align: center;
+	border-radius: 50%;background-color: var(--primary-blue);box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+	z-index: 10;
+}
 .ux-button.icon-menu.bell .badge .count{line-height: 18px;}
 .ux-button.icon-menu.bell.noti-msg .badge {display: block;}
 
-/* 프로필아이콘 버튼 */
+/* 프로필 이미지 버튼 */
 .ux-button.custom-profile {position: relative;padding: 0 4px;}
 .ux-button.custom-profile .label{position: absolute;width: 1px;height: 1px;overflow: hidden;margin: -1px;clip: rect(0, 0, 0, 0);}
 
-/* 프로필 + 드롭다운  */
+/* 드롭다운 - 프로필 영역 */
 .user-profile-wrap {display: flex;align-items:center;gap: 16px;}
 .user-profile-wrap > .user-profile-img {position: relative;width: 40px;height: 40px;border: 1px solid var(--line-02);border-radius: 50%;transition:all 0.3s ease;}
 .user-profile-wrap > .user-profile-img:before {position: absolute;top: -5px;left: -5px;width: 48px;height: 48px;border-radius: 50%;transition:all 0.3s ease;content:'';}
@@ -579,7 +590,10 @@ header .logo .h1 {display: flex;align-items: center;width: auto;color: var(--pri
 .user-profile-wrap .user-profile-info .user-name {font-weight: 700;}
 .user-profile-wrap .user-profile-info .user-id {max-width:160px;font-size: 0.875rem;color: var(--fc-666);}
 
+/* 드롭다운 */
 .dropdown-wrap {position: absolute;left: -190px;top:90px;width: 240px;height: 0;border-radius: 8px;background-color: #fff;box-shadow: 8px 8px 6px rgba(0, 0, 0, .04);transition: all 0.3s ease;opacity: 0;overflow: hidden;}
+.dropdown-wrap.expanded {height: auto;border: 1px solid var(--line-02);opacity: 1;}
+
 .dropdown-wrap ul {gap: 0;padding: 0 16px 16px 16px;}
 .dropdown-wrap ul li{position: relative;width: 100%;border-radius: 8px;padding-left: 4px;color: var(--fc-666);transition: all 0.3s ease;}
 .dropdown-wrap ul li:hover{background-color: var(--bg-02);}
@@ -588,11 +602,10 @@ header .logo .h1 {display: flex;align-items: center;width: auto;color: var(--pri
 .dropdown-wrap ul li:last-of-type{margin-top: 8px;}
 .dropdown-wrap ul li:last-of-type:before{display: block;position: absolute;left:0;top: -4px;width : 100%;height: 1px;background-color:var(--line-02);content:'';}
 
-.dropdown-wrap .ux-button.text-button {width: 100%;justify-content: flex-start;padding-left: 0;}
-.dropdown-wrap .ux-button.text-button .icon{width: 16px;height: 16px;font-size: 16px; color:var(--fc-666);}
-.dropdown-wrap .ux-button.text-button .icon + .label{margin-left: 12px;}
-
-.dropdown-wrap.expanded {height: auto;border: 1px solid var(--line-02);opacity: 1;}
+/* 드롭다운 - 아이콘버튼 */
+.ux-button.icon-button {width: 100%;justify-content: flex-start;padding-left: 0;outline: 1px solid #0ff;}
+.ux-button.icon-button .icon{display: flex; align-items: center;justify-content: center;width: 16px;height: 16px;font-size: 16px;color:var(--fc-888);}
+.ux-button.icon-button .icon + .label{margin-left: 12px;}
 
 
 
@@ -655,9 +668,8 @@ aside .admin-menu .menu-list .ux-button.text-button {padding: 0;font-weight: 700
 .admin-container main {padding:40px;}
 .admin-container main.ui-sign {justify-content: center;}
 .admin-container main > section,
-.admin-container main:not(.ui-sign) > section > article {width:100%;}
+.admin-container main:not(.ui-sign) > section > article {width:100%;min-width: 0;}
 /* .admin-container main > section > article div {width:100%} */
-
 
 
 

@@ -27,7 +27,7 @@
 						<li><a href="#" role="button" class="gnb-menu"><span class="label">회사소개</span></a></li>
 						<li><a href="${contextPath}/notice/listNotices.do" role="button" class="gnb-menu"><span class="label">공지사항</span></a></li>
 						<li><a href="#" role="button" class="gnb-menu"><span class="label">이벤트</span></a></li>
-						<li><a href="#" role="button" class="gnb-menu"><span class="label">자주묻는질문</span></a></li>
+						<li><a href="#" role="button" class="gnb-menu"><span class="label">FAQ</span></a></li>
 					</ul>
 				</nav>
 				<div class="menu-bar">
@@ -62,19 +62,29 @@
 										</div>
 										<ul class="dropdown-menu">
 											<li>
-												<a href="${contextPath}/member/myPage.do" role="button" class="ux-button text-button"><i class="icon fa-regular fa-user"></i><span class="label">마이페이지</span></a>
+												<a href="${contextPath}/member/myPage.do" role="button" class="ux-button icon-button">
+													<span class="icon"><i class="fa-regular fa-user"></i></span><span class="label">마이페이지</span>
+												</a>
 											</li>
 											<li>
-												<a href="#" role="button" class="ux-button text-button"><i class="icon fa-regular fa-calendar-check"></i><span class="label">예약내역</span></a>
-											</li>
-											<li>
-												<a href="#" role="button" class="ux-button text-button"><i class="icon fa-regular fa-star"></i><span class="label">즐겨찾기</span></a>
+												<a href="${contextPath}/favorites.do" role="button" class="ux-button icon-button">
+													<span class="icon"><i class="fa-regular fa-star"></i></span><span class="label">즐겨찾기</span>
+												</a>
 											</li>
 											<!-- <li>
-												<a href="#" role="button" class="ux-button text-button"><i class="icon fa-regular fa-bell"></i></i><span class="label">알림</span></a>
+												<a href="#" role="button" class="ux-button icon-button">
+													<span class="icon"><i class="fa-regular fa-calendar-check"></i></span><span class="label">예약내역</span>
+												</a>
+											</li>
+											<li>
+												<a href="#" role="button" class="ux-button icon-button">
+													<span class="icon"><i class="fa-regular fa-bell"></i></span><span class="label">알림</span>
+												</a>
 											</li> -->
 											<li>
-												<a href="${contextPath}/member/logout.do" role="button" class="ux-button text-button"><i class="icon fa-solid fa-arrow-right-from-bracket"></i><span class="label">로그아웃</span></a>
+												<a href="${contextPath}/member/logout.do" role="button" class="ux-button icon-button">
+													<span class="icon"><i class="icon fa-solid fa-arrow-right-from-bracket"></i></span><span class="label">로그아웃</span>
+												</a>
 											</li>
 										</ul>
 									</div>
