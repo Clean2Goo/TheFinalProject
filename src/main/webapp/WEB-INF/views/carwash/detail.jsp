@@ -11,16 +11,16 @@
 				<h3>세차장 정보</h3>
 			</div>
 			<div class="content">
+				<!-- 데이터가 없을 경우 표시 -->
 				<c:if test="${empty carWashDetail}">
 					<div>데이터가 없습니다.</div>
-					<!-- 데이터가 없을 경우 표시 -->
 				</c:if>
 				<c:if test="${not empty carWashDetail}">
 					<div class="ux-divider"></div>
 					<div class="h4 subpage-custom">
 						<div class="content">
 							<div class="item-photo-book">
-								<img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210417_136%2F1618658809016WgFKa_JPEG%2FNMD_0FjfKRVihZrQ_0jATPh7.jpeg.jpg" alt="">
+								<img src="${carWashDetail.washImg}" alt="">
 							</div>
 						</div>
 						<div class="content">
