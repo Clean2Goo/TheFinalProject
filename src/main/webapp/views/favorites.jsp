@@ -13,16 +13,16 @@
     <title>즐겨찾기 목록</title>
     <link rel="stylesheet" href="${contextPath}/resources/assets/css/favorites.css">
 </head>
-
-    <main>
+<body>
+    <header>
         <h1>즐겨찾기 목록</h1>
         <button onclick="goBack()">뒤로가기</button>
-    
-    
+    </header>
+    <main>
         <div id="favorite-list" class="favorite-list">
            
         </div>
     </main>
     <script src="${contextPath}/resources/js/favorites.js"></script>
-
+</body>
 </html>

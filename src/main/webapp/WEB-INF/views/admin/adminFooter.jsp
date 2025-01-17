@@ -6,7 +6,15 @@
 <footer>
 	<section>
 		<article>
-			<h3>어드민푸터다</h3>
+			<div class="company-info">
+				<h1><a href="${contextPath}/admin.do" class="ux-link h1">Clean2Go admin system</a></h1>
+			</div>
+			<div class="copyright-info">
+				<dl>
+					<dt><span class="label">COPYRIGHT© 2025</span></dt>
+					<dd><span class="value">CAMPROAD CO., LTD All rights reserved.</span></dd>
+				</dl>
+			</div>
 		</article>
 	</section>
 </footer>

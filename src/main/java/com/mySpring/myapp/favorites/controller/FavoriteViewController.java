@@ -22,7 +22,7 @@ public class FavoriteViewController {
 		String viewName = (String)request.getAttribute("viewName");
 		System.out.println(viewName);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
+		mav.setViewName("favorites");
 		return mav;
 	}
 }

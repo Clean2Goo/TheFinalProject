@@ -22,6 +22,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.mySpring.myapp.member.service.MemberService;
 import com.mySpring.myapp.member.vo.MemberVO;
 
+import com.mySpring.myapp.carwash.service.CarWashService;
+import com.mySpring.myapp.carwash.model.CarWash;
+
+
 @Controller("memberController")
 //@EnableAspectJAutoProxy
 public class MemberControllerImpl implements MemberController {
@@ -29,6 +33,10 @@ public class MemberControllerImpl implements MemberController {
 	private MemberService memberService;
 	@Autowired
 	MemberVO memberVO;
+
+	@Autowired
+	private CarWashService carWashService;
+
 
 	// 어드민 메인
 	@RequestMapping(value = "/admin.do", method = RequestMethod.GET)
@@ -68,29 +76,6 @@ public class MemberControllerImpl implements MemberController {
 	        rAttr.addAttribute("result", "loginFailed");
 	        mav.setViewName("adminBefore");
 	    }
-//		if(memberVO != null) {
-//		    HttpSession session = request.getSession();
-//		    session.setAttribute("member", memberVO);
-//		    session.setAttribute("isLogOn", true);
-//		    String action = (String)session.getAttribute("action");
-//		    session.removeAttribute("action");
-//		    if(action!= null) {
-//		       mav.setViewName("redirect:"+action);
-//		       System.out.println("액션없음");
-//		    }else {
-//		      List membersList = memberService.listMembers();
-//		      mav.addObject("membersList", membersList);
-//		      System.out.println(" 어드민 로그인하면서 멤버정보가져와");
-//		      System.out.println(membersList);
-//
-//		       mav.setViewName("adminAfter");
-//		       System.out.println(" 어드민 로그인되서 adminAfter");
-//		    }
-//		}else {
-//		   rAttr.addAttribute("result","loginFailed");
-//		   System.out.println("어드민 로그인 실패로 adminBefore");
-//		   mav.setViewName("adminBefore");
-//		}
 		return mav;
 	}
 
@@ -148,11 +133,14 @@ public class MemberControllerImpl implements MemberController {
 
 
 	// 고객 메인
-	@RequestMapping(value = { "/","/main.do"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/main.do", "/",}, method = RequestMethod.GET)
 	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String)request.getAttribute("viewName");
-		System.out.println(viewName);
+		System.out.println("/main.do");
 		ModelAndView mav = new ModelAndView();
+		//beaver 강남구 특정 조건 리스트
+		List<CarWash> carWashesListInGangnam = carWashService.selectCarWashesInGangnam();
+		mav.addObject("carWashesListInGangnam",carWashesListInGangnam);
 		mav.setViewName(viewName);
 		return mav;
 	}

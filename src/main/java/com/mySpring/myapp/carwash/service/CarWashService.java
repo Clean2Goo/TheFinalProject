@@ -1,5 +1,6 @@
 package com.mySpring.myapp.carwash.service;
 
+import com.mySpring.myapp.carwash.dao.CarWashDAO;
 import com.mySpring.myapp.carwash.model.CarWash;
 import com.mySpring.myapp.carwash.repository.CarWashRepository;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -25,6 +26,10 @@ public class CarWashService {
 
     @Autowired
     private RestTemplate restTemplate;
+    
+    //beaver 
+    @Autowired 
+    private CarWashDAO carWashDAO;
 
     // 모든 세차장 데이터를 조회
     public List<CarWash> getAllCarWashes() {
@@ -36,6 +41,15 @@ public class CarWashService {
     public List<CarWash> findCarWashesByAddr(String addr) {
         logger.info("Searching for car washes with address containing: " + addr);
         return carWashRepository.findByWashAddrContaining(addr);
+    }
+
+	//beaver 추가 강남구 특정 조건 세차장 조회
+	 public List<CarWash> selectCarWashesInGangnam() {
+        return carWashDAO.selectCarWashesInGangnam();
+    }
+	//beaver 추가 해당 아이디 세차장 정보 조회
+	public CarWash selectCarWasheById(int washId) {
+        return carWashDAO.selectCarWasheById(washId); //
     }
 
     // 카카오 API로 데이터 요청
@@ -183,4 +197,7 @@ public class CarWashService {
 
         return imageUrls;
     }
+
+
+
 }

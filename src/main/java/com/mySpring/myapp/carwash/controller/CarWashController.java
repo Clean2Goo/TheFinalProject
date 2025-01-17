@@ -4,26 +4,32 @@ import com.mySpring.myapp.carwash.model.CarWash;
 import com.mySpring.myapp.carwash.service.CarWashService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.net.URLEncoder;
 import java.util.List;
 
-@RestController
-@RequestMapping("/api")
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+//beaver: json,jsp 모두 활용 가능한 컨트롤러로 변경 | 기존  @RestController, @RequestMapping("/api") 제거
+@Controller
 public class CarWashController {
 
     @Autowired
     private CarWashService carWashService;
 
-    // 모든 세차장 데이터를 JSON 형식으로 반환
-    @GetMapping("/carwashes")
-    public List<CarWash> getAllCarWashes() {
-        return carWashService.getAllCarWashes();
+    // 모든 세차장 데이터를 JSON 형식으로 반환 // beaver: @Controller적용으로 인한 코드 수정
+    @GetMapping("/api/carwashes")
+    public ResponseEntity<List<CarWash>> getAllCarWashes() {
+        List<CarWash> carWashes = carWashService.getAllCarWashes();
+        return ResponseEntity.ok(carWashes);
     }
 
-    // 카카오 API를 통해 세차장 데이터를 가져오고 데이터베이스에 저장
-    @RequestMapping(value = "/fetch-carwashes", method = {RequestMethod.GET, RequestMethod.POST})
+    // 카카오 API를 통해 세차장 데이터를 가져오고 데이터베이스에 저장 //beaver: /api/ 경로삽입
+    @RequestMapping(value = "/api/fetch-carwashes", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity<String> fetchAndSaveCarWashes(@RequestParam String query) {
         try {
             String apiUrl = "https://dapi.kakao.com/v2/local/search/keyword.json?query=" + URLEncoder.encode(query, "UTF-8");
@@ -42,8 +48,8 @@ public class CarWashController {
         }
     }
 
-    // 특정 세차장을 주소로 검색하여 반환
-    @GetMapping("/search-carwash")
+    // 특정 세차장을 주소로 검색하여 반환 //beaver: /api/ 경로삽입
+    @GetMapping("/api/search-carwash")
     public ResponseEntity<?> searchCarWashByAddr(@RequestParam String addr) {
         try {
             List<CarWash> carWashes = carWashService.findCarWashesByAddr(addr);
@@ -57,8 +63,8 @@ public class CarWashController {
         }
     }
 
-    // explore.do 페이지 접속 시 자동으로 이미지와 데이터를 갱신
-    @GetMapping("/update-images")
+    // explore.do 페이지 접속 시 자동으로 이미지와 데이터를 갱신 //beaver: /api/ 경로삽입
+    @GetMapping("/api/update-images")
     public ResponseEntity<String> updateImagesForWashAddrWithSuffix() {
         try {
             carWashService.fetchImagesForWashAddrWithSuffix();
@@ -68,4 +74,54 @@ public class CarWashController {
             return ResponseEntity.status(500).body("이미지 업데이트 중 오류가 발생했습니다: " + e.getMessage());
         }
     }
+
+	//beaver 해당 아이디 세차장 정보 조회
+	@RequestMapping(value = "/carwash/detail.do", method = RequestMethod.GET)
+	public ModelAndView carWashDetail(@RequestParam("washId") int washId, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		CarWash CarWash = carWashService.selectCarWasheById(washId);
+		if (CarWash == null) {
+			throw new Exception("Carwash detail not found for ID: " + washId);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("carWashDetail", CarWash);
+		System.out.println("detail.do?washId=" + washId + " 데이터 조회");
+		return mav;
+	}
+
+	//beaver 추가 작업 화면
+	@RequestMapping(value = { "/carwash/reservStep1.do"}, method = RequestMethod.GET)
+	private ModelAndView reservStep1(HttpServletRequest request, HttpServletResponse response) {
+		String viewName = (String)request.getAttribute("viewName");
+		System.out.println(viewName);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	@RequestMapping(value = { "/carwash/reservStep2.do"}, method = RequestMethod.GET)
+	private ModelAndView reservStep2(HttpServletRequest request, HttpServletResponse response) {
+		String viewName = (String)request.getAttribute("viewName");
+		System.out.println(viewName);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	@RequestMapping(value = { "/carwash/reservStep3.do"}, method = RequestMethod.GET)
+	private ModelAndView reservStep3(HttpServletRequest request, HttpServletResponse response) {
+		String viewName = (String)request.getAttribute("viewName");
+		System.out.println(viewName);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	@RequestMapping(value="/carwash/listReservations.do" ,method = RequestMethod.GET)
+	public ModelAndView listReservations(HttpServletRequest request, HttpServletResponse response)  {
+		String viewName = (String)request.getAttribute("viewName");
+		System.out.println(viewName);
+		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
+
 }
