@@ -19,10 +19,9 @@
 						<img src="${contextPath}/resources/assets/images/${notice.imagefilename}" alt="첨부 이미지" />
 					</c:if>
 					
-					<!-- 목록버튼 -->
-					<div class="board-actions">
-        			<button onclick="window.location.href='${pageContext.request.contextPath}/notice/listNotices.do';">목록</button>
-     				</div>
+					<!-- 파란 경계선 -->
+					<div class="board-actions"></div>
+        			
      				
      				  <!-- 이전글 목록 -->
 <div class="board-navigation">

@@ -714,7 +714,7 @@ aside .admin-menu .menu-list .ux-button.text-button {padding: 0;font-weight: 700
 .admin-container main.ui-sign {justify-content: center;}
 .admin-container main > section,
 .admin-container main:not(.ui-sign) > section > article {width:100%;}
-.admin-container main > section > article div {width:100%}
+/* .admin-container main > section > article div {width:100%} */
 
 
 /* 이하 화면 작업중 */
