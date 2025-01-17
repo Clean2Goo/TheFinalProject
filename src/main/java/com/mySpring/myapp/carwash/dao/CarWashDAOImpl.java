@@ -24,4 +24,16 @@ public class CarWashDAOImpl implements CarWashDAO {
     public List<CarWash> getAllCarWashes() {
         return sqlSession.selectList(NAMESPACE + ".getAllCarWashes");
     }
+
+	@Override
+    public List<CarWash> selectCarWashesInGangnam() {
+        return sqlSession.selectList(NAMESPACE + ".selectCarWashesInGangnam");
+    }
+
+	@Override
+    public CarWash selectCarWasheById(int washId) {
+        return sqlSession.selectOne(NAMESPACE + ".selectCarWasheById",washId);
+    }
+
+
 }
