@@ -17,7 +17,7 @@ public class FavoriteViewController {
 //        return new ModelAndView("favorites"); // favorites.jsp 반환
 //    }
     
-    @RequestMapping(value = {"/favorites.do"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/member/favorites.do"}, method = RequestMethod.GET)
 	private ModelAndView favorites(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String)request.getAttribute("viewName");
 		System.out.println(viewName);

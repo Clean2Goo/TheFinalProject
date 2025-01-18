@@ -39,7 +39,7 @@
    
    <definition name="favorites" extends="asideLayout">
       <put-attribute name="title" value="고객-마이페이지" />
-      <put-attribute name="body" value="/WEB-INF/views/favorites.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/member/favorites.jsp" />
    </definition>
 
    <definition name="/member/listMembers" extends="baseLayout">

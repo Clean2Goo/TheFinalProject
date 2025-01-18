@@ -20,7 +20,7 @@
 						<a href="${contextPath}/member/myPage.do" class="ux-link">내 정보</a>
 					</li>
 					<li>
-						<a href="${contextPath}/favorites.do" class="ux-link">즐겨찾기 목록</a>
+						<a href="${contextPath}/member/favorites.do" class="ux-link">즐겨찾기 목록</a>
 					</li>
 				</ul>
 			</div>
