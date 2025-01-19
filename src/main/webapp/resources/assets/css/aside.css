@@ -24,7 +24,7 @@
 }
 
 #aside ul li {
-    margin-bottom: 15px;
+    margin-top: 30px;
 }
 
 #aside ul li a:hover {
@@ -39,6 +39,8 @@
 
 /* 활성화된 링크 스타일 */
 .ux-link.active {
+	font-size: 18px;
+	margin-top: 30px;
     color: #007bff; /* 파란색 */
     font-weight: bold; /* 굵은 글씨 */
     text-decoration: underline; /* 밑줄 */
