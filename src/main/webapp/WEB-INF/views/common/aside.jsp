@@ -18,10 +18,10 @@
 				</c:choose>
 				<ul>
 					<li>
-						<a href="${contextPath}/member/myPage.do" class="ux-link ${activeMenu == 'myPage' ? 'active' : ''}">개인정보</a>
+						<a href="${contextPath}/myPage/myInfo.do" class="ux-link ${activeMenu == 'myInfo' ? 'active' : ''}">개인정보</a>
 					</li>
 					<li>
-						<a href="${contextPath}/member/favorites.do" class="ux-link ${activeMenu == 'favorites' ? 'active' : ''}">즐겨찾기</a>
+						<a href="${contextPath}/myPage/favorites.do" class="ux-link ${activeMenu == 'favorites' ? 'active' : ''}">즐겨찾기</a>
 					</li>
 					<li>
 						<a href="" class="ux-link">등급혜택</a>

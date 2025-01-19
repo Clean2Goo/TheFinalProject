@@ -148,23 +148,23 @@ public class MemberControllerImpl implements MemberController {
 	}
 
 	// 고객 마이페이지
-	@RequestMapping(value =  "/member/myPage.do", method = RequestMethod.GET)
+	@RequestMapping(value =  "/myPage/myInfo.do", method = RequestMethod.GET)
 	private ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		HttpSession session = request.getSession();
 	    MemberVO member = (MemberVO) session.getAttribute("member");
 
-		ModelAndView mav = new ModelAndView("myPage");
+		ModelAndView mav = new ModelAndView("myInfo");
 		mav.addObject("member", member);
-		mav.addObject("activeMenu", "myPage");
+		mav.addObject("activeMenu", "myInfo");
 		return mav;
 	}
 	
 	//페이지 이동
-	@RequestMapping("/member/{menu}.do")
-	public String memberMenu(@PathVariable String menu, Model model) {
+	@RequestMapping("/myPage/{menu}.do")
+	public String myPageMenu(@PathVariable String menu, Model model) {
 	    model.addAttribute("activeMenu", menu); // 현재 메뉴 이름 전달
-	    return "memberMenu"; // 공통 JSP 파일로 이동
+	    return "myPageMenu"; // 공통 JSP 파일로 이동
 	}
 
     // 프로필 이미지 업데이트 처리 메서드

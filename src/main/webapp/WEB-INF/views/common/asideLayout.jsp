@@ -46,7 +46,7 @@
 	<script type="text/javascript" src="${contextPath}/resources/js/onlyCustomer.js"></script>
 
 	<!-- 백엔드 취합 후 수정 필요한 css -->
-	<link rel="stylesheet" href="${contextPath}/resources/assets/css/myPage.css">
+	<link rel="stylesheet" href="${contextPath}/resources/assets/css/myInfo.css">
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/favorites.css">
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/aside.css">
 	
@@ -57,8 +57,6 @@
 </head>
 <style>
 .myPage-container #content {display:flex;min-height: calc(100vh - 168px);padding :112px 0 0;}
-.myPage-container header article {width: calc(100vw - 80px);}
-.myPage-container header .logo .h1 {font-size: 1.8rem;}
 
 aside section article {width: auto;}
 
