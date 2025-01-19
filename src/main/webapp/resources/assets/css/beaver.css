@@ -10,21 +10,21 @@ main.ui-index section article .section-title,
 main.ui-index section article .content {align-items: flex-start;}
 main.ui-index section article .section-title.fdr {display: flex;flex-direction: row;justify-content: space-between;align-items: center;}
 
-main.ui-index article {width: calc(100vw - 380px);align-items: flex-start;gap: 40px;outline: 1px solid #0ff;}
+main.ui-index article {width: calc(100vw - 380px);align-items: flex-start;gap: 40px;outline: 1px solid red;}
 main.ui-index article.has-swiper {width: calc(100vw - 120px);}
 main.ui-index article.has-swiper .section-title {padding-left: 130px;}
 
 main.ui-index .section-title {width: 100%;}
 main.ui-index .section-title h3{font-size: 4.75rem;font-weight: 700;}
+
 /* 섹션1 카피라이트*/
 
 /* 섹션2 신규세차장 */
 
 .recommand-swiper {position: relative;width: 100%;height: auto;}
-/* .recommand-swiper .swiper-wrapper{position: absolute;left: 190px;} */
 .swiper-slide.recommand-slide {width: calc(100vw - 80px);height: auto;}
 .recommand-swiper .recommand {display: flex;flex-direction: column;gap:20px;}
-.recommand-swiper .recommand .item-image {position: relative;width:100%;height: 400px;border-radius: 8px;overflow: hidden;transition: all 0.3s ease;}
+.recommand-swiper .recommand .item-image {position: relative;width:100%;height: 400px;border-radius: 2rem;overflow: hidden;transition: all 0.3s ease;}
 .recommand-swiper .recommand .item-image .img {
 	width: 100%; height: 100%;object-fit: cover;transition: all 0.3s ease;
 }
@@ -45,13 +45,14 @@ main.ui-index .section-title h3{font-size: 4.75rem;font-weight: 700;}
         height: 540px;border: 1px solid blue;
     }
 }
-.recommand-swiper .recommand .item-info {flex:1;display: flex;flex-direction : column;flex-wrap:nowrap;}
-.recommand-swiper .recommand .item-info .info-title {transition: all 0.3s ease;}
+
+.recommand-swiper .recommand .item-info {flex:1;display: flex;flex-direction : column;flex-wrap:nowrap;gap: 8px;outline: 1px solid #0ff;}
+.recommand-swiper .recommand .item-info .info-title {font-size: 1.75rem;transition: all 0.3s ease;}
 .recommand-swiper .recommand:hover .item-info .info-title {color: var(--primary-blue);}
 
-.item-info .info-location {font-size: 12px;font-weight: 400;color: var(--primary-blue);}
-.item-info .info-location .icon{width: 12px;height: 16px;background: url('../images/common/pin.png') center center no-repeat;background-size: cover;}
-.item-info .info-location .label{margin-left: 4px;}
+.info-location {font-size: .875rem;font-weight: 400;color: var(--primary-blue);}
+.info-location .icon{width: 12px;height: 16px;background: url('../images/common/pin.png') center center no-repeat;background-size: cover;}
+.info-location .label{margin-left: 4px;}
 
 /* 섹션4 회사소개 */
 
@@ -64,3 +65,77 @@ main.ui-index .section-title h3{font-size: 4.75rem;font-weight: 700;}
 
 /* 섹션5 FAQ */
 
+
+/* ************************************  서브페이지 ************************************ */
+/* ************************************  서브페이지 ************************************ */
+
+/* 서브페이지  */
+main.ui-subpage section > article > .content > .h4 .h4-title{
+	align-items: flex-start;flex-direction: row; justify-content: space-between;
+}
+main.ui-subpage section > article > .content > .h4 .content{
+	align-items: flex-start;
+}
+
+main.ui-subpage .h4.subpage-custom {flex-direction: row;}
+main.ui-subpage .h4.subpage-custom .content {justify-content: space-between;flex:0 1 auto;height: 100%;}
+main.ui-subpage .h4.subpage-custom .content .custom-flex-box {width: 100%;}
+
+.custom-flex-box {outline: 1px solid #0ff;height: 100%;display: flex;flex-direction: column;justify-content: space-between;}
+.custom-flex-box .group {display: flex; flex-direction: column;gap: 8px;}
+.custom-flex-box .group .flex {display: flex; align-items: flex-start; justify-content: space-between;}
+.custom-flex-box .group .flex .ux-button.icon-menu {margin-top: 8px;}
+.custom-flex-box .group .flex .info-location {font-size: 1rem;}
+
+
+/* 세차장 상세보기 */
+.h4-title .info-num{color: var(--primary-blue)}
+
+.info-item .item {color:var(--fc-666);}
+
+.text-intro {font-size: 1.125rem;}
+
+.item-photo-book {height: auto;border-radius: 16px;overflow: hidden;}
+.item-photo-book img {width: 100%;height: 100%;object-fit: cover;}
+
+
+.icon-list {display: flex;flex-wrap: wrap;width: 100%;}
+.icon-list li {flex-basis:100%;display: flex;padding: 8px 0 ;}
+.icon-list.col-2 li {flex-basis: 50%;}
+
+.icon-list li p{display: flex;}
+.icon-list li p .icon {display: flex; align-items: center; justify-content: center;width: 24px;height: 24px;color:var(--fc-888);margin-right: 12px;font-size: 1.2rem;outline: 1px solid #0ff;}
+.icon-list li p .label {color: var(--fc-111);}
+
+.middot-list {display: flex;flex-wrap: wrap;width: 100%;}
+.middot-list li {flex-basis:100%;display: flex;padding: 8px 0 ;}
+.middot-list li{position: relative;padding-left: .8rem !important;}
+.middot-list li:before {display: block;position: absolute;top: 50%; left: 2px;width: 4px;height: 4px;border-radius: 50%;background-color: rgba(0, 0, 0, .4); transform: translateY(-50%); content: "";}
+.desc {font-size: 0.875rem;color:var(--fc-333);}
+
+.dash-list {display: flex;flex-wrap: wrap;width: 100%;}
+.dash-list li {flex-basis:100%;display: flex;padding: 8px 0 ;}
+.dash-list li{position: relative;padding-left: .8rem !important;}
+.dash-list li:before {display: block;position: absolute;top: 50%; left: 2px;transform: translateY(-50%); content: "-";}
+
+
+.dl-list {position: relative;}
+.dl-list dl {display: flex;flex-wrap: wrap;gap: 16px;font-size: 1.125rem;}
+.dl-list dt {flex-grow: 0;flex-shrink: 0;flex-basis: 180px;color: var(--fc-888);}
+.dl-list dd {flex-grow: 1;flex-shrink: 1;flex-basis: calc(100% - 180px - 16px);}
+
+
+
+/* ************************************ 테이블 ************************************ */
+/* ************************************ 테이블 ************************************ */
+
+
+.data-grid {width: 100%;border-top: 1px solid #000;}
+.data-grid table {width: 100%;}
+.data-grid {width: 100%;}
+.data-grid table {width: 100%;text-align: center;}
+.data-grid table th,
+.data-grid table td {font-size: 1rem;color: #111; border-bottom: 1px solid rgba(0, 0, 0, .12);}
+
+.data-grid table th {padding: 16px 16px;font-weight: 700;color: var(--fc-111);background-color: var(--bg-01);}
+.data-grid table td {padding: 24px 16px;border-bottom: 1px solid rgba(0, 0, 0, .12);}

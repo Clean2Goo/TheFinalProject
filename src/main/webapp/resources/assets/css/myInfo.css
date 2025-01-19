@@ -4,56 +4,68 @@
     background-color: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.mypage-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #2467bf;
-    font-size: 24px;
-}
-
-.user-info {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.user-info .info-item {
+.profile-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.info-item {
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
 }
 
-.user-info .info-item:last-child {
+.info-item:last-child {
     border-bottom: none; /* 마지막 항목의 border-bottom 제거 */
 }
 
-.user-info .info-item span {
+.info-item span {
     font-size: 16px;
 }
 
-.user-info .info-item .label {
+.info-item .label {
     color: #888;
     font-weight: bold;
     width: 150px;  /* 항목명 고정 너비 */
 }
 
-.user-info .info-item .value {
+.info-item .value {
     color: #333;
     width: calc(100% - 160px);  /* 항목명 너비를 제외한 나머지 공간을 value에 할당 */
     text-align: left;
 }
 
-.user-info .info-item .value a {
+.info-item .value a {
     color: #2467bf;
     text-decoration: none;
 }
 
-.user-info .info-item .value a:hover {
+.info-item .value a:hover {
     text-decoration: underline;
+}
+
+img {
+    width: 56px;
+    height: 56px;
+    aspect-ratio: auto 56 / 56;
+}
+
+#user-profile-name {
+    font-size: 20px;
+    font-weight: bold;
+    width: calc(100% - 160px);
+    display: flex;
+    align-items: center;
 }
 
 /* 수정 버튼 스타일 */
@@ -66,8 +78,8 @@
     cursor: pointer;
     transition: background-color 0.3s;
     text-align: center;
-    white-space: nowrap; /* 텍스트가 한 줄로 유지되도록 설정 */
-    display: inline-block; /* 텍스트가 한 줄로 유지되도록 설정 */
+    white-space: nowrap;
+    display: inline-block;
 }
 
 .edit-btn:hover {
