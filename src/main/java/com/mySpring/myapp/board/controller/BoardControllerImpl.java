@@ -53,6 +53,18 @@ public class BoardControllerImpl  implements BoardController{
 		
 	}
 	
+	//어드민-보드 목록
+	@RequestMapping(value= "/board/adminListArticles.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView adminListArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+//		String viewName = "/board/listArticles";
+		List articlesList = boardService.listArticles();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("articlesList", articlesList);
+		return mav;
+	
+	}
+	
 	 //한 개 이미지 글쓰기
 	@Override
 	@RequestMapping(value="/board/addNewArticle.do" ,method = RequestMethod.POST)
@@ -119,6 +131,18 @@ public class BoardControllerImpl  implements BoardController{
 		mav.addObject("article", articleVO);
 		return mav;
 	}
+	
+	//어드민-보드 상세
+		@RequestMapping(value="/board/adminViewArticle.do" ,method = RequestMethod.GET)
+		public ModelAndView adminViewArticle(@RequestParam("articleNO") int articleNO,
+	                                    HttpServletRequest request, HttpServletResponse response) throws Exception{
+			String viewName = (String)request.getAttribute("viewName");
+			articleVO=boardService.viewArticle(articleNO);
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName(viewName);
+			mav.addObject("article", articleVO);
+			return mav;
+		}
 	
 	/*
 	//다중 이미지 보여주기
@@ -305,6 +329,15 @@ public class BoardControllerImpl  implements BoardController{
 
 	@RequestMapping(value = "/board/*Form.do", method =  RequestMethod.GET)
 	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	//어드민-보드 수정
+	@RequestMapping(value = "/board/adminArticleForm.do", method =  RequestMethod.GET)
+	private ModelAndView adminForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);

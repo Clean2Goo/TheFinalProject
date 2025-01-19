@@ -36,7 +36,7 @@
      <td >작성일</td>
   </tr>
 <c:choose>
-  <c:when test="${articlesList ==null }" >
+  <c:when test="${articlesList == null }" >
     <tr  height="10">
       <td colspan="4">
          <p align="center">

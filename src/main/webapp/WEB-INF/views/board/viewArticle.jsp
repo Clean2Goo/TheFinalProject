@@ -89,6 +89,9 @@
 </head>
 <body>
   <form name="frmArticle" method="post"  action="${contextPath}"  enctype="multipart/form-data">
+  <input type="hidden" name="articleNO" value="${article.articleNO}"  /> 
+  <!-- hidden은 form 태그 아래에 모아놓기 -->
+  
   <table  border=0  align="center">
   <tr>
    <td width=150 align="center" bgcolor=#FF9933>
@@ -96,7 +99,6 @@
    </td>
    <td >
     <input type="text"  value="${article.articleNO }"  disabled />
-    <input type="hidden" name="articleNO" value="${article.articleNO}"  />
    </td>
   </tr>
   <tr>

@@ -5,7 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.mySpring.myapp.member.vo.MemberVO"  alias="memberVO" />
-		<typeAlias type="com.mySpring.myapp.notice.vo.ArticleVO"  alias="articleVO" />
-		<typeAlias type="com.mySpring.myapp.notice.vo.ImageVO"  alias="imageVO" />
+		<typeAlias type="com.mySpring.myapp.board.vo.ArticleVO"  alias="articleVO" />
+		<typeAlias type="com.mySpring.myapp.board.vo.ImageVO"  alias="imageVO" />
 	</typeAliases>
 </configuration>

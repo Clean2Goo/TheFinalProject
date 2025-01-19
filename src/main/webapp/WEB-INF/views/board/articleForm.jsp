@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
      pageEncoding="UTF-8"
     isELIgnored="false" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  /> 
 <%
   request.setCharacterEncoding("UTF-8");
-%>
+%> 
 
 <head>
 <meta charset="UTF-8">
 <title>글쓰기창</title>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script  src="${contextPath}/resources/lib/jquery-3.1.1.min.js"></script>
-<script  src="<c:url value='/resources/lib/jquery-3.1.1.min.js' />" ></script>
+<script  src="${contextPath}/resources/js/jquery-3.1.1.min.js"></script>
+<script  src="<c:url value='/resources/js/jquery-3.1.1.min.js' />" ></script>
 <script type="text/javascript">
    function readURL(input) {
       if (input.files && input.files[0]) {
@@ -23,17 +23,17 @@
           }
          reader.readAsDataURL(input.files[0]);
       }
-  }
+  }  
   function backToList(obj){
     obj.action="${contextPath}/board/listArticles.do";
     obj.submit();
   }
-
+  
   var cnt=1;
   function fn_addFile(){
 	  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
 	  cnt++;
-  }
+  }  
 
 </script>
  <title>글쓰기창</title>
@@ -58,12 +58,12 @@
 			  <td align="right">이미지파일 첨부:  </td>
 			  <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
 			  <td><img  id="preview" src="#"   width=200 height=200/></td>
-
-
+			  
+			  
 			  <td align="right">이미지파일 첨부</td>
 				<td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
-
-
+				
+				
 	   </tr>
 	   <tr>
 	      <td colspan="4"><div id="d_file"></div></td>

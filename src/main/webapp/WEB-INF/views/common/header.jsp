@@ -26,7 +26,7 @@
 					<ul>
 						<li><a href="#" role="button" class="gnb-menu"><span class="label">회사소개</span></a></li>
 						<li><a href="${contextPath}/notice/listNotices.do" role="button" class="gnb-menu"><span class="label">공지사항</span></a></li>
-						<li><a href="#" role="button" class="gnb-menu"><span class="label">이벤트</span></a></li>
+						<li><a href="${contextPath}/board/listArticles.do" role="button" class="gnb-menu"><span class="label">이벤트</span></a></li>
 						<li><a href="#" role="button" class="gnb-menu"><span class="label">FAQ</span></a></li>
 					</ul>
 				</nav>
