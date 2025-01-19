@@ -7,11 +7,9 @@
 }
 
 #aside {
-    width: 250px;
+    width: 300px;
     background-color: #f0f0f5;
-    padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    margin: 0;
 }
 
 #content {
@@ -29,12 +27,19 @@
     margin-bottom: 15px;
 }
 
-#aside ul li a {
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-}
-
 #aside ul li a:hover {
     color: #007bff;
+}
+
+.ux-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+/* 활성화된 링크 스타일 */
+.ux-link.active {
+    color: #007bff; /* 파란색 */
+    font-weight: bold; /* 굵은 글씨 */
+    text-decoration: underline; /* 밑줄 */
 }

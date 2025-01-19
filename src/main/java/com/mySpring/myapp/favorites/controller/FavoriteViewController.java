@@ -23,6 +23,7 @@ public class FavoriteViewController {
 		System.out.println(viewName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("favorites");
+		mav.addObject("activeMenu", "favorites");
 		return mav;
 	}
 }

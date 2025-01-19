@@ -14,12 +14,14 @@ public class MemberVO {
     private String userType; 
     private Date joinDate; 
     private String img; 
+    private String rank; 
+    private Date dob;
 
 	public MemberVO() {
 		
 	}
 
-	public MemberVO(String id, String pwd, String name, String email, String phone, String userType, String img) {
+	public MemberVO(String id, String pwd, String name, String email, String phone, String userType, String img, String rank) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;
@@ -27,6 +29,8 @@ public class MemberVO {
         this.phone = phone;
         this.userType = userType;
         this.img = img;
+        this.rank = rank;
+        
     }
 
 	public String getId() {
@@ -91,5 +95,21 @@ public class MemberVO {
 
     public void setImg(String img) {
         this.img = img;
+    }
+    
+    public String getRank() {
+		return rank;
+	}
+
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
+	
+	public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 }

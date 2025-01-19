@@ -13,14 +13,21 @@
 					<c:when test="${isLogOn == true  && member!= null}">
 						<h4>이름: ${member.name}님!</h4>
 						<h4>구분: ${member.userType}</h4>
+						<h4>등급: ${member.rank}</h4>
 					</c:when>
 				</c:choose>
 				<ul>
 					<li>
-						<a href="${contextPath}/member/myPage.do" class="ux-link">내 정보</a>
+						<a href="${contextPath}/member/myPage.do" class="ux-link ${activeMenu == 'myPage' ? 'active' : ''}">개인정보</a>
 					</li>
 					<li>
-						<a href="${contextPath}/member/favorites.do" class="ux-link">즐겨찾기 목록</a>
+						<a href="${contextPath}/member/favorites.do" class="ux-link ${activeMenu == 'favorites' ? 'active' : ''}">즐겨찾기</a>
+					</li>
+					<li>
+						<a href="" class="ux-link">등급혜택</a>
+					</li>
+					<li>
+						<a href="" class="ux-link">보안설정</a>
 					</li>
 				</ul>
 			</div>

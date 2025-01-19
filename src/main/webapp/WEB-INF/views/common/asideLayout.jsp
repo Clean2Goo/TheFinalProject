@@ -60,13 +60,12 @@
 .myPage-container header article {width: calc(100vw - 80px);}
 .myPage-container header .logo .h1 {font-size: 1.8rem;}
 
-aside {padding:40px;background-color: var(--bg-01);border: 1px solid var(--line-02);}
 aside section article {width: auto;}
 
-.myPage-container main {padding:40px;}
+.myPage-container main {padding:40px 210px 40px 80px;}
 .myPage-container main.ui-sign {justify-content: center;}
 .myPage-container main > section,
-.myPage-container main:not(.ui-sign) > section > article {width:100%;}
+.myPage-container main:not(.ui-sign) > section > article {min-width: 100% !important;}
 .myPage-container main > section > article div {width:100%}
 
 </style>

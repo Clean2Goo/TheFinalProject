@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -154,7 +156,15 @@ public class MemberControllerImpl implements MemberController {
 
 		ModelAndView mav = new ModelAndView("myPage");
 		mav.addObject("member", member);
+		mav.addObject("activeMenu", "myPage");
 		return mav;
+	}
+	
+	//페이지 이동
+	@RequestMapping("/member/{menu}.do")
+	public String memberMenu(@PathVariable String menu, Model model) {
+	    model.addAttribute("activeMenu", menu); // 현재 메뉴 이름 전달
+	    return "memberMenu"; // 공통 JSP 파일로 이동
 	}
 
     // 프로필 이미지 업데이트 처리 메서드
