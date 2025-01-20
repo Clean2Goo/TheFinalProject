@@ -26,7 +26,7 @@
 					<ul>
 						<li><a href="#" role="button" class="gnb-menu"><span class="label">회사소개</span></a></li>
 						<li><a href="${contextPath}/notice/listNotices.do" role="button" class="gnb-menu"><span class="label">공지사항</span></a></li>
-						<li><a href="#" role="button" class="gnb-menu"><span class="label">이벤트</span></a></li>
+						<li><a href="${contextPath}/board/listArticles.do" role="button" class="gnb-menu"><span class="label">이벤트</span></a></li>
 						<li><a href="#" role="button" class="gnb-menu"><span class="label">FAQ</span></a></li>
 					</ul>
 				</nav>
@@ -62,12 +62,12 @@
 										</div>
 										<ul class="dropdown-menu">
 											<li>
-												<a href="${contextPath}/member/myPage.do" role="button" class="ux-button icon-button">
+												<a href="${contextPath}/myPage/myInfo.do" role="button" class="ux-button icon-button">
 													<span class="icon"><i class="fa-regular fa-user"></i></span><span class="label">마이페이지</span>
 												</a>
 											</li>
 											<li>
-												<a href="${contextPath}/favorites.do" role="button" class="ux-button icon-button">
+												<a href="${contextPath}/myPage/favorites.do" role="button" class="ux-button icon-button">
 													<span class="icon"><i class="fa-regular fa-star"></i></span><span class="label">즐겨찾기</span>
 												</a>
 											</li>
