@@ -13,12 +13,14 @@
         <result property="userType" column="USERTYPE" />
         <result property="joinDate" column="JOINDATE" />
         <result property="img" column="USERIMG" />
+        <result property="rank" column="RANK" />
+        <result property="dob" column="DOB" />
 	</resultMap> 
 	
     <!-- 회원 전체 목록 조회 -->
     <select id="selectAllMemberList" resultMap="memResult">
         <![CDATA[
-            SELECT USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE 
+            SELECT USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE, USERIMG, RANK, DOB
             FROM USERS 
             ORDER BY JOINDATE DESC
         ]]>
@@ -27,8 +29,8 @@
     <!-- 회원 가입 -->
     <insert id="insertMember" parameterType="memberVO">
         <![CDATA[
-            INSERT INTO USERS (USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE)
-            VALUES (#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{userType}, SYSDATE)
+            INSERT INTO USERS (USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE, USERIMG, RANK, DOB)
+            VALUES (#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{userType}, SYSDATE, , #{joinDate}, #{img}, #{rank}, #{dob})
         ]]>
     </insert>
     
@@ -40,7 +42,10 @@
                 USERNAME = #{name}, 
                 USEREMAIL = #{email}, 
                 USERPHONE = #{phone},
-                USERTYPE = #{userType}
+                USERTYPE = #{userType},
+                USERIMG = #{img}, 
+                RANK = #{rank},
+                DOB = #{dob}
             WHERE USERID = #{id}
         ]]>
     </update>
@@ -56,7 +61,7 @@
     <!-- 로그인 체크 -->
     <select id="loginById" resultMap="memResult" parameterType="memberVO">
         <![CDATA[
-            SELECT USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE 
+            SELECT USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE, USERIMG, RANK, DOB
             FROM USERS
             WHERE USERID = #{id} AND USERPWD = #{pwd}
         ]]>

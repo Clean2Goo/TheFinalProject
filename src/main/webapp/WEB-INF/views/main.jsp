@@ -40,7 +40,7 @@
 							<div class="swiper-slide recommand-slide">
 								<a class="recommand" href="${contextPath}/carwash/detail.do?washId=${item.washId}">
 									<div class="item-image">
-										<img class="img" src="${contextPath}/resources/assets/images/carwashes/temp.jpg" alt="세차장대표사진">
+										<img class="img" src=${item.washImg} alt="세차장대표이미지">
 									</div>
 									<div class="item-info">
 										<h4 class="info-title">${item.washName}</h4>
@@ -54,14 +54,12 @@
 							</c:forEach>
 						</c:if>
 					</div>
-					<!-- <div class="swiper-button-next"></div>
-					<div class="swiper-button-prev"></div> -->
 				</div>
 			</div>
 		</article>
 	</section>
 	<!-- 섹션 3 -->
-	<section class="section3">
+	<!-- <section class="section3">
 		<article >
 			<div class="section-title fdr">
 				<h3>섹션3333 회사소개</h3>
@@ -73,9 +71,9 @@
 				<div>회사소개</div>
 			</div>
 		</article>
-	</section>
+	</section> -->
 	<!-- 섹션 4 -->
-	<section class="section4">
+	<!-- <section class="section4">
 		<article >
 			<div class="section-title fdr">
 				<h3>섹션4444 이벤트</h3>
@@ -104,9 +102,9 @@
 				</div>
 			</div>
 		</article>
-	</section>
+	</section> -->
 	<!-- 섹션 5 -->
-	<section class="section5">
+	<!-- <section class="section5">
 		<article >
 			<div class="section-title fdr">
 				<h3>섹션5555 FAQ</h3>
@@ -152,5 +150,5 @@
 				</div>
 			</div>
 		</article>
-	</section>
+	</section> -->
 </main>

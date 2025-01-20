@@ -14,8 +14,26 @@
 	</definition>
 	
 	<definition name="/board/viewArticle" extends="baseLayout">
-    <put-attribute name="title" value="글상세창" />
-    <put-attribute name="body" value="/WEB-INF/views/board/viewArticle.jsp" />
-  </definition>
+    	<put-attribute name="title" value="글상세창" />
+    	<put-attribute name="body" value="/WEB-INF/views/board/viewArticle.jsp" />
+  	</definition>
+  
+  <!-- 어드민- 보드 목록 -->
+	<definition name="/board/adminListArticles" extends="adminLayout">
+	      <put-attribute name="title" value="어드민-글목록창" />
+	      <put-attribute name="body" value="/WEB-INF/views/board/listArticles.jsp" />
+	</definition>
+
+	<!-- 어드민- 보드 상세 -->
+	<definition name="/board/adminArticleForm" extends="adminLayout">
+		<put-attribute name="title" value="어드민-글쓰기창" />
+		<put-attribute name="body" value="/WEB-INF/views/board/articleForm.jsp" />
+	</definition>
+
+	<!-- 어드민- 보드 작성 -->
+	<definition name="/board/adminViewArticle" extends="adminLayout">
+    	<put-attribute name="title" value="어드민-글상세창" />
+    	<put-attribute name="body" value="/WEB-INF/views/board/viewArticle.jsp" />
+  	</definition>
 	
 </tiles-definitions>
