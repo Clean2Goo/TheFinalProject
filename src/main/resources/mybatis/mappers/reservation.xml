@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.reservation">
+
+    <resultMap id="reservationResult" type="com.mySpring.myapp.reservation.vo.ReservationVO">
+        <result property="rsvnId" column="RSVNID" />
+        <result property="userId" column="USERID" />
+        <result property="washType" column="washtype" />
+        <result property="washId" column="washid" />
+        <result property="staffId" column="staffid" />
+        <result property="requestId" column="requestid" />
+        <result property="rsvnDate" column="rsvndate" />
+        <result property="rsvnTime" column="rsvntime" />
+        <result property="carTypeCost" column="cartypecost" />
+        <result property="status" column="status" />
+        <result property="cancelYn" column="cancelyn" />
+        <result property="crtDate" column="crtdate" />
+
+		<result property="userName" column="userName"/> <!-- 전문가 직원명 -->
+		<result property="washName" column="washName"/> <!-- 카워시 세차장명 -->
+		<result property="fmtRsvnDate" column="fmtRsvnDate"/> <!-- 세차일시 포맷컬럼명 -->
+
+
+    </resultMap>
+
+	 <!-- 유저별 예약 목록 조회 -->
+	    <select id="listReservations" parameterType="String" resultMap="reservationResult">
+	        <![CDATA[
+				SELECT
+					r.rsvnId,
+				    r.userId,
+				    r.washType,
+				    r.washId,
+				    r.staffId,
+				    r.requestId,
+				    TO_CHAR(r.rsvnDate, 'YYYY"년" MM"월" DD"일"') AS fmtRsvnDate,
+				    r.rsvnTime,
+				    r.carTypeCost,
+				    r.status,
+				    r.cancelYn,
+				    r.crtDate,
+				    u.userName,
+				    cw.washName
+				FROM reservations r
+				JOIN carwashes cw ON r.washId = cw.washId
+				LEFT JOIN staff s ON r.staffId = s.staffId
+				LEFT JOIN users u ON s.userId = u.userId
+				WHERE r.USERID = #{userId}
+				ORDER BY r.rsvnid DESC
+			]]>
+	    </select>
+
+
+	 <!-- 예약 취소 -->
+		<update id="updateReservationStatus" parameterType="map">
+		    UPDATE reservations
+		    SET status = '예약취소',
+		    	cancelYn ='Y'
+		    WHERE rsvnId = #{rsvnId}
+		</update>
+</mapper>
