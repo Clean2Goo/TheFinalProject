@@ -158,7 +158,16 @@
 														</c:otherwise>
 													</c:choose>
 												</td>
-												<td>${reservation.status}</td>
+												<td>
+													<div class="table-flex-box">
+														${reservation.status}
+														<c:if test="${reservation.status == '이용완료'}">
+															    <button class="ux-button button-table contained primary" >
+															    	<span class="label">리뷰작성</span>
+																</button>
+													    </c:if>
+												 	</div>
+												</td>
 												<!-- <td>
 													<fmt:formatDate value="${reservation.crtDate}" pattern="yyyy년 MM월 dd일 HH:mm:ss" />
 												</td> -->
