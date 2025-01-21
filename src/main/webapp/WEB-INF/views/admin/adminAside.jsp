@@ -31,11 +31,11 @@
 					</li>
 				</c:if>
 				<li>
-					<a href="${contextPath}/board/adminListArticles" class="ux-button text-button"><span class="label">이벤트</span></a>
+					<a href="${contextPath}/board/adminListArticles.do" class="ux-button text-button"><span class="label">이벤트</span></a>
 				</li>
 				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
 					<li>
-						<a href="${contextPath}/board/adminArticleForm" class="ux-button text-button"><span class="label">이벤트 작성</span></a>
+						<a href="${contextPath}/board/adminArticleForm.do" class="ux-button text-button"><span class="label">이벤트 작성</span></a>
 					</li>
 				</c:if>
 				<li>
