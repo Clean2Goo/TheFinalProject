@@ -7,8 +7,8 @@
 <html>
 <head>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script  src="${contextPath}/resources/js/jquery-3.1.1.min.js"></script>
-<script  src="<c:url value='/resources/js/jquery-3.1.1.min.js' />" ></script>
+<script  src="${contextPath}/resources/lib/jquery-3.1.1.min.js"></script>
+<script  src="<c:url value='/resources/lib/jquery-3.1.1.min.js' />" ></script>
 <script type="text/javascript">
    function readURL(input) {
       if (input.files && input.files[0]) {

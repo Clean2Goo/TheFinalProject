@@ -45,21 +45,21 @@
 									</div>
 									<ul class="dropdown-menu">
 										<li>
-											<a href="${contextPath}/member/myPage.do" role="button" class="ux-button icon-button">
+											<a href="${contextPath}/myPage/myInfo.do" role="button" class="ux-button icon-button">
 												<span class="icon"><i class="icon fa-regular fa-user"></i></span><span class="label">마이페이지</span>
 											</a>
 										</li>
-										<!-- <li>
-											<a href="#" role="button" class="ux-button icon-button">
+										 <li>
+											<a href="${contextPath}/myPage/listReservations.do" role="button" class="ux-button icon-button">
 												<span class="icon"><i class="icon fa-regular fa-calendar-check"></i></span><span class="label">예약내역</span>
 											</a>
 										</li>
 										<li>
-											<a href="#" role="button" class="ux-button icon-button">
+											<a href="${contextPath}/myPage/favorites.do" role="button" class="ux-button icon-button">
 												<span class="icon"><i class="icon fa-regular fa-star"></i></span><span class="label">즐겨찾기</span>
 											</a>
 										</li>
-										<li>
+										<!--<li>
 											<a href="#" role="button" class="ux-button icon-button">
 												<span class="icon"><i class="icon fa-regular fa-bell"></i></span><span class="label">알림</span>
 											</a>
