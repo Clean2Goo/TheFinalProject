@@ -1,104 +1,140 @@
 @charset "utf-8";
 
-.notice-titleh {margin-top: 50px;text-align: center;color: #0074D9;}
-
 /* 작성 페이지 스타일 */
 .notice-form {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--bg-fff);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 
+/* 폼 내부 레이아웃 */
 .notice-form form {
-    margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-/* 공지사항 작성 폼 스타일 */
+/* 레이블 스타일 */
 .notice-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: inline-block;
-    width: 120px; /* label 너비를 지정하여 왼쪽에 고정되도록 함 */
-    text-align: right; /* label의 텍스트를 오른쪽 정렬 */
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: inline-block;
+  color: var(--fc-333);
+  width: 100%;
+  max-width: 120px;
+  text-align: left;
 }
 
+/* 설명 텍스트 */
+.description {
+  font-size: 0.875rem;
+  color: var(--line-03);
+  margin-bottom: 10px;
+}
+
+/* 인풋, 텍스트 영역 스타일 */
 .notice-form input[type="text"],
 .notice-form textarea,
 .notice-form input[type="file"] {
-    width: calc(100% - 130px); /* label의 너비를 제외한 나머지 부분을 차지하도록 함 */
-    padding: 10px;
-    margin: 10px 0px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid var(--line-02);
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* textarea 전용 스타일 */
+/* 인풋 및 텍스트 필드 포커스 스타일 */
+.notice-form input[type="text"]:focus,
+.notice-form textarea:focus,
+.notice-form input[type="file"]:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 5px rgba(0, 75, 213, 0.3);
+  outline: none;
+}
+
+/* 텍스트 영역 전용 스타일 */
 .notice-form textarea {
-    vertical-align: top; /* 상단 정렬 */
-    height: 150px; /* 고정 높이 설정 */
+  height: 150px;
+  resize: none;
 }
 
-/* 버튼 스타일 */
-.notice-form button {
-    margin-top: 10px;
+.button-row {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-/* 제출 버튼 스타일 */
-.notice-form button,
-.notice-form a.button {
-    display: inline-block;
-    background-color: #0074D9;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.button-row button,
+.button-row a {
+  flex: 1;
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.notice-form button:hover,
-.notice-form a.button:hover {
-    background-color: #0056b3;
+/* 등록 버튼 스타일 */
+.button-row button {
+  background-color: var(--primary-blue);
+  color: var(--fc-fff);
+  border: none;
 }
 
-/* 링크 스타일 */
-.notice-form a {
-    color: #0074D9;
-    text-decoration: none;
+.button-row button:hover {
+  background-color: var(--primary-blue-hover);
+  box-shadow: 0 4px 8px rgba(0, 75, 213, 0.2);
 }
 
-.notice-form a:hover {
-    text-decoration: underline;
+/* 취소 버튼 스타일 */
+.button-row a {
+  display: inline-block;
+  background-color: var(--line-03);
+  color: var(--fc-333);
+  text-decoration: none;
+  border: 1px solid var(--line-03);
+}
+
+.button-row a:hover {
+  background-color: var(--line-02);
 }
 
 /* 표 스타일 */
 .notice-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
 }
 
 .notice-table th,
 .notice-table td {
-    text-align: left;
-    padding: 12px;
-    border: 1px solid #ddd;
+  text-align: left;
+  padding: 12px;
+  border: 1px solid #ddd;
 }
 
 .notice-table th {
-    background-color: #e0f7fa;
-    color: #0074D9;
+  background-color: #e0f7fa;
+  color: #0074d9;
 }
 
 /* 이미지 스타일 */
 .notice-detail img {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 /* 상세보기 페이지 */
 .notice-detail {
-    margin-top: 20px;
-}
-
-.redo {
-	margin-bottom: 50px;
+  margin-top: 20px;
 }
