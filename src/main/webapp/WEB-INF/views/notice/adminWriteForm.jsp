@@ -30,7 +30,6 @@
           <label for="content">내용</label>
           <textarea
             name="content"
-            id="content"
             rows="10"
             cols="30"
             required
