@@ -41,7 +41,6 @@
 	<script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
 
 	<!-- 백엔드 취합 후 수정 필요한 css -->
-	<link rel="stylesheet" href="${contextPath}/resources/assets/css/myPage.css">
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/listNotice.css">
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/viewNotice.css">
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/writeFrom.css">
