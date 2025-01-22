@@ -53,7 +53,7 @@
         <div id="header">
             <tiles:insertAttribute name="header" />
         </div>
-        <div id="content">
+        <div id="main">
             <c:choose>
                 <c:when test="${isLogOn == true}">
                     <aside id="aside">

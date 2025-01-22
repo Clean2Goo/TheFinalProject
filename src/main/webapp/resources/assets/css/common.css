@@ -652,7 +652,7 @@ footer .copyright-info {opacity: .8;}
 /* ************************************ 어드민 레이아웃 **************************************** */
 /* ************************************ 어드민 레이아웃 **************************************** */
 
-.admin-container #content {display:flex;min-height: calc(100vh - 138px);padding-top :112px;}
+.admin-container #main {display:flex;min-height: calc(100vh - 138px);padding-top :112px;}
 .admin-container header article,
 .admin-container footer article {width: calc(100vw - 80px);}
 
