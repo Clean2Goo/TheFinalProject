@@ -37,14 +37,18 @@ function applyFilters() {
         .map((checkbox) => checkbox.value);
 
     const filteredCarWashes = allCarWashes.filter((carWash) => {
+        // 세차장의 WASHTYPE 데이터를 배열로 변환
         const washTypes = carWash.washType ? carWash.washType.split(',').map(type => type.trim()) : [];
-        return selectedFilters.every((filter) => washTypes.includes(filter)); // 모든 조건 만족
+        
+        // 모든 선택된 필터가 세차장의 WASHTYPE에 포함되어 있는지 확인
+        return selectedFilters.every((filter) => washTypes.includes(filter));
     });
 
     // 필터링 결과 업데이트
-    displayCarWashMarkers(filteredCarWashes);
-    updateRecommendedList(filteredCarWashes);
+    displayCarWashMarkers(filteredCarWashes); // 지도 마커 업데이트
+    updateRecommendedList(filteredCarWashes); // 추천 리스트 업데이트
 }
+
 
 
 // 로컬 스토리지에 즐겨찾기 저장
@@ -354,7 +358,6 @@ function updateRecommendedList(carWashList) {
 
         const isFavorite = favoriteList.has(carWash.washId) ? "active" : "";
 
-        // 추천 리스트에서 이미지를 제거
         carWashCard.innerHTML = `
             <div class="recommend-item-content">
                 <h3>${carWash.washName}</h3>
@@ -373,11 +376,17 @@ function updateRecommendedList(carWashList) {
             toggleFavorite(carWash.washId); // 즐겨찾기 토글
         });
 
-        // 세차장 카드를 클릭했을 때 팝업 열기
+        // 세차장 카드를 클릭했을 때 지도 이동 및 확대
         carWashCard.addEventListener("click", (e) => {
             e.preventDefault();
-            map.setCenter(new kakao.maps.LatLng(carWash.washLat, carWash.washLng)); // 지도의 중심 이동
-            openPopup(carWash); // 팝업 열기
+
+            // 지도 중심 이동
+            const targetPosition = new kakao.maps.LatLng(carWash.washLat, carWash.washLng);
+            map.setLevel(2); // 줌 레벨을 4로 설정 (더 가까운 확대)
+            map.setCenter(targetPosition);
+
+            // 마커 클릭과 동일한 팝업 열기
+            openPopup(carWash);
         });
 
         recommendedList.appendChild(carWashCard);
@@ -393,6 +402,7 @@ function updateRecommendedList(carWashList) {
     // 페이지네이션 버튼 이벤트 설정
     setupPaginationEvents();
 }
+
 
 
 function redirectToReservation(carWashId) {

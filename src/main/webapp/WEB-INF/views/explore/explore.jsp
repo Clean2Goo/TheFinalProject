@@ -29,10 +29,10 @@
                     <div class="filter-dropdown">
                         <button class="filter-button">필터 ▼</button>
                         <div class="filter-options">
-                            <label><input type="checkbox" value="기계 세차"> 기계 세차</label>
-                            <label><input type="checkbox" value="전문가 세차"> 전문가 세차</label>
-                            <label><input type="checkbox" value="출장 세차"> 출장 세차</label>
-                            <label><input type="checkbox" value="셀프 세차"> 셀프 세차</label>
+                            <label><input type="checkbox" value="자동세차"> 자동세차</label>
+                            <label><input type="checkbox" value="전문세차"> 전문세차</label>
+                            <label><input type="checkbox" value="출장세차"> 출장세차</label>
+                            <label><input type="checkbox" value="셀프세차"> 셀프세차</label>
                         </div>
                     </div>
                 </div>
