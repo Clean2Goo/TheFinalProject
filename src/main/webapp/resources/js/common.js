@@ -66,7 +66,7 @@ const publish = (function () {
 			common.setAccordion();
 			common.setDropDown();
 			common.setSelect();
-			common.setDatepicker();
+			//common.setDatepicker();
 		},
 		setSwiperSlide: function () {
 			var recommandSwiper = new Swiper(".recommand-swiper", {

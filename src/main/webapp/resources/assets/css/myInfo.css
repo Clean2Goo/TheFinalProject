@@ -36,12 +36,12 @@
 .info-item .label {
     color: #888;
     font-weight: bold;
-    width: 150px;  /* 항목명 고정 너비 */
+    width: 70px;  /* 항목명 고정 너비 */
 }
 
 .info-item .value {
     color: #333;
-    width: calc(100% - 160px);  /* 항목명 너비를 제외한 나머지 공간을 value에 할당 */
+    width: calc(100% - 140px);  /* 항목명 너비를 제외한 나머지 공간을 value에 할당 */
     text-align: left;
 }
 
@@ -54,16 +54,16 @@
     text-decoration: underline;
 }
 
+/* class로 스타일이 안먹혀서 img로 먹여놓은 부분*/
 img {
-    width: 56px;
-    height: 56px;
-    aspect-ratio: auto 56 / 56;
+    width: 60px;
+    height: 60px;
 }
 
-#user-profile-name {
+.user-name {
     font-size: 20px;
     font-weight: bold;
-    width: calc(100% - 160px);
+    width: calc(100% - 200px);
     display: flex;
     align-items: center;
 }

@@ -32,8 +32,9 @@
       <put-attribute name="body" value="/WEB-INF/views/carwash/reservStep3.jsp" />
    </definition>
 
-   <definition name="/carwash/listReservations" extends="baseLayout">
-      <put-attribute name="title" value="세차장-예약내역" />
+	<!-- 예약내역  -->
+   <definition name="listReservations" extends="asideLayout">
+      <put-attribute name="title" value="마이페이지-예약내역" />
       <put-attribute name="body" value="/WEB-INF/views/carwash/listReservations.jsp" />
    </definition>
 </tiles-definitions>

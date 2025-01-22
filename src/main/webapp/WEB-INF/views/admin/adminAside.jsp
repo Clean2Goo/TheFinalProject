@@ -16,7 +16,7 @@
 					</div>
 				</c:when>
 			</c:choose>
-			<ul class="menu-list">
+			<ul class="menu-list depth1">
 				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
 					<li>
 						<a href="${contextPath}/member/adminListMembers.do" class="ux-button text-button"><span class="label">전체회원 리스트</span></a>
@@ -31,11 +31,11 @@
 					</li>
 				</c:if>
 				<li>
-					<a href="${contextPath}/board/adminListArticles" class="ux-button text-button"><span class="label">이벤트</span></a>
+					<a href="${contextPath}/board/adminListArticles.do" class="ux-button text-button"><span class="label">이벤트</span></a>
 				</li>
 				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
 					<li>
-						<a href="${contextPath}/board/adminArticleForm" class="ux-button text-button"><span class="label">이벤트 작성</span></a>
+						<a href="${contextPath}/board/adminArticleForm.do" class="ux-button text-button"><span class="label">이벤트 작성</span></a>
 					</li>
 				</c:if>
 				<li>
@@ -46,6 +46,27 @@
 						<a href="#" class="ux-button text-button"><span class="label">자주묻는질문 작성</span></a>
 					</li>
 				</c:if>
+				<!-- 세자창 관리자 메뉴 -->
+				<li>
+					<a href="#" class="ux-button text-button"><span class="label">세차정보관리</span></a>
+				</li>
+				<li>
+					<a href="#" class="ux-button text-button"><span class="label">직원관리</span></a>
+				</li>
+				<li>
+					<a href="#" class="ux-button text-button"><span class="label">예약자관리</span></a>
+					<ul class="menu-list depth2">
+						<li>
+							<a href="#" class="ux-button text-button"><span class="label">- 예약현황판</span></a>
+						</li>
+						<li>
+							<a href="#" class="ux-button text-button"><span class="label">- 예약신청자</span></a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#" class="ux-button text-button"><span class="label">리뷰확인</span></a>
+				</li>
 			</ul>
 			<div class="ux-button-bar">
 				<button type="button" class="ux-button outlined"
