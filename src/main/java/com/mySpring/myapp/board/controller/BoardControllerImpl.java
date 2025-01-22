@@ -35,7 +35,7 @@ import com.mySpring.myapp.member.vo.MemberVO;
 
 @Controller("boardController")
 public class BoardControllerImpl  implements BoardController{
-	private static final String ARTICLE_IMAGE_REPO = "/Users/plumlee/Desktop/board/article_image";
+	private static final String ARTICLE_IMAGE_REPO = "C:\\board\\article_image";
 	@Autowired
 	private BoardService boardService;
 	@Autowired

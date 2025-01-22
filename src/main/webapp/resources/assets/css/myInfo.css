@@ -60,7 +60,7 @@ img {
     aspect-ratio: auto 56 / 56;
 }
 
-#user-profile-name {
+.user-name {
     font-size: 20px;
     font-weight: bold;
     width: calc(100% - 160px);

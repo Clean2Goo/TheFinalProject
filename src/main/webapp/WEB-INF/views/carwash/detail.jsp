@@ -74,7 +74,7 @@
 						<div class="content">
 							<div class="table data-grid">
 								<table>
-									<caption>테이블캡션</caption>
+									<caption>세차비용 테이블</caption>
 									<colgroup>
 										<col width="">
 										<col width="">

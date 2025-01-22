@@ -91,37 +91,5 @@ public class CarWashController {
 		return mav;
 	}
 
-	//beaver 추가 작업 화면
-	@RequestMapping(value = { "/carwash/reservStep1.do"}, method = RequestMethod.GET)
-	private ModelAndView reservStep1(HttpServletRequest request, HttpServletResponse response) {
-		String viewName = (String)request.getAttribute("viewName");
-		System.out.println(viewName);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}
-	@RequestMapping(value = { "/carwash/reservStep2.do"}, method = RequestMethod.GET)
-	private ModelAndView reservStep2(HttpServletRequest request, HttpServletResponse response) {
-		String viewName = (String)request.getAttribute("viewName");
-		System.out.println(viewName);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}
-	@RequestMapping(value = { "/carwash/reservStep3.do"}, method = RequestMethod.GET)
-	private ModelAndView reservStep3(HttpServletRequest request, HttpServletResponse response) {
-		String viewName = (String)request.getAttribute("viewName");
-		System.out.println(viewName);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}
-	@RequestMapping(value="/carwash/listReservations.do" ,method = RequestMethod.GET)
-	public ModelAndView listReservations(HttpServletRequest request, HttpServletResponse response)  {
-		String viewName = (String)request.getAttribute("viewName");
-		System.out.println(viewName);
-		ModelAndView mav = new ModelAndView(viewName);
-		return mav;
-	}
 
 }
