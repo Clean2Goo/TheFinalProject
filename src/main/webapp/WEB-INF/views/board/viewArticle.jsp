@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%request.setCharacterEncoding("UTF-8");%>
@@ -8,8 +9,6 @@
 
  --%>
  
-<!DOCTYPE html>
-<html>
 <head>
    <style>
      #tr_file_upload{
@@ -210,4 +209,3 @@
 		</article>
 	</section>
 </main>
-</html>

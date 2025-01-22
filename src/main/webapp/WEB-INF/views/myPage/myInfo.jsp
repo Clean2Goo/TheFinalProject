@@ -17,10 +17,10 @@
 					</div>
 			        	<div class="content">
 				            <div class="profile-item">
-						    <span id="user-profile-image">
+						    <span class="user-image">
 						        <img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
 						    </span>
-						    <span id="user-profile-name">${member.name}</span>
+						    <span class="user-name">${member.name}</span>
 						    <button class="edit-btn" onclick="location.href='${contextPath}/editProfile?id=${member.id}'">실명수정</button>
 						</div>
 			            <div class="info-item">
@@ -53,10 +53,10 @@
 					</div>
 			        	<div class="content">
 				            <div class="profile-item">
-						    <span id="user-profile-image">
+						    <span class="user-image">
 						        <img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
 						    </span>
-						    <span id="user-profile-name">${member.name}</span>
+						    <span class="user-name">${member.name}</span>
 						    <button class="edit-btn" onclick="location.href='${contextPath}/editProfile?id=${member.id}'">실명수정</button>
 						</div>
 			            <div class="info-item">
@@ -89,10 +89,10 @@
 					</div>
 			        	<div class="content">
 				            <div class="profile-item">
-						    <span id="user-profile-image">
+						    <span class="user-image">
 						        <img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
 						    </span>
-						    <span id="user-profile-name">${member.name}</span>
+						    <span class="user-name">${member.name}</span>
 						    <button class="edit-btn" onclick="location.href='${contextPath}/editProfile?id=${member.id}'">실명수정</button>
 						</div>
 			            <div class="info-item">
