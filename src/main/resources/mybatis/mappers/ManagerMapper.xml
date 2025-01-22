@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mySpring.myapp.mapper.ManagerMapper">
+
+    <!-- 모든 세차장 조회 -->
+    <select id="findAll" resultType="com.mySpring.myapp.carwash.model.CarWash">
+        SELECT * FROM CARWASHES
+    </select>
+
+    <!-- 특정 세차장 조회 -->
+    <select id="findById" parameterType="string" resultType="com.mySpring.myapp.carwash.model.CarWash">
+        SELECT * FROM CARWASHES WHERE WASHID = #{washId}
+    </select>
+
+    <!-- 특정 사용자의 세차장 조회 -->
+    <select id="findByUserId" parameterType="string" resultType="com.mySpring.myapp.carwash.model.CarWash">
+        SELECT * FROM CARWASHES WHERE USERID = #{userId}
+    </select>
+
+    <!-- 세차장 추가 -->
+    <insert id="insert" parameterType="com.mySpring.myapp.carwash.model.CarWash">
+        INSERT INTO CARWASHES (WASHID, USERID, WASHNAME, WASHADDR, WASHINFO, WASHIMG, WASHTEL, OPENHRS, WASHTYPE)
+        VALUES (#{washId}, #{userId}, #{washName}, #{washAddr}, #{washInfo}, #{washImg}, #{washTel}, #{openHrs}, #{washType})
+    </insert>
+
+    <!-- 세차장 수정 -->
+    <update id="update" parameterType="com.mySpring.myapp.carwash.model.CarWash">
+        UPDATE CARWASHES
+        SET WASHNAME = #{washName},
+            WASHADDR = #{washAddr},
+            WASHINFO = #{washInfo},
+            WASHIMG = #{washImg},
+            WASHTEL = #{washTel},
+            OPENHRS = #{openHrs},
+            WASHTYPE = #{washType}
+        WHERE WASHID = #{washId}
+    </update>
+
+    <!-- 세차장 삭제 -->
+    <delete id="deleteById" parameterType="string">
+        DELETE FROM CARWASHES WHERE WASHID = #{washId}
+    </delete>
+
+</mapper>

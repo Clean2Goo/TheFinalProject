@@ -10,15 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WashWise - 세차장 탐색</title>
     <link rel="stylesheet" href="${contextPath}/resources/assets/css/explore.css"/>
+    <!-- <meta name="contextPath" content="${contextPath}" /> layout.jsp 에서 단 한번 선언-->
     <meta name="sessionMember" content="${sessionScope.member.id}">
     <meta name="description" content="WashWise에서 세차장을 탐색하고 예약하세요.">
     <meta property="og:title" content="WashWise - 세차장 탐색">
-    <meta name="contextPath" content="${contextPath}">
-    
     <meta property="og:description" content="WashWise에서 세차장을 탐색하고 예약하세요.">
     <meta property="og:image" content="${contextPath}/resources/images/logo.png">
 </head>
 <body>
+
 
     <main class="ui-search-map">
         <div class="map-container">
@@ -60,7 +60,6 @@
             <div class="popup-buttons">
                 <button id="popup-reserve-button" class="reserve-button" aria-label="예약하기">예약하기</button>
                 <button id="popup-detail-button" class="detail-button" aria-label="상세 보기">상세 보기</button>
-
             </div>
 
             <!-- 리뷰 섹션 -->
@@ -89,11 +88,6 @@
                 </select>
                 <button id="submit-review-button">리뷰 제출</button>
             </div>
-        </div>
-
-        <!-- 상세 정보 컨테이너 -->
-        <div id="detail-container" class="detail-container" style="display: none;">
-            <!-- JavaScript에서 동적으로 내용을 렌더링합니다. -->
         </div>
     </main>
 
