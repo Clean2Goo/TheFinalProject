@@ -155,22 +155,35 @@ function displayCarWashMarkers(carWashList) {
 
 // 팝업을 열고 세차장 정보를 표시하는 함수
 function openPopup(carWash) {
-	const popup = document.getElementById("sliding-popup");
-	document.getElementById("popup-carwash-name").innerText = carWash.washName || "데이터없음";
-	document.getElementById("popup-carwash-name").setAttribute("data-id", carWash.washId); // 세차장 ID 설정
-	document.getElementById("popup-carwash-address").innerText = carWash.washAddr || "데이터없음";
-	document.getElementById("popup-carwash-phone").innerText = carWash.washTel || "데이터없음";
+    const popup = document.getElementById("sliding-popup");
 
-	const popupImage = document.getElementById("popup-carwash-image");
-	popupImage.src = carWash.washImg || `${contextPath}/resources/assets/images/default-carwash.jpg`; // 기본 이미지 설정
-	popupImage.alt = carWash.washName || "세차장 이미지";
+    // 데이터 채우기
+    document.getElementById("popup-carwash-name").innerText = carWash.washName || "데이터없음";
+    document.getElementById("popup-carwash-name").setAttribute("data-id", carWash.washId);
+    document.getElementById("popup-carwash-address").innerText = carWash.washAddr || "데이터없음";
+    document.getElementById("popup-carwash-phone").innerText = carWash.washTel || "데이터없음";
 
-	popup.style.display = "block";
-	popup.classList.add("open");
+    const popupImage = document.getElementById("popup-carwash-image");
+    popupImage.src = carWash.washImg || `${contextPath}/resources/assets/images/default-carwash.jpg`;
+    popupImage.alt = carWash.washName || "세차장 이미지";
 
-	// 세차장 리뷰 목록 불러오기
-	fetchReviewsForCarWash(carWash.washId);
+    popup.style.display = "block";
+    popup.classList.add("open");
+
+    // 상세보기 버튼 클릭 이벤트 추가
+    const detailButton = document.getElementById("popup-detail-button");
+    detailButton.onclick = function () {
+        console.log(`Redirecting to detail page for washId: ${carWash.washId}`);
+        redirectToDetailPage(carWash.washId); // 리디렉션 함수 호출
+    };
+
+    // 디버깅 로그 추가
+    console.log("Popup opened with carWash:", carWash);
+
+    // 세차장 리뷰 목록 불러오기
+    fetchReviewsForCarWash(carWash.washId);
 }
+
 
 // 팝업을 닫는 함수
 function closePopup() {
@@ -180,6 +193,28 @@ function closePopup() {
 }
 
 document.querySelector(".close-btn").addEventListener("click", closePopup);
+
+// 상세 페이지로 리디렉션하는 함수
+function redirectToDetailPage(washId) {
+    const contextPathMeta = document.querySelector('meta[name="contextPath"]');
+    if (!contextPathMeta) {
+        console.error("meta[name='contextPath'] 태그를 찾을 수 없습니다.");
+        return;
+    }
+
+    const contextPath = contextPathMeta.getAttribute("content");
+    if (!contextPath) {
+        console.error("contextPath 값이 비어 있습니다.");
+        return;
+    }
+
+    const redirectUrl = `${contextPath}/carwash/detail.do?washId=${washId}`;
+    console.log("Redirecting to:", redirectUrl);
+    window.location.href = redirectUrl; // 리디렉션
+}
+
+
+
 
 // 리뷰 작성 및 제출
 document.getElementById("submit-review-button").addEventListener("click", async () => {
