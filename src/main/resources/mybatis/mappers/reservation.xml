@@ -61,4 +61,22 @@
 		    	cancelYn ='Y'
 		    WHERE rsvnId = #{rsvnId}
 		</update>
+		
+		
+	 <!-- 예약 하기  TO_DATE(#{rsvnDate}, 'YYYY-MM-DD'), -->
+		<insert id="insertReservation" parameterType="com.mySpring.myapp.reservation.vo.ReservationVO">
+		      <![CDATA[
+		        INSERT INTO reservations (USERID, WASHTYPE, WASHID, RSVNDATE, RSVNTIME, CARTYPECOST)
+		        VALUES (
+		            #{userId}, 
+		            #{washType}, 
+		            #{washId}, 
+		            #{rsvnDate}, 
+		            #{rsvnTime}, 
+		            #{carTypeCost}
+		        )
+		    ]]>
+		</insert>
+			
+
 </mapper>

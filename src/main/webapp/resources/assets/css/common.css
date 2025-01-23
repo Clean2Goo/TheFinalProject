@@ -486,8 +486,8 @@ main section:only-of-type,
 main section:first-of-type {}
 
 /* 공통 아티클 가로 너비 정의 : 요청시 수정 */
-main section article {width: calc(100vw - 820px);gap: 60px;flex-grow: 1;flex-shrink: 1;flex-basis: auto;}
-main:not(.ui-sign) section article {min-width: 1100px;}
+main section article {width: calc(100vw - 640px);gap: 60px;flex-grow: 1;flex-shrink: 1;flex-basis: auto;}
+main:not(.ui-sign) section article {min-width: 1280px;}
 
 main section article .h3-title,
 main section article .content,

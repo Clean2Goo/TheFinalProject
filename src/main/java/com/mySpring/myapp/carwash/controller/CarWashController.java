@@ -76,7 +76,7 @@ public class CarWashController {
     }
 
 	//beaver 해당 아이디 세차장 정보 조회
-	@RequestMapping(value = "/carwash/detail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/carwash/carWashDetail.do", method = RequestMethod.GET)
 	public ModelAndView carWashDetail(@RequestParam("washId") int washId, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
@@ -87,7 +87,7 @@ public class CarWashController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("carWashDetail", CarWash);
-		System.out.println("detail.do?washId=" + washId + " 데이터 조회");
+		System.out.println("carWashDetail.do?washId=" + washId + " 데이터 조회");
 		return mav;
 	}
 

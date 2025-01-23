@@ -80,7 +80,8 @@
 															<form action="${contextPath}/myPage/cancelReservation.do" method="POST">
 															    <input type="hidden" name="rsvnId" value="${reservation.rsvnId}"/>
 															    <button class="ux-button button-table contained cancel" type="submit">
-															    	<span class="label">예약 취소</span></button>
+															    	<span class="label">예약 취소</span>
+														    	</button>
 															</form>
 													    </c:if>
 												 	</div>

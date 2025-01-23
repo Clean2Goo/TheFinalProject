@@ -34,9 +34,16 @@
 	<script type="text/javascript" src="${contextPath}/resources/lib/jquery-ui-1.12.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-	<!-- contextPath 변수 선언 -->
-	<script type="text/javascript">var contextPath = "${contextPath}";</script>
+	
+	<c:set var="isLoggedIn" value="${not empty member}" />
+	<!-- contextPath 변수 선언 / isLoggedIn 로그인상태체크 변수 선언 -->
+	<script type="text/javascript">
+		var contextPath = "${contextPath}";
+		var isLoggedIn = ${isLoggedIn ? 'true' : 'false'};
+	</script>
+	<!--confirm -->
+	<script type="text/javascript" src="${contextPath}/resources/js/messageBox.js"></script>
+	
 	<!-- common.js 고객, 어드민 공통 -->
 	<script type="text/javascript" src="${contextPath}/resources/js/common.js"></script>
 
@@ -44,7 +51,7 @@
 	<script src="https://unpkg.com/typeit@8.3.3/dist/index.umd.js"></script>
 	<!--onlyCustomer.js 고객용 -->
 	<script type="text/javascript" src="${contextPath}/resources/js/onlyCustomer.js"></script>
-
+	
 	<!-- 백엔드 취합 후 수정 필요한 css -->
  	<link rel="stylesheet" href="${contextPath}/resources/assets/css/viewNotice.css"> 
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/writeFrom.css">
