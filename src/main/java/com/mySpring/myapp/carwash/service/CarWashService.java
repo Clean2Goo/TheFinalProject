@@ -27,9 +27,9 @@ public class CarWashService {
 
     @Autowired
     private RestTemplate restTemplate;
-    
-    //beaver 
-    @Autowired 
+
+    //beaver
+    @Autowired
     private CarWashDAO carWashDAO;
 
     // 모든 세차장 데이터를 조회
@@ -56,31 +56,16 @@ public class CarWashService {
             logger.warning("No car wash found for ID: " + washId);
             return null;
         }
-        
-     // 스태프 리스트 문자열 가져오기
-        String staffListString = carWash.getStaffListAsString(); // 이 부분을 확인하세요
-        logger.info("Staff list string: " + staffListString); // 로그 추가
-        
-        if (staffListString != null && !staffListString.isEmpty()) {
-            List<Staff> staffList = new ArrayList<>();
-            
-            String[] staffEntries = staffListString.split(";"); // 세미콜론으로 분리
-            for (String entry : staffEntries) {
-                String[] details = entry.split(","); // 쉼표로 분리
-                if (details.length == 6) { // 필요한 정보가 모두 있는 경우
-                    Staff staff = new Staff();
-                    staff.setStaffId(details[0]);
-                    staff.setUserId(details[1]);
-                    staff.setUserName(details[2]);
-                    staff.setExperience(details[3]);
-                    staff.setRating(details[4]);
-                    staff.setStaffInfo(details[5]);
-                    staffList.add(staff);
-                }
-            }
 
-            carWash.setStaffList(staffList); // 세차장 객체에 스태프 리스트 설정
-            logger.info("Staff list: " + staffList); // 로그 추가
+     // 스태프 정보 가져오기
+        List<Staff> staffList = carWashDAO.selectStaffByWashId(washId);
+        logger.info("Staff list: " + staffList); // 로그 추가
+
+        // 세차장 객체에 스태프 리스트 설정
+        if (staffList != null && !staffList.isEmpty()) {
+            carWash.setStaffList(staffList);
+        } else {
+            carWash.setStaffList(new ArrayList<>()); // 빈 리스트 설정
         }
 
         return carWash;

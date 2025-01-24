@@ -77,17 +77,16 @@
 							<h4>스태프 정보</h4>
 						</div>
 						<div class="content">
-							<h4>나와라 ${carWashDetail.staffList}</h4>
 					        <c:if test="${not empty carWashDetail.staffList}">
 					            <ul>
 					                <c:forEach var="staff" items="${carWashDetail.staffList}">
 					                    <li>
-					                        <strong>이름:</strong> ${staff.staffId} <br>
-					                        <strong>이름:</strong> ${staff.userId} <br>
-					                        <strong>이름:</strong> ${staff.userName} <br>
-					                        <strong>경험:</strong> ${staff.experience} <br>
-					                        <strong>평점:</strong> ${staff.rating} <br>
-					                        <strong>소개:</strong> ${staff.staffInfo} <br>
+					                        <strong>staffId:</strong> ${staff.staffId} <br>
+					                        <strong>userId:</strong> ${staff.userId} <br>
+					                        <strong>userName:</strong> ${staff.userName} <br>
+					                        <strong>experience:</strong> ${staff.experience} <br>
+					                        <strong>rating:</strong> ${staff.rating} <br>
+					                        <strong>staffInfo:</strong> ${staff.staffInfo} <br>
 					                    </li>
 					                </c:forEach>
 					            </ul>
