@@ -4,6 +4,7 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%request.setCharacterEncoding("UTF-8");%>
 
+	
 <main class="ui-subpage">
 	<section>
 		<article>
@@ -43,9 +44,13 @@
 										<dt>수용가능차량 수</dt><dd><span>${carWashDetail.maxCar}</span> 대</dd>
 									</dl>
 								</div>
-								<div class="ux-button-bar">
-									<a href="" class="ux-button contained primary" role="button"><span class="label">바로 예약 하기</span></a>
-								</div>
+								<form class="check-login-form" action="${contextPath}/carwash/reservationStep1.do" method="post">
+								    <input type="hidden" name="washId" value="${carWashDetail.washId}">
+								    <input type="hidden" name="washName" value="${carWashDetail.washName}">
+									<div class="ux-button-bar">
+										<button class="ux-button contained primary" type="submit"><span class="label">바로 예약 하기</span></button>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -64,6 +69,31 @@
 						<div class="h4-title">
 							<h4>고객상담 </h4>
 							<h4 class="info-num"><span>${carWashDetail.washTel}</span></h4>
+						</div>
+					</div>
+					<div class="ux-divider"></div>
+					<div class="h4">
+						<div class="h4-title">
+							<h4>스태프 정보</h4>
+						</div>
+						<div class="content">
+					        <c:if test="${not empty carWashDetail.staffList}">
+					            <ul>
+					                <c:forEach var="staff" items="${carWashDetail.staffList}">
+					                    <li>
+					                        <strong>staffId:</strong> ${staff.staffId} <br>
+					                        <strong>userId:</strong> ${staff.userId} <br>
+					                        <strong>userName:</strong> ${staff.userName} <br>
+					                        <strong>experience:</strong> ${staff.experience} <br>
+					                        <strong>rating:</strong> ${staff.rating} <br>
+					                        <strong>staffInfo:</strong> ${staff.staffInfo} <br>
+					                    </li>
+					                </c:forEach>
+					            </ul>
+					        </c:if>
+					        <c:if test="${empty carWashDetail.staffList}">
+					            <p>스태프 정보가 없습니다.</p>
+					        </c:if>
 						</div>
 					</div>
 					<div class="ux-divider"></div>

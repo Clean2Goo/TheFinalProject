@@ -2,6 +2,7 @@ package com.mySpring.myapp.carwash.service;
 
 import com.mySpring.myapp.carwash.dao.CarWashDAO;
 import com.mySpring.myapp.carwash.model.CarWash;
+import com.mySpring.myapp.carwash.model.Staff;
 import com.mySpring.myapp.carwash.repository.CarWashRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,9 +27,9 @@ public class CarWashService {
 
     @Autowired
     private RestTemplate restTemplate;
-    
-    //beaver 
-    @Autowired 
+
+    //beaver
+    @Autowired
     private CarWashDAO carWashDAO;
 
     // 모든 세차장 데이터를 조회
@@ -49,7 +50,25 @@ public class CarWashService {
     }
 	//beaver 추가 해당 아이디 세차장 정보 조회
 	public CarWash selectCarWasheById(int washId) {
-        return carWashDAO.selectCarWasheById(washId); //
+		logger.info("Fetching car wash details for ID: " + washId);
+        CarWash carWash = carWashDAO.selectCarWasheById(washId);
+        if (carWash == null) {
+            logger.warning("No car wash found for ID: " + washId);
+            return null;
+        }
+
+     // 스태프 정보 가져오기
+        List<Staff> staffList = carWashDAO.selectStaffByWashId(washId);
+        logger.info("Staff list: " + staffList); // 로그 추가
+
+        // 세차장 객체에 스태프 리스트 설정
+        if (staffList != null && !staffList.isEmpty()) {
+            carWash.setStaffList(staffList);
+        } else {
+            carWash.setStaffList(new ArrayList<>()); // 빈 리스트 설정
+        }
+
+        return carWash;
     }
 
     // 카카오 API로 데이터 요청

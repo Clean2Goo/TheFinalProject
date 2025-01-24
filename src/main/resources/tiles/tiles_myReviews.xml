@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+    <!-- Base Layout 정의 
+	    <definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+	    <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+	    <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>  -->
+
+<definition name="myreviews/myReviews" extends="asideLayout">
+    <put-attribute name="title" value="나의 리뷰" />
+    <put-attribute name="body" value="/WEB-INF/views/myreviews/myReviews.jsp" />
+</definition>
+
+</tiles-definitions>

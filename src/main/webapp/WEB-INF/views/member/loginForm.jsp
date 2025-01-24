@@ -79,15 +79,15 @@
 				</form>
 			</div>
 		</article>
-	</section>
+	</section> 
 	<!-- alert -->
 	<c:choose>
 		<c:when test="${result=='loginFailed' }">
-		<script>
-			window.onload=function(){
-			alert("아이디나 비밀번호가 틀립니다.다시 로그인 하세요!");
-			}
-		</script>
+			<script>
+				window.onload=function(){
+				alert("아이디나 비밀번호가 틀립니다.다시 로그인 하세요!");
+				}
+			</script>
 		</c:when>
 	</c:choose>
 </main>
