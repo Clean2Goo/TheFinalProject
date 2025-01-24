@@ -3,6 +3,8 @@ package com.mySpring.myapp.carwash.controller;
 import com.mySpring.myapp.carwash.model.CarWash;
 import com.mySpring.myapp.carwash.model.Staff;
 import com.mySpring.myapp.carwash.service.CarWashService;
+
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -86,6 +88,9 @@ public class CarWashController {
 		if (carWash == null) {
 			throw new Exception("Carwash detail not found for ID: " + washId);
 		}
+		
+		// staffList 초기화
+	    Hibernate.initialize(carWash.getStaffList());
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);

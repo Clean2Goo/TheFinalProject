@@ -65,9 +65,9 @@ public class CarWash {
     @Column(name = "CRTDATE")
     private java.sql.Date crtDate;
 
-    @OneToMany(mappedBy = "carWash", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Staff> staffList = new ArrayList<>(); // 여러 스태프 정보를 담는 리스트
-    
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Staff> staffList;
+
     // Getter와 Setter
     public String getWashId() {
         return washId;
@@ -212,7 +212,7 @@ public class CarWash {
     public void setCrtDate(java.sql.Date crtDate) {
         this.crtDate = crtDate;
     }
-    
+
     public List<Staff> getStaffList() {
         return staffList;
     }
@@ -220,21 +220,5 @@ public class CarWash {
     public void setStaffList(List<Staff> staffList) {
         this.staffList = staffList;
     }
-    
- // 스태프 리스트를 문자열로 변환하는 메서드
-    public String getStaffListAsString() {
-        if (staffList == null || staffList.isEmpty()) {
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        for (Staff staff : staffList) {
-            sb.append(staff.getStaffId()).append(",")
-              .append(staff.getUserId()).append(",")
-              .append(staff.getUserName()).append(",")
-              .append(staff.getExperience()).append(",")
-              .append(staff.getRating()).append(",")
-              .append(staff.getStaffInfo()).append(";"); // 세미콜론으로 구분
-        }
-        return sb.toString();
-    }
+
 }
