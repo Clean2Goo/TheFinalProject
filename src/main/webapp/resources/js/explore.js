@@ -212,7 +212,7 @@ function redirectToDetailPage(washId) {
         return;
     }
 
-    const redirectUrl = `${contextPath}/carwash/detail.do?washId=${washId}`;
+    const redirectUrl = `${contextPath}/carwash/carWashDetail.do?washId=${washId}`;
     console.log("Redirecting to:", redirectUrl);
     window.location.href = redirectUrl; // 리디렉션
 }

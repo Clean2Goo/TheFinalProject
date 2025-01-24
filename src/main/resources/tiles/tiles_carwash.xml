@@ -12,24 +12,24 @@
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
 
-   <definition name="/carwash/detail" extends="baseLayout">
+   <definition name="/carwash/carWashDetail" extends="baseLayout">
       <put-attribute name="title" value="세차장-상세보기" />
-      <put-attribute name="body" value="/WEB-INF/views/carwash/detail.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/carwash/carWashDetail.jsp" />
    </definition>
 
-   <definition name="/carwash/reservStep1" extends="baseLayout">
+   <definition name="/carwash/reservationStep1" extends="baseLayout">
       <put-attribute name="title" value="세차장-예약하기1" />
-      <put-attribute name="body" value="/WEB-INF/views/carwash/reservStep1.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/carwash/reservationStep1.jsp" />
    </definition>
 
-   <definition name="/carwash/reservStep2" extends="baseLayout">
+   <definition name="/carwash/reservationStep2" extends="baseLayout">
       <put-attribute name="title" value="세차장-예약하기2" />
-      <put-attribute name="body" value="/WEB-INF/views/carwash/reservStep2.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/carwash/reservationStep2.jsp" />
    </definition>
 
-   <definition name="/carwash/reservStep3" extends="baseLayout">
+   <definition name="/carwash/carWashReserve" extends="baseLayout">
       <put-attribute name="title" value="세차장-예약하기3" />
-      <put-attribute name="body" value="/WEB-INF/views/carwash/reservStep3.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/carwash/reservationSuccess.jsp" />
    </definition>
 
 	<!-- 예약내역  -->

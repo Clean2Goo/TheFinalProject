@@ -34,9 +34,15 @@
 
 	<!-- 해당 아이디 세차장 정보 조회 -->
     <select id="selectCarWasheById" resultType="com.mySpring.myapp.carwash.model.CarWash">
-        SELECT *
-		FROM CARWASHES
-		WHERE washId = #{washId}
+        SELECT * FROM CARWASHES WHERE WASHID = #{washId}
+    </select>
+	
+	<!-- 해당 아이디 스태프 정보 조회 -->
+	<select id="selectStaffByWashId" parameterType="int" resultType="com.mySpring.myapp.carwash.model.Staff">
+        SELECT s.staffId, s.userId, u.username, s.experience, s.rating, s.staffInfo 
+        FROM STAFF s 
+        LEFT JOIN USERS u ON s.USERID = u.USERID 
+        WHERE s.WASHID = #{washId}
     </select>
 
 </mapper>

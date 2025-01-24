@@ -81,5 +81,5 @@ async function removeFavorite(washId) {
 // 상세 페이지로 리디렉션하는 함수
 function redirectToDetailPage(washId) {
     const contextPath = document.querySelector('meta[name="contextPath"]').getAttribute("content");
-    window.location.href = `${contextPath}/carwash/detail.do?washId=${washId}`;
+    window.location.href = `${contextPath}/carwash/carWashDetail.do?washId=${washId}`;
 }

@@ -38,7 +38,7 @@
 						<c:if test="${not empty carWashesListInGangnam}">
 							<c:forEach var="item" items="${carWashesListInGangnam}">
 							<div class="swiper-slide recommand-slide">
-								<a class="recommand" href="${contextPath}/carwash/detail.do?washId=${item.washId}">
+								<a class="recommand" href="${contextPath}/carwash/carWashDetail.do?washId=${item.washId}">
 									<div class="item-image">
 										<img class="img" src=${item.washImg} alt="세차장대표이미지">
 									</div>

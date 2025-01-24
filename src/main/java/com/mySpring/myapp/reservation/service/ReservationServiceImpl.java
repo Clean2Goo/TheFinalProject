@@ -23,4 +23,9 @@ public class ReservationServiceImpl implements ReservationService {
     public void cancelReservation(String rsvnId) {
     	reservationDAO.updateReservationStatus(rsvnId);
     }
+    
+    @Override
+    public void saveReservation(ReservationVO reservation) {
+    	reservationDAO.insertReservation(reservation);
+    }
 }
