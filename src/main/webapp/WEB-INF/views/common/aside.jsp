@@ -27,6 +27,9 @@
 						<a href="${contextPath}/myPage/favorites.do" class="ux-link ${activeMenu == 'favorites' ? 'active' : ''}">즐겨찾기</a>
 					</li>
 					<li>
+						<a href="${contextPath}/myReviews.do" class="ux-link ${activeMenu == 'favorites' ? 'active' : ''}">리뷰내역</a>
+					</li>
+					<li>
 						<a href="" class="ux-link">등급혜택</a>
 					</li>
 					<li>

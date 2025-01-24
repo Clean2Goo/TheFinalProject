@@ -5,14 +5,14 @@
 <tiles-definitions>
 
     <!-- Base Layout Definition -->
-    <definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+    <!--  <definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
         <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
         <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
         <put-attribute name="body" value="" />
-    </definition>
+    </definition>-->
 
     <!-- Manager Page Definition -->
-    <definition name="manager" extends="baseLayout">
+    <definition name="manager" extends="adminLayout">
         <put-attribute name="title" value="세차장 관리" />
         <put-attribute name="body" value="/WEB-INF/views/manager/manager.jsp" />
     </definition>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<!-- 고객- faq 목록 -->
+  	<definition name="/faq/listFaqs" extends="baseLayout">
+	      <put-attribute name="title" value="고객-faq목록창" />
+	      <put-attribute name="body" value="/WEB-INF/views/faq/listFaqs.jsp" />
+	</definition>
+
+	<!-- 고객- faq 상세 -->
+	 <definition name="/faq/viewFaq" extends="baseLayout">
+	      <put-attribute name="title" value="고객-faq상세창" />
+	      <put-attribute name="body" value="/WEB-INF/views/notice/viewFaq.jsp" />
+	</definition>
+
+	<!-- 어드민- faq 목록 -->
+  	<definition name="/faq/adminListFaqs" extends="adminLayout">
+	      <put-attribute name="title" value="어드민-faq목록창" />
+	      <put-attribute name="body" value="/WEB-INF/views/faq/listFaqs.jsp" />
+	</definition>
+
+	<!-- 어드민- faq 상세 -->
+  	<definition name="/faq/adminViewFaq" extends="adminLayout">
+	      <put-attribute name="title" value="어드민-faq상세창" />
+	      <put-attribute name="body" value="/WEB-INF/views/faq/viewFaq.jsp" />
+	</definition>
+
+	<!-- 어드민- faq 작성 -->
+	 <definition name="/faq/adminWriteFaqForm" extends="adminLayout">
+	      <put-attribute name="title" value="어드민-faq쓰기창" />
+	      <put-attribute name="body" value="/WEB-INF/views/faq/adminWriteFaqForm.jsp" />
+	</definition>
+</tiles-definitions>

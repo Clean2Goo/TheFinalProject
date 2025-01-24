@@ -28,5 +28,8 @@ public class ReservationDAOImpl implements ReservationDAO {
         sqlSession.update("updateReservationStatus", params);
     }
 
-	
+    @Override
+    public void insertReservation(ReservationVO reservation) throws DataAccessException {
+        sqlSession.insert("mapper.reservation.insertReservation", reservation);
+    }
 }

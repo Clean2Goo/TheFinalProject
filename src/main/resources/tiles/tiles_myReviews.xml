@@ -4,13 +4,13 @@
     "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 
 <tiles-definitions>
-    <!-- Base Layout 정의 -->
-    <definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
-    <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-    <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
-</definition>
+    <!-- Base Layout 정의 
+	    <definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+	    <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+	    <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>  -->
 
-<definition name="myreviews/myReviews" extends="baseLayout">
+<definition name="myreviews/myReviews" extends="asideLayout">
     <put-attribute name="title" value="나의 리뷰" />
     <put-attribute name="body" value="/WEB-INF/views/myreviews/myReviews.jsp" />
 </definition>

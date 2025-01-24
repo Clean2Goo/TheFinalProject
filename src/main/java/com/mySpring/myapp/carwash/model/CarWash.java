@@ -2,6 +2,8 @@ package com.mySpring.myapp.carwash.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "CARWASHES") // 테이블 이름 매핑
@@ -62,6 +64,9 @@ public class CarWash {
 
     @Column(name = "CRTDATE")
     private java.sql.Date crtDate;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Staff> staffList;
 
     // Getter와 Setter
     public String getWashId() {
@@ -207,4 +212,13 @@ public class CarWash {
     public void setCrtDate(java.sql.Date crtDate) {
         this.crtDate = crtDate;
     }
+
+    public List<Staff> getStaffList() {
+        return staffList;
+    }
+
+    public void setStaffList(List<Staff> staffList) {
+        this.staffList = staffList;
+    }
+
 }
