@@ -75,9 +75,9 @@ public class ManagerRestController {
     }
 
     // 테스트용 메서드: 세션에 userId 설정
-    @GetMapping("/test-login")
-    public ResponseEntity<String> testLogin(HttpSession session) {
-        session.setAttribute("userId", "Operator"); // 테스트용 ID 설정
-        return ResponseEntity.ok("Test user logged in with ID: Operator");
-    }
+//    @GetMapping("/test-login")
+//    public ResponseEntity<String> testLogin(HttpSession session) {
+//        session.setAttribute("userId", "Operator"); // 테스트용 ID 설정
+//        return ResponseEntity.ok("Test user logged in with ID: Operator");
+//    }
 }

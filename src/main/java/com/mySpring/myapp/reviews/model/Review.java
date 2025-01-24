@@ -33,6 +33,9 @@ public class Review {
     @Column(name = "CRTDATE") // 리뷰 작성일
     private Date crtDate;
 
+    @Transient // DB와 매핑되지 않음
+    private String washName; // 세차장 이름
+
     // Getters and Setters
     public String getRwId() {
         return rwId;
@@ -96,5 +99,13 @@ public class Review {
 
     public void setCrtDate(Date crtDate) {
         this.crtDate = crtDate;
+    }
+
+    public String getWashName() {
+        return washName;
+    }
+
+    public void setWashName(String washName) {
+        this.washName = washName;
     }
 }

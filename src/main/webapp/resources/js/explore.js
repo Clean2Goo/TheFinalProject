@@ -220,54 +220,7 @@ function redirectToDetailPage(washId) {
 
 
 
-// 리뷰 작성 및 제출
-document.getElementById("submit-review-button").addEventListener("click", async () => {
-	const sessionMember = document.querySelector('meta[name="sessionMember"]')?.getAttribute("content");
-	if (!sessionMember) {
-		alert("로그인이 필요합니다.");
-		return;
-	}
 
-	const reviewContent = document.getElementById("review-content").value;
-	const reviewScore = document.getElementById("review-score").value;
-	const carWashId = document.getElementById("popup-carwash-name").getAttribute("data-id");
-
-	if (!reviewContent.trim() || isNaN(reviewScore) || reviewScore < 1 || reviewScore > 5 || !carWashId) {
-		alert("리뷰 내용을 올바르게 입력해주세요.");
-		return;
-	}
-
-	const reviewData = {
-		rsvId: carWashId,
-		rwvScore: parseInt(reviewScore),
-		content: reviewContent,
-		crtDate: new Date().toISOString(),
-	};
-
-	try {
-		const response = await fetch(`${contextPath}/api/reviews`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(reviewData),
-		});
-
-		if (response.ok) {
-			alert("리뷰가 성공적으로 제출되었습니다.");
-			document.getElementById("review-content").value = ""; // 입력 필드 초기화
-			document.getElementById("review-score").value = "";
-			fetchReviewsForCarWash(carWashId); // 리뷰 목록 갱신
-		} else {
-			const error = await response.text();
-			console.error("Failed to submit review:", error);
-			alert("리뷰 제출 중 오류가 발생했습니다.");
-		}
-	} catch (error) {
-		console.error("Error submitting review:", error);
-		alert("리뷰 제출 중 문제가 발생했습니다.");
-	}
-});
 
 // 특정 세차장의 리뷰 목록 가져오기
 async function fetchReviewsForCarWash(carWashId) {

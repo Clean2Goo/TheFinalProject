@@ -10,27 +10,34 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    // 세차장 추가 버튼 이벤트 리스너 추가
+    document.getElementById("add-carwash-btn").addEventListener("click", () => {
+        openModel(null); // 새로운 세차장 추가를 위한 빈 폼 열기
+    });
+
     // 세차장 수정/추가 모델 열기
-    function openModel(carwash) {
-        if (!model || !modelTitle || !form) {
-            console.error("Model elements not found.");
-            return;
-        }
-        model.style.display = "block";
-        modelTitle.textContent = carwash ? "세차장 정보 수정" : "세차장 추가";
-        if (carwash) {
-            document.getElementById("carwash-id").value = carwash.washId || "";
-            document.getElementById("carwash-name").value = carwash.washName || "";
-            document.getElementById("carwash-address").value = carwash.washAddr || "";
-            document.getElementById("carwash-info").value = carwash.washInfo || "";
-            document.getElementById("carwash-image").value = carwash.washImg || "";
-            document.getElementById("carwash-phone").value = carwash.washTel || "";
-            document.getElementById("carwash-hours").value = carwash.openHrs || "";
-            document.getElementById("carwash-type").value = carwash.washType || "";
-        } else {
-            form.reset();
-        }
+   function openModel(carwash) {
+    if (!model || !modelTitle || !form) {
+        console.error("Model elements not found.");
+        return;
     }
+    model.style.display = "block";
+    modelTitle.textContent = carwash ? "세차장 정보 수정" : "세차장 추가";
+    if (carwash) {
+        document.getElementById("carwash-id").value = carwash.washId || "";
+        document.getElementById("carwash-name").value = carwash.washName || "";
+        document.getElementById("carwash-address").value = carwash.washAddr || "";
+        document.getElementById("carwash-lat").value = carwash.washLat || "";
+        document.getElementById("carwash-lng").value = carwash.washLng || "";
+        document.getElementById("carwash-info").value = carwash.washInfo || "";
+        document.getElementById("carwash-image").value = carwash.washImg || "";
+        document.getElementById("carwash-phone").value = carwash.washTel || "";
+        document.getElementById("carwash-hours").value = carwash.openHrs || "";
+        document.getElementById("carwash-type").value = carwash.washType || "";
+    } else {
+        form.reset();
+    }
+}
 
     // 모델 닫기
     document.querySelector(".close-btn").addEventListener("click", () => {
@@ -39,38 +46,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 폼 제출 (세차장 추가/수정)
     form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const carwashData = {
-            washId: document.getElementById("carwash-id").value || null,
-            washName: document.getElementById("carwash-name").value,
-            washAddr: document.getElementById("carwash-address").value,
-            washInfo: document.getElementById("carwash-info").value,
-            washImg: document.getElementById("carwash-image").value,
-            washTel: document.getElementById("carwash-phone").value,
-            openHrs: document.getElementById("carwash-hours").value,
-            washType: document.getElementById("carwash-type").value,
-        };
+    e.preventDefault();
+    const carwashData = {
+        washId: document.getElementById("carwash-id").value || null,
+        washName: document.getElementById("carwash-name").value,
+        washAddr: document.getElementById("carwash-address").value,
+        washLat: parseFloat(document.getElementById("carwash-lat").value),
+        washLng: parseFloat(document.getElementById("carwash-lng").value),
+        washInfo: document.getElementById("carwash-info").value,
+        washImg: document.getElementById("carwash-image").value,
+        washTel: document.getElementById("carwash-phone").value,
+        openHrs: document.getElementById("carwash-hours").value,
+        washType: document.getElementById("carwash-type").value,
+    };
 
-        const method = carwashData.washId ? "PUT" : "POST";
-        const endpoint = carwashData.washId
-            ? `${contextPath}/api/manager/carwashes/${carwashData.washId}`
-            : `${contextPath}/api/manager/carwashes`;
+    const method = carwashData.washId ? "PUT" : "POST";
+    const endpoint = carwashData.washId
+        ? `${contextPath}/api/manager/carwashes/${carwashData.washId}`
+        : `${contextPath}/api/manager/carwashes`;
 
-        try {
-            const response = await fetch(endpoint, {
-                method,
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(carwashData),
-            });
-            if (!response.ok) throw new Error("Failed to save carwash");
-            alert("세차장 정보가 저장되었습니다.");
-            model.style.display = "none";
-            fetchCarwashes();
-        } catch (error) {
-            console.error("Error saving carwash:", error);
-            alert("저장 중 오류가 발생했습니다.");
-        }
-    });
+    try {
+        const response = await fetch(endpoint, {
+            method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(carwashData),
+        });
+        if (!response.ok) throw new Error("Failed to save carwash");
+        alert("세차장 정보가 저장되었습니다.");
+        model.style.display = "none";
+        fetchCarwashes();
+    } catch (error) {
+        console.error("Error saving carwash:", error);
+        alert("저장 중 오류가 발생했습니다.");
+    }
+});
+
 
     // 세차장 목록 가져오기
     async function fetchCarwashes() {

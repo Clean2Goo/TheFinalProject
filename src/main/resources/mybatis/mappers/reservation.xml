@@ -61,4 +61,18 @@
 		    	cancelYn ='Y'
 		    WHERE rsvnId = #{rsvnId}
 		</update>
+		
+		<select id="findReviewStatuses" resultType="map">
+    SELECT 
+        r.RSVNID,
+        CASE 
+            WHEN COUNT(rv.RVWID) > 0 THEN 'true' 
+            ELSE 'false' 
+        END AS isReviewed
+    FROM RESERVATIONS r
+    LEFT JOIN REVIEWS rv ON r.RSVNID = rv.RSVNID AND rv.USERID = #{userId}
+    WHERE r.USERID = #{userId}
+    GROUP BY r.RSVNID
+</select>
+		
 </mapper>
