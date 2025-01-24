@@ -29,10 +29,10 @@
                     <div class="filter-dropdown">
                         <button class="filter-button">필터 ▼</button>
                         <div class="filter-options">
-                            <label><input type="checkbox" value="기계 세차"> 기계 세차</label>
-                            <label><input type="checkbox" value="전문가 세차"> 전문가 세차</label>
-                            <label><input type="checkbox" value="출장 세차"> 출장 세차</label>
-                            <label><input type="checkbox" value="셀프 세차"> 셀프 세차</label>
+                            <label><input type="checkbox" value="자동세차"> 자동세차</label>
+                            <label><input type="checkbox" value="전문세차"> 전문세차</label>
+                            <label><input type="checkbox" value="출장세차"> 출장세차</label>
+                            <label><input type="checkbox" value="셀프세차"> 셀프세차</label>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,6 @@
             <div class="popup-buttons">
                 <button id="popup-reserve-button" class="reserve-button" aria-label="예약하기">예약하기</button>
                 <button id="popup-detail-button" class="detail-button" aria-label="상세 보기">상세 보기</button>
-
             </div>
 
             <!-- 리뷰 섹션 -->
@@ -77,17 +76,6 @@
                     <span id="review-page-info">1 / 1</span>
                     <button id="next-review-button" class="pagination-button" disabled>다음</button>
                 </div>
-
-                <!-- 리뷰 작성 -->
-                <textarea id="review-content" placeholder="리뷰를 작성하세요..."></textarea>
-                <select id="review-score">
-                    <option value="1">1점</option>
-                    <option value="2">2점</option>
-                    <option value="3">3점</option>
-                    <option value="4">4점</option>
-                    <option value="5">5점</option>
-                </select>
-                <button id="submit-review-button">리뷰 제출</button>
             </div>
         </div>
 
