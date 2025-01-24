@@ -32,11 +32,16 @@
 		AND newyn = 'Y'
     </select>
 
-	<!-- 해당 아이디 세차장 정보 조회 -->
+	<!-- 해당 아이디 세차장 정보 조회 / 스태프정보 조회 추가-->
     <select id="selectCarWasheById" resultType="com.mySpring.myapp.carwash.model.CarWash">
-        SELECT *
-		FROM CARWASHES
-		WHERE washId = #{washId}
+        SELECT c.*, 
+	           (SELECT LISTAGG(s.staffId || ',' || s.userId || ',' || u.username || ',' || s.experience || ',' || s.rating || ',' || s.staffInfo, ';') 
+	            WITHIN GROUP (ORDER BY s.staffId)
+	            FROM STAFF s 
+	            LEFT JOIN USERS u ON s.USERID = u.USERID 
+	            WHERE s.WASHID = c.WASHID) AS staffList
+	    FROM CARWASHES c
+	    WHERE c.WASHID = #{washId}
     </select>
 
 </mapper>

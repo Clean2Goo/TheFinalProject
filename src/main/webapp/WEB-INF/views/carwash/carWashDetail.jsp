@@ -46,6 +46,7 @@
 								</div>
 								<form class="check-login-form" action="${contextPath}/carwash/reservationStep1.do" method="post">
 								    <input type="hidden" name="washId" value="${carWashDetail.washId}">
+								    <input type="hidden" name="washName" value="${carWashDetail.washName}">
 									<div class="ux-button-bar">
 										<button class="ux-button contained primary" type="submit"><span class="label">바로 예약 하기</span></button>
 									</div>
@@ -68,6 +69,32 @@
 						<div class="h4-title">
 							<h4>고객상담 </h4>
 							<h4 class="info-num"><span>${carWashDetail.washTel}</span></h4>
+						</div>
+					</div>
+					<div class="ux-divider"></div>
+					<div class="h4">
+						<div class="h4-title">
+							<h4>스태프 정보</h4>
+						</div>
+						<div class="content">
+							<h4>나와라 ${carWashDetail.staffList}</h4>
+					        <c:if test="${not empty carWashDetail.staffList}">
+					            <ul>
+					                <c:forEach var="staff" items="${carWashDetail.staffList}">
+					                    <li>
+					                        <strong>이름:</strong> ${staff.staffId} <br>
+					                        <strong>이름:</strong> ${staff.userId} <br>
+					                        <strong>이름:</strong> ${staff.userName} <br>
+					                        <strong>경험:</strong> ${staff.experience} <br>
+					                        <strong>평점:</strong> ${staff.rating} <br>
+					                        <strong>소개:</strong> ${staff.staffInfo} <br>
+					                    </li>
+					                </c:forEach>
+					            </ul>
+					        </c:if>
+					        <c:if test="${empty carWashDetail.staffList}">
+					            <p>스태프 정보가 없습니다.</p>
+					        </c:if>
 						</div>
 					</div>
 					<div class="ux-divider"></div>

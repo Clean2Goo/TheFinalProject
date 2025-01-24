@@ -17,9 +17,12 @@
 					</div>
 					<div class="content">
 					<p>선택한 세차장 ID: ${washId}</p>
+					<p>선택한 세차장명: ${carWashDetail.washName}</p>
 					<p>유저 ID: ${userId}</p>
+					
 					 <form action="${contextPath}/carwash/reservationStep2.do" method="POST">
 					    <input type="hidden" name="washId" value="${washId}">
+					    <input type="hidden" name="washName" value="${carWashDetail.washName}">
 					    <input type="hidden" name="userId" value="${userId}">
 					    
 					    <!-- 세차날짜 -->

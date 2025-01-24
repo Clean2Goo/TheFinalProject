@@ -2,6 +2,7 @@ package com.mySpring.myapp.carwash.service;
 
 import com.mySpring.myapp.carwash.dao.CarWashDAO;
 import com.mySpring.myapp.carwash.model.CarWash;
+import com.mySpring.myapp.carwash.model.Staff;
 import com.mySpring.myapp.carwash.repository.CarWashRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,7 +50,40 @@ public class CarWashService {
     }
 	//beaver 추가 해당 아이디 세차장 정보 조회
 	public CarWash selectCarWasheById(int washId) {
-        return carWashDAO.selectCarWasheById(washId); //
+		logger.info("Fetching car wash details for ID: " + washId);
+        CarWash carWash = carWashDAO.selectCarWasheById(washId);
+        if (carWash == null) {
+            logger.warning("No car wash found for ID: " + washId);
+            return null;
+        }
+        
+     // 스태프 리스트 문자열 가져오기
+        String staffListString = carWash.getStaffListAsString(); // 이 부분을 확인하세요
+        logger.info("Staff list string: " + staffListString); // 로그 추가
+        
+        if (staffListString != null && !staffListString.isEmpty()) {
+            List<Staff> staffList = new ArrayList<>();
+            
+            String[] staffEntries = staffListString.split(";"); // 세미콜론으로 분리
+            for (String entry : staffEntries) {
+                String[] details = entry.split(","); // 쉼표로 분리
+                if (details.length == 6) { // 필요한 정보가 모두 있는 경우
+                    Staff staff = new Staff();
+                    staff.setStaffId(details[0]);
+                    staff.setUserId(details[1]);
+                    staff.setUserName(details[2]);
+                    staff.setExperience(details[3]);
+                    staff.setRating(details[4]);
+                    staff.setStaffInfo(details[5]);
+                    staffList.add(staff);
+                }
+            }
+
+            carWash.setStaffList(staffList); // 세차장 객체에 스태프 리스트 설정
+            logger.info("Staff list: " + staffList); // 로그 추가
+        }
+
+        return carWash;
     }
 
     // 카카오 API로 데이터 요청

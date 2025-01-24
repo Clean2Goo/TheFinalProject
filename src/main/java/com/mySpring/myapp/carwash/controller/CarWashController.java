@@ -1,6 +1,7 @@
 package com.mySpring.myapp.carwash.controller;
 
 import com.mySpring.myapp.carwash.model.CarWash;
+import com.mySpring.myapp.carwash.model.Staff;
 import com.mySpring.myapp.carwash.service.CarWashService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -80,13 +81,21 @@ public class CarWashController {
 	public ModelAndView carWashDetail(@RequestParam("washId") int washId, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		CarWash CarWash = carWashService.selectCarWasheById(washId);
-		if (CarWash == null) {
+		CarWash carWash = carWashService.selectCarWasheById(washId);
+		
+		if (carWash == null) {
 			throw new Exception("Carwash detail not found for ID: " + washId);
 		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
-		mav.addObject("carWashDetail", CarWash);
+		mav.addObject("carWashDetail", carWash);
+		
+	   // 스태프 리스트 추가
+	    List<Staff> staffList = carWash.getStaffList();
+	    mav.addObject("staffList", staffList);
+	    
+		System.out.println("staffList" + staffList );
 		System.out.println("carWashDetail.do?washId=" + washId + " 데이터 조회");
 		return mav;
 	}

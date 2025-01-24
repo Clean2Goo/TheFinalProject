@@ -1,5 +1,6 @@
 package com.mySpring.myapp.reservation.controller;
 
+import com.mySpring.myapp.carwash.model.CarWash;
 import com.mySpring.myapp.carwash.service.CarWashService;
 import com.mySpring.myapp.member.service.MemberService;
 import com.mySpring.myapp.member.vo.MemberVO;
@@ -69,6 +70,8 @@ public class ReservationControllerImpl implements ReservationController {
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 	    
+		CarWash CarWash = carWashService.selectCarWasheById(washId);
+		
 		ModelAndView mav = new ModelAndView();
 		
 	    if (memberVO != null) {
@@ -80,6 +83,8 @@ public class ReservationControllerImpl implements ReservationController {
 	    	//rAttr.addAttribute("result","reservatinStep1"); 
 	        mav.setViewName("redirect:/member/loginForm.do");
 	    }
+	    mav.addObject("carWashDetail", CarWash);
+	    System.out.println("예약스텝1" + washId + " washName 추가받기");
 		return mav;
 		
 		

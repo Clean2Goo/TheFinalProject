@@ -17,6 +17,7 @@
 					</div>
 					<div class="content">
 						<p>선택한 세차장 ID: ${washId}</p>
+						<p>선택한 세차장명: ${washName}</p>
 						<p>유저 ID: ${userId}</p>
 						<p>세차유형: ${washType}</p>
 						<p>직원 ID (선택적):  ${staffId}</p>
