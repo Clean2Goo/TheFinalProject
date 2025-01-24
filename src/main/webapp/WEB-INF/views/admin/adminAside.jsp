@@ -48,7 +48,7 @@
 				</c:if>
 				<!-- 세자창 관리자 메뉴 -->
 				<li>
-					<a href="#" class="ux-button text-button"><span class="label">세차정보관리</span></a>
+					<a href="${contextPath}/manager.do" class="ux-button text-button"><span class="label">세차정보관리</span></a>
 				</li>
 				<li>
 					<a href="#" class="ux-button text-button"><span class="label">직원관리</span></a>
