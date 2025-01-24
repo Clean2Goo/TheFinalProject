@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CarWashRepository extends JpaRepository<CarWash, String> {
@@ -15,5 +16,7 @@ public interface CarWashRepository extends JpaRepository<CarWash, String> {
 
     // 주소로 세차장을 검색하는 메서드
     List<CarWash> findByWashAddrContaining(String addr);
+    
+    Optional<CarWash> findByWashId(String washId);
 
 }

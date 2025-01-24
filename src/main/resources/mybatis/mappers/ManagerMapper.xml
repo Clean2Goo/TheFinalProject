@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mySpring.myapp.mapper.ManagerMapper">
+
+    <!-- 모든 세차장 조회 -->
+    <select id="findAll" resultType="com.mySpring.myapp.carwash.model.CarWash">
+        SELECT * FROM CARWASHES
+    </select>
+
+    <!-- 특정 세차장 조회 -->
+    <select id="findById" parameterType="string" resultType="com.mySpring.myapp.carwash.model.CarWash">
+        SELECT * FROM CARWASHES WHERE WASHID = #{washId}
+    </select>
+
+    <!-- 특정 사용자의 세차장 조회 -->
+    <select id="findByUserId" parameterType="string" resultType="com.mySpring.myapp.carwash.model.CarWash">
+        SELECT * FROM CARWASHES WHERE USERID = #{userId}
+    </select>
+
+    <!-- 세차장 추가 -->
+    <insert id="insert" parameterType="com.mySpring.myapp.carwash.model.CarWash">
+        INSERT INTO CARWASHES (
+            WASHID, USERID, WASHNAME, WASHADDR, WASHINFO, WASHIMG, 
+            WASHTEL, OPENHRS, WASHTYPE, WASHLAT, WASHLNG, 
+            WASHABLECAR, MAXCAR, VACANCY, NEWYN, RVWCOUNT, RATING, CRTDATE
+        )
+        VALUES (
+            WASHID_SEQ.NEXTVAL, -- WASHID는 시퀀스를 사용하여 자동 생성
+            #{userId, jdbcType=VARCHAR}, 
+            #{washName, jdbcType=VARCHAR}, 
+            #{washAddr, jdbcType=VARCHAR}, 
+            #{washInfo, jdbcType=CLOB}, 
+            #{washImg, jdbcType=VARCHAR}, 
+            #{washTel, jdbcType=VARCHAR}, 
+            #{openHrs, jdbcType=VARCHAR}, 
+            #{washType, jdbcType=VARCHAR}, 
+            COALESCE(#{washLat, jdbcType=NUMERIC}, 0), 
+            COALESCE(#{washLng, jdbcType=NUMERIC}, 0), 
+            #{washableCar, jdbcType=VARCHAR}, 
+            COALESCE(#{maxCar, jdbcType=NUMERIC}, 0), 
+            COALESCE(#{vacancy, jdbcType=NUMERIC}, 0), 
+            COALESCE(#{newYn, jdbcType=CHAR}, 'N'), 
+            COALESCE(#{rvwCount, jdbcType=NUMERIC}, 0), 
+            COALESCE(#{rating, jdbcType=NUMERIC}, 0), 
+            COALESCE(#{crtDate, jdbcType=TIMESTAMP}, CURRENT_TIMESTAMP)
+        )
+    </insert>
+
+    <!-- 세차장 수정 -->
+    <update id="update" parameterType="com.mySpring.myapp.carwash.model.CarWash">
+        UPDATE CARWASHES
+        SET WASHNAME = #{washName, jdbcType=VARCHAR},
+            WASHADDR = #{washAddr, jdbcType=VARCHAR},
+            WASHINFO = #{washInfo, jdbcType=CLOB},
+            WASHIMG = #{washImg, jdbcType=VARCHAR},
+            WASHTEL = #{washTel, jdbcType=VARCHAR},
+            OPENHRS = #{openHrs, jdbcType=VARCHAR},
+            WASHTYPE = #{washType, jdbcType=VARCHAR},
+            WASHLAT = COALESCE(#{washLat, jdbcType=NUMERIC}, 0),
+            WASHLNG = COALESCE(#{washLng, jdbcType=NUMERIC}, 0),
+            WASHABLECAR = #{washableCar, jdbcType=VARCHAR},
+            MAXCAR = COALESCE(#{maxCar, jdbcType=NUMERIC}, 0),
+            VACANCY = COALESCE(#{vacancy, jdbcType=NUMERIC}, 0),
+            NEWYN = COALESCE(#{newYn, jdbcType=CHAR}, 'N'),
+            RVWCOUNT = COALESCE(#{rvwCount, jdbcType=NUMERIC}, 0),
+            RATING = COALESCE(#{rating, jdbcType=NUMERIC}, 0),
+            CRTDATE = COALESCE(#{crtDate, jdbcType=TIMESTAMP}, CURRENT_TIMESTAMP)
+        WHERE WASHID = #{washId, jdbcType=VARCHAR}
+    </update>
+
+    <!-- 세차장 삭제 -->
+    <delete id="deleteById" parameterType="string">
+        DELETE FROM CARWASHES WHERE WASHID = #{washId}
+    </delete>
+
+</mapper>
