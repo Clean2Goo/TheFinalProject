@@ -171,6 +171,9 @@ function openPopup(carWash) {
     popupImage.src = carWash.washImg || `${contextPath}/resources/assets/images/default-carwash.jpg`;
     popupImage.alt = carWash.washName || "세차장 이미지";
 
+	document.getElementById("popup-wash-id").value = carWash.washId;
+    document.getElementById("popup-wash-name").value = carWash.washName;
+
     popup.style.display = "block";
     popup.classList.add("open");
 
@@ -180,6 +183,11 @@ function openPopup(carWash) {
         console.log(`Redirecting to detail page for washId: ${carWash.washId}`);
         redirectToDetailPage(carWash.washId); // 리디렉션 함수 호출
     };
+    
+     const reserveButton = document.getElementById("popup-reserve-button");
+    reserveButton.onclick = function () {
+        redirectToReservationPage(carWash.washId); // 예약 페이지로 이동
+    };
 
     // 디버깅 로그 추가
     console.log("Popup opened with carWash:", carWash);
@@ -187,6 +195,31 @@ function openPopup(carWash) {
     // 세차장 리뷰 목록 불러오기
     fetchReviewsForCarWash(carWash.washId);
 }
+
+function redirectToReservationPage(washId) {
+    const redirectUrl = `${contextPath}/carwash/reservationStep1.do`;
+
+    fetch(redirectUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({ washId }),
+    })
+    .then((response) => {
+        if (response.redirected) {
+            // 서버에서 리디렉션이 발생한 경우
+            window.location.href = response.url;
+        } else {
+            console.log("POST request succeeded without redirection.");
+        }
+    })
+    .catch((error) => {
+        console.error("Error during reservation POST request:", error);
+        alert("예약 처리 중 오류가 발생했습니다.");
+    });
+}
+
 
 
 // 팝업을 닫는 함수

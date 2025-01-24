@@ -21,8 +21,16 @@
 					<div class="h4 subpage-custom">
 						<div class="content">
 							<div class="item-photo-book">
-								<img src="${carWashDetail.washImg}" alt="">
-							</div>
+    <img src="<c:choose>
+                <c:when test="${not empty carWashDetail.washImg}">
+                    ${carWashDetail.washImg}
+                </c:when>
+                <c:otherwise>
+                    ${contextPath}/resources/assets/images/default-carwash.jpg
+                </c:otherwise>
+              </c:choose>" alt="${carWashDetail.washName}">
+</div>
+
 						</div>
 						<div class="content">
 							<div class="custom-flex-box">
