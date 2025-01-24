@@ -40,7 +40,7 @@
 			<div class="copyright-info">
 				<dl>
 					<dt><span class="label">COPYRIGHT© 2025</span></dt>
-					<dd><span class="value">CAMPROAD CO., LTD All rights reserved.</span></dd>
+					<dd><span class="value">CLEAN2GO CO., LTD All rights reserved.</span></dd>
 				</dl>
 			</div>
 		</article>

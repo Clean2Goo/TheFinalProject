@@ -160,6 +160,17 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
+	// 비밀번호 변경 페이지
+	@RequestMapping(value = "/myPage/modPwd.do", method = RequestMethod.GET)
+	public ModelAndView modPwd(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    HttpSession session = request.getSession();
+	    MemberVO member = (MemberVO) session.getAttribute("member");
+
+	    ModelAndView mav = new ModelAndView("myPage/modPwd");
+	    mav.addObject("member", member);
+	    return mav;
+	}
+	
 	//페이지 이동
 	@RequestMapping("/myPage/{menu}.do")
 	public String myPageMenu(@PathVariable String menu, Model model) {

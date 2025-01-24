@@ -1,9 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<%request.setCharacterEncoding("UTF-8");%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<% request.setCharacterEncoding("UTF-8"); %>
 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="stylesheet" href="${contextPath}/resources/assets/css/reservation.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="contextPath" content="${contextPath}">
+    <meta name="sessionMember" content="${sessionScope.member.id}">
+    <title>예약 내역</title>
+</head>
+<body>
 <main class="ui-subpage">
 	<section>
 		<article>
@@ -42,7 +53,7 @@
 								<tbody>
 									<c:if test="${empty reservations}">
 										<tr>
-											<td colspan="8" style="text-align: center;"><p>예약내역이 없습니다.</p></td>
+											<td colspan="6" style="text-align: center;"><p>예약내역이 없습니다.</p></td>
 										</tr>
 									</c:if>
 									<c:forEach var="reservation" items="${reservations}">
@@ -50,9 +61,7 @@
 											<tr>
 												<td>${reservation.rsvnId}</td>
 												<td>${reservation.washName}</td>
-												<td>
-													${reservation.fmtRsvnDate} ${reservation.rsvnTime}
-												</td>
+												<td>${reservation.fmtRsvnDate} ${reservation.rsvnTime}</td>
 												<td>
 													<c:choose>
 														<c:when test="${empty reservation.carTypeCost}">
@@ -80,7 +89,8 @@
 															<form action="${contextPath}/myPage/cancelReservation.do" method="POST">
 															    <input type="hidden" name="rsvnId" value="${reservation.rsvnId}"/>
 															    <button class="ux-button button-table contained cancel" type="submit">
-															    	<span class="label">예약 취소</span></button>
+															    	<span class="label">예약 취소</span>
+																</button>
 															</form>
 													    </c:if>
 												 	</div>
@@ -127,7 +137,7 @@
 								<tbody>
 									<c:if test="${empty reservations}">
 										<tr>
-											<td colspan="8" style="text-align: center;"><p>예약내역이 없습니다.</p></td>
+											<td colspan="6" style="text-align: center;"><p>예약내역이 없습니다.</p></td>
 										</tr>
 									</c:if>
 									<c:forEach var="reservation" items="${reservations}">
@@ -162,8 +172,11 @@
 													<div class="table-flex-box">
 														${reservation.status}
 														<c:if test="${reservation.status == '이용완료'}">
-															    <button class="ux-button button-table contained primary" >
-															    	<span class="label">리뷰작성</span>
+																<button class="ux-button button-table contained primary review-button" 
+																	data-reservation-id="${reservation.rsvnId}" 
+																	data-wash-name="${reservation.washName}" 
+																	data-wash-id="${reservation.washId}">
+																	<span class="label">리뷰작성</span>
 																</button>
 													    </c:if>
 												 	</div>
@@ -183,3 +196,35 @@
 		</article>
 	</section>
 </main>
+
+<!-- 리뷰 팝업 -->
+<div id="review-popup" class="model" style="display:none;">
+    <div class="model-content">
+        <span class="close-btn" id="close-review-popup">×</span>
+        <h2 id="popup-wash-name">리뷰 작성</h2>
+        <ul id="review-list"></ul>
+        <div id="review-pagination">
+            <button id="prev-review-button" disabled>이전</button>
+            <span id="review-page-info">1 / 1</span>
+            <button id="next-review-button" disabled>다음</button>
+        </div>
+        <form id="review-form">
+            <textarea id="review-content" placeholder="리뷰를 작성하세요..."></textarea>
+            <select id="review-score">
+                <option value="">점수 선택</option>
+                <option value="1">1점</option>
+                <option value="2">2점</option>
+                <option value="3">3점</option>
+                <option value="4">4점</option>
+                <option value="5">5점</option>
+            </select>
+            <input type="hidden" id="popup-reservation-id">
+            <input type="hidden" id="popup-wash-id">
+            <button type="submit">리뷰 저장</button>
+        </form>
+    </div>
+</div>
+
+<script src="${contextPath}/resources/js/reservation.js"></script>
+</body>
+</html>

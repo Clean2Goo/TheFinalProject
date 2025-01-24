@@ -61,4 +61,36 @@
 		    	cancelYn ='Y'
 		    WHERE rsvnId = #{rsvnId}
 		</update>
+		
+		
+	 <!-- 예약 하기  TO_DATE(#{rsvnDate}, 'YYYY-MM-DD'), -->
+		<insert id="insertReservation" parameterType="com.mySpring.myapp.reservation.vo.ReservationVO">
+		      <![CDATA[
+		        INSERT INTO reservations (USERID, WASHTYPE, WASHID, RSVNDATE, RSVNTIME, CARTYPECOST)
+		        VALUES (
+		            #{userId}, 
+		            #{washType}, 
+		            #{washId}, 
+		            #{rsvnDate}, 
+		            #{rsvnTime}, 
+		            #{carTypeCost}
+		        )
+		    ]]>
+		</insert>
+			
+
+	<!-- 석준님 코드 -->
+		<select id="findReviewStatuses" resultType="map">
+			SELECT 
+				r.RSVNID,
+				CASE 
+					WHEN COUNT(rv.RVWID) > 0 THEN 'true' 
+					ELSE 'false' 
+				END AS isReviewed
+			FROM RESERVATIONS r
+			LEFT JOIN REVIEWS rv ON r.RSVNID = rv.RSVNID AND rv.USERID = #{userId}
+			WHERE r.USERID = #{userId}
+			GROUP BY r.RSVNID
+		</select>
+		
 </mapper>

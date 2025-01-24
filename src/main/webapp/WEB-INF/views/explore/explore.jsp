@@ -10,15 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WashWise - 세차장 탐색</title>
     <link rel="stylesheet" href="${contextPath}/resources/assets/css/explore.css"/>
-    <!-- <meta name="contextPath" content="${contextPath}" /> layout.jsp 에서 단 한번 선언-->
     <meta name="sessionMember" content="${sessionScope.member.id}">
     <meta name="description" content="WashWise에서 세차장을 탐색하고 예약하세요.">
     <meta property="og:title" content="WashWise - 세차장 탐색">
+    <meta name="contextPath" content="${contextPath}">
+    
     <meta property="og:description" content="WashWise에서 세차장을 탐색하고 예약하세요.">
     <meta property="og:image" content="${contextPath}/resources/images/logo.png">
 </head>
 <body>
-
 
     <main class="ui-search-map">
         <div class="map-container">
@@ -29,10 +29,10 @@
                     <div class="filter-dropdown">
                         <button class="filter-button">필터 ▼</button>
                         <div class="filter-options">
-                            <label><input type="checkbox" value="기계 세차"> 기계 세차</label>
-                            <label><input type="checkbox" value="전문가 세차"> 전문가 세차</label>
-                            <label><input type="checkbox" value="출장 세차"> 출장 세차</label>
-                            <label><input type="checkbox" value="셀프 세차"> 셀프 세차</label>
+                            <label><input type="checkbox" value="자동세차"> 자동세차</label>
+                            <label><input type="checkbox" value="전문세차"> 전문세차</label>
+                            <label><input type="checkbox" value="출장세차"> 출장세차</label>
+                            <label><input type="checkbox" value="셀프세차"> 셀프세차</label>
                         </div>
                     </div>
                 </div>
@@ -76,18 +76,12 @@
                     <span id="review-page-info">1 / 1</span>
                     <button id="next-review-button" class="pagination-button" disabled>다음</button>
                 </div>
-
-                <!-- 리뷰 작성 -->
-                <textarea id="review-content" placeholder="리뷰를 작성하세요..."></textarea>
-                <select id="review-score">
-                    <option value="1">1점</option>
-                    <option value="2">2점</option>
-                    <option value="3">3점</option>
-                    <option value="4">4점</option>
-                    <option value="5">5점</option>
-                </select>
-                <button id="submit-review-button">리뷰 제출</button>
             </div>
+        </div>
+
+        <!-- 상세 정보 컨테이너 -->
+        <div id="detail-container" class="detail-container" style="display: none;">
+            <!-- JavaScript에서 동적으로 내용을 렌더링합니다. -->
         </div>
     </main>
 
