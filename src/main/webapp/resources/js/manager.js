@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Model elements not found.");
         return;
     }
-    model.style.display = "block";
+    model.style.display = "flex";
     modelTitle.textContent = carwash ? "세차장 정보 수정" : "세차장 추가";
     if (carwash) {
         document.getElementById("carwash-id").value = carwash.washId || "";
