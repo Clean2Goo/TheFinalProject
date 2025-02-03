@@ -41,6 +41,7 @@ function renderFavorites(favorites) {
                     <p>전화번호: ${favorite.washTel || "전화번호 없음"}</p>
                 </div>
                 <button class="remove-favorite-btn" onclick="removeFavorite('${favorite.washId}')">즐겨찾기 삭제</button>
+                <button class="reserve-favorite-btn" onclick="redirectToReservationPage('${favorite.washId}')">예약하기</button>
             </div>
         `;
 
@@ -77,6 +78,31 @@ async function removeFavorite(washId) {
         alert("네트워크 오류가 발생했습니다.");
     }
 }
+
+function redirectToReservationPage(washId) {
+    const contextPath = document.querySelector('meta[name="contextPath"]').getAttribute("content");
+    const redirectUrl = `${contextPath}/carwash/reservationStep1.do`;
+
+    fetch(redirectUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({ washId }),
+    })
+    .then((response) => {
+        if (response.redirected) {
+            window.location.href = response.url; // 서버에서 리디렉션된 URL로 이동
+        } else {
+            console.log("POST request succeeded without redirection.");
+        }
+    })
+    .catch((error) => {
+        console.error("Error during reservation POST request:", error);
+        alert("예약 처리 중 오류가 발생했습니다.");
+    });
+}
+
 
 // 상세 페이지로 리디렉션하는 함수
 function redirectToDetailPage(washId) {
