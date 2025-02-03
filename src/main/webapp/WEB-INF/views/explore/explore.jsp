@@ -58,7 +58,11 @@
             <p><strong>전화번호:</strong> <span id="popup-carwash-phone">데이터없음</span></p>
 
             <div class="popup-buttons">
-                <button id="popup-reserve-button" class="reserve-button" aria-label="예약하기">예약하기</button>
+                 <form action="${contextPath}/carwash/reservationStep1.do" method="post">
+            <input type="hidden" id="popup-wash-id" name="washId" value="">
+            <input type="hidden" id="popup-wash-name" name="washName" value="">
+            <button type="submit" class="reserve-button">예약하기</button>
+        </form>
                 <button id="popup-detail-button" class="detail-button" aria-label="상세 보기">상세 보기</button>
             </div>
 
