@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.springframework.transaction.annotation.Transactional;
+
+
 @Service
 public class CarWashService {
 
@@ -33,9 +36,10 @@ public class CarWashService {
     private CarWashDAO carWashDAO;
 
     // 모든 세차장 데이터를 조회
+    @Transactional(readOnly = true)
     public List<CarWash> getAllCarWashes() {
         logger.info("Fetching all car washes from database.");
-        return carWashRepository.findAll();
+        return carWashRepository.findAll();  // staffList는 지연 로딩 상태로 남음
     }
 
     // 주소로 세차장 검색
@@ -49,6 +53,7 @@ public class CarWashService {
         return carWashDAO.selectCarWashesInGangnam();
     }
 	//beaver 추가 해당 아이디 세차장 정보 조회
+	@Transactional
 	public CarWash selectCarWasheById(int washId) {
 		logger.info("Fetching car wash details for ID: " + washId);
         CarWash carWash = carWashDAO.selectCarWasheById(washId);
