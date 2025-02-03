@@ -11,7 +11,7 @@ public class Review {
     @Column(name = "RVWID") // 리뷰 ID
     private String rwId;
 
-    @Column(name = "RSVNID") // 예약 ID
+    @Column(name = "RSVNID", nullable = false) // 예약 ID (NOT NULL 설정)
     private String rsvId;
 
     @Column(name = "USERID", nullable = false) // 작성자 ID
@@ -33,10 +33,13 @@ public class Review {
     @Column(name = "CRTDATE") // 리뷰 작성일
     private Date crtDate;
 
+    @Column(name = "WASHID") // ✅ 세차장 ID (DB에서 자동 매핑)
+    private String washId;
+
     @Transient // DB와 매핑되지 않음
     private String washName; // 세차장 이름
 
-    // Getters and Setters
+    // ✅ Getters and Setters
     public String getRwId() {
         return rwId;
     }
@@ -99,6 +102,14 @@ public class Review {
 
     public void setCrtDate(Date crtDate) {
         this.crtDate = crtDate;
+    }
+
+    public String getWashId() {
+        return washId;
+    }
+
+    public void setWashId(String washId) {
+        this.washId = washId;
     }
 
     public String getWashName() {

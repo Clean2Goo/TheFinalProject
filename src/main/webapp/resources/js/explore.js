@@ -171,7 +171,7 @@ function openPopup(carWash) {
     popupImage.src = carWash.washImg || `${contextPath}/resources/assets/images/default-carwash.jpg`;
     popupImage.alt = carWash.washName || "세차장 이미지";
 
-	document.getElementById("popup-wash-id").value = carWash.washId;
+    document.getElementById("popup-wash-id").value = carWash.washId;
     document.getElementById("popup-wash-name").value = carWash.washName;
 
     popup.style.display = "block";
@@ -179,46 +179,27 @@ function openPopup(carWash) {
 
     // 상세보기 버튼 클릭 이벤트 추가
     const detailButton = document.getElementById("popup-detail-button");
-    detailButton.onclick = function () {
-        console.log(`Redirecting to detail page for washId: ${carWash.washId}`);
-        redirectToDetailPage(carWash.washId); // 리디렉션 함수 호출
-    };
-    
-     const reserveButton = document.getElementById("popup-reserve-button");
-    reserveButton.onclick = function () {
-        redirectToReservationPage(carWash.washId); // 예약 페이지로 이동
-    };
+    if (detailButton) {
+        detailButton.onclick = function () {
+            console.log(`Redirecting to detail page for washId: ${carWash.washId}`);
+            redirectToDetailPage(carWash.washId);
+        };
+    }
 
-    // 디버깅 로그 추가
+ 
+    const reserveButton = document.getElementById("popup-reserve-button");
+    if (reserveButton) {
+        reserveButton.onclick = function () {
+            redirectToReservationPage(carWash.washId);
+        };
+    }
+
     console.log("Popup opened with carWash:", carWash);
 
-    // 세차장 리뷰 목록 불러오기
+    console.log("📡 리뷰 요청 시작:", carWash.washId); 
     fetchReviewsForCarWash(carWash.washId);
 }
 
-function redirectToReservationPage(washId) {
-    const redirectUrl = `${contextPath}/carwash/reservationStep1.do`;
-
-    fetch(redirectUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({ washId }),
-    })
-    .then((response) => {
-        if (response.redirected) {
-            // 서버에서 리디렉션이 발생한 경우
-            window.location.href = response.url;
-        } else {
-            console.log("POST request succeeded without redirection.");
-        }
-    })
-    .catch((error) => {
-        console.error("Error during reservation POST request:", error);
-        alert("예약 처리 중 오류가 발생했습니다.");
-    });
-}
 
 
 
@@ -251,77 +232,88 @@ function redirectToDetailPage(washId) {
 }
 
 
-
-
-
-
 // 특정 세차장의 리뷰 목록 가져오기
-async function fetchReviewsForCarWash(carWashId) {
-	try {
-		const response = await fetch(`${contextPath}/api/reviews/${carWashId}`);
-		if (!response.ok) throw new Error(`Failed to fetch reviews: ${response.status}`);
-
-		currentReviews = await response.json(); // 전체 리뷰 데이터를 클라이언트에 저장
-		currentReviewPage = 1; // 리뷰 페이지 초기화
-		updateReviewList();
-	} catch (error) {
-		console.error("Failed to fetch reviews:", error);
-	}
+async function fetchReviewsForCarWash(washId) {
+    try {
+        console.log(`Fetching reviews for washId: ${washId}`);
+        const response = await fetch(`${contextPath}/api/reviews/${washId}`);
+        
+        if (!response.ok) throw new Error(`리뷰 불러오기 실패: ${response.status}`);
+        
+        currentReviews = await response.json();
+        console.log("Fetched Reviews:", currentReviews);  // ✅ 디버깅 로그
+        currentReviewPage = 1; 
+        updateReviewList();
+    } catch (error) {
+        console.error("리뷰 불러오기 중 오류 발생:", error);
+        alert(`리뷰를 불러오는 중 문제가 발생했습니다: ${error.message}`);
+    }
 }
+
 
 // 리뷰 목록 UI 업데이트 (페이지네이션 포함)
 function updateReviewList() {
-	const reviewList = document.getElementById("review-list");
-	reviewList.innerHTML = "";
+    const reviewList = document.getElementById("review-list");
+    reviewList.innerHTML = ""; // 기존 리뷰 초기화
 
-	const totalPages = Math.ceil(currentReviews.length / reviewsPerPage);
-	const startIndex = (currentReviewPage - 1) * reviewsPerPage;
-	const endIndex = startIndex + reviewsPerPage;
-	const reviewsToDisplay = currentReviews.slice(startIndex, endIndex);
+    const totalPages = Math.ceil(currentReviews.length / reviewsPerPage);
+    const startIndex = (currentReviewPage - 1) * reviewsPerPage;
+    const endIndex = startIndex + reviewsPerPage;
+    const reviewsToDisplay = currentReviews.slice(startIndex, endIndex);
 
-	reviewsToDisplay.forEach((review) => {
-		const userImg = review.userImg || `${contextPath}/resources/assets/images/profile.png`;
+    if (reviewsToDisplay.length === 0) {
+        reviewList.innerHTML = "<p>등록된 리뷰가 없습니다.</p>";
+        return;
+    }
 
-		const reviewItem = document.createElement("div");
-		reviewItem.classList.add("review-item");
-		reviewItem.innerHTML = `
+    reviewsToDisplay.forEach((review) => {
+        const formattedDate = review.crtDate
+            ? new Date(review.crtDate).toLocaleDateString()
+            : "작성일 없음";
+
+        const reviewItem = document.createElement("div");
+        reviewItem.classList.add("review-item");
+
+        reviewItem.innerHTML = `
             <div class="review-header">
-                <img src="${userImg}" alt="프로필 이미지" class="profile-img">
-                <div>
-                    <p class="username">${review.userId || "익명 사용자"}</p>
-                    <p class="review-date">${new Date(review.crtDate).toLocaleString()}</p>
-                </div>
+                <strong class="username">작성자:</strong> <span>${review.userId || "익명 사용자"}</span>
+                <span class="review-date"> | 작성일: ${formattedDate}</span>
             </div>
-            <p class="review-content">${review.content}</p>
-            <p class="review-score">점수: ${review.rwvScore}</p>
+            <div class="review-content">
+                <strong>내용:</strong> <p>${review.content || "내용 없음"}</p>
+            </div>
+            <div class="review-score">
+                <strong>평점:</strong> <span>${review.rwvScore !== undefined ? review.rwvScore + "점" : "없음"}</span>
+            </div>
         `;
-		reviewList.appendChild(reviewItem);
-	});
 
-	// 페이지네이션 버튼 활성화/비활성화
-	document.getElementById("prev-review-button").disabled = currentReviewPage === 1;
-	document.getElementById("next-review-button").disabled = currentReviewPage === totalPages;
+        reviewList.appendChild(reviewItem);
+    });
 
-	// 페이지 정보 업데이트
-	document.getElementById("review-page-info").innerText = `${currentReviewPage} / ${totalPages}`;
+    // 페이지네이션 버튼 상태 업데이트
+    document.getElementById("prev-review-button").disabled = currentReviewPage === 1;
+    document.getElementById("next-review-button").disabled = currentReviewPage === totalPages;
+    document.getElementById("review-page-info").innerText = `${currentReviewPage} / ${totalPages}`;
 }
+
 
 // 이전 리뷰 페이지로 이동
 document.getElementById("prev-review-button").addEventListener("click", () => {
-	if (currentReviewPage > 1) {
-		currentReviewPage--;
-		updateReviewList();
-	}
+    if (currentReviewPage > 1) {
+        currentReviewPage--;
+        updateReviewList();
+    }
 });
 
 // 다음 리뷰 페이지로 이동
 document.getElementById("next-review-button").addEventListener("click", () => {
-	const totalPages = Math.ceil(currentReviews.length / reviewsPerPage);
-	if (currentReviewPage < totalPages) {
-		currentReviewPage++;
-		updateReviewList();
-	}
+    const totalPages = Math.ceil(currentReviews.length / reviewsPerPage);
+    if (currentReviewPage < totalPages) {
+        currentReviewPage++;
+        updateReviewList();
+    }
 });
+
 
 // 추천 세차장 리스트를 업데이트하는 함수
 function updateRecommendedList(carWashList) {
