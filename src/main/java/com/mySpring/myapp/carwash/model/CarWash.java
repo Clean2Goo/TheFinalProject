@@ -1,6 +1,9 @@
 package com.mySpring.myapp.carwash.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +68,8 @@ public class CarWash {
     @Column(name = "CRTDATE")
     private java.sql.Date crtDate;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
+    @JsonIgnore // JSON 직렬화 시 제외
     private List<Staff> staffList;
 
     // Getter와 Setter
@@ -214,6 +218,9 @@ public class CarWash {
     }
 
     public List<Staff> getStaffList() {
+    	 if (staffList == null) {
+             staffList = new ArrayList<>(); // 기본 빈 리스트 리턴
+         }
         return staffList;
     }
 

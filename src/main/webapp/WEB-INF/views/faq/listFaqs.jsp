@@ -61,21 +61,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <!-- 페이지네이션 -->
-                <!--
-                <div class="pagination">
-                    <c:forEach var="page" begin="1" end="${totalPages}">
-                        <c:choose>
-                            <c:when test="${currentPage == page}">
-                                <a href="${contextPath}/faq/listFaqs.do?page=${page}" class="page-link active">${page}</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a href="${contextPath}/faq/listFaqs.do?page=${page}" class="page-link">${page}</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </div>
-                -->
+              
             </div>
         </article>
     </section>
