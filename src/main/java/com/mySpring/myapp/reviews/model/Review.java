@@ -33,7 +33,7 @@ public class Review {
     @Column(name = "CRTDATE") // 리뷰 작성일
     private Date crtDate;
 
-    @Column(name = "WASHID") // ✅ 세차장 ID (DB에서 자동 매핑)
+    @Column(name = "WASHID", insertable = false, updatable = false) // ✅ 세차장 ID (DB에서 자동 매핑)
     private String washId;
 
     @Transient // DB와 매핑되지 않음
