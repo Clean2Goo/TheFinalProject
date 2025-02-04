@@ -11,4 +11,6 @@ public interface NoticeService {
     public NoticeVO viewNotice(int noticeno) throws Exception; // 특정 공지사항 조회
     public void modNotice(Map<String, Object> noticeMap) throws Exception; // 공지사항 수정
     public void removeNotice(int noticeno) throws Exception; // 공지사항 삭제
+    public NoticeVO getPrevNoticeDetails(int noticeno) throws Exception;
+    public NoticeVO getNextNoticeDetails(int noticeno) throws Exception;
 }

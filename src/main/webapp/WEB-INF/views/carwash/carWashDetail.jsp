@@ -107,7 +107,7 @@
 							<h4>세차 비용 안내</h4>
 						</div>
 						<div class="content">
-							<div class="table data-grid">
+							<div class="data-grid">
 								<table>
 									<caption>세차 비용 테이블</caption>
 									<colgroup>
