@@ -14,7 +14,7 @@
 	<!-- 고객- faq 상세 -->
 	 <definition name="/faq/viewFaq" extends="baseLayout">
 	      <put-attribute name="title" value="고객-faq상세창" />
-	      <put-attribute name="body" value="/WEB-INF/views/notice/viewFaq.jsp" />
+	      <put-attribute name="body" value="/WEB-INF/views/faq/viewFaq.jsp" />
 	</definition>
 
 	<!-- 어드민- faq 목록 -->

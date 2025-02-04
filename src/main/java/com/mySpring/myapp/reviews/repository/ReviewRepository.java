@@ -23,6 +23,9 @@ public interface ReviewRepository extends JpaRepository<Review, String> {
     // 예약 ID로 리뷰 존재 여부 확인
     boolean existsByRsvId(String rsvId);
 
+    // 세차장 ID(WASHID)로 리뷰 목록 조회
+    List<Review> findByWashId(String washId); 
+
     // 리뷰 ID로 리뷰 삭제
     @Transactional
     void deleteByRwId(String rwId);

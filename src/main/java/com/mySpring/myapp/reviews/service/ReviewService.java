@@ -61,10 +61,17 @@ public class ReviewService {
         return reviews;
     }
 
+
+    public List<Review> getReviewsByWashId(String washId) {
+        logger.info("Fetching reviews for washId: " + washId);
+        List<Review> reviews = reviewRepository.findByWashId(washId);
+        enrichReviewsWithWashName(reviews); // 세차장 이름 추가
+        return reviews;
+    }
+
     public boolean checkReviewExists(String rsvId) {
         return reviewRepository.existsByRsvId(rsvId);
     }
-
 
     public List<Review> getReviewsByUserId(String userId) {
         logger.info("Fetching reviews for userId: " + userId);
@@ -130,7 +137,11 @@ public class ReviewService {
     }
 
     public void enrichReviewWithWashName(Review review) {
-        if (review.getRsvId() != null) {
+        if (review.getWashId() != null) { 
+            carWashRepository.findByWashId(review.getWashId()).ifPresent(carWash -> {
+                review.setWashName(carWash.getWashName());
+            });
+        } else if (review.getRsvId() != null) { 
             carWashRepository.findByWashId(review.getRsvId()).ifPresent(carWash -> {
                 review.setWashName(carWash.getWashName());
             });
