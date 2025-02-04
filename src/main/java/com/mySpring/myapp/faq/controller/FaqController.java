@@ -80,7 +80,10 @@ import com.mySpring.myapp.member.vo.MemberVO;
 		        }
 
 		        String id = memberVO.getId();
-		        faqMap.put("id", id);
+		        if(id ==null || id.isEmpty()) {
+		        	System.out.println("ERROR: USERID 값이 NULL 또는 빈 값");
+		        }
+		        faqMap.put("userId", id);
 
 		        try {
 		            faqService.addNewFaq(faqMap);

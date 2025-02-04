@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -43,10 +44,46 @@ public class ReservationControllerImpl implements ReservationController {
 	    System.out.println("로그인한 사용자 ID: " + userId);
 
 	    List<ReservationVO> reservations = reservationService.listReservations(userId);
-	    ModelAndView mav = new ModelAndView();
-		mav.setViewName("listReservations");
+	    
+	    Date currentDate = new Date(); // 현재 시간
+	    System.out.println("currentDate :" + currentDate);
+	    
+	    // 날짜 포맷 정의
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일HH:mm"); // 포맷에 맞춰 정의
+	    
+	 // 예약 상태 업데이트
+	    for (ReservationVO reservation : reservations) {
+	    	// 예약 상태가 "예약중"인 경우에만 처리
+	        if ("예약중".equals(reservation.getStatus())) {
+	            String rsvnDateTime = reservation.getfmtRsvnDate() + reservation.getRsvnTime(); // 세차날짜 + 세차시간
+	            System.out.println("rsvnDateTime :" + rsvnDateTime);
+
+	            try {
+	                // 문자열을 Date로 변환
+	                Date reservationDateTime = dateFormat.parse(rsvnDateTime);
+	                // 1시간 후의 예약 시간 계산
+	                Date oneHourLater = new Date(reservationDateTime.getTime() + 3600000); // 1시간 = 3600000 milliseconds
+
+	                // 현재 시간이 예약 시간 + 1시간 이후인지 확인
+	                if (currentDate.after(oneHourLater)) {
+	                    // 상태를 "이용완료"로 변경
+	                    reservationService.updateReservationStatusCompleted(reservation.getRsvnId(), "이용완료");
+	                    System.out.println("예약 ID: " + reservation.getRsvnId() + "의 상태가 '이용완료'로 변경되었습니다.");
+	                }
+	            } catch (ParseException e) {
+	                e.printStackTrace();
+	                System.out.println("날짜 변환 오류: " + rsvnDateTime);
+	            }
+	        }
+	    }
+	    
+	 // 상태 업데이트 후 다시 최신 예약 목록을 조회하여 보여줍니다.
+	    reservations = reservationService.listReservations(userId); // 최신 데이터 조회
+	    
+	    ModelAndView mav = new ModelAndView("listReservations");
 	    mav.addObject("reservations", reservations);
 		mav.addObject("activeMenu", "listreservations");
+		
 	    return mav;
 	}
 

@@ -54,43 +54,53 @@
 	    </select>
 
 
-	 <!-- 예약 취소 -->
+	 <!-- 예약취소 상태 업데이트-->
 		<update id="updateReservationStatus" parameterType="map">
 		    UPDATE reservations
 		    SET status = '예약취소',
 		    	cancelYn ='Y'
 		    WHERE rsvnId = #{rsvnId}
 		</update>
-		
-		
+
+	 <!-- 이용완료 상태 업데이트 -->
+		<update id="updateReservationStatusCompleted">
+		    UPDATE reservations
+		    SET status = #{status}
+		    WHERE rsvnId = #{rsvnId}
+		</update>
+
 	 <!-- 예약 하기  TO_DATE(#{rsvnDate}, 'YYYY-MM-DD'), -->
 		<insert id="insertReservation" parameterType="com.mySpring.myapp.reservation.vo.ReservationVO">
 		      <![CDATA[
 		        INSERT INTO reservations (USERID, WASHTYPE, WASHID, RSVNDATE, RSVNTIME, CARTYPECOST)
 		        VALUES (
-		            #{userId}, 
-		            #{washType}, 
-		            #{washId}, 
-		            #{rsvnDate}, 
-		            #{rsvnTime}, 
+		            #{userId},
+		            #{washType},
+		            #{washId},
+		            #{rsvnDate},
+		            #{rsvnTime},
 		            #{carTypeCost}
 		        )
 		    ]]>
 		</insert>
-			
+
+
+
+
+
 
 	<!-- 석준님 코드 -->
 		<select id="findReviewStatuses" resultType="map">
-			SELECT 
+			SELECT
 				r.RSVNID,
-				CASE 
-					WHEN COUNT(rv.RVWID) > 0 THEN 'true' 
-					ELSE 'false' 
+				CASE
+					WHEN COUNT(rv.RVWID) > 0 THEN 'true'
+					ELSE 'false'
 				END AS isReviewed
 			FROM RESERVATIONS r
 			LEFT JOIN REVIEWS rv ON r.RSVNID = rv.RSVNID AND rv.USERID = #{userId}
 			WHERE r.USERID = #{userId}
 			GROUP BY r.RSVNID
 		</select>
-		
+
 </mapper>

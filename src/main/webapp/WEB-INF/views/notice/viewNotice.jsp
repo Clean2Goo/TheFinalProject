@@ -23,7 +23,7 @@
 					<div class="board-actions"></div>
         			
      				
-     				  <!-- 이전글 목록 -->
+     		<%-- 		  <!-- 이전글 목록 -->
 <div class="board-navigation">
   <div class="navigation-label">PREV ▲</div>
   <a 
@@ -56,7 +56,7 @@
     </c:choose>
   </a>
 </div>
-     				
+     		 --%>		
 					
 					
 					<!-- 고객 -->
