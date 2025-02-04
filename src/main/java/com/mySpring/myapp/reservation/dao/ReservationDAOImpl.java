@@ -24,7 +24,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     public void updateReservationStatus(String rsvnId) {
         Map<String, Object> params = new HashMap<>();
         params.put("rsvnId", rsvnId);
-        
+
         sqlSession.update("updateReservationStatus", params);
     }
 
@@ -32,4 +32,15 @@ public class ReservationDAOImpl implements ReservationDAO {
     public void insertReservation(ReservationVO reservation) throws DataAccessException {
         sqlSession.insert("mapper.reservation.insertReservation", reservation);
     }
+
+	@Override
+	public void updateReservationStatusCompleted(String rsvnId, String status) {
+
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("rsvnId", rsvnId);
+	    params.put("status", status);
+
+	    sqlSession.update("mapper.reservation.updateReservationStatusCompleted", params);
+
+	}
 }
