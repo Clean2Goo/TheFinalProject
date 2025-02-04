@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/reviews")
@@ -20,6 +19,9 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
+    /**
+     *  리뷰 작성 시 WASHID 자동 설정
+     */
     @PostMapping
     public ResponseEntity<String> addReview(@RequestBody Review review, HttpServletRequest request) {
         try {
@@ -31,7 +33,9 @@ public class ReviewController {
             MemberVO member = (MemberVO) session.getAttribute("member");
             review.setUserId(member.getId());
 
+           
             reviewService.saveReview(review, member.getId());
+
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_TYPE, "application/json; charset=UTF-8")
                     .body("리뷰가 성공적으로 저장되었습니다.");
@@ -40,11 +44,18 @@ public class ReviewController {
             return ResponseEntity.status(500).body("리뷰 저장 중 오류가 발생했습니다: " + e.getMessage());
         }
     }
-    
-    
-    
 
-    
+    @GetMapping("/byWashId/{washId}")
+    public ResponseEntity<?> getReviewsByWashId(@PathVariable String washId) {
+        try {
+            List<Review> reviews = reviewService.getReviewsByWashId(washId);
+            return ResponseEntity.ok(reviews);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("리뷰 조회 중 오류가 발생했습니다: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/{rsvId}")
     public ResponseEntity<?> getReviewsByRsvId(@PathVariable String rsvId) {
         try {
@@ -67,10 +78,8 @@ public class ReviewController {
             MemberVO member = (MemberVO) session.getAttribute("member");
             String userId = member.getId();
 
-            // 로그인 사용자의 리뷰 가져오기
             List<Review> myReviews = reviewService.getReviewsByUserId(userId);
 
-            // 각 리뷰에 세차장 이름 추가
             for (Review review : myReviews) {
                 reviewService.enrichReviewWithWashName(review);
             }
@@ -92,8 +101,6 @@ public class ReviewController {
             return ResponseEntity.status(500).body(false);
         }
     }
-
-    
 
     @GetMapping
     public ResponseEntity<List<Review>> getAllReviews() {
