@@ -44,7 +44,7 @@
 						<c:if test="${empty prevNotice}">
 							<div class="nav prev">
 								<p class="label">이전 글<span class="icon"></span></p>
-								<p class="subject">이전 글이 없습니다.</p>
+								<p class="subject none">이전 글이 없습니다.</p>
 							</div>
 						</c:if>
 
@@ -66,7 +66,7 @@
 						<c:if test="${empty nextNotice}">
 							<div class="nav next">
 								<p class="label">다음 글<span class="icon"></span></p>
-								<p class="subject">다음 글이 없습니다.</p>
+								<p class="subject none">다음 글이 없습니다.</p>
 							</div>
 						</c:if>
 					</div>

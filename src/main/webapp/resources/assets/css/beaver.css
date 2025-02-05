@@ -208,7 +208,8 @@ main.ui-subpage .h4.subpage-custom {flex-direction: row;}
 	flex-basis: auto;flex-grow: 1;flex-shrink: 1;
 	text-overflow: ellipsis;white-space: nowrap;overflow: hidden;font-weight: 400;color: var(--fc-333);  transition: all .3s ease;
 }
-.bbs-navigation .subject:hover {color:var(--primary-blue);}
+.bbs-navigation .subject:not(.none):hover {color:var(--primary-blue);}
+.bbs-navigation .subject.none {color:var(--fc-666);}
 .bbs-navigation .date {flex-basis: 160px;flex-grow: 0;flex-shrink: 0;color:var(--fc-888);text-align: center;}
 
 
