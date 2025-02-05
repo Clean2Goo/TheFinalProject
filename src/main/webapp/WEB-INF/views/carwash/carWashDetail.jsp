@@ -83,19 +83,26 @@
 						</div>
 						<div class="content">
 							<c:if test="${not empty carWashDetail.staffList}">
-								<ul>
-									<c:forEach var="staff" items="${carWashDetail.staffList}">
-										<li>
-											<strong>Staff ID:</strong> ${staff.staffId} <br />
-											<strong>User ID:</strong> ${staff.userId} <br />
-											<strong>Name:</strong> ${staff.userName} <br />
-											<strong>Experience:</strong> ${staff.experience} <br />
-											<strong>Rating:</strong> ${staff.rating} <br />
-											<strong>Info:</strong> ${staff.staffInfo} <br />
-											<strong>staffImg:</strong> <img src="${contextPath}${staff.staffImg}" alt=""> <br />
-										</li>
-									</c:forEach>
-								</ul>
+								 <div class="staff-list">
+									 <ul>
+										 <c:forEach var="staff" items="${carWashDetail.staffList}">
+											 <li>
+												<div class="staff-profile-img">
+													<img src="${contextPath}${staff.staffImg}" alt="${staff.userName} 이미지">
+												</div>
+												<div class="staff-info-list">
+													<ul>
+														<li><strong>${staff.userName}</strong></li>
+														<li class="clipped">스태프번호 : <span>${staff.staffId}</span></li>
+														<li class="clipped">스태프아이디 : <span>${staff.userId}</span></li>
+														<li><p class="desc">경력 : <span>${staff.experience}</span> 년</p> <p class="desc">고객평점 : <span> ${staff.rating} / 5</span></p></li>
+														<li><p>${staff.staffInfo}</p></li>
+													</ul>
+												</div>
+											 </li>
+										 </c:forEach>
+									 </ul>
+								 </div>
 							</c:if>
 							<c:if test="${empty carWashDetail.staffList}">
 								<p>스태프 정보가 없습니다.</p>
@@ -130,6 +137,14 @@
 										</tr>
 									</thead>
 									<tbody>
+										<tr>
+											<th>셀프</th>
+											<td>개별사용 코인가</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+										</tr>
 										<tr>
 											<th>자동</th>
 											<td>10,000</td>
