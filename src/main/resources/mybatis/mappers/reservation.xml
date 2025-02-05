@@ -107,6 +107,7 @@
             r.washId,
             r.staffId,
             r.requestId,
+            r.rsvnDate,
             TO_CHAR(r.rsvnDate, 'YYYY"년" MM"월" DD"일"') AS fmtRsvnDate,
             r.rsvnTime,
             r.carTypeCost,

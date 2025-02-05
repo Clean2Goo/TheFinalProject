@@ -73,7 +73,6 @@
         </table>
     </div>
 
-    <!-- ✅ JS 파일 분리 후 로드 -->
     <script src="${contextPath}/resources/js/adminReservations.js"></script>
 </body>
 </html>
