@@ -84,11 +84,6 @@
 		    ]]>
 		</insert>
 
-
-
-
-
-
 	<!-- 석준님 코드 -->
 		<select id="findReviewStatuses" resultType="map">
 			SELECT
@@ -102,5 +97,38 @@
 			WHERE r.USERID = #{userId}
 			GROUP BY r.RSVNID
 		</select>
+		<!-- 관리자용 예약 목록 조회 -->
+<select id="getReservationsByOwnerId" parameterType="String" resultMap="reservationResult">
+    <![CDATA[
+        SELECT
+            r.rsvnId,
+            r.userId,
+            r.washType,
+            r.washId,
+            r.staffId,
+            r.requestId,
+            TO_CHAR(r.rsvnDate, 'YYYY"년" MM"월" DD"일"') AS fmtRsvnDate,
+            r.rsvnTime,
+            r.carTypeCost,
+            r.status,
+            r.cancelYn,
+            r.crtDate,
+            u.userName,
+            cw.washName
+        FROM reservations r
+        JOIN carwashes cw ON r.washId = cw.washId
+        LEFT JOIN staff s ON r.staffId = s.staffId
+        LEFT JOIN users u ON s.userId = u.userId
+        WHERE cw.userId = #{ownerId}
+        ORDER BY r.rsvnDate DESC, r.rsvnTime DESC
+    ]]>
+</select>
+		
+<update id="updateReservationStatusDynamic" parameterType="map">
+    UPDATE reservations
+    SET status = #{status},
+        cancelYn = CASE WHEN #{status} = '예약취소' THEN 'Y' ELSE 'N' END
+    WHERE rsvnId = #{rsvnId}
+</update>
 
 </mapper>

@@ -127,6 +127,45 @@ public class ReservationControllerImpl implements ReservationController {
 		
 	}
 
+	 // 신규 기능 - 관리자용 예약 목록 조회
+	@RequestMapping(value = "/admin/reservations.do", method = RequestMethod.GET)
+	public ModelAndView listAdminReservations(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    HttpSession session = request.getSession();
+	    MemberVO admin = (MemberVO) session.getAttribute("member");
+
+	    if (admin == null) {
+	        return new ModelAndView("redirect:/member/loginForm.do");
+	    }
+
+	    List<ReservationVO> adminReservations = reservationService.getReservationsByOwnerId(admin.getId());
+
+	    ModelAndView mav = new ModelAndView("admin.reservations"); // 타일즈 이름과 일치시킴
+	    mav.addObject("reservations", adminReservations);
+	    return mav;
+	}
+
+	// ✅ 1. 올바른 URL 매핑으로 수정
+	@RequestMapping(value = "/admin/updateStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateReservationStatus(@RequestParam("rsvnId") String rsvnId,
+	                                      @RequestParam("status") String status) {
+	    System.out.println("🔔 [요청 수신] rsvnId: " + rsvnId + ", status: " + status); // 디버깅 로그 추가
+	    try {
+	        reservationService.updateReservationStatus(rsvnId, status);
+	        System.out.println("✅ [DB 업데이트 성공]");
+	        return "success";
+	    } catch (Exception e) {
+	        System.out.println("❌ [DB 업데이트 실패]");
+	        e.printStackTrace();
+	        return "error";
+	    }
+	}
+
+
+
+
+
+	
 	
 	@RequestMapping(value = "/carwash/reservationStep2.do", method = RequestMethod.POST)
 	public ModelAndView reservationStep2(@RequestParam Map<String, String> params,
