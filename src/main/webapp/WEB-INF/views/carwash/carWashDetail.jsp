@@ -92,6 +92,7 @@
 											<strong>Experience:</strong> ${staff.experience} <br />
 											<strong>Rating:</strong> ${staff.rating} <br />
 											<strong>Info:</strong> ${staff.staffInfo} <br />
+											<strong>staffImg:</strong> <img src="${contextPath}${staff.staffImg}" alt=""> <br />
 										</li>
 									</c:forEach>
 								</ul>
