@@ -8,6 +8,11 @@ public class ReviewPageController {
 
     @GetMapping("/myReviews.do")
     public String myReviewsPage() {
-        return "myreviews/myReviews";
+        return "myreviews/myReviews";  
+    }
+
+    @GetMapping("/admin/reviewManagement")
+    public String reviewManagementPage() {
+        return "admin.reviewManagement";  
     }
 }

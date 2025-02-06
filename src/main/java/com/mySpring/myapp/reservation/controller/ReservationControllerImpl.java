@@ -144,18 +144,18 @@ public class ReservationControllerImpl implements ReservationController {
 	    return mav;
 	}
 
-	// ✅ 1. 올바른 URL 매핑으로 수정
+	//  1. 올바른 URL 매핑으로 수정
 	@RequestMapping(value = "/admin/updateStatus", method = RequestMethod.POST)
 	@ResponseBody
 	public String updateReservationStatus(@RequestParam("rsvnId") String rsvnId,
 	                                      @RequestParam("status") String status) {
-	    System.out.println("🔔 [요청 수신] rsvnId: " + rsvnId + ", status: " + status); // 디버깅 로그 추가
+	    System.out.println(" [요청 수신] rsvnId: " + rsvnId + ", status: " + status); // 디버깅 로그 추가
 	    try {
 	        reservationService.updateReservationStatus(rsvnId, status);
-	        System.out.println("✅ [DB 업데이트 성공]");
+	        System.out.println(" [DB 업데이트 성공]");
 	        return "success";
 	    } catch (Exception e) {
-	        System.out.println("❌ [DB 업데이트 실패]");
+	        System.out.println(" [DB 업데이트 실패]");
 	        e.printStackTrace();
 	        return "error";
 	    }

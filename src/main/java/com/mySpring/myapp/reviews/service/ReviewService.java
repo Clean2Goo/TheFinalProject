@@ -46,6 +46,15 @@ public class ReviewService {
 
         reviewRepository.deleteByRwId(rwId);
     }
+    public List<Review> getReviewsByOwnerId(String ownerId) {
+        List<String> washIds = carWashRepository.findWashIdsByOwnerId(ownerId);
+        List<Review> reviews = reviewRepository.findByWashIdIn(washIds);
+
+        // 세차장 이름 추가
+        enrichReviewsWithWashName(reviews);
+        
+        return reviews;
+    }
 
     public List<Review> getAllReviews() {
         logger.info("Fetching all reviews from database.");

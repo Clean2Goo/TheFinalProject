@@ -24,7 +24,10 @@ public interface CarWashRepository extends JpaRepository<CarWash, String> {
 
     Optional<CarWash> findByWashId(String washId);
 
-    // 평균 평점을 직접 받아서 업데이트하는 쿼리
+    @Query("SELECT c.washId FROM CarWash c WHERE c.userId = :ownerId")
+    List<String> findWashIdsByOwnerId(@Param("ownerId") String ownerId);
+
+
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query("UPDATE CarWash c SET c.rating = :rating WHERE c.washId = :washId")

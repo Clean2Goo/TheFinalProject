@@ -67,8 +67,11 @@
 					</ul>
 				</li>
 				<li>
-					<a href="#" class="ux-button text-button"><span class="label">리뷰확인</span></a>
-				</li>
+    <a href="${contextPath}/admin/reviewManagement" class="ux-button text-button">
+        <span class="label">리뷰확인</span>
+    </a>
+</li>
+
 			</ul>
 			<div class="ux-button-bar">
 				<button type="button" class="ux-button outlined"

@@ -131,6 +131,28 @@ public class ReviewController {
         }
     }
 
+    @GetMapping("/admin/reviews")
+    public ResponseEntity<?> getAdminReviews(HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session == null || session.getAttribute("member") == null) {
+                return ResponseEntity.status(401).body("로그인이 필요합니다.");
+            }
+
+            MemberVO admin = (MemberVO) session.getAttribute("member");
+            String ownerId = admin.getId();  // 세차장 관리자의 ID
+
+            // 관리자가 소유한 모든 세차장 리뷰 조회
+            List<Review> adminReviews = reviewService.getReviewsByOwnerId(ownerId);
+
+            return ResponseEntity.ok(adminReviews);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("관리자 리뷰 조회 중 오류가 발생했습니다: " + e.getMessage());
+        }
+    }
+
+    
     @PutMapping("/{rwId}")
     public ResponseEntity<?> updateReview(@PathVariable String rwId, @RequestBody Review updatedReview, HttpServletRequest request) {
         try {
