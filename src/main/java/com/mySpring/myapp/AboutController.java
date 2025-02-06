@@ -31,4 +31,22 @@ public class AboutController {
 	        ModelAndView mav = new ModelAndView(viewName);
 	        return mav;
 	    }
+//	    
+//	    // ceo인사말페이지
+//	    @RequestMapping(value = "/ceo.do", method = {RequestMethod.GET, RequestMethod.POST})
+//	    public ModelAndView ceo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//	        String viewName = (String) request.getAttribute("viewName");
+//	        System.out.println("View Name: " + viewName); // 디버깅 로그 추가
+//	        ModelAndView mav = new ModelAndView(viewName);
+//	        return mav;
+//	    }
+//	    
+//	    // 회사연페이지
+//	    @RequestMapping(value = "/history.do", method = {RequestMethod.GET, RequestMethod.POST})
+//	    public ModelAndView history(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//	        String viewName = (String) request.getAttribute("viewName");
+//	        System.out.println("View Name: " + viewName); // 디버깅 로그 추가
+//	        ModelAndView mav = new ModelAndView(viewName);
+//	        return mav;
+//	    }
 }
