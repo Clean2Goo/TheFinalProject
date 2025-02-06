@@ -58,41 +58,50 @@ public class MemberControllerImpl implements MemberController {
         return mav;
     }
 	// 어드민 로그인
-	@Override
 	@RequestMapping(value = "/member/adminLoginForm.do", method = RequestMethod.POST)
 	public ModelAndView adminLoginForm(@ModelAttribute("member") MemberVO member,
-				              RedirectAttributes rAttr,
-		                       HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		memberVO = memberService.login(member);
+	                                   RedirectAttributes rAttr,
+	                                   HttpServletRequest request, 
+	                                   HttpServletResponse response) throws Exception {
+	    ModelAndView mav = new ModelAndView();
+	    memberVO = memberService.login(member);
 
-		if (memberVO != null) {
-	        HttpSession session = request.getSession();
+	    if (memberVO != null) {
+	        
+	        HttpSession oldSession = request.getSession(false);
+	        if (oldSession != null) {
+	            oldSession.invalidate();
+	        }
+
+	  
+	        HttpSession session = request.getSession(true);
 	        session.setAttribute("member", memberVO);
 	        session.setAttribute("isLogOn", true);
+	        session.setAttribute("userId", memberVO.getId()); // userId 저장
 
-		      mav.addObject("member", memberVO);
-		      System.out.println("되는군");
-		      mav.setViewName("adminAfter");
+	        mav.addObject("member", memberVO);
+	        mav.setViewName("adminAfter");
 	    } else {
 	        rAttr.addAttribute("result", "loginFailed");
 	        mav.setViewName("adminBefore");
 	    }
-		return mav;
+	    return mav;
 	}
 
+
 	// 어드민 로그아웃
-	@Override
-	@RequestMapping(value = "/member/adminLogout.do", method =  RequestMethod.GET)
+	@RequestMapping(value = "/member/adminLogout.do", method = RequestMethod.GET)
 	public ModelAndView adminLogout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
+		session.removeAttribute("userId"); // userId 제거
 		ModelAndView mav = new ModelAndView();
 		System.out.println(" 어드민 로그아웃으로 다시 어드민 로그인전 화면 간다");
 		mav.setViewName("redirect:/admin.do");
 		return mav;
 	}
+
 
 	// 어드민 가입
 		@Override
@@ -160,14 +169,40 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
-	// 비밀번호 변경 페이지
-	@RequestMapping(value = "/myPage/modPwd.do", method = RequestMethod.GET)
-	public ModelAndView modPwd(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/member/changePassword.do", method = RequestMethod.POST)
+	public ModelAndView changePassword(
+	    @RequestParam("currentPassword") String currentPassword,
+	    @RequestParam("newPassword") String newPassword,
+	    HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    
 	    HttpSession session = request.getSession();
 	    MemberVO member = (MemberVO) session.getAttribute("member");
 
-	    ModelAndView mav = new ModelAndView("myPage/modPwd");
-	    mav.addObject("member", member);
+	    ModelAndView mav = new ModelAndView();
+
+	    // 비밀번호 확인
+	    if (member == null) {
+	        mav.setViewName("redirect:/member/loginForm.do");
+	        return mav;
+	    }
+
+	    // 비밀번호가 일치하는지 확인
+	    boolean isPasswordCorrect = memberService.checkPassword(member.getId(), currentPassword);
+	    if (!isPasswordCorrect) {
+	        mav.addObject("errorMessage", "현재 비밀번호가 올바르지 않습니다.");
+	        mav.setViewName("myInfo"); // 비밀번호 변경 화면으로 리턴
+	        return mav;
+	    }
+
+	    // 새 비밀번호로 업데이트
+	    boolean isUpdated = memberService.changePassword(member.getId(), newPassword);
+	    if (isUpdated) {
+	        mav.addObject("successMessage", "비밀번호가 성공적으로 변경되었습니다.");
+	    } else {
+	        mav.addObject("errorMessage", "비밀번호 변경에 실패했습니다.");
+	    }
+
+	    mav.setViewName("myInfo");
 	    return mav;
 	}
 	

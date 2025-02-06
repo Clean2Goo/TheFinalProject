@@ -21,26 +21,38 @@ public class ReservationDAOImpl implements ReservationDAO {
         return sqlSession.selectList("mapper.reservation.listReservations", userId);
     }
 
+    @Override
     public void updateReservationStatus(String rsvnId) {
         Map<String, Object> params = new HashMap<>();
         params.put("rsvnId", rsvnId);
 
-        sqlSession.update("updateReservationStatus", params);
+        sqlSession.update("mapper.reservation.updateReservationStatus", params);
     }
 
     @Override
     public void insertReservation(ReservationVO reservation) throws DataAccessException {
         sqlSession.insert("mapper.reservation.insertReservation", reservation);
     }
+    @Override
+    public void updateReservationStatusDynamic(String rsvnId, String status) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("rsvnId", rsvnId);
+        params.put("status", status);
+        sqlSession.update("mapper.reservation.updateReservationStatusDynamic", params);
+    }
 
-	@Override
-	public void updateReservationStatusCompleted(String rsvnId, String status) {
+    @Override
+    public void updateReservationStatusCompleted(String rsvnId, String status) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("rsvnId", rsvnId);
+        params.put("status", status);
 
-	    Map<String, Object> params = new HashMap<>();
-	    params.put("rsvnId", rsvnId);
-	    params.put("status", status);
+        sqlSession.update("mapper.reservation.updateReservationStatusCompleted", params);
+    }
 
-	    sqlSession.update("mapper.reservation.updateReservationStatusCompleted", params);
-
-	}
+    // 추가된 기능: 관리자용 예약 목록 조회
+    @Override
+    public List<ReservationVO> getReservationsByOwnerId(String ownerId) {
+        return sqlSession.selectList("mapper.reservation.getReservationsByOwnerId", ownerId);
+    }
 }

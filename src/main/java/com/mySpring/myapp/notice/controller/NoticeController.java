@@ -39,6 +39,15 @@ public class NoticeController {
         String viewName = (String) request.getAttribute("viewName");
         ModelAndView mav = new ModelAndView(viewName);
         mav.addObject("notice", noticeService.viewNotice(noticeno));
+        
+        // 이전글과 다음글 정보 조회
+        NoticeVO prevNotice = noticeService.getPrevNoticeDetails(noticeno);
+        NoticeVO nextNotice = noticeService.getNextNoticeDetails(noticeno);
+        
+        // 모델에 이전글과 다음글 추가
+        mav.addObject("prevNotice", prevNotice);
+        mav.addObject("nextNotice", nextNotice);
+        
         return mav;
     }
 
@@ -101,6 +110,15 @@ public class NoticeController {
         String viewName = (String) request.getAttribute("viewName");
         ModelAndView mav = new ModelAndView(viewName);
         mav.addObject("notice", noticeService.viewNotice(noticeno));
+        
+        // 이전글과 다음글 정보 조회
+        NoticeVO prevNotice = noticeService.getPrevNoticeDetails(noticeno);
+        NoticeVO nextNotice = noticeService.getNextNoticeDetails(noticeno);
+        
+        // 모델에 이전글과 다음글 추가
+        mav.addObject("prevNotice", prevNotice);
+        mav.addObject("nextNotice", nextNotice);
+        
         return mav;
     }
 

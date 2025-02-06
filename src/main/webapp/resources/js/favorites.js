@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-
 function renderFavorites(favorites) {
     const favoriteListContainer = document.getElementById("favorite-list");
     const contextPath = document.querySelector('meta[name="contextPath"]').getAttribute("content");
@@ -42,8 +41,8 @@ function renderFavorites(favorites) {
                     </div>
                 </div>
                 <div class="favorite-actions">
-                    <button class="remove-favorite-btn" onclick="removeFavorite('${favorite.washId}')">즐겨찾기 삭제</button>
                     <button class="reserve-favorite-btn" onclick="redirectToReservationPage('${favorite.washId}')">예약하기</button>
+                    <button class="remove-favorite-btn" onclick="removeFavorite('${favorite.washId}')">즐겨찾기 삭제</button>
                 </div>
             </div>
         `;
@@ -51,7 +50,6 @@ function renderFavorites(favorites) {
         favoriteListContainer.appendChild(favoriteItem);
     });
 }
-
 
 async function removeFavorite(washId) {
     const contextPath = document.querySelector('meta[name="contextPath"]').getAttribute("content");
@@ -77,7 +75,6 @@ async function removeFavorite(washId) {
     }
 }
 
-
 function redirectToReservationPage(washId) {
     const contextPath = document.querySelector('meta[name="contextPath"]').getAttribute("content");
 
@@ -89,10 +86,8 @@ function redirectToReservationPage(washId) {
     })
     .then((response) => {
         if (response.redirected) {
-            // 서버가 리디렉션을 반환하면 해당 URL로 이동
             window.location.href = response.url;
         } else if (response.ok) {
-            // 수동으로 페이지 이동 처리
             return response.text();
         } else {
             throw new Error("예약 요청 실패");
@@ -100,7 +95,6 @@ function redirectToReservationPage(washId) {
     })
     .then((html) => {
         if (html) {
-            // 서버가 HTML 페이지를 반환한 경우, 현재 페이지를 새로운 HTML로 덮어쓰기
             document.open();
             document.write(html);
             document.close();
@@ -111,6 +105,7 @@ function redirectToReservationPage(washId) {
         alert("예약 처리 중 문제가 발생했습니다.");
     });
 }
+
 function redirectToDetailPage(washId) {
     const contextPath = document.querySelector('meta[name="contextPath"]').getAttribute("content");
     window.location.href = `${contextPath}/carwash/carWashDetail.do?washId=${washId}`;

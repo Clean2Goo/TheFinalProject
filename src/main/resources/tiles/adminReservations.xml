@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="adminLayout" template="/WEB-INF/views/layouts/adminLayout.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/common/adminHeader.jsp" />
+        <put-attribute name="aside" value="/WEB-INF/views/common/adminAside.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/common/adminFooter.jsp" />
+    </definition>
+
+    <definition name="admin.reservations" extends="adminLayout">
+        <put-attribute name="title" value="예약 현황판" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/adminReservations.jsp" />
+    </definition>
+</tiles-definitions>

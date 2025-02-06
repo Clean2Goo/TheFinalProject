@@ -53,4 +53,13 @@ public class NoticeDAOImpl implements NoticeDAO {
         return sqlSession.selectOne("com.mySpring.myapp.notice.dao.NoticeDAO.selectNewNoticeno");
     }
 
+    @Override
+    public NoticeVO selectPrevNoticeDetails(int noticeno) throws DataAccessException {
+        return sqlSession.selectOne("com.mySpring.myapp.notice.dao.NoticeDAO.selectPrevNoticeDetails", noticeno);
+    }
+
+    @Override
+    public NoticeVO selectNextNoticeDetails(int noticeno) throws DataAccessException {
+        return sqlSession.selectOne("com.mySpring.myapp.notice.dao.NoticeDAO.selectNextNoticeDetails", noticeno);
+    }
 }

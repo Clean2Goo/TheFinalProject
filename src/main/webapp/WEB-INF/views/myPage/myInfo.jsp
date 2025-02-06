@@ -21,7 +21,7 @@
 						        <img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
 						    </span>
 						    <span class="user-name">${member.name}</span>
-						    <button type="button" class="edit-btn" onclick="fn_passChange()">비밀번호 변경</button>
+						    <button type="button" class="edit-btn" onclick="openPasswordModal()">비밀번호 변경</button>
 						</div>
 			            <div class="info-item">
 			                <span class="label">생년월일</span>
@@ -80,4 +80,25 @@
 	    </article>
     </section>
 </main>
+
+<!-- 비밀번호 변경 모달 -->
+<div id="edit-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-edit-modal" class="close">&times;</span>
+        <h2>비밀번호 변경</h2>
+        <form id="edit-form">
+            <label for="current-password">현재 비밀번호</label>
+            <input type="password" id="current-password" required>
+            
+            <label for="new-password">새 비밀번호</label>
+            <input type="password" id="new-password" required>
+            
+            <label for="confirm-password">새 비밀번호 확인</label>
+            <input type="password" id="confirm-password" required>
+            
+            <button type="submit">적용</button>
+        </form>
+    </div>
+</div>
+
 <script src="${contextPath}/resources/js/myInfo.js"></script>

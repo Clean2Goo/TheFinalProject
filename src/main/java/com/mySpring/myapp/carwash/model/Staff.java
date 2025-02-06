@@ -12,7 +12,7 @@ public class Staff {
     @Column(name = "STAFFID", nullable = false) // PK 자동생성 시퀀스,트리거 설정 해놓음
     private String staffId;
     //기존 직원 추가 쿼리문 첨부
-    //INSERT INTO staff (userid, washid,role,staffinfo,experience,workyn,rating) 
+    //INSERT INTO staff (userid, washid,role,staffinfo,experience,workyn,rating)
     //VALUES ('staff01', 1031715982,'직원','친절하게 모시겠습니다.',8,'Y',5);
     //기재된 컬럼값만 작성하여 직원추가 가능
 
@@ -39,8 +39,10 @@ public class Staff {
 
     @Column(name = "HIREDATE") // 고용 날짜
     private java.sql.Date hireDate;
-    
-    
+
+    @Column(name = "STAFFIMG") // 스태프 프로필이미지 추가
+    private String staffImg;
+
     @Transient // JPA에서 관리하지 않을 필드
     private String userName;
 
@@ -128,7 +130,7 @@ public class Staff {
     public void setCarWash(CarWash carWash) {
         this.carWash = carWash;
     }
-    
+
     public String getUserName() {
         return userName;
     }
@@ -136,5 +138,13 @@ public class Staff {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
+
+    public String getStaffImg() {
+        return staffImg;
+    }
+
+    public void setStaffImg(String staffImg) {
+        this.staffImg = staffImg;
+    }
+
 }
