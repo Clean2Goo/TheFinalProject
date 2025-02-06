@@ -92,7 +92,14 @@
 							</li>
 						</c:when>
 					</c:choose>
-					<li><a href="${contextPath}/main.do">HOME</a></li>
+					<li>
+						<a href="${contextPath}/main.do" class="ux-button icon-menu home " role="button">
+							<span class="icon">
+								<i class="fa-solid fa-house"></i>
+							</span>
+							<span class="label">홈으로가기</span>
+						</a>
+					</li>
 				</ul>
 			</div>
 		</article>

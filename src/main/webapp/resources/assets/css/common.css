@@ -143,6 +143,7 @@ input[type="password"],
 input[type="number"],
 input[type="email"],
 input[type="search"],
+input[type="date"],
 textarea {height: 52px;padding: 0 24px;color: var(--fc-111);border: 0;border-radius: 8px;}
 input::placeholder,
 textarea::placeholder {color: var(--fc-aaa);font-size: 1rem;font-weight: 500;}
@@ -244,6 +245,7 @@ textarea {min-height: 170px;}
 .ui-input .input > input[type="password"],
 .ui-input .input > input[type="number"],
 .ui-input .input > input[type="search"],
+.ui-input .input > input[type="date"],
 .ui-input .input > .ui-selectmenu-button,
 textarea {font-size: 1rem;font-weight: 500;flex-grow: 1;flex-shrink: 1;flex-basis: auto;}
 .ui-input .input span.at,
@@ -265,7 +267,7 @@ textarea {font-size: 1rem;font-weight: 500;flex-grow: 1;flex-shrink: 1;flex-basi
   position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
   width: 20px; height: 20px; background-image: url("../images/common/icn_popup_close.svg");background-position: 0 0;background-repeat: no-repeat;background-size: cover;}
 .ui-input .input .delete-button .label{position: absolute;width: 1px;height: 1px;overflow: hidden;margin: -1px;clip: rect(0, 0, 0, 0);}
-.ui-input > div + div {margin-top: 8px;}
+/* .ui-input > div + div {margin-top: 8px;} */
 .ui-input > .inputs + .msg,
 .ui-input > .input + .msg,
 .ui-input > .outputs + .msg,
@@ -587,9 +589,9 @@ header .logo .h1 {display: flex;align-items: center;width: auto;color: var(--pri
 .ux-button.custom-profile .label{position: absolute;width: 1px;height: 1px;overflow: hidden;margin: -1px;clip: rect(0, 0, 0, 0);}
 
 /* 드롭다운 - 프로필 영역 */
-.user-profile-wrap {display: flex;align-items:center;gap: 16px;}
-.user-profile-img {position: relative;width: 40px;height: 40px;border: 1px solid var(--line-02);border-radius: 50%;transition:all 0.3s ease;}
-.user-profile-img:before {position: absolute;top: -5px;left: -5px;width: 48px;height: 48px;border-radius: 50%;transition:all 0.3s ease;content:'';}
+.user-profile-wrap {display: flex;align-items:center;gap: 16px;position: relative;}
+.user-profile-img {width: 40px;height: 40px;border: 1px solid var(--line-02);border-radius: 50%;overflow: hidden;transition:all 0.3s ease;}
+.user-profile-img:before {position: absolute;top: -4px;left: -4px;width: 48px;height: 48px;border-radius: 50%;transition:all 0.3s ease;content:'';}
 .user-profile-img img{position: relative;}
 .user-profile-img:not(.dropdown):hover:before {background-color:rgba(0,0,0,.07);}
 .user-profile-img img{width: 100%;height: 100%;object-fit: contain;}
@@ -628,7 +630,12 @@ header .logo .h1 {display: flex;align-items: center;width: auto;color: var(--pri
 .dropdown-wrap.message .dropdown-menu{padding: 0 16px;}
 .dropdown-wrap.message .dropdown-menu .ux-button.readed{pointer-events: none;}
 
-
+/* 홈버튼 */
+.ux-button.icon-menu.home {width: 48px;height: 48px;border-radius: 50%;transition: all .3s ease;}
+.ux-button.icon-menu.home .icon{color: var(--fc-ccc);}
+.ux-button.icon-menu.home:hover {background-color:rgba(0,0,0,.07);}
+.ux-button.icon-menu.home:hover .icon,
+.ux-button.icon-menu.home:active .icon{color: var(--primary-blue);}
 
 /* ************************************ 푸터 ************************************ */
 /* ************************************ 푸터 ************************************ */

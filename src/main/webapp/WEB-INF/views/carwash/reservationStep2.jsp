@@ -4,47 +4,63 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%request.setCharacterEncoding("UTF-8");%>
 
-<main>
+<main class="ui-reservation">
 	<section>
 		<article>
 			<div class="h3-title">
-				<h3>예약2단계</h3>
+				<div class="ui-stepper">
+					<ol>
+						<li>
+							<span class="icon"></span><span class="label">Step01. 세차 옵션 선택</span>
+						</li>
+						<li class="current">
+							<span class="icon"></span><span class="label">Step02. 선택 옵션 확인</span>
+						</li>
+						<li>
+							<span class="icon"></span><span class="label">Step03. 예약 완료</span>
+						</li>
+					</ol>
+				</div>
+				<h3 class="tac">아래 선택 사항으로<br/> 예약을 진행 하시겠습니까?</h3>
+
+				<div class="posa">
+					<h6><em>확인용 : 개발완료시 삭제</em></h6>
+					<p>선택한 세차장 ID: ${washId}</p>
+					<p>선택한 세차장명: ${carWashDetail.washName}</p>
+					<p>유저 ID: ${userId}</p>
+					<p>유저 네임: ${member.name}</p>
+					<p>직원 ID (선택적):  ${staffId}</p>
+				</div>
 			</div>
 			<div class="content">
-				<div class="h4">
-					<div class="h4-title">
-						<h4>예약 확인</h4>
+				<div class="custom-box">
+					<div class="dl-list">
+						<dl>
+							<dt>세차장명</dt><dd><strong>${washName}</strong></dd>
+							<dt>예약자명</dt><dd><strong>${member.name}</strong></dd>
+							<dt>세차일시</dt><dd><strong><em>${rsvnDate} / ${rsvnTime}</em></strong></dd>
+							<dt>세차유형</dt><dd>${washType}</dd>
+							<dt>세차옵션</dt><dd>${carTypeCost}</dd>
+						</dl>
 					</div>
-					<div class="content">
-						<p>선택한 세차장 ID: ${washId}</p>
-						<p>선택한 세차장명: ${washName}</p>
-						<p>유저 ID: ${userId}</p>
-						<p>세차유형: ${washType}</p>
-						<p>직원 ID (선택적):  ${staffId}</p>
-						<p>예약 날짜 : ${rsvnDate}</p>
-						<p>예약 시간 : ${rsvnTime}</p>
-						<p>차량 타입 + 가격: ${carTypeCost}</p>
-						<p>예약 상태 (디폴트): ${status}</p>
-						<p>취소 여부 (디폴트): ${cancelYn}</p>
-						<p>생성 날짜 (디폴트): ${crtDate}</p>
-						
- 						<form action="${contextPath}/carwash/carWashReserve.do" method="POST">
-						    <input type="hidden" name="userId" value="${userId}">
-						    <input type="hidden" name="washType" value="${washType}">
-						    <input type="hidden" name="washId" value="${washId}">
-						    <input type="hidden" name="rsvnDate" value="${rsvnDate}">
-						    <input type="hidden" name="rsvnTime" value="${rsvnTime}">
-						    <input type="hidden" name="carTypeCost" value="${carTypeCost}">
-						    <!--
-						    <input type="hidden" name="status" value="${status}">
-						    <input type="hidden" name="cancelYn" value="${cancelYn}">
-						    <input type="hidden" name="staffId" value="${staffId}">
-						    <input type="hidden" name="crtDate" value="${crtDate}">
-						     -->
-						    <button type="submit">예약하기</button>
-						</form>
- 						
-					</div>
+				</div>
+				<form action="${contextPath}/carwash/carWashReserve.do" method="POST" style="width: 100%;">
+					<input type="hidden" name="userId" value="${userId}">
+					<input type="hidden" name="userName" value="${member.name}">
+					<input type="hidden" name="washType" value="${washType}">
+					<input type="hidden" name="washId" value="${washId}">
+					<input type="hidden" name="rsvnDate" value="${rsvnDate}">
+					<input type="hidden" name="rsvnTime" value="${rsvnTime}">
+					<input type="hidden" name="carTypeCost" value="${carTypeCost}">
+					<!--
+						<input type="hidden" name="staffId" value="${staffId}">
+						-->
+						<div class="ux-button-bar">
+							<button class="ux-button contained primary" type="submit">
+								<span class="label">예약하기</span>
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</article>

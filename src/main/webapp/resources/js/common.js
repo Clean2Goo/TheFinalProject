@@ -66,6 +66,7 @@ const publish = (function () {
 			common.setAccordion();
 			common.setDropDown();
 			common.setSelect();
+			common.setLottie();
 			//common.setDatepicker();
 		},
 		setSwiperSlide: function () {
@@ -79,7 +80,7 @@ const publish = (function () {
 				},
 			});
 			var eventSwiper = new Swiper(".event-swiper", {
-				slidesPerView: 2,
+				slidesPerView: 3,
 				spaceBetween: 40,
 			});
 		},
@@ -254,13 +255,22 @@ const publish = (function () {
 					showButtonPanel: false,
 					showMonthAfterYear: true,
 					showOn: "both",
-					buttonImage: "../assets/images/common/icn_calendar.svg",
+					buttonImage: contextPath + "/resources/assets/images/common/icn_calendar.svg",
 					buttonImageOnly: true,
 					showOtherMonths: true,
 					yearRange: from + ":" + to,
 					minDate: minDate,
 				});
 				$(this).parent(".input").addClass("has-datepicker").parent(".inputs").addClass("has-datepicker");
+			});
+		},
+		setLottie: function () {
+			var animation = lottie.loadAnimation({
+				container: document.getElementById("lottie-result"),
+				renderer: "svg",
+				loop: false,
+				autoplay: true,
+				path: "../resources/assets/animation/lottie-check.json",
 			});
 		},
 	};
