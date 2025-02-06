@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<!-- 기본 레이아웃 상속 -->
+  	<definition name="/about/info" extends="baseLayout">
+	      <put-attribute name="title" value="회사소개" />
+	      <put-attribute name="body" value="/WEB-INF/views/company/about.jsp" />
+	</definition>
+
+  	<!-- CEO 인사말 페이지 -->
+  	<definition name="/about/ceo" extends="baseLayout">
+	      <put-attribute name="title" value="CEO 인사말" />
+	      <put-attribute name="body" value="/WEB-INF/views/company/ceo.jsp" />
+	</definition>
+
+  	<!-- 회사 연혁 페이지 -->
+  	<definition name="/about/history" extends="baseLayout">
+	      <put-attribute name="title" value="회사 연혁" />
+	      <put-attribute name="body" value="/WEB-INF/views/company/history.jsp" />
+	</definition>
+</tiles-definitions>

@@ -13,9 +13,9 @@
           <h1>HISTORY</h1>
         </div>
         <div class="nav-links">
-          <a href="about.html">회사소개</a>
-          <a href="ceo.html">CEO 인사말</a>
-          <a href="history.html">회사연혁</a>
+          <a href="${contextPath}/about/info.do">회사소개</a>
+          <a href="${contextPath}/about/ceo.do">CEO 인사말</a>
+          <a href="${contextPath}/about/history.do">회사연혁</a>
         </div>
       </div>
 

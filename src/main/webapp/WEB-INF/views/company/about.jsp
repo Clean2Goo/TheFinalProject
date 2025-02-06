@@ -13,9 +13,9 @@
           <h1>ABOUT CLEAN2GO</h1>
         </div>
         <div class="nav-links">
-          <a href="about.jsp">회사소개</a>
-          <a href="ceo.jsp">CEO 인사말</a>
-          <a href="history.jsp">회사연혁</a>
+          <a href="${contextPath}/about/info.do">회사소개</a>
+          <a href="${contextPath}/about/ceo.do">CEO 인사말</a>
+          <a href="${contextPath}/about/history.do">회사연혁</a>
         </div>
       </div>
 
