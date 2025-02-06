@@ -13,5 +13,7 @@ public interface MemberDAO {
 	 public int deleteMember(String id) throws DataAccessException;
 	 public MemberVO loginById(MemberVO memberVO) throws DataAccessException;
 	 void updateProfileImage(MemberVO member);
+	public MemberVO getMemberById(String id);
+	public boolean updatePassword(String id, String newPassword);
 
 }
