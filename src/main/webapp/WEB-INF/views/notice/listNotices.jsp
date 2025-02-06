@@ -9,72 +9,76 @@
 			<div class="h3-title">
 				<h3>공지사항</h3>
 			</div>
-			<div class="notice-list-container content">
-				
-				<!-- 공지사항 작성 버튼 (관리자만 보임) -->
-			<%-- 	<c:if test="${member.userType == 'systemOperator'}">
-					<a href="${contextPath}/notice/adminWriteForm.do"" class="notice-write-btn">공지사항 작성</a>
-				</c:if> --%>
-				<!-- 공지사항 테이블 -->
-				<table class="notice-table">
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>등록일</th>
-							<c:if test="${member.userType == 'systemOperator'}">
-								<th>게시물관리</th>
-							</c:if>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${noticesList}" var="notice">
-							<tr>
-								<td>${notice.noticeno}</td>
-								<td>
-									
-									<!-- 고객 -->
-									<c:if test="${member.userType == 'customer'}">
-										 <a href="${contextPath}/notice/viewNotice.do?noticeno=${notice.noticeno}">
-											 ${notice.title}
-										 </a>
-									</c:if>
-									<!-- 어드민 -->
-									<c:if test="${member.userType != 'customer'}">
-										 <a href="${contextPath}/notice/adminViewNotice.do?noticeno=${notice.noticeno}">
-											 ${notice.title}
-										 </a>
-									</c:if>
-								</td>
-								<td>${notice.id}</td>
-								<td>${notice.writedate}</td>
+			<div class="content">
+				 <div class="data-grid">
+					 <table>
+						<caption>공지사항</caption>
+						<colgroup>
+							<col class="">
+							<col class="">
+							<col class="">
+							<col class="">
+							<col class="">
+						</colgroup>
+						 <thead>
+							 <tr>
+								<th>번호</th>
+								<th>제목</th>
+								<th>작성자</th>
+								<th>등록일</th>
 								<!-- 게시글 삭제 (슈퍼 관리자만 보임) -->
-								<c:if test="${member.userType == 'systemOperator'}">
-									<td>
-										<form action="${contextPath}/notice/adminDeleteNotice.do" method="post" style="display: inline;">
-											<input type="hidden" name="noticeno" value="${notice.noticeno}" />
-											<button type="submit" class="delete-btn">삭제</button>
-										</form>
-									</td>
-								</c:if>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				<!-- 페이지네이션 -->
-<%-- 					<div class="pagination">
-					<c:forEach var="page" begin="1" end="${totalPages}">
-						<c:choose>
-							<c:when test="${currentPage == page}">
-								<a href="${contextPath}/notice/listNotices.do?page=${page}" class="page-link active">${page}</a>
-							</c:when>
-							<c:otherwise>
-								<a href="${contextPath}/notice/listNotices.do?page=${page}" class="page-link">${page}</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</div> --%>
+								 <c:if test="${member.userType == 'systemOperator'}">
+									 <th>게시물관리</th>
+								 </c:if>
+							 </tr>
+						 </thead>
+						 <tbody>
+							<c:if test="${empty noticesList}">
+								<tr>
+									<td colspan="${isLogOn && member.userType != 'customer' ? 5 : 4}">공지사항이 없습니다.</td>
+								</tr>
+							</c:if>
+							<c:if test="${not empty noticesList}">
+								<c:forEach items="${noticesList}" var="notice">
+									<tr>
+										<td>${notice.noticeno}</td>
+										<td class="subject">
+											<!-- 고객 / 로그인정보 없을시 -->
+											<c:if test="${!isLogOn || member.userType == 'customer'}">
+												<a href="${contextPath}/notice/viewNotice.do?noticeno=${notice.noticeno}">
+													${notice.title}
+												</a>
+											</c:if>
+											<!-- 어드민: 로그인했을 때만 표시 -->
+											<c:if test="${isLogOn && member.userType != 'customer'}">
+												<a href="${contextPath}/notice/adminViewNotice.do?noticeno=${notice.noticeno}">
+													${notice.title}
+												</a>
+											</c:if>
+										</td>
+										<td>${notice.id}</td>
+										<td>${notice.writedate}</td>
+										<!-- 게시글 삭제 (슈퍼 관리자만 보임) -->
+										<c:if test="${not empty member.userType && member.userType == 'systemOperator'}">
+											<td>
+												<form action="${contextPath}/notice/adminDeleteNotice.do" method="post" style="display: inline;">
+													<input type="hidden" name="noticeno" value="${notice.noticeno}" />
+													<button type="submit" class="ux-button button-table contained remove"><span class="label">삭제</span></button>
+												</form>
+											</td>
+										</c:if>
+									</tr>
+								</c:forEach>
+							 </c:if>
+						 </tbody>
+					 </table>
+				 </div>
+				<!-- 공지사항 등록 버튼 -->
+				<c:if test="${member.userType == 'systemOperator'}">
+					<div class="ux-button-bar">
+						<a href="${contextPath}/notice/adminWriteForm.do" class="ux-button contained primary" role="button"><span class="label">공지사항 등록하기</span></a>
+					</div>
+				</c:if>
 			</div>
 		</article>
 	</section>

@@ -1,71 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
-<link rel="stylesheet" href="${contextPath}/resources/assets/css/viewNotice.css"> 
+<link rel="stylesheet" href="${contextPath}/resources/assets/css/viewNotice.css">
 
 <main>
 	<section>
 		<article>
-			<div class="notice-container">
-				<div class="notice-box">
-					<h1 class="board-header">공지사항</h1>
-					<h1 class="board-title">${notice.title}</h1>
-					<div class="board-info">
-					<p class="board-author"><strong>작성자:</strong> ${notice.id}</p>
-					<p class="board-date"><strong>작성일:</strong> ${notice.writedate}</p>
+			<div class="h3-title">
+				<h3>공지사항</h3>
+			</div>
+			<div class="content">
+				<div class="bbs-read">
+					<div class="bbs-title">
+						<h4 class="subject">${notice.title}</h4>
+						<ul class="info-list">
+							<li>
+								<p>작성자 : <span class="author">${notice.id}</span></p>
+							</li>
+							<li>
+								<p>등록일 : <span class="date">${notice.writedate}</span></p>
+							</li>
+						</ul>
 					</div>
-					<p class="board-content">${notice.content}</p>
-					<c:if test="${not empty notice.imagefilename}">
-						<img src="${contextPath}/resources/assets/images/${notice.imagefilename}" alt="첨부 이미지" />
-					</c:if>
-					
-					<!-- 파란 경계선 -->
-					<div class="board-actions"></div>
-        			
-     				
-     		<%-- 		  <!-- 이전글 목록 -->
-<div class="board-navigation">
-  <div class="navigation-label">PREV ▲</div>
-  <a 
-    href="/board/${board.prev_board.id}?page=${param.page}&searchKeyword=${param.searchKeyword}" 
-    class="<c:if test='${empty board.prev_board}'>disabled</c:if>">
-    <c:choose>
-      <c:when test="${empty board.prev_board}">
-        이전 글이 없습니다.
-      </c:when>
-      <c:otherwise>
-        <span style="color: blue;">${board.prev_board.title}</span>
-      </c:otherwise>
-    </c:choose>
-  </a>
-</div>
+					<div class="bbs-content">
+						<p>${notice.content}</p>
+					</div>
+					<div class="bbs-navigation">
+						<!-- 이전 글 표시 -->
+						<c:if test="${not empty prevNotice}">
+							<div class="nav prev">
+								<p class="label">이전 글<span class="icon"></span></p>
+								<!-- 고객 / 로그인정보 없을시 -->
+								<c:if test="${!isLogOn || member.userType == 'customer'}">
+									<a href="${contextPath}/notice/viewNotice.do?noticeno=${prevNotice.noticeno}" class="subject">${prevNotice.title}</a>
+								</c:if>
+								<!-- 어드민: 로그인했을 때만 표시 -->
+								<c:if test="${isLogOn && member.userType != 'customer'}">
+									<a href="${contextPath}/notice/adminViewNotice.do?noticeno=${prevNotice.noticeno}" class="subject">${prevNotice.title}</a>
+								</c:if>
+								<p class="date">${prevNotice.writedate}</p>
+							</div>
+						</c:if>
+						<c:if test="${empty prevNotice}">
+							<div class="nav prev">
+								<p class="label">이전 글<span class="icon"></span></p>
+								<p class="subject none">이전 글이 없습니다.</p>
+							</div>
+						</c:if>
 
-<!-- 다음글 목록 -->
-<div class="board-navigation">
-  <div class="navigation-label">NEXT ▼</div>
-  <a 
-    href="/board/${board.next_board.id}?page=${param.page}&searchKeyword=${param.searchKeyword}" 
-    class="<c:if test='${empty board.next_board}'>disabled</c:if>">
-    <c:choose>
-      <c:when test="${empty board.next_board}">
-        다음 글이 없습니다.
-      </c:when>
-      <c:otherwise>
-        <span style="color: blue;">${board.next_board.title}</span>
-      </c:otherwise>
-    </c:choose>
-  </a>
-</div>
-     		 --%>		
-					
-					
-					<!-- 고객 -->
+						<!-- 다음 글 표시 -->
+						<c:if test="${not empty nextNotice}">
+							<div class="nav next">
+								<p class="label">다음 글<span class="icon"></span></p>
+								<!-- 고객 / 로그인정보 없을시 -->
+								<c:if test="${!isLogOn || member.userType == 'customer'}">
+									<a href="${contextPath}/notice/viewNotice.do?noticeno=${nextNotice.noticeno}" class="subject">${nextNotice.title}</a>
+								</c:if>
+								<!-- 어드민: 로그인했을 때만 표시 -->
+								<c:if test="${isLogOn && member.userType != 'customer'}">
+									<a href="${contextPath}/notice/adminViewNotice.do?noticeno=${nextNotice.noticeno}" class="subject">${nextNotice.title}</a>
+								</c:if>
+								<p class="date">${nextNotice.writedate}</p>
+							</div>
+						</c:if>
+						<c:if test="${empty nextNotice}">
+							<div class="nav next">
+								<p class="label">다음 글<span class="icon"></span></p>
+								<p class="subject none">다음 글이 없습니다.</p>
+							</div>
+						</c:if>
+					</div>
+				</div>
+				<div class="ux-button-bar">
+					<!-- 고객 / 로그인정보 없을시 -->
 					<c:if test="${!isLogOn || member.userType == 'customer'}">
-						<a class="back-button" href="${contextPath}/notice/listNotices.do">고객-목록으로 돌아가기</a>
+						<a class="ux-button outlined" href="${contextPath}/notice/listNotices.do">목록보기</a>
 					</c:if>
-					<!-- 어드민-->
+					<!-- 어드민: 로그인했을 때만 표시-->
 					<c:if test="${isLogOn && member.userType != 'customer'}">
-						<a class="back-button" href="${contextPath}/notice/adminListNotices.do">어드민-목록으로 돌아가기</a>
+						<a class="ux-button outlined" href="${contextPath}/notice/adminListNotices.do">어드민-목록보기</a>
 					</c:if>
 				</div>
 			</div>

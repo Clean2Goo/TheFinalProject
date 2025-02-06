@@ -13,4 +13,6 @@ public interface NoticeDAO {
     public NoticeVO selectNotice(int noticeno) throws DataAccessException; // 특정 공지사항 조회
     public void updateNotice(Map<String, Object> noticeMap) throws DataAccessException; // 공지사항 수정
     public void deleteNotice(int noticeno) throws DataAccessException; // 공지사항 삭제
+	public NoticeVO selectPrevNoticeDetails(int noticeno) throws DataAccessException;
+	public NoticeVO selectNextNoticeDetails(int noticeno) throws DataAccessException;
 }
