@@ -4,9 +4,9 @@
 <link rel="stylesheet" href="${contextPath}/resources/assets/css/about.css">
 <link rel="stylesheet" href="${contextPath}/resources/assets/css/common.css">
 
-
 <main class="about">
       <div class="nav-links-background">
+       <img src="${contextPath}/resources/assets/images/company/about-banner.jpg" alt="회사배너" />
         <div class="description">
           <p>Clean2Go</p>
           <br />
@@ -84,6 +84,6 @@
       </div>
     </main>
 
-    <script src="${contextPath}/resources/assets/images/company/about.js"></script>
+    <script src="${contextPath}/resources/js/about.js"></script>
 
     
