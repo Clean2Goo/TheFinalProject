@@ -21,11 +21,11 @@ public class ReservationDAOImpl implements ReservationDAO {
         return sqlSession.selectList("mapper.reservation.listReservations", userId);
     }
 
+    @Override
     public void updateReservationStatus(String rsvnId) {
         Map<String, Object> params = new HashMap<>();
         params.put("rsvnId", rsvnId);
-
-        sqlSession.update("updateReservationStatus", params);
+        sqlSession.update("mapper.reservation.updateReservationStatus", params);
     }
 
     @Override
@@ -33,14 +33,29 @@ public class ReservationDAOImpl implements ReservationDAO {
         sqlSession.insert("mapper.reservation.insertReservation", reservation);
     }
 
-	@Override
-	public void updateReservationStatusCompleted(String rsvnId, String status) {
+    @Override
+    public void updateReservationStatusDynamic(String rsvnId, String status) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("rsvnId", rsvnId);
+        params.put("status", status);
+        sqlSession.update("mapper.reservation.updateReservationStatusDynamic", params);
+    }
 
-	    Map<String, Object> params = new HashMap<>();
-	    params.put("rsvnId", rsvnId);
-	    params.put("status", status);
+    @Override
+    public void updateReservationStatusCompleted(String rsvnId, String status) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("rsvnId", rsvnId);
+        params.put("status", status);
+        sqlSession.update("mapper.reservation.updateReservationStatusCompleted", params);
+    }
 
-	    sqlSession.update("mapper.reservation.updateReservationStatusCompleted", params);
+    @Override
+    public ReservationVO findReservationById(String rsvnId) throws DataAccessException {
+        return sqlSession.selectOne("mapper.reservation.findReservationById", rsvnId);
+    }
 
-	}
+    @Override
+    public List<ReservationVO> getReservationsByOwnerId(String ownerId) {
+        return sqlSession.selectList("mapper.reservation.getReservationsByOwnerId", ownerId);
+    }
 }

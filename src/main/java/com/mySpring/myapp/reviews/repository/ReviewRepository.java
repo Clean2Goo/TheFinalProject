@@ -11,25 +11,27 @@ import java.util.Optional;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, String> {
 
-    // 특정 예약 ID로 리뷰 목록 조회
+    // 특정 예약 ID(RSVNID) 기준으로 리뷰 찾기
     List<Review> findByRsvId(String rsvId);
-
-    // 특정 리뷰 ID로 리뷰 조회
+    
+    // 리뷰 ID로 개별 리뷰 찾기
     Optional<Review> findByRwId(String rwId);
-
-    // 리뷰 ID로 리뷰 존재 여부 확인
+    
+    // 특정 리뷰 ID 존재 여부 확인
     boolean existsByRwId(String rwId);
-
-    // 예약 ID로 리뷰 존재 여부 확인
+    
+    // 특정 예약 ID(RSVNID) 존재 여부 확인
     boolean existsByRsvId(String rsvId);
 
-    // 세차장 ID(WASHID)로 리뷰 목록 조회
-    List<Review> findByWashId(String washId); 
+    // 예약 건별 ID(RSVNID2) 관련 메서드 추가
+    boolean existsByRsvId2(String rsvId2);  // 예약 ID(RSVNID2) 기준으로 중복 체크
+    List<Review> findByRsvId2(String rsvId2); // 예약 ID(RSVNID2) 기준으로 리뷰 조회
 
-    // 리뷰 ID로 리뷰 삭제
+    // 세차장 및 사용자 관련 메서드
+    List<Review> findByWashId(String washId);
+    List<Review> findByWashIdIn(List<String> washIds);
+    List<Review> findByUserId(String userId);
+
     @Transactional
     void deleteByRwId(String rwId);
-
-    // 특정 사용자 ID로 리뷰 조회
-    List<Review> findByUserId(String userId);
 }

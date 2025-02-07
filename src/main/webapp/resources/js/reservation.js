@@ -13,52 +13,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const reviewsPerPage = 3;
     let currentReviewButton = null;
 
+    // 팝업 닫기
     closeReviewPopup.addEventListener("click", () => {
         reviewPopup.style.display = "none";
     });
 
-    async function checkReviewStatus(washId, button) {
+    // 특정 예약 ID(rsvId2)의 리뷰 존재 여부 확인
+    async function checkReviewStatus(rsvId2, button) {
         try {
-            const response = await fetch(`${contextPath}/api/reviews/${washId}/exists?timestamp=${new Date().getTime()}`);
+            const response = await fetch(`${contextPath}/api/reviews/${rsvId2}/exists`);
             if (!response.ok) throw new Error("Failed to check review status");
             const exists = await response.json();
 
-            if (exists) {
-                button.textContent = "작성 완료";
-                button.disabled = true;
-                button.classList.remove("primary");
-                button.classList.add("disabled");
-            } else {
-                button.textContent = "리뷰 작성";
-                button.disabled = false;
-                button.classList.remove("disabled");
-                button.classList.add("primary");
-            }
+            button.textContent = exists ? "작성 완료" : "리뷰 작성";
+            button.disabled = exists;
+            button.classList.toggle("primary", !exists);
+            button.classList.toggle("disabled", exists);
         } catch (error) {
             console.error("Error checking review status:", error);
         }
     }
 
-    function openReviewPopup(washId, washName, button) {
+    // 리뷰 작성 팝업 열기
+    function openReviewPopup(rsvId2, washName, button) {
         const washNameElement = document.getElementById("popup-wash-name");
         const reservationIdInput = document.getElementById("popup-reservation-id");
 
         if (!washNameElement || !reservationIdInput) {
-            console.error("Required elements for the popup are missing.");
+            console.error("팝업 관련 요소가 존재하지 않습니다.");
             return;
         }
 
         washNameElement.innerText = `${washName} 리뷰 작성`;
-        reservationIdInput.value = washId;
+        reservationIdInput.value = rsvId2;
         reviewPopup.style.display = "block";
 
         currentReviewButton = button;
-        fetchReviewsForWash(washId);
+        fetchReviewsForRsvId2(rsvId2);
     }
 
-    async function fetchReviewsForWash(washId) {
+    // 특정 예약 ID(rsvId2)의 리뷰 가져오기
+    async function fetchReviewsForRsvId2(rsvId2) {
         try {
-            const response = await fetch(`${contextPath}/api/reviews/${washId}`);
+            const response = await fetch(`${contextPath}/api/reviews/byRsvId2/${rsvId2}`);
             if (!response.ok) throw new Error("Failed to fetch reviews");
             currentReviews = await response.json();
             currentReviewPage = 1;
@@ -68,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // 리뷰 리스트 업데이트 (페이지네이션)
     function updateReviewList() {
         reviewList.innerHTML = '';
         const start = (currentReviewPage - 1) * reviewsPerPage;
@@ -101,16 +99,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    async function deleteReview(reviewId, washId, button) {
+    // 리뷰 삭제
+    async function deleteReview(reviewId, rsvId2, button) {
         try {
-            const response = await fetch(`${contextPath}/api/reviews/${reviewId}`, {
-                method: "DELETE",
-            });
+            const response = await fetch(`${contextPath}/api/reviews/${reviewId}`, { method: "DELETE" });
 
             if (response.ok) {
                 alert("리뷰가 삭제되었습니다.");
-                fetchReviewsForWash(washId);
-                checkReviewStatus(washId, button);
+                fetchReviewsForRsvId2(rsvId2);
+                checkReviewStatus(rsvId2, button);
             } else {
                 const error = await response.text();
                 throw new Error(`리뷰 삭제 실패: ${error}`);
@@ -121,19 +118,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // 리뷰 작성
     reviewForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-        const washId = document.getElementById("popup-reservation-id").value;
-        const reviewContent = document.getElementById("review-content").value;
+        const rsvId2Input = document.getElementById("popup-reservation-id");
+        const rsvId2 = rsvId2Input ? rsvId2Input.value : null;
+        const reviewContent = document.getElementById("review-content").value.trim();
         const reviewScore = document.getElementById("review-score").value;
 
-        if (!reviewContent.trim() || !reviewScore) {
-            alert("리뷰 내용을 작성하고 점수를 선택해주세요.");
+        if (!rsvId2 || !reviewContent || !reviewScore) {
+            alert("예약 정보가 없거나, 리뷰 내용을 작성하고 점수를 선택해주세요.");
             return;
         }
 
         const reviewData = {
-            rsvId: washId,
+            rsvId2: rsvId2,
             rwvScore: parseInt(reviewScore, 10),
             content: reviewContent,
             crtDate: new Date().toISOString(),
@@ -150,13 +149,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("리뷰가 성공적으로 저장되었습니다.");
                 reviewPopup.style.display = "none";
                 reviewForm.reset();
-                fetchReviewsForWash(washId);
+                fetchReviewsForRsvId2(rsvId2);
 
                 if (currentReviewButton) {
-                    currentReviewButton.textContent = "작성 완료";
-                    currentReviewButton.disabled = true;
-                    currentReviewButton.classList.remove("primary");
-                    currentReviewButton.classList.add("disabled");
+                    checkReviewStatus(rsvId2, currentReviewButton);
                 }
             } else {
                 const error = await response.text();
@@ -168,18 +164,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    const reviewButtons = document.querySelectorAll(".review-button");
-    reviewButtons.forEach(button => {
-        const washId = button.getAttribute("data-wash-id");
-        checkReviewStatus(washId, button);
+    // 리뷰 버튼 이벤트 처리
+    document.querySelectorAll(".review-button").forEach(button => {
+        const rsvId2 = button.getAttribute("data-reservation-id2");
+        checkReviewStatus(rsvId2, button);
     });
 
     document.addEventListener("click", (event) => {
         const button = event.target.closest(".review-button");
         if (button) {
-            const washId = button.getAttribute("data-wash-id");
+            const rsvId2 = button.getAttribute("data-reservation-id2");
             const washName = button.getAttribute("data-wash-name");
-            openReviewPopup(washId, washName, button);
+            openReviewPopup(rsvId2, washName, button);
         }
     });
 });

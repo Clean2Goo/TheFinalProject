@@ -55,4 +55,28 @@
         ]]>
     </select>
 
+	<!-- 이전글 상세 조회 -->
+	<select id="selectPrevNoticeDetails" parameterType="int" resultType="com.mySpring.myapp.notice.vo.NoticeVO">
+	    <![CDATA[
+	    SELECT * FROM (
+	        SELECT NOTICENO AS noticeno, TITLE AS title, CRTDATE AS writedate
+	        FROM NOTICES 
+	        WHERE NOTICENO < #{noticeno}
+	        ORDER BY NOTICENO DESC
+	    ) WHERE ROWNUM = 1
+	    ]]>
+	</select>
+	
+	<!-- 다음글 상세 조회 -->
+	<select id="selectNextNoticeDetails" parameterType="int" resultType="com.mySpring.myapp.notice.vo.NoticeVO">
+	    <![CDATA[
+	    SELECT * FROM (
+	        SELECT NOTICENO AS noticeno, TITLE AS title, CRTDATE AS writedate
+	        FROM NOTICES 
+	        WHERE NOTICENO > #{noticeno}
+	        ORDER BY NOTICENO ASC
+	    ) WHERE ROWNUM = 1
+	    ]]>
+	</select>
+	
 </mapper>

@@ -26,13 +26,13 @@ import java.util.Map;
 public class ReservationControllerImpl implements ReservationController {
 	@Autowired
 	private MemberService memberService;
-	
+
     @Autowired
     private ReservationService reservationService;
 
     @Autowired
     private CarWashService carWashService;
-    
+
 	//로그인한 사용자 아이디에 따른 예약내역 조회
 	@Override
 	@RequestMapping(value = "/myPage/listReservations.do", method = RequestMethod.GET)
@@ -44,13 +44,13 @@ public class ReservationControllerImpl implements ReservationController {
 	    System.out.println("로그인한 사용자 ID: " + userId);
 
 	    List<ReservationVO> reservations = reservationService.listReservations(userId);
-	    
+
 	    Date currentDate = new Date(); // 현재 시간
 	    System.out.println("currentDate :" + currentDate);
-	    
+
 	    // 날짜 포맷 정의
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일HH:mm"); // 포맷에 맞춰 정의
-	    
+
 	 // 예약 상태 업데이트
 	    for (ReservationVO reservation : reservations) {
 	    	// 예약 상태가 "예약중"인 경우에만 처리
@@ -76,14 +76,14 @@ public class ReservationControllerImpl implements ReservationController {
 	            }
 	        }
 	    }
-	    
+
 	 // 상태 업데이트 후 다시 최신 예약 목록을 조회하여 보여줍니다.
 	    reservations = reservationService.listReservations(userId); // 최신 데이터 조회
-	    
+
 	    ModelAndView mav = new ModelAndView("listReservations");
 	    mav.addObject("reservations", reservations);
 		mav.addObject("activeMenu", "listreservations");
-		
+
 	    return mav;
 	}
 
@@ -99,49 +99,89 @@ public class ReservationControllerImpl implements ReservationController {
 
 
 
-	//beaver 예약 단계별 화면 작업예정
+	//beaver 예약 단계별 화면 작업
 	//예약단계 1
 	@RequestMapping(value = { "/carwash/reservationStep1.do"}, method = RequestMethod.POST)
-	private ModelAndView reservationStep1(@RequestParam("washId") int washId, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+	private ModelAndView reservationStep1(@RequestParam("washId") int washId,HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		HttpSession session = request.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-	    
+		MemberVO member = (MemberVO) session.getAttribute("member");
+
 		CarWash CarWash = carWashService.selectCarWasheById(washId);
-		
+
 		ModelAndView mav = new ModelAndView();
-		
-	    if (memberVO != null) {
+
+	    if (member != null) {
 	        String viewName = (String) request.getAttribute("viewName");
 	        System.out.println(viewName);
 	        mav.setViewName(viewName);
 	        mav.addObject("washId", washId);
+			mav.addObject("member", member);
 	    } else {
-	    	//rAttr.addAttribute("result","reservatinStep1"); 
+	    	//rAttr.addAttribute("result","reservatinStep1");
 	        mav.setViewName("redirect:/member/loginForm.do");
 	    }
 	    mav.addObject("carWashDetail", CarWash);
 	    System.out.println("예약스텝1" + washId + " washName 추가받기");
 		return mav;
-		
-		
+
+
 	}
 
+	 // 신규 기능 - 관리자용 예약 목록 조회
+	@RequestMapping(value = "/admin/reservations.do", method = RequestMethod.GET)
+	public ModelAndView listAdminReservations(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    HttpSession session = request.getSession();
+	    MemberVO admin = (MemberVO) session.getAttribute("member");
+
+	    if (admin == null) {
+	        return new ModelAndView("redirect:/member/loginForm.do");
+	    }
+
+	    List<ReservationVO> adminReservations = reservationService.getReservationsByOwnerId(admin.getId());
+
+	    ModelAndView mav = new ModelAndView("admin.reservations"); // 타일즈 이름과 일치시킴
+	    mav.addObject("reservations", adminReservations);
+	    return mav;
+	}
+
+	//  1. 올바른 URL 매핑으로 수정
+	@RequestMapping(value = "/admin/updateStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateReservationStatus(@RequestParam("rsvnId") String rsvnId,
+	                                      @RequestParam("status") String status) {
+	    System.out.println(" [요청 수신] rsvnId: " + rsvnId + ", status: " + status); // 디버깅 로그 추가
+	    try {
+	        reservationService.updateReservationStatus(rsvnId, status);
+	        System.out.println(" [DB 업데이트 성공]");
+	        return "success";
+	    } catch (Exception e) {
+	        System.out.println(" [DB 업데이트 실패]");
+	        e.printStackTrace();
+	        return "error";
+	    }
+	}
+
+
+
+
+
+	
 	
 	@RequestMapping(value = "/carwash/reservationStep2.do", method = RequestMethod.POST)
 	public ModelAndView reservationStep2(@RequestParam Map<String, String> params,
 										HttpServletRequest request,HttpServletResponse response) throws Exception {
-		
+
 		String viewName = (String)request.getAttribute("viewName");
 		System.out.println(viewName);
-		
+
 		ModelAndView mav = new ModelAndView();
-		
+
 		mav.setViewName(viewName);
 	    mav.addAllObjects(params);
-	    
+
 	    ReservationVO reservation = new ReservationVO();
-	    
+
 	    reservation.setUserId(params.get("userId"));
 	    reservation.setWashType(params.get("washType"));
 	    reservation.setWashId(params.get("washId"));
@@ -151,11 +191,11 @@ public class ReservationControllerImpl implements ReservationController {
 	    reservation.setRsvnDate(rsvnDate);
 	    // 예약 날짜를 원하는 형식으로 출력
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    
+
 	    reservation.setCarTypeCost(params.get("carTypeCost"));
 	    reservation.setStatus(params.get("status"));
 	    reservation.setCancelYn(params.get("cancelYn"));
-	    
+
 	    System.out.println("예약 getWashId: " + reservation.getWashId());
 	    System.out.println("예약 getUserId: " + reservation.getUserId());
 	    System.out.println("예약 포맷 getRsvnDate: " + dateFormat.format(reservation.getRsvnDate()));
@@ -163,22 +203,22 @@ public class ReservationControllerImpl implements ReservationController {
 	    System.out.println("예약 getCarTypeCost: " + reservation.getCarTypeCost());
 	    System.out.println("예약 WashType: " + reservation.getWashType());
 	    System.out.println("예약 CancelYn: " + reservation.getCancelYn());
-	    
+
 	    return mav;
 
 	}
 
-	
-	
-	
+
+
+
 	@RequestMapping(value = { "/carwash/carWashReserve.do"}, method = RequestMethod.POST)
 	private ModelAndView carWashReserve(@RequestParam Map<String, String> params,
 										HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		System.out.println(viewName);
-		
+
 		ReservationVO reservation = new ReservationVO();
-		
+
 		reservation.setUserId(params.get("userId"));
 	    reservation.setWashType(params.get("washType"));
 	    reservation.setWashId(params.get("washId"));
@@ -188,11 +228,11 @@ public class ReservationControllerImpl implements ReservationController {
 	    reservation.setRsvnDate(rsvnDate);
 	    // 예약 날짜를 원하는 형식으로 출력
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    
+
 	    reservation.setCarTypeCost(params.get("carTypeCost"));
 	    reservation.setStatus(params.get("status"));
 	    reservation.setCancelYn(params.get("cancelYn"));
-	    
+
 	    System.out.println("예약 getWashId: " + reservation.getWashId());
 	    System.out.println("예약 getUserId: " + reservation.getUserId());
 	    System.out.println("예약 포맷 getRsvnDate: " + dateFormat.format(reservation.getRsvnDate()));
@@ -231,18 +271,18 @@ public class ReservationControllerImpl implements ReservationController {
 	        System.out.println("예약 날짜: " + reservation.getRsvnDate());
 	    }
 
-	    
-	    
-	    
+
+
+
 	    // 예약 정보 저장
 	    reservationService.saveReservation(reservation);
-		
-		
+
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addAllObjects(params); //디버깅 용도
-		 
-		 
+
+
 		return mav;
 	}
 

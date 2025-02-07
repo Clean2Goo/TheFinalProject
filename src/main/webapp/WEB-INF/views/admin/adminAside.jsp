@@ -57,7 +57,9 @@
 					<a href="#" class="ux-button text-button"><span class="label">예약자관리</span></a>
 					<ul class="menu-list depth2">
 						<li>
-							<a href="#" class="ux-button text-button"><span class="label">- 예약현황판</span></a>
+							<a href="${contextPath}/admin/reservations.do" class="ux-button text-button">
+                <span class="label">- 예약현황판</span>
+            </a>
 						</li>
 						<li>
 							<a href="#" class="ux-button text-button"><span class="label">- 예약신청자</span></a>
@@ -65,8 +67,11 @@
 					</ul>
 				</li>
 				<li>
-					<a href="#" class="ux-button text-button"><span class="label">리뷰확인</span></a>
-				</li>
+    <a href="${contextPath}/admin/reviewManagement" class="ux-button text-button">
+        <span class="label">리뷰확인</span>
+    </a>
+</li>
+
 			</ul>
 			<div class="ux-button-bar">
 				<button type="button" class="ux-button outlined"

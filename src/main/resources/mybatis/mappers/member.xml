@@ -73,5 +73,23 @@
 	    SET USERIMG = #{userImg}
 	    WHERE USERID = #{id}
 	</update>
+	
+	
+	<!-- 사용자 정보 조회 (아이디로) -->
+    <select id="getMemberById" resultType="MemberVO">
+        SELECT * FROM USERS WHERE USERID = #{id}
+    </select>
+
+    <!-- 비밀번호 확인 (현재 비밀번호 확인) -->
+    <select id="checkPassword" resultType="MemberVO">
+        SELECT USERPWD FROM USERS WHERE USERID = #{id}
+    </select>
+
+    <!-- 비밀번호 업데이트 -->
+    <update id="updatePassword">
+        UPDATE USERS
+        SET USERPWD = #{newPassword}
+        WHERE USERID = #{id}
+    </update>
     
 </mapper>

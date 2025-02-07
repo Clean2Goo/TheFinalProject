@@ -66,6 +66,7 @@ const publish = (function () {
 			common.setAccordion();
 			common.setDropDown();
 			common.setSelect();
+			common.setLottie();
 			//common.setDatepicker();
 		},
 		setSwiperSlide: function () {
@@ -79,7 +80,7 @@ const publish = (function () {
 				},
 			});
 			var eventSwiper = new Swiper(".event-swiper", {
-				slidesPerView: 2,
+				slidesPerView: 3,
 				spaceBetween: 40,
 			});
 		},
@@ -142,14 +143,33 @@ const publish = (function () {
 			});
 		},
 		setDropDown: function () {
-			let $ui = $(".dropdown-wrap");
+			let $mypage = $(".dropdown-wrap.mypage");
+			let $message = $(".dropdown-wrap.message");
+			let $readedBtn = $(".ux-button.readed");
+			let $notiGearBtn = $(".ux-button.gear");
 			$(".ux-button.custom-profile").on("click", function () {
 				event.stopPropagation();
-				$ui.toggleClass("expanded");
+				$mypage.toggleClass("expanded");
 			});
+			$(".ux-button.icon-menu.bell").on("click", function () {
+				event.stopPropagation();
+				$message.toggleClass("expanded");
+			});
+
+			$readedBtn.on("click", function (event) {
+				event.stopPropagation();
+				// 알림작업시 추가 작성
+			});
+			$notiGearBtn.on("click", function (event) {
+				event.stopPropagation();
+			});
+
 			$(document).click(function () {
-				if ($ui.hasClass("expanded")) {
-					$ui.toggleClass("expanded");
+				if ($mypage.hasClass("expanded")) {
+					$mypage.toggleClass("expanded");
+				}
+				if ($message.hasClass("expanded")) {
+					$message.toggleClass("expanded");
 				}
 			});
 		},
@@ -235,13 +255,22 @@ const publish = (function () {
 					showButtonPanel: false,
 					showMonthAfterYear: true,
 					showOn: "both",
-					buttonImage: "../assets/images/common/icn_calendar.svg",
+					buttonImage: contextPath + "/resources/assets/images/common/icn_calendar.svg",
 					buttonImageOnly: true,
 					showOtherMonths: true,
 					yearRange: from + ":" + to,
 					minDate: minDate,
 				});
 				$(this).parent(".input").addClass("has-datepicker").parent(".inputs").addClass("has-datepicker");
+			});
+		},
+		setLottie: function () {
+			var animation = lottie.loadAnimation({
+				container: document.getElementById("lottie-result"),
+				renderer: "svg",
+				loop: false,
+				autoplay: true,
+				path: "../resources/assets/animation/lottie-check.json",
 			});
 		},
 	};

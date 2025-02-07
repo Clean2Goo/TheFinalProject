@@ -41,4 +41,13 @@ public class NoticeServiceImpl implements NoticeService {
     public void removeNotice(int noticeno) throws Exception {
         noticeDAO.deleteNotice(noticeno);
     }
+    
+	public NoticeVO getPrevNoticeDetails(int noticeno) {
+        return noticeDAO.selectPrevNoticeDetails(noticeno);
+    }
+    
+    public NoticeVO getNextNoticeDetails(int noticeno) {
+        return noticeDAO.selectNextNoticeDetails(noticeno);
+    }
+
 }
