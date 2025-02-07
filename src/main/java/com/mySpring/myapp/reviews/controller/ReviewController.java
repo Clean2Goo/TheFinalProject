@@ -19,7 +19,6 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    // 리뷰 작성 (rsvId2 포함)
     @PostMapping
     public ResponseEntity<String> addReview(@RequestBody Review review, HttpServletRequest request) {
         try {
@@ -29,7 +28,7 @@ public class ReviewController {
             }
             MemberVO member = (MemberVO) session.getAttribute("member");
             review.setUserId(member.getId());
-            
+
             // rsvId2 값이 포함되어 있어야 함
             reviewService.saveReview(review, member.getId());
             return ResponseEntity.ok()
@@ -42,11 +41,11 @@ public class ReviewController {
         }
     }
 
-    // 세차장별 리뷰 조회
-    @GetMapping("/byWashId/{washId}")
-    public ResponseEntity<?> getReviewsByWashId(@PathVariable String washId) {
+    // 특정 예약(rsvId2) 리뷰 조회
+    @GetMapping("/byRsvId2/{rsvId2}")
+    public ResponseEntity<?> getReviewsByRsvId2(@PathVariable String rsvId2) {
         try {
-            List<Review> reviews = reviewService.getReviewsByWashId(washId);
+            List<Review> reviews = reviewService.getReviewsByRsvId(rsvId2);
             return ResponseEntity.ok(reviews);
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,11 +53,11 @@ public class ReviewController {
         }
     }
 
-    // 예약 건별 리뷰 조회 (rsvId2 기준)
-    @GetMapping("/{rsvId}")
-    public ResponseEntity<?> getReviewsByRsvId(@PathVariable String rsvId) {
+    // 특정 세차장 리뷰 조회
+    @GetMapping("/byWashId/{washId}")
+    public ResponseEntity<?> getReviewsByWashId(@PathVariable String washId) {
         try {
-            List<Review> reviews = reviewService.getReviewsByRsvId(rsvId);
+            List<Review> reviews = reviewService.getReviewsByWashId(washId);
             return ResponseEntity.ok(reviews);
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,11 +85,11 @@ public class ReviewController {
         }
     }
 
-    // 예약 건별 리뷰 존재 확인
-    @GetMapping("/{rsvId}/exists")
-    public ResponseEntity<Boolean> checkReviewExists(@PathVariable String rsvId) {
+    // 특정 예약 건의 리뷰 존재 여부 확인 (rsvId2 기준)
+    @GetMapping("/{rsvId2}/exists")
+    public ResponseEntity<Boolean> checkReviewExists(@PathVariable String rsvId2) {
         try {
-            boolean exists = reviewService.checkReviewExists(rsvId);
+            boolean exists = reviewService.checkReviewExists(rsvId2);
             return ResponseEntity.ok(exists);
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,7 +126,7 @@ public class ReviewController {
         }
     }
 
-    // 관리자용 리뷰 조회
+    // 관리자 리뷰 조회
     @GetMapping("/admin/reviews")
     public ResponseEntity<?> getAdminReviews(HttpServletRequest request) {
         try {
