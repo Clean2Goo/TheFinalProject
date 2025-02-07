@@ -11,9 +11,9 @@ public interface ReservationDAO {
     void insertReservation(ReservationVO reservation); // 예약 내역 저장
     void updateReservationStatusCompleted(String rsvnId, String status); // 예약 상태 완료로 업데이트
 
-    // 추가된 기능: 관리자용 예약 목록 조회
-    List<ReservationVO> getReservationsByOwnerId(String ownerId);
-    
-    void updateReservationStatusDynamic(String rsvnId, String status);
+    ReservationVO findReservationById(String rsvnId) throws DataAccessException;
 
+    List<ReservationVO> getReservationsByOwnerId(String ownerId);
+
+    void updateReservationStatusDynamic(String rsvnId, String status);
 }
