@@ -25,7 +25,6 @@ public class ReservationDAOImpl implements ReservationDAO {
     public void updateReservationStatus(String rsvnId) {
         Map<String, Object> params = new HashMap<>();
         params.put("rsvnId", rsvnId);
-
         sqlSession.update("mapper.reservation.updateReservationStatus", params);
     }
 
@@ -33,6 +32,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     public void insertReservation(ReservationVO reservation) throws DataAccessException {
         sqlSession.insert("mapper.reservation.insertReservation", reservation);
     }
+
     @Override
     public void updateReservationStatusDynamic(String rsvnId, String status) {
         Map<String, Object> params = new HashMap<>();
@@ -46,11 +46,14 @@ public class ReservationDAOImpl implements ReservationDAO {
         Map<String, Object> params = new HashMap<>();
         params.put("rsvnId", rsvnId);
         params.put("status", status);
-
         sqlSession.update("mapper.reservation.updateReservationStatusCompleted", params);
     }
 
-    // 추가된 기능: 관리자용 예약 목록 조회
+    @Override
+    public ReservationVO findReservationById(String rsvnId) throws DataAccessException {
+        return sqlSession.selectOne("mapper.reservation.findReservationById", rsvnId);
+    }
+
     @Override
     public List<ReservationVO> getReservationsByOwnerId(String ownerId) {
         return sqlSession.selectList("mapper.reservation.getReservationsByOwnerId", ownerId);

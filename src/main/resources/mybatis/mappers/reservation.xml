@@ -1,135 +1,142 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.reservation">
 
     <resultMap id="reservationResult" type="com.mySpring.myapp.reservation.vo.ReservationVO">
         <result property="rsvnId" column="RSVNID" />
         <result property="userId" column="USERID" />
-        <result property="washType" column="washtype" />
-        <result property="washId" column="washid" />
-        <result property="staffId" column="staffid" />
-        <result property="requestId" column="requestid" />
-        <result property="rsvnDate" column="rsvndate" />
-        <result property="rsvnTime" column="rsvntime" />
-        <result property="carTypeCost" column="cartypecost" />
-        <result property="status" column="status" />
-        <result property="cancelYn" column="cancelyn" />
-        <result property="crtDate" column="crtdate" />
+        <result property="washType" column="WASHTYPE" />
+        <result property="washId" column="WASHID" />
+        <result property="staffId" column="STAFFID" />
+        <result property="requestId" column="REQUESTID" />
+        <result property="rsvnDate" column="RSVNDATE" />
+        <result property="rsvnTime" column="RSVNTIME" />
+        <result property="carTypeCost" column="CARTYPECOST" />
+        <result property="status" column="STATUS" />
+        <result property="cancelYn" column="CANCELYN" />
+        <result property="crtDate" column="CRTDATE" />
 
-		<result property="userName" column="userName"/> <!-- 전문가 직원명 -->
-		<result property="washName" column="washName"/> <!-- 카워시 세차장명 -->
-		<result property="fmtRsvnDate" column="fmtRsvnDate"/> <!-- 세차일시 포맷컬럼명 -->
-
-
+        <result property="userName" column="USERNAME"/> <!-- 전문가 직원명 -->
+        <result property="washName" column="WASHNAME"/> <!-- 카워시 세차장명 -->
+        <result property="fmtRsvnDate" column="FMTRSVNDATE"/> <!-- 세차일시 포맷컬럼명 -->
     </resultMap>
 
-	 <!-- 유저별 예약 목록 조회 -->
-	    <select id="listReservations" parameterType="String" resultMap="reservationResult">
-	        <![CDATA[
-				SELECT
-					r.rsvnId,
-				    r.userId,
-				    r.washType,
-				    r.washId,
-				    r.staffId,
-				    r.requestId,
-				    TO_CHAR(r.rsvnDate, 'YYYY"년" MM"월" DD"일"') AS fmtRsvnDate,
-				    r.rsvnTime,
-				    r.carTypeCost,
-				    r.status,
-				    r.cancelYn,
-				    r.crtDate,
-				    u.userName,
-				    cw.washName
-				FROM reservations r
-				JOIN carwashes cw ON r.washId = cw.washId
-				LEFT JOIN staff s ON r.staffId = s.staffId
-				LEFT JOIN users u ON s.userId = u.userId
-				WHERE r.USERID = #{userId}
-				ORDER BY r.rsvnid DESC
-			]]>
-	    </select>
-
-
-	 <!-- 예약취소 상태 업데이트-->
-		<update id="updateReservationStatus" parameterType="map">
-		    UPDATE reservations
-		    SET status = '예약취소',
-		    	cancelYn ='Y'
-		    WHERE rsvnId = #{rsvnId}
-		</update>
-
-	 <!-- 이용완료 상태 업데이트 -->
-		<update id="updateReservationStatusCompleted">
-		    UPDATE reservations
-		    SET status = #{status}
-		    WHERE rsvnId = #{rsvnId}
-		</update>
-
-	 <!-- 예약 하기  TO_DATE(#{rsvnDate}, 'YYYY-MM-DD'), -->
-		<insert id="insertReservation" parameterType="com.mySpring.myapp.reservation.vo.ReservationVO">
-		      <![CDATA[
-		        INSERT INTO reservations (USERID, WASHTYPE, WASHID, RSVNDATE, RSVNTIME, CARTYPECOST)
-		        VALUES (
-		            #{userId},
-		            #{washType},
-		            #{washId},
-		            #{rsvnDate},
-		            #{rsvnTime},
-		            #{carTypeCost}
-		        )
-		    ]]>
-		</insert>
-
-	<!-- 석준님 코드 -->
-		<select id="findReviewStatuses" resultType="map">
-			SELECT
-				r.RSVNID,
-				CASE
-					WHEN COUNT(rv.RVWID) > 0 THEN 'true'
-					ELSE 'false'
-				END AS isReviewed
-			FROM RESERVATIONS r
-			LEFT JOIN REVIEWS rv ON r.RSVNID = rv.RSVNID AND rv.USERID = #{userId}
-			WHERE r.USERID = #{userId}
-			GROUP BY r.RSVNID
-		</select>
-		<!-- 관리자용 예약 목록 조회 -->
-<select id="getReservationsByOwnerId" parameterType="String" resultMap="reservationResult">
-    <![CDATA[
+    <!--  유저별 예약 목록 조회 -->
+    <select id="listReservations" parameterType="String" resultMap="reservationResult">
+        <![CDATA[
         SELECT
-            r.rsvnId,
-            r.userId,
-            r.washType,
-            r.washId,
-            r.staffId,
-            r.requestId,
-            r.rsvnDate,
-            TO_CHAR(r.rsvnDate, 'YYYY"년" MM"월" DD"일"') AS fmtRsvnDate,
-            r.rsvnTime,
-            r.carTypeCost,
-            r.status,
-            r.cancelYn,
-            r.crtDate,
-            u.userName,
-            cw.washName
-        FROM reservations r
-        JOIN carwashes cw ON r.washId = cw.washId
-        LEFT JOIN staff s ON r.staffId = s.staffId
-        LEFT JOIN users u ON s.userId = u.userId
-        WHERE cw.userId = #{ownerId}
-        ORDER BY r.rsvnDate DESC, r.rsvnTime DESC
-    ]]>
-</select>
-		
-<update id="updateReservationStatusDynamic" parameterType="map">
-    UPDATE reservations
-    SET status = #{status},
-        cancelYn = CASE WHEN #{status} = '예약취소' THEN 'Y' ELSE 'N' END
-    WHERE rsvnId = #{rsvnId}
-</update>
+            r.RSVNID,
+            r.USERID,
+            r.WASHTYPE,
+            r.WASHID,
+            r.STAFFID,
+            r.REQUESTID,
+            TO_CHAR(r.RSVNDATE, 'YYYY"년" MM"월" DD"일"') AS FMTRSVNDATE,
+            r.RSVNTIME,
+            r.CARTYPECOST,
+            r.STATUS,
+            r.CANCELYN,
+            r.CRTDATE,
+            u.USERNAME,
+            cw.WASHNAME
+        FROM RESERVATIONS r
+        JOIN CARWASHES cw ON r.WASHID = cw.WASHID
+        LEFT JOIN STAFF s ON r.STAFFID = s.STAFFID
+        LEFT JOIN USERS u ON s.USERID = u.USERID
+        WHERE r.USERID = #{userId}
+        ORDER BY r.RSVNID DESC
+        ]]>
+    </select>
+
+    <!--  예약취소 상태 업데이트 -->
+    <update id="updateReservationStatus" parameterType="map">
+        UPDATE RESERVATIONS
+        SET STATUS = '예약취소',
+            CANCELYN = 'Y'
+        WHERE RSVNID = #{rsvnId}
+    </update>
+
+    <!--  이용완료 상태 업데이트 -->
+    <update id="updateReservationStatusCompleted">
+        UPDATE RESERVATIONS
+        SET STATUS = #{status}
+        WHERE RSVNID = #{rsvnId}
+    </update>
+
+    <!--  예약 추가 -->
+    <insert id="insertReservation" parameterType="com.mySpring.myapp.reservation.vo.ReservationVO">
+        <![CDATA[
+        INSERT INTO RESERVATIONS (RSVNID, USERID, WASHTYPE, WASHID, RSVNDATE, RSVNTIME, CARTYPECOST)
+        VALUES (
+            #{rsvnId},  -- Java에서 미리 UUID 생성 후 전달
+            #{userId},
+            #{washType},
+            #{washId},
+            #{rsvnDate},
+            #{rsvnTime},
+            #{carTypeCost}
+        )
+        ]]>
+    </insert>
+
+    <!--  예약 아이디로 조회 (리뷰 중복 확인용) -->
+    <select id="findReservationById" parameterType="String" resultType="com.mySpring.myapp.reservation.vo.ReservationVO">
+        SELECT * FROM RESERVATIONS WHERE RSVNID = #{rsvnId}
+    </select>
+
+    <!--  예약 건별 리뷰 작성 여부 조회 -->
+    <select id="findReviewStatuses" resultType="map">
+        <![CDATA[
+        SELECT
+            r.RSVNID,
+            CASE
+                WHEN COUNT(rv.RWID) > 0 THEN 'true'
+                ELSE 'false'
+            END AS isReviewed
+        FROM RESERVATIONS r
+        LEFT JOIN REVIEWS rv ON r.RSVNID = rv.RSVNID2 AND rv.USERID = #{userId} -- ✅ RSVNID2 기준으로 변경
+        WHERE r.USERID = #{userId}
+        GROUP BY r.RSVNID
+        ]]>
+    </select>
+
+    <!--  관리자용 예약 목록 조회 -->
+    <select id="getReservationsByOwnerId" parameterType="String" resultMap="reservationResult">
+        <![CDATA[
+        SELECT
+            r.RSVNID,
+            r.USERID,
+            r.WASHTYPE,
+            r.WASHID,
+            r.STAFFID,
+            r.REQUESTID,
+            r.RSVNDATE,
+            TO_CHAR(r.RSVNDATE, 'YYYY"년" MM"월" DD"일"') AS FMTRSVNDATE,
+            r.RSVNTIME,
+            r.CARTYPECOST,
+            r.STATUS,
+            r.CANCELYN,
+            r.CRTDATE,
+            u.USERNAME,
+            cw.WASHNAME
+        FROM RESERVATIONS r
+        JOIN CARWASHES cw ON r.WASHID = cw.WASHID
+        LEFT JOIN STAFF s ON r.STAFFID = s.STAFFID
+        LEFT JOIN USERS u ON s.USERID = u.USERID
+        WHERE cw.USERID = #{ownerId}
+        ORDER BY r.RSVNDATE DESC, r.RSVNTIME DESC
+        ]]>
+    </select>
+
+    <!--  예약 상태 업데이트 -->
+    <update id="updateReservationStatusDynamic" parameterType="map">
+        UPDATE RESERVATIONS
+        SET STATUS = #{status},
+            CANCELYN = CASE WHEN #{status} = '예약취소' THEN 'Y' ELSE 'N' END
+        WHERE RSVNID = #{rsvnId}
+    </update>
 
 </mapper>

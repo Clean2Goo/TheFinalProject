@@ -172,12 +172,12 @@
 														<div class="table-flex-box">
 															${reservation.status}
 															<c:if test="${reservation.status == '이용완료'}">
-																<button class="ux-button button-table contained primary review-button"
-																		data-reservation-id="${reservation.rsvnId}"
-																		data-wash-name="${reservation.washName}"
-																		data-wash-id="${reservation.washId}">
-																	<span class="label">리뷰작성</span>
-																</button>
+																<button class="review-button" 
+    data-reservation-id2="${reservation.rsvnId}" 
+    data-wash-name="${reservation.washName}">
+    리뷰 작성
+</button>
+
 															</c:if>
 														</div>
 													</td>
