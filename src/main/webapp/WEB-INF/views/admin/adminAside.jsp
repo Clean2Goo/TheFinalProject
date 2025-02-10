@@ -39,13 +39,19 @@
 					</li>
 				</c:if>
 				<li>
-					<a href="#" class="ux-button text-button"><span class="label">자주묻는질문</span></a>
-				</li>
-				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
-					<li>
-						<a href="#" class="ux-button text-button"><span class="label">자주묻는질문 작성</span></a>
-					</li>
-				</c:if>
+    <a href="${contextPath}/faq/listFaqs.do" class="ux-button text-button">
+        <span class="label">자주 묻는 질문</span>
+    </a>
+</li>
+<c:if test="${isLogOn && member.userType == 'systemOperator'}">
+    <li>
+        <a href="${contextPath}/faq/adminWriteFaqForm.do" class="ux-button text-button">
+            <span class="label">자주 묻는 질문 작성</span>
+        </a>
+    </li>
+</c:if>
+
+
 				<!-- 세자창 관리자 메뉴 -->
 				<li>
 					<a href="${contextPath}/manager.do" class="ux-button text-button"><span class="label">세차정보관리</span></a>

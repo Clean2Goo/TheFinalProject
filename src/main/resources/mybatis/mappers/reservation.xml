@@ -69,9 +69,8 @@
     <!--  예약 추가 -->
     <insert id="insertReservation" parameterType="com.mySpring.myapp.reservation.vo.ReservationVO">
         <![CDATA[
-        INSERT INTO RESERVATIONS (RSVNID, USERID, WASHTYPE, WASHID, RSVNDATE, RSVNTIME, CARTYPECOST)
+        INSERT INTO RESERVATIONS ( USERID, WASHTYPE, WASHID, RSVNDATE, RSVNTIME, CARTYPECOST)
         VALUES (
-            #{rsvnId, jdbcType=VARCHAR},
             #{userId},
             #{washType},
             #{washId},
@@ -81,7 +80,7 @@
         )
         ]]>
     </insert>
- 
+
     <!--  예약 아이디로 조회 (리뷰 중복 확인용) -->
     <select id="findReservationById" parameterType="String" resultType="com.mySpring.myapp.reservation.vo.ReservationVO">
         SELECT * FROM RESERVATIONS WHERE RSVNID = #{rsvnId}
