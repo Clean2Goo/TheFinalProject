@@ -236,12 +236,13 @@ function redirectToDetailPage(washId) {
 async function fetchReviewsForCarWash(washId) {
     try {
         console.log(`Fetching reviews for washId: ${washId}`);
-        const response = await fetch(`${contextPath}/api/reviews/${washId}`);
+        const response = await fetch(`${contextPath}/api/reviews/byWashId/${washId}`);
+
         
         if (!response.ok) throw new Error(`리뷰 불러오기 실패: ${response.status}`);
         
         currentReviews = await response.json();
-        console.log("Fetched Reviews:", currentReviews);  // ✅ 디버깅 로그
+        console.log("Fetched Reviews:", currentReviews);  //
         currentReviewPage = 1; 
         updateReviewList();
     } catch (error) {
