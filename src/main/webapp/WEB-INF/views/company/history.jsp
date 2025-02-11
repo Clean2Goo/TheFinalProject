@@ -7,6 +7,7 @@
 
     <main class="history">
       <div class="nav-links-background">
+      <img src="${contextPath}/resources/assets/images/company/history-banner.jpg" alt="회사배너" />
         <div class="description">
           <p>Clean2Go</p>
           <br />

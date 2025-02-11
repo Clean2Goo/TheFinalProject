@@ -270,7 +270,7 @@ const publish = (function () {
 				renderer: "svg",
 				loop: false,
 				autoplay: true,
-				path: "../resources/assets/animation/lottie-check.json",
+				path: contextPath + "/resources/assets/animation/lottie-check.json",
 			});
 		},
 	};

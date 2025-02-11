@@ -32,7 +32,7 @@
 					<p>예약 날짜 : ${rsvnDate}</p>
 					<p>예약 시간 : ${rsvnTime}</p>
 					<p>차량 타입 + 가격: ${carTypeCost}</p>
-					<p>직원 ID (선택적):  ${staffId}</p>
+					<p>직원 ID (작업보류):  ${staffId}</p>
 				</div>
 			</div>
 			<div class="content">

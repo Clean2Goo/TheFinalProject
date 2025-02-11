@@ -2,7 +2,10 @@ package com.mySpring.myapp.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -10,10 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -169,41 +175,44 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/member/changePassword.do", method = RequestMethod.POST)
-	public ModelAndView changePassword(
-	    @RequestParam("currentPassword") String currentPassword,
-	    @RequestParam("newPassword") String newPassword,
-	    HttpServletRequest request, HttpServletResponse response) throws Exception {
-	    
-	    HttpSession session = request.getSession();
+	//비밀번호 변경
+	@PostMapping("/member/updatePassword")
+	public ResponseEntity<Map<String, Object>> updatePassword(
+	        @RequestBody Map<String, String> passwordMap, HttpSession session) {
+	    String currentPassword = passwordMap.get("currentPassword");
+	    String newPassword = passwordMap.get("newPassword");
+	    String id = (String) session.getAttribute("userId");
+
+	    Map<String, Object> response = new HashMap<>();
+
+	    if (id == null) {
+	        response.put("success", false);
+	        response.put("message", "로그인이 필요합니다.");
+	        return ResponseEntity.status(403).body(response);
+	    }
+
+	    boolean success = memberService.updatePassword(id, currentPassword, newPassword);
+	    if (success) {
+	        response.put("success", true);
+	        response.put("message", "비밀번호가 성공적으로 변경되었습니다.");
+	        return ResponseEntity.ok(response);
+	    } else {
+	        response.put("success", false);
+	        response.put("message", "현재 비밀번호가 일치하지 않습니다.");
+	        return ResponseEntity.status(400).body(response);
+	    }
+	}
+	
+	@RequestMapping(value =  "/myPage/benefit.do", method = RequestMethod.GET)
+	private ModelAndView benefit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		HttpSession session = request.getSession();
 	    MemberVO member = (MemberVO) session.getAttribute("member");
 
-	    ModelAndView mav = new ModelAndView();
-
-	    // 비밀번호 확인
-	    if (member == null) {
-	        mav.setViewName("redirect:/member/loginForm.do");
-	        return mav;
-	    }
-
-	    // 비밀번호가 일치하는지 확인
-	    boolean isPasswordCorrect = memberService.checkPassword(member.getId(), currentPassword);
-	    if (!isPasswordCorrect) {
-	        mav.addObject("errorMessage", "현재 비밀번호가 올바르지 않습니다.");
-	        mav.setViewName("myInfo"); // 비밀번호 변경 화면으로 리턴
-	        return mav;
-	    }
-
-	    // 새 비밀번호로 업데이트
-	    boolean isUpdated = memberService.changePassword(member.getId(), newPassword);
-	    if (isUpdated) {
-	        mav.addObject("successMessage", "비밀번호가 성공적으로 변경되었습니다.");
-	    } else {
-	        mav.addObject("errorMessage", "비밀번호 변경에 실패했습니다.");
-	    }
-
-	    mav.setViewName("myInfo");
-	    return mav;
+		ModelAndView mav = new ModelAndView("benefit");
+		mav.addObject("member", member);
+		mav.addObject("activeMenu", "benefit");
+		return mav;
 	}
 	
 	//페이지 이동
@@ -212,51 +221,6 @@ public class MemberControllerImpl implements MemberController {
 	    model.addAttribute("activeMenu", menu); // 현재 메뉴 이름 전달
 	    return "myPageMenu"; // 공통 JSP 파일로 이동
 	}
-
-    // 프로필 이미지 업데이트 처리 메서드
-    @RequestMapping("/updateProfileImage")
-    public ModelAndView updateProfileImage(
-            @RequestParam("profileImage") MultipartFile profileImage,
-            @RequestParam("id") String id,
-            HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        // 1. ServletContext 가져오기
-        ServletContext context = request.getSession().getServletContext();  // 수정된 부분
-
-        // 2. 파일을 저장할 실제 경로 가져오기
-        String realPath = context.getRealPath("/resources/assets/images/");
-
-        // 3. 이미지 디렉토리가 없으면 생성
-        File uploadDir = new File(realPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdirs();
-        }
-
-        // 4. 파일이 존재하면 저장
-        if (!profileImage.isEmpty()) {
-            // 업로드된 파일의 파일명
-            String fileName = profileImage.getOriginalFilename();
-
-            // 파일을 저장할 경로
-            File file = new File(uploadDir, fileName);
-
-            // 파일 저장
-            profileImage.transferTo(file);
-
-            // MemberVO 객체에 이미지 파일 경로 저장
-            MemberVO member = new MemberVO();
-            member.setId(id);
-            member.setImg("/resources/assets/images/" + fileName);
-
-            // DB에 이미지 경로 업데이트
-            memberService.updateMemberProfileImage(member);
-        }
-
-        // 프로필 이미지 업데이트 성공 메시지와 함께 myPage로 리다이렉트
-        ModelAndView modelAndView = new ModelAndView("redirect:/myPage");
-        return modelAndView;
-    }
-
 
 	// !고객은 회원목록 조회 불가능
 //	@Override
@@ -382,6 +346,11 @@ public class MemberControllerImpl implements MemberController {
 			viewName = viewName.substring(viewName.lastIndexOf("/", 1), viewName.length());
 		}
 		return viewName;
+	}
+	@Override
+	public ResponseEntity<?> updatePassword(String currentPassword, String newPassword, HttpSession session) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
