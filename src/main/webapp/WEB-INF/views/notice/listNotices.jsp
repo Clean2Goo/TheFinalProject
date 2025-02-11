@@ -14,10 +14,10 @@
 					 <table>
 						<caption>공지사항</caption>
 						<colgroup>
-							<col class="">
-							<col class="">
-							<col class="">
-							<col class="">
+							<col class="col-8">
+							<col class="col-auto">
+							<col class="col-10">
+							<col class="col-16">
 							<col class="">
 						</colgroup>
 						 <thead>

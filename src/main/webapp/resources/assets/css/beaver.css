@@ -170,6 +170,11 @@ main.ui-subpage .h4.subpage-custom {flex-direction: row;}
 
 /* ************************************ 테이블 ************************************ */
 /* ************************************ 테이블 ************************************ */
+.col-8 { width: 8%;}
+.col-auto {width: auto;}
+.col-10 {width: 10%;}
+.col-16 {width: 16%;}
+
 .table-flex-box {display: flex;align-items: center;justify-content: center;gap: 12px;}
 
 .data-grid {width: 100%;border-top: 1px solid #000;}
