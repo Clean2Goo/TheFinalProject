@@ -88,7 +88,7 @@
 													 	<div class="table-flex-box">
 															${reservation.status}
 															<c:if test="${reservation.status == '예약중'}">
-																<form action="${contextPath}/myPage/cancelReservation.do" method="POST">
+																<form action="${contextPath}/myPage/cancelReservation.do" method="POST" onsubmit="return confirmCancellation();">
 																	<input type="hidden" name="rsvnId" value="${reservation.rsvnId}"/>
 																	<button class="ux-button button-table contained cancel" type="submit">
 																		<span class="label">예약 취소</span>
@@ -172,8 +172,8 @@
 														<div class="table-flex-box">
 															${reservation.status}
 															<c:if test="${reservation.status == '이용완료'}">
-																<button class="review-button" 
-    data-reservation-id2="${reservation.rsvnId}" 
+																<button class="review-button"
+    data-reservation-id2="${reservation.rsvnId}"
     data-wash-name="${reservation.washName}">
     리뷰 작성
 </button>

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="${contextPath}/resources/assets/css/about.css">
 <link rel="stylesheet" href="${contextPath}/resources/assets/css/common.css">
 
-<main class="about">
+<main class="ui-history about">
       <div class="nav-links-background">
        <img src="${contextPath}/resources/assets/images/company/about-banner.jpg" alt="회사배너" />
         <div class="description">

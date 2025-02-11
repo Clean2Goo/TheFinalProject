@@ -128,72 +128,91 @@
 												<span class="icon"></span>
 												<span class="label">전문세차</span>
 											</label>
-											<label class="custom-radio contained" for="visit">
-												<input type="radio" id="visit" name="washType" value="출장세차" onclick="setCarTypeCost()">
+											<!-- <label class="custom-radio contained" for="visit">
+												<input type="radio" id="visit" name="washType" value="출장세차">
 												<span class="icon"></span>
 												<span class="label">출장세차</span>
-											</label>
+											</label> -->
 										</div>
 									</div>
 								</div>
 							</li>
-							<li id="carTypeCostContainer" style="display: none;">
+							<li id="carTypeCostContainer" class="cartype-cost" style="display: none;">
 								<div class="field">
 									<p class="label" for="carTypeCost">세차옵션을 선택해주세요</p>
 									<div class="ui-input">
-										<div id="autoCarTypeCost" class="input" style="display: none;">
-											<label class="custom-radio contained" for="compact">
-												<input type="radio" id="compact" name="carTypeCost" value="소형 10,000" required>
-												<span class="icon"></span>
-												<span class="label">소형 10,000</span>
-											</label>
-											<label class="custom-radio contained" for="mid">
-												<input type="radio" id="mid" name="carTypeCost" value="중형 13,000">
-												<span class="icon"></span>
-												<span class="label">중형 13,000</span>
-											</label>
-											<label class="custom-radio contained" for="large">
-												<input type="radio" id="large" name="carTypeCost" value="준중형 15,000">
-												<span class="icon"></span>
-												<span class="label">준중형 15,000</span>
-											</label>
-											<label class="custom-radio contained" for="subcompact">
-												<input type="radio" id="subcompact" name="carTypeCost" value="대형 20,000">
-												<span class="icon"></span>
-												<span class="label">대형 20,000</span>
-											</label>
-											<label class="custom-radio contained" for="suv">
-												<input type="radio" id="suv" name="carTypeCost" value="SUV 25,000">
-												<span class="icon"></span>
-												<span class="label">SUV 25,000</span>
-											</label>
+										<!-- 셀프세차 -->
+										<div id="selfCarTypeCost" class="type-cost" style="display: none;">
+											<div class="input">
+												<label class="custom-radio contained" for="selfCarTypeCost">
+													<input type="radio" id="selfCarTypeCost" name="carTypeCost" value="매장방문시 코인 사용" required checked="checked">
+													<span class="icon"></span>
+													<span class="label">매장방문시 코인 사용</span>
+												</label>
+											</div>
 										</div>
-										<div id="expertCarTypeCost" class="input" style="display: none;">
-											<label class="custom-radio contained" for="compact_expert">
-												<input type="radio" id="compact_expert" name="carTypeCost" value="소형 28,000" required>
-												<span class="icon"></span>
-												<span class="label">소형 28,000</span>
-											</label>
-											<label class="custom-radio contained" for="mid_expert">
-												<input type="radio" id="mid_expert" name="carTypeCost" value="중형 33,000">
-												<span class="icon"></span>
-												<span class="label">중형 33,000</span>
-											</label>
-											<label class="custom-radio contained" for="large_expert">
+										<!-- 자동세차 -->
+										<div id="autoCarTypeCost" class="type-cost" style="display: none;">
+											<div class="input">
+												<label class="custom-radio contained" for="compact">
+													<input type="radio" id="compact" name="carTypeCost" value="소형 10,000" required>
+													<span class="icon"></span>
+													<span class="label">소형 10,000</span>
+												</label>
+												<label class="custom-radio contained" for="mid">
+													<input type="radio" id="mid" name="carTypeCost" value="중형 13,000">
+													<span class="icon"></span>
+													<span class="label">중형 13,000</span>
+												</label>
+												<label class="custom-radio contained" for="large">
+													<input type="radio" id="large" name="carTypeCost" value="준중형 15,000">
+													<span class="icon"></span>
+													<span class="label">준중형 15,000</span>
+												</label>
+												<label class="custom-radio contained" for="subcompact">
+													<input type="radio" id="subcompact" name="carTypeCost" value="대형 20,000">
+													<span class="icon"></span>
+													<span class="label">대형 20,000</span>
+												</label>
+												<label class="custom-radio contained" for="suv">
+													<input type="radio" id="suv" name="carTypeCost" value="SUV 25,000">
+													<span class="icon"></span>
+													<span class="label">SUV 25,000</span>
+												</label>
+											</div>
+										</div>
+										<!-- 전문세차 -->
+										<div id="expertCarTypeCost" class="type-cost" style="display: none;">
+											<div class="input">
+												<label class="custom-radio contained" for="compact_expert">
+													<input type="radio" id="compact_expert" name="carTypeCost" value="소형 28,000" required>
+													<span class="icon"></span>
+													<span class="label">소형 28,000</span>
+												</label>
+												<label class="custom-radio contained" for="mid_expert">
+													<input type="radio" id="mid_expert" name="carTypeCost" value="중형 33,000">
+													<span class="icon"></span>
+													<span class="label">중형 33,000</span>
+												</label>
+												<label class="custom-radio contained" for="large_expert">
 												<input type="radio" id="large_expert" name="carTypeCost" value="준중형 38,000">
 												<span class="icon"></span>
 												<span class="label">준중형 38,000</span>
-											</label>
-											<label class="custom-radio contained" for="subcompact_expert">
-												<input type="radio" id="subcompact_expert" name="carTypeCost" value="대형 40,000">
-												<span class="icon"></span>
-												<span class="label">대형 40,000</span>
-											</label>
-											<label class="custom-radio contained" for="suv_expert">
-												<input type="radio" id="suv_expert" name="carTypeCost" value="SUV 50,000">
-												<span class="icon"></span>
-												<span class="label">SUV 50,000</span>
-											</label>
+												</label>
+												<label class="custom-radio contained" for="subcompact_expert">
+													<input type="radio" id="subcompact_expert" name="carTypeCost" value="대형 40,000">
+													<span class="icon"></span>
+													<span class="label">대형 40,000</span>
+												</label>
+												<label class="custom-radio contained" for="suv_expert">
+													<input type="radio" id="suv_expert" name="carTypeCost" value="SUV 50,000">
+													<span class="icon"></span>
+													<span class="label">SUV 50,000</span>
+												</label>
+											</div>
+											<div class="msg">
+												<p>매장방문시 작업 가능한 전문가로 자동 배정 됩니다.</p>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -221,19 +240,25 @@
 				const washType = document.querySelector('input[name="washType"]:checked').value;
 
 				const carTypeCostContainer = document.getElementById('carTypeCostContainer');
+				const selfCarTypeCost = document.getElementById('selfCarTypeCost');
 				const autoCarTypeCost = document.getElementById('autoCarTypeCost');
 				const expertCarTypeCost = document.getElementById('expertCarTypeCost');
 
 				carTypeCostContainer.style.display = 'none';
+				selfCarTypeCost.style.display = 'none';
 				autoCarTypeCost.style.display = 'none';
 				expertCarTypeCost.style.display = 'none';
 
-				if (washType === '자동세차') {
-					carTypeCostContainer.style.display = 'flex';
-					autoCarTypeCost.style.display = 'flex';
-				} else if (washType === '전문세차') {
-					carTypeCostContainer.style.display = 'flex';
-					expertCarTypeCost.style.display = 'flex';
+				if (washType === '셀프세차') {
+					carTypeCostContainer.style.display = 'block';
+					selfCarTypeCost.style.display = 'block';
+				} else if (washType === '자동세차') {
+					carTypeCostContainer.style.display = 'block';
+					autoCarTypeCost.style.display = 'block';
+				} else if (
+					washType === '전문세차') {
+					carTypeCostContainer.style.display = 'block';
+					expertCarTypeCost.style.display = 'block';
 				}
 			}
 		</script>

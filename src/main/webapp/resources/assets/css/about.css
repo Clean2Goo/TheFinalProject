@@ -67,23 +67,12 @@
 }
 
 /* about */
-.about {
-  
-  position: relative;
+/* ui-history about ui-history ceo ui-history history */
+main.ui-history  {
+  padding: 112px 0 100px;
   z-index: 2;
 }
 
-/* ceo인사말 */
-.ceo {
-  position: relative;
-  z-index: 2;
-}
-
-/* 연혁 */
-.history {
-  position: relative;
-  z-index: 2;
-}
 
 /* 페이지 설명 */
 .description {

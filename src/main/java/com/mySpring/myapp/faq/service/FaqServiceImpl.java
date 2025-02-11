@@ -17,33 +17,48 @@ public class FaqServiceImpl implements FaqService {
     @Autowired
     private FaqDAO faqDAO;
     
-    //faq목록조회
+    // FAQ 목록 조회
     @Override
     public List<FaqVO> listFaqs() throws Exception {
         return faqDAO.selectAllFaqs();
     }
     
-    //faq추가
+    // 새 FAQ 등록
     @Override
     public int addNewFaq(Map<String, Object> faqMap) throws Exception {
         return faqDAO.insertFaq(faqMap);
     }
     
-    //faq보기
+    // 특정 FAQ 조회
     @Override
     public FaqVO viewFaq(int faqNo) throws Exception {
         return faqDAO.selectFaq(faqNo);
     }
     
-    //faq수정
+    // FAQ 수정
     @Override
     public void modFaq(Map<String, Object> faqMap) throws Exception {
         faqDAO.updateFaq(faqMap);
     }
     
-    //faq삭제
+    // FAQ 삭제
     @Override
     public void removeFaq(int faqNo) throws Exception {
         faqDAO.deleteFaq(faqNo);
     }
+
+    // FAQ 답변 등록 및 수정
+    @Override
+    public void updateAnswer(int faqNo, String answer) throws Exception {
+        Map<String, Object> answerMap = Map.of(
+            "faqNo", faqNo,
+            "answer", answer
+        );
+        faqDAO.updateFaq(answerMap);
+    }
+    @Override
+    public int addUserQuestion(FaqVO faqVO) throws Exception {
+        return faqDAO.insertFaq(faqVO.toMap());
+    }
+
 }

@@ -29,7 +29,10 @@
 					<p>선택한 세차장명: ${carWashDetail.washName}</p>
 					<p>유저 ID: ${userId}</p>
 					<p>유저 네임: ${member.name}</p>
-					<p>직원 ID (선택적):  ${staffId}</p>
+					<p>세차유형: ${washType}</p>
+					<p>세차옵션: ${carTypeCost}</p>
+					<p>세차시간: ${rsvnTime}</p>
+					<p>직원 ID (작업보류): ${staffId}</p>
 				</div>
 			</div>
 			<div class="content">
