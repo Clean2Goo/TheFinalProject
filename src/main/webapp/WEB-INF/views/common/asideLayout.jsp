@@ -55,7 +55,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
 	<!-- 백엔드 취합 후 수정 필요한 css -->
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/myInfo.css">
-	<link rel="stylesheet" href="${contextPath}/resources/assets/css/favorites.css">
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/aside.css">
 
 
