@@ -45,3 +45,28 @@
     font-weight: bold; /* 굵은 글씨 */
     text-decoration: underline; /* 밑줄 */
 }
+
+/* 유저 프로필 정보 스타일 */
+.aside-user-info {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.aside-user-image img {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+.user-type {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.user-rank {
+    font-size: 14px;
+    color: #999;
+    margin-top: 3px;
+}

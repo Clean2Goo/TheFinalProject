@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         
         try {
-            const response = await fetch("/member/changePassword.do", {
+            const response = await fetch("/member/updatePassword", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)

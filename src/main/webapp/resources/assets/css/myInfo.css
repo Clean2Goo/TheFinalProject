@@ -54,8 +54,7 @@
     text-decoration: underline;
 }
 
-/* class로 스타일이 안먹혀서 img로 먹여놓은 부분*/
-img {
+.user-image img {
     width: 60px;
     height: 60px;
 }
