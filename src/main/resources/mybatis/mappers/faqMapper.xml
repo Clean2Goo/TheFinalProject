@@ -6,67 +6,76 @@
 
     <!-- faq 목록 조회 -->
     <select id="selectAllFaqs" resultType="com.mySpring.myapp.faq.vo.FaqVO">
-        <![CDATA[
-        SELECT USERID AS userId, QUESTION AS question, 
-               ANSWER AS answer, CRTDATE AS crtDate, FAQNO AS faqNo, 
-               FAQIMG AS faqImg
-        FROM   FAQS
-        ORDER BY FAQNO DESC
-        ]]>
+    <![CDATA[
+    SELECT USERID AS userId, TITLE AS title, QUESTION AS question, 
+           ANSWER AS answer, CRTDATE AS crtDate, FAQNO AS faqNo, 
+           FAQIMG AS faqImg
+    FROM FAQS
+    ORDER BY FAQNO DESC
+    ]]>
     </select>
 
     <!-- faq 상세 보기 -->
     <select id="selectFaq" parameterType="int" resultType="com.mySpring.myapp.faq.vo.FaqVO">
-        <![CDATA[
-        SELECT USERID AS userId, QUESTION AS question, 
-               ANSWER AS answer, CRTDATE AS crtDate, FAQNO AS faqNo, 
-               FAQIMG AS faqImg
-        FROM FAQS
-        WHERE FAQNO = #{faqNo}
-        ]]>
+    <![CDATA[
+    SELECT USERID AS userId, TITLE AS title, QUESTION AS question, 
+           ANSWER AS answer, CRTDATE AS crtDate, FAQNO AS faqNo, 
+           FAQIMG AS faqImg
+    FROM FAQS
+    WHERE FAQNO = #{faqNo}
+    ]]>
     </select>
 
     <!-- faq 등록 -->
     <insert id="insertFaq" parameterType="map">
-        <![CDATA[
-        INSERT INTO FAQS
-        (USERID, QUESTION, ANSWER, CRTDATE, FAQNO, FAQIMG)
-        VALUES (
-             
-            #{userId, jdbcType=VARCHAR}, 
-            #{question, jdbcType=VARCHAR}, 
-            #{answer, jdbcType=CLOB}, 
-            SYSDATE,
-            #{faqNo, jdbcType=VARCHAR}, 
-            #{faqImg, jdbcType=VARCHAR}
-        )
-        ]]>
+    <![CDATA[
+    INSERT INTO FAQS
+    (USERID, TITLE, QUESTION, ANSWER, CRTDATE, FAQNO, FAQIMG)
+    VALUES (
+        #{userId, jdbcType=VARCHAR}, 
+        #{title, jdbcType=VARCHAR}, 
+        #{question, jdbcType=CLOB}, 
+        NVL(#{answer, jdbcType=CLOB}, '답변 대기 중'), 
+        SYSDATE,
+        #{faqNo, jdbcType=INTEGER}, 
+        #{faqImg, jdbcType=VARCHAR}
+    )
+    ]]>
     </insert>
 
     <!-- faq 삭제 -->
     <delete id="deleteFaq" parameterType="int">
-        <![CDATA[
-        DELETE FROM FAQS
-        WHERE FAQNO = #{faqNo}
-        ]]>
+    <![CDATA[
+    DELETE FROM FAQS
+    WHERE FAQNO = #{faqNo}
+    ]]>
     </delete>
 
     <!-- 새 faq 번호 생성 -->
     <select id="selectNewFaqNo" resultType="int">
-        <![CDATA[
-        SELECT NVL(MAX(FAQNO), 0) + 1 FROM FAQS
-        ]]>
+    <![CDATA[
+    SELECT NVL(MAX(FAQNO), 0) + 1 FROM FAQS
+    ]]>
     </select>
     
     <!-- FAQ 수정 -->
-<update id="updateFaq" parameterType="map">
+    <update id="updateFaq" parameterType="map">
     <![CDATA[
     UPDATE FAQS
-    SET QUESTION = #{question}, 
-        ANSWER = #{answer}, 
-        FAQIMG = #{faqImg}
+    SET QUESTION = #{question, jdbcType=CLOB}, 
+        ANSWER = #{answer, jdbcType=CLOB}, 
+        FAQIMG = #{faqImg, jdbcType=VARCHAR}
     WHERE FAQNO = #{faqNo}
     ]]>
-</update>
+    </update>
+    
+    <!-- FAQ 답변 등록 및 수정 -->
+    <update id="updateAnswer" parameterType="map">
+    <![CDATA[
+    UPDATE FAQS
+    SET ANSWER = #{answer, jdbcType=CLOB}
+    WHERE FAQNO = #{faqNo}
+    ]]>
+    </update>
 
 </mapper>
