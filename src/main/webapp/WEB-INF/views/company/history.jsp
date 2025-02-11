@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="${contextPath}/resources/assets/css/common.css">
 
 
-    <main class="history">
+    <main class="ui-history history">
       <div class="nav-links-background">
       <img src="${contextPath}/resources/assets/images/company/history-banner.jpg" alt="회사배너" />
         <div class="description">
