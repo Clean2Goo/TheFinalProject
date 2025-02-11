@@ -192,18 +192,21 @@ main.ui-subpage .h4.subpage-custom {flex-direction: row;}
 /* ************************************ 게시판 ************************************ */
 /* ************************************ 게시판 ************************************ */
 /* 목록 */
-.data-grid table td.subject {text-align: left}
+.data-grid table td.subject {text-align: left;font-weight: 700;transition: all .3s ease;}
+.data-grid table td.subject:hover {color: var(--primary-blue);}
 
 /* 상세 */
 .bbs-read {width: 100%;}
-.bbs-read .bbs-title { display: flex;flex-direction: column;gap: 20px;padding: 20px 40px;
+.bbs-read .bbs-title { display: flex;flex-direction: column;gap: 32px;padding: 40px 40px 32px;
 	color: var(--fc-111);border-top: 1px solid var(--line-01); border-bottom: 1px solid var(--line-02);
 }
 
 .bbs-read .bbs-title .subject{text-align: left; font-weight: bold;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.bbs-read .bbs-title .info-list {display: flex;justify-content: space-between;gap: 12px;color: var(--fc-666);}
+.bbs-read .bbs-title .info-list li {display: flex;gap: 24px;}
+.bbs-read .bbs-title .number{}
 .bbs-read .bbs-title .author{}
 .bbs-read .bbs-title .date{}
-.bbs-read .bbs-title .info-list {display: flex;justify-content: space-between;gap: 12px;color: var(--fc-333);}
 
 .bbs-read .bbs-content {min-height:250px;padding: 40px; line-height: 160%;border-bottom: 1px solid var(--line-02);}
 
@@ -226,6 +229,7 @@ main.ui-subpage .h4.subpage-custom {flex-direction: row;}
 	flex-basis: auto;flex-grow: 1;flex-shrink: 1;
 	text-overflow: ellipsis;white-space: nowrap;overflow: hidden;font-weight: 400;color: var(--fc-333);  transition: all .3s ease;
 }
+.bbs-navigation .subject:not(.none) {font-weight: 700;}
 .bbs-navigation .subject:not(.none):hover {color:var(--primary-blue);}
 .bbs-navigation .subject.none {color:var(--fc-666);}
 .bbs-navigation .date {flex-basis: 160px;flex-grow: 0;flex-shrink: 0;color:var(--fc-888);text-align: center;}
