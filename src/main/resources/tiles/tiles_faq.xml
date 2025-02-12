@@ -16,6 +16,12 @@
 	      <put-attribute name="title" value="고객-faq상세창" />
 	      <put-attribute name="body" value="/WEB-INF/views/faq/viewFaq.jsp" />
 	</definition>
+	
+	<!-- 고객- faq 작성 -->
+	 <definition name="/faq/userQuestionForm" extends="baseLayout">
+	      <put-attribute name="title" value="고객-faq쓰기창" />
+	      <put-attribute name="body" value="/WEB-INF/views/faq/userQuestionForm.jsp" />
+	</definition>
 
 	<!-- 어드민- faq 목록 -->
   	<definition name="/faq/adminListFaqs" extends="adminLayout">
@@ -27,6 +33,12 @@
   	<definition name="/faq/adminViewFaq" extends="adminLayout">
 	      <put-attribute name="title" value="어드민-faq상세창" />
 	      <put-attribute name="body" value="/WEB-INF/views/faq/viewFaq.jsp" />
+	</definition>
+
+<!-- 고객- faq 작성 -->
+	 <definition name="/faq/adminQuestionForm" extends="adminLayout">
+	      <put-attribute name="title" value="어드민-faq쓰기창" />
+	      <put-attribute name="body" value="/WEB-INF/views/faq/userQuestionForm.jsp" />
 	</definition>
 
 	<!-- 어드민- faq 작성 -->

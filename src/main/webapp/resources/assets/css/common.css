@@ -1,6 +1,6 @@
 @charset "utf-8";
-@import url("beaver.css"); /*비버 작업용 css*/
-
+@import url("beaver.css"); /*비버 */
+@import url("modifications.css"); /* 프론트 공통 적용*/
 :root {
 	--primary-blue:#004bd5; /*36,103,191*/
 	--primary-black: #020C22;
@@ -325,7 +325,8 @@ textarea {font-size: 1rem;font-weight: 500;flex-grow: 1;flex-shrink: 1;flex-basi
 
 /* 버튼 컨테인드 */
 .ux-button.contained,
-.ux-button.contained:hover .label{color: var(--fc-fff);}
+.ux-button.contained .lavel,
+.ux-button.contained:hover .label{color: var(--fc-fff)!important;}
 .ux-button.contained:before {
 	position: absolute;top: 0;right: 0;bottom: 0;left: 0;overflow: hidden;border-radius: 8px;content: "";
 }
@@ -335,7 +336,7 @@ textarea {font-size: 1rem;font-weight: 500;flex-grow: 1;flex-shrink: 1;flex-basi
 
 .ux-button.contained.remove {background-color: var(--negative);}
 .ux-button.contained.cancel {background-color: orange;}
-
+.ux-button.contained.edit {background-color:#4CAF50;}
 .ux-button.contained.disabled {color: var(--fc-666);background-color: var(--contained-disabled);background-image: none;pointer-events: none;}
 .ux-button.contained.disabled:before {display: none;}
 
