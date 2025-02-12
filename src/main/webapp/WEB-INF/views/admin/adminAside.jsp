@@ -40,13 +40,13 @@
 				</c:if>
 				<li>
 				    <a href="${contextPath}/faq/adminListFaqs.do" class="ux-button text-button">
-				        <span class="label">자주 묻는 질문</span>
+				        <span class="label">Q&A</span>
 				    </a>
 				</li>
 				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
 				    <li>
-				        <a href="${contextPath}/faq/adminWriteFaqForm.do" class="ux-button text-button">
-				            <span class="label">자주 묻는 질문 작성</span>
+				        <a href="${contextPath}/faq/adminQuestionForm.do" class="ux-button text-button">
+				            <span class="label">Q&A 작성</span>
 				        </a>
 				    </li>
 				</c:if>
@@ -58,20 +58,7 @@
 						<a href="${contextPath}/manager.do" class="ux-button text-button"><span class="label">세차정보관리</span></a>
 					</li>
 					<li>
-						<a href="#" class="ux-button text-button"><span class="label">직원관리</span></a>
-					</li>
-					<li>
-						<a href="#" class="ux-button text-button"><span class="label">예약자관리</span></a>
-						<ul class="menu-list depth2">
-							<li>
-								<a href="${contextPath}/admin/reservations.do" class="ux-button text-button">
-					                <span class="label">- 예약현황판</span>
-					            </a>
-							</li>
-							<li>
-								<a href="#" class="ux-button text-button"><span class="label">- 예약신청자</span></a>
-							</li>
-						</ul>
+						<a href="${contextPath}/admin/reservations.do" class="ux-button text-button"><span class="label">예약자관리</span></a>
 					</li>
 					<li>
 					    <a href="${contextPath}/admin/reviewManagement" class="ux-button text-button">

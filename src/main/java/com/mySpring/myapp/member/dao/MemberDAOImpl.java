@@ -1,6 +1,5 @@
 package com.mySpring.myapp.member.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,16 +10,41 @@ import org.springframework.stereotype.Repository;
 
 import com.mySpring.myapp.member.vo.MemberVO;
 
+
 @Repository("memberDAO")
 public class MemberDAOImpl implements MemberDAO {
-    @Autowired
-    private SqlSession sqlSession;
+	@Autowired
+	private SqlSession sqlSession;
 
-    @Override
-    public List selectAllMemberList() throws DataAccessException {
-        List<MemberVO> membersList = null;
-        membersList = sqlSession.selectList("mapper.member.selectAllMemberList");
-        return membersList;
+	@Override
+	public List selectAllMemberList() throws DataAccessException {
+		List<MemberVO> membersList = null;
+		membersList = sqlSession.selectList("mapper.member.selectAllMemberList");
+		return membersList;
+	}
+
+	@Override
+	public int insertMember(MemberVO memberVO) throws DataAccessException {
+		int result = sqlSession.insert("mapper.member.insertMember", memberVO);
+		return result;
+	}
+
+	@Override
+	public int deleteMember(String id) throws DataAccessException {
+		int result = sqlSession.delete("mapper.member.deleteMember", id);
+		return result;
+	}
+	
+	@Override
+	public MemberVO loginById(MemberVO memberVO) throws DataAccessException{
+		  MemberVO vo = sqlSession.selectOne("mapper.member.loginById",memberVO);
+		return vo;
+	}
+	
+	@Override
+    public void updateProfileImage(MemberVO member) {
+        // MyBatis 쿼리를 사용해 프로필 이미지를 업데이트합니다.
+        sqlSession.update("mapper.member.updateProfileImage", member);
     }
 	@Override
     public String checkPassword(String id) {
@@ -36,37 +60,4 @@ public class MemberDAOImpl implements MemberDAO {
         sqlSession.update("mapper.member.updateMemberInfo", paramMap);
     }
 
-    @Override
-    public int insertMember(MemberVO memberVO) throws DataAccessException {
-        int result = sqlSession.insert("mapper.member.insertMember", memberVO);
-        return result;
-    }
-
-    @Override
-    public int deleteMember(String id) throws DataAccessException {
-        int result = sqlSession.delete("mapper.member.deleteMember", id);
-        return result;
-    }
-    
-    @Override
-    public MemberVO loginById(MemberVO memberVO) throws DataAccessException {
-        MemberVO vo = sqlSession.selectOne("mapper.member.loginById", memberVO);
-        return vo;
-    }
-    
-    private static final String NAMESPACE = "mapper.member";
-    
-    @Override
-    public String checkPassword(String id) {
-        return sqlSession.selectOne(NAMESPACE + ".checkPassword", id);
-    }
-
-    @Override
-    public void updatePassword(String id, String newPassword) {
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("id", id);
-        params.put("newPassword", newPassword);
-        sqlSession.update(NAMESPACE + ".updatePassword", params);
-    }
-    
 }
