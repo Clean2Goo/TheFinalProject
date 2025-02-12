@@ -2,7 +2,10 @@ package com.mySpring.myapp.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -10,13 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -92,14 +99,14 @@ public class MemberControllerImpl implements MemberController {
 	// 어드민 로그아웃
 	@RequestMapping(value = "/member/adminLogout.do", method = RequestMethod.GET)
 	public ModelAndView adminLogout(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	    HttpSession session = request.getSession(false);
-	    if (session != null) {
-	        session.invalidate();
-	    }
-
-	    ModelAndView mav = new ModelAndView();
-	    mav.setViewName("redirect:/admin.do");
-	    return mav;
+		HttpSession session = request.getSession();
+		session.removeAttribute("member");
+		session.removeAttribute("isLogOn");
+		session.removeAttribute("userId"); // userId 제거
+		ModelAndView mav = new ModelAndView();
+		System.out.println(" 어드민 로그아웃으로 다시 어드민 로그인전 화면 간다");
+		mav.setViewName("redirect:/admin.do");
+		return mav;
 	}
 
 
@@ -169,15 +176,44 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
-	// 비밀번호 변경 페이지
-	@RequestMapping(value = "/myPage/modPwd.do", method = RequestMethod.GET)
-	public ModelAndView modPwd(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	    HttpSession session = request.getSession();
+	//비밀번호 변경
+	@PostMapping("/member/updatePassword")
+	public ResponseEntity<Map<String, Object>> updatePassword(
+	        @RequestBody Map<String, String> passwordMap, HttpSession session) {
+	    String currentPassword = passwordMap.get("currentPassword");
+	    String newPassword = passwordMap.get("newPassword");
+	    String id = (String) session.getAttribute("userId");
+
+	    Map<String, Object> response = new HashMap<>();
+
+	    if (id == null) {
+	        response.put("success", false);
+	        response.put("message", "로그인이 필요합니다.");
+	        return ResponseEntity.status(403).body(response);
+	    }
+
+	    boolean success = memberService.updatePassword(id, currentPassword, newPassword);
+	    if (success) {
+	        response.put("success", true);
+	        response.put("message", "비밀번호가 성공적으로 변경되었습니다.");
+	        return ResponseEntity.ok(response);
+	    } else {
+	        response.put("success", false);
+	        response.put("message", "현재 비밀번호가 일치하지 않습니다.");
+	        return ResponseEntity.status(400).body(response);
+	    }
+	}
+	
+	@RequestMapping(value =  "/myPage/benefit.do", method = RequestMethod.GET)
+	private ModelAndView benefit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		HttpSession session = request.getSession();
 	    MemberVO member = (MemberVO) session.getAttribute("member");
 
-	    ModelAndView mav = new ModelAndView("myPage/modPwd");
-	    mav.addObject("member", member);
-	    return mav;
+		ModelAndView mav = new ModelAndView("benefit");
+		mav.addObject("member", member);
+		mav.addObject("activeMenu", "benefit");
+		return mav;
 	}
 	
 	//페이지 이동
@@ -186,51 +222,6 @@ public class MemberControllerImpl implements MemberController {
 	    model.addAttribute("activeMenu", menu); // 현재 메뉴 이름 전달
 	    return "myPageMenu"; // 공통 JSP 파일로 이동
 	}
-
-    // 프로필 이미지 업데이트 처리 메서드
-    @RequestMapping("/updateProfileImage")
-    public ModelAndView updateProfileImage(
-            @RequestParam("profileImage") MultipartFile profileImage,
-            @RequestParam("id") String id,
-            HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        // 1. ServletContext 가져오기
-        ServletContext context = request.getSession().getServletContext();  // 수정된 부분
-
-        // 2. 파일을 저장할 실제 경로 가져오기
-        String realPath = context.getRealPath("/resources/assets/images/");
-
-        // 3. 이미지 디렉토리가 없으면 생성
-        File uploadDir = new File(realPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdirs();
-        }
-
-        // 4. 파일이 존재하면 저장
-        if (!profileImage.isEmpty()) {
-            // 업로드된 파일의 파일명
-            String fileName = profileImage.getOriginalFilename();
-
-            // 파일을 저장할 경로
-            File file = new File(uploadDir, fileName);
-
-            // 파일 저장
-            profileImage.transferTo(file);
-
-            // MemberVO 객체에 이미지 파일 경로 저장
-            MemberVO member = new MemberVO();
-            member.setId(id);
-            member.setImg("/resources/assets/images/" + fileName);
-
-            // DB에 이미지 경로 업데이트
-            memberService.updateMemberProfileImage(member);
-        }
-
-        // 프로필 이미지 업데이트 성공 메시지와 함께 myPage로 리다이렉트
-        ModelAndView modelAndView = new ModelAndView("redirect:/myPage");
-        return modelAndView;
-    }
-
 
 	// !고객은 회원목록 조회 불가능
 //	@Override
@@ -357,6 +348,36 @@ public class MemberControllerImpl implements MemberController {
 		}
 		return viewName;
 	}
+	
+	
+    @PostMapping("/member/updateMemberInfo")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateMemberInfo(
+            @RequestParam("field") String field,
+            @RequestParam("value") String value,
+            HttpSession session) {
+        
+        Map<String, Object> response = new HashMap<>();
+        String userId = (String) session.getAttribute("userId");
+
+        if (userId == null) {
+            response.put("success", false);
+            response.put("message", "로그인이 필요합니다.");
+            return ResponseEntity.status(403).body(response);
+        }
+
+        try {
+            memberService.updateMemberInfo(userId, field, value);
+            response.put("success", true);
+            response.put("message", "정보가 성공적으로 수정되었습니다.");
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "수정 실패: " + e.getMessage());
+        }
+
+        return ResponseEntity.ok(response);
+    }
+
 
 
 

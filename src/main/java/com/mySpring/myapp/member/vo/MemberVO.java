@@ -16,6 +16,7 @@ public class MemberVO {
     private String img; 
     private String rank; 
     private Date dob;
+    private String newPassword;
 
 	public MemberVO() {
 		
@@ -40,7 +41,13 @@ public class MemberVO {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public String getNewPassword() {
+        return newPassword;
+    }
 
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
 	public String getPwd() {
 		return pwd;
 	}

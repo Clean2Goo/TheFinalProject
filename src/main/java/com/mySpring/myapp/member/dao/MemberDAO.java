@@ -1,6 +1,7 @@
 package com.mySpring.myapp.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -13,5 +14,9 @@ public interface MemberDAO {
 	 public int deleteMember(String id) throws DataAccessException;
 	 public MemberVO loginById(MemberVO memberVO) throws DataAccessException;
 	 void updateProfileImage(MemberVO member);
+	 String checkPassword(String id); 
+	 void updatePassword(MemberVO member);
+	 void updateMemberInfo(Map<String, String> paramMap);
+
 
 }
