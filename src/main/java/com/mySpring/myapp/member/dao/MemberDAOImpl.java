@@ -2,6 +2,7 @@ package com.mySpring.myapp.member.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,19 @@ public class MemberDAOImpl implements MemberDAO {
         List<MemberVO> membersList = null;
         membersList = sqlSession.selectList("mapper.member.selectAllMemberList");
         return membersList;
+    }
+	@Override
+    public String checkPassword(String id) {
+        return sqlSession.selectOne("mapper.member.checkPassword", id);
+    }
+
+    @Override
+    public void updatePassword(MemberVO member) {
+        sqlSession.update("mapper.member.updatePassword", member);
+    }
+    @Override
+    public void updateMemberInfo(Map<String, String> paramMap) {
+        sqlSession.update("mapper.member.updateMemberInfo", paramMap);
     }
 
     @Override
