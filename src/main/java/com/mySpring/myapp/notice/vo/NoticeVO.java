@@ -10,6 +10,7 @@ public class NoticeVO {
     private Date writedate;
     private String imagefilename;
 
+	private String userName; // 작성자 이름
 
     // Getter and Setter
     public int getNoticeno() {
@@ -72,4 +73,12 @@ public class NoticeVO {
                 ", imagefilename='" + imagefilename + '\'' +
                 '}';
     }
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserhName(String userName) {
+		this.userName = userName;
+	}
 }

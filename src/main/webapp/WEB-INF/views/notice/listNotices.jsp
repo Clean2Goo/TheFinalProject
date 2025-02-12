@@ -14,10 +14,10 @@
 					 <table>
 						<caption>공지사항</caption>
 						<colgroup>
-							<col class="">
-							<col class="">
-							<col class="">
-							<col class="">
+							<col class="col-8">
+							<col class="col-auto">
+							<col class="col-10">
+							<col class="col-16">
 							<col class="">
 						</colgroup>
 						 <thead>
@@ -56,7 +56,7 @@
 												</a>
 											</c:if>
 										</td>
-										<td>${notice.id}</td>
+										<td>${notice.userName}</td>
 										<td>${notice.writedate}</td>
 										<!-- 게시글 삭제 (슈퍼 관리자만 보임) -->
 										<c:if test="${not empty member.userType && member.userType == 'systemOperator'}">

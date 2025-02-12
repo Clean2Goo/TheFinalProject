@@ -3,26 +3,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%request.setCharacterEncoding("UTF-8");%>
-<!DOCTYPE html>
-<html lang="ko">
-	<head>
-	    <meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <meta name="contextPath" content="${pageContext.request.contextPath}">
-	    <title>즐겨찾기 목록</title>
-	    <link rel="stylesheet" href="${contextPath}/resources/assets/css/favorites.css">
-	</head>
-	<main>
-		<section>
-		    <article>
-			    <div class="h3-title">
-					<h3>즐겨찾기</h3>
+
+<main class="ui-favorites">
+	<section>
+		<article>
+			<div class="h3-title">
+				<h3>즐겨찾기</h3>
+			</div>
+			<div class="content">
+				<div class="ui-page-desc">
+					<div class="middot-list">
+						<ul>
+							<li>즐겨찾기 등록 된 각 세차장 클릭시, 해당 세차장의 상세정보화면으로 이동합니다.</li>
+							<li>바로 예약 서비스와 즐겨찾기 해제를 이용하실 수 있습니다.</li>
+						</ul>
+					</div>
 				</div>
-				<div class="content">
-					<div id="favorite-list" class="favorite-list"></div>
-				</div>
-			</article>
-    	</section>
-	</main>
-	<script src="${contextPath}/resources/js/favorites.js"></script>
-</html>
+				<ul id="favorite-list" class="favorite-list"></ul>
+			</div>
+		</article>
+	</section>
+</main>
+<script src="${contextPath}/resources/js/favorites.js"></script>
