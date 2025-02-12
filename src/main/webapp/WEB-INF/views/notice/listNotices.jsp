@@ -56,7 +56,7 @@
 												</a>
 											</c:if>
 										</td>
-										<td>${member.name}</td>
+										<td>${notice.userName}</td>
 										<td>${notice.writedate}</td>
 										<!-- 게시글 삭제 (슈퍼 관리자만 보임) -->
 										<c:if test="${not empty member.userType && member.userType == 'systemOperator'}">

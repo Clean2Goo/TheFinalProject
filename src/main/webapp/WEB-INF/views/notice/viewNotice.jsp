@@ -18,7 +18,7 @@
 								<p class="info">번호 : <span class="number">${notice.noticeno}</span></p>
 							</li>
 							<li>
-								<p class="info">작성자 : <span class="author">${member.name}</span></p>
+								<p class="info">작성자 : <span class="author">${notice.userName}</span></p>
 								<p class="info">등록일 : <span class="date">${notice.writedate}</span></p>
 							</li>
 						</ul>
