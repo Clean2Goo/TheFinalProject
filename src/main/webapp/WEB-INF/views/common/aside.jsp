@@ -26,10 +26,10 @@
 						<a href="${contextPath}/myPage/myInfo.do" class="ux-link ${activeMenu == 'myInfo' ? 'active' : ''}">개인정보</a>
 					</li>
 					<li>
-						<a href="${contextPath}/myPage/listReservations.do" class="ux-link ${activeMenu == 'listreservations' ? 'active' : ''}">예약내역</a>
+						<a href="${contextPath}/myPage/favorites.do" class="ux-link ${activeMenu == 'favorites' ? 'active' : ''}">즐겨찾기</a>
 					</li>
 					<li>
-						<a href="${contextPath}/myPage/favorites.do" class="ux-link ${activeMenu == 'favorites' ? 'active' : ''}">즐겨찾기</a>
+						<a href="${contextPath}/myPage/listReservations.do" class="ux-link ${activeMenu == 'listreservations' ? 'active' : ''}">예약내역</a>
 					</li>
 					<li>
 						<a href="${contextPath}/myReviews.do" class="ux-link ${activeMenu == 'myReviews' ? 'active' : ''}">리뷰내역</a>
