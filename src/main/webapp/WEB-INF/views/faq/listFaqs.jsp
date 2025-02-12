@@ -122,11 +122,12 @@
             <!-- FAQ 리스트 -->
             <div class="faq-list-container content">
                 <div class="faq-actions">
-                    <c:if test="${member != null}">
+                    <!-- 질문 작성 버튼 -->
+                    <c:if test="${member != null && member.userType == 'customer'}">
                         <a href="${contextPath}/faq/userQuestionForm.do" class="btn btn-primary">질문 작성</a>
                     </c:if>
-                    <c:if test="${member != null && member.userType == 'systemOperator'}">
-                        <a href="${contextPath}/faq/adminWriteFaqForm.do" class="btn btn-secondary">FAQ 작성</a>
+                    <c:if test="${member != null && member.userType != 'customer'}">
+                        <a href="${contextPath}/faq/adminQuestionForm.do" class="btn btn-primary">질문 작성</a>
                     </c:if>
                 </div>
 

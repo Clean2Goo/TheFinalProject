@@ -9,31 +9,33 @@
 	<article>
 		<div class="myPage-menu">
 			<div class="menu-list">
-				<c:choose>
-					<c:when test="${isLogOn == true  && member!= null}">
-						<h4>이름: ${member.name}님!</h4>
-						<h4>구분: ${member.userType}</h4>
-						<h4>등급: ${member.rank}</h4>
-					</c:when>
-				</c:choose>
+				<div class="aside-user-info">
+                    <div class="aside-user-image">
+                        <img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필 이미지">
+                    </div>
+                    <c:choose>
+                        <c:when test="${isLogOn == true && member != null}">
+                            <h4>${member.id}</h4>
+                            <p class="user-type">${member.userType}</p>
+                            <p class="user-rank">${member.rank}</p>
+                        </c:when>
+                    </c:choose>
+                </div>
 				<ul>
 					<li>
 						<a href="${contextPath}/myPage/myInfo.do" class="ux-link ${activeMenu == 'myInfo' ? 'active' : ''}">개인정보</a>
 					</li>
 					<li>
-						<a href="${contextPath}/myPage/listReservations.do" class="ux-link ${activeMenu == 'listreservations' ? 'active' : ''}">예약내역</a>
-					</li>
-					<li>
 						<a href="${contextPath}/myPage/favorites.do" class="ux-link ${activeMenu == 'favorites' ? 'active' : ''}">즐겨찾기</a>
 					</li>
 					<li>
-						<a href="${contextPath}/myReviews.do" class="ux-link ${activeMenu == 'favorites' ? 'active' : ''}">리뷰내역</a>
+						<a href="${contextPath}/myPage/listReservations.do" class="ux-link ${activeMenu == 'listreservations' ? 'active' : ''}">예약내역</a>
 					</li>
 					<li>
-						<a href="" class="ux-link">등급혜택</a>
+						<a href="${contextPath}/myReviews.do" class="ux-link ${activeMenu == 'myReviews' ? 'active' : ''}">리뷰내역</a>
 					</li>
 					<li>
-						<a href="" class="ux-link">보안설정</a>
+						<a href="${contextPath}/myPage/benefit.do" class="ux-link ${activeMenu == 'benefit' ? 'active' : ''}">등급혜택</a>
 					</li>
 				</ul>
 			</div>

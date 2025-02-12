@@ -24,10 +24,10 @@
 			<div class="gnb">
 				<nav>
 					<ul>
-						<li><a href="${contextPath}/about.do" role="button" class="gnb-menu"><span class="label">회사소개</span></a></li>
+						<li><a href="${contextPath}/about/info.do" role="button" class="gnb-menu"><span class="label">회사소개</span></a></li>
 						<li><a href="${contextPath}/notice/listNotices.do" role="button" class="gnb-menu"><span class="label">공지사항</span></a></li>
 						<li><a href="${contextPath}/board/listArticles.do" role="button" class="gnb-menu"><span class="label">이벤트</span></a></li>
-						<li><a href="${contextPath}/faq/listFaqs.do" role="button" class="gnb-menu"><span class="label">FAQ</span></a></li>
+						<li><a href="${contextPath}/faq/listFaqs.do" role="button" class="gnb-menu"><span class="label">Q&A</span></a></li>
 					</ul>
 				</nav>
 				<div class="menu-bar">
@@ -35,11 +35,30 @@
 						<c:choose>
 							<c:when test="${isLogOn == true  && member!= null}">
 								<li>
-									<a href="#" class="ux-button icon-menu bell noti-msg" role="button">
-										<i class="icon fa-regular fa-bell"></i>
+									<a href="#" class="ux-button icon-menu bell" role="button">
+										<span class="icon">
+											<i class="fa-regular fa-bell"></i>
+										</span>
 										<span class="label">알림</span>
 										<div class="badge"><span class="count">3</span></div>
 									</a>
+									<div class="dropdown-wrap message">
+										<!-- 드롭다운 헤더 -->
+										<div class="dropdown-header">
+											<div class="dropdown-title">
+												<h6>알림</h6>
+												<button class="ux-button icon-menu gear">
+													<span class="icon"><i class="fa-solid fa-gear"></i></span>
+													<span class="label">알림설정</span>
+												</button>
+											</div>
+										</div>
+										<ul class="dropdown-menu">
+											<li>
+												<button class="ux-button readed" disabled><p>알림이 없습니다.</p></button>
+											</li>
+										</ul>
+									</div>
 								</li>
 								<li>
 									<button class="ux-button custom-profile">
@@ -50,8 +69,9 @@
 										</div>
 										<span class="label">퀵메뉴 열기</span>
 									</button>
-									<div class="dropdown-wrap">
-										<div class="user-profile-wrap">
+									<div class="dropdown-wrap mypage">
+										<!-- 드롭다운 헤더 -->
+										<div class="user-profile-wrap dropdown-header">
 											<div class="user-profile-img dropdown">
 												<img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
 											</div>

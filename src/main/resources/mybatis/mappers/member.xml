@@ -28,7 +28,7 @@
     <insert id="insertMember" parameterType="memberVO">
         <![CDATA[
             INSERT INTO USERS (
-                USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE, USERIMG, RANK, DOB
+                USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE
             ) VALUES (
                 #{id, jdbcType=VARCHAR}, 
                 #{pwd, jdbcType=VARCHAR}, 
@@ -36,10 +36,7 @@
                 #{email, jdbcType=VARCHAR}, 
                 #{phone, jdbcType=VARCHAR}, 
                 #{userType, jdbcType=VARCHAR}, 
-                SYSDATE, 
-                #{img, jdbcType=VARCHAR}, 
-                #{rank, jdbcType=VARCHAR}, 
-                #{dob, jdbcType=DATE}
+                SYSDATE
             )
         ]]>
     </insert>

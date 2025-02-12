@@ -104,6 +104,15 @@ public class FaqController {
         return mav;
     }
 
+ // 어드민 - 질문 등록 화면
+    @RequestMapping(value = "/adminQuestionForm.do", method = RequestMethod.GET)
+    public ModelAndView adminQuestionForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("adminQuestionForm 요청 수신");
+
+        String viewName = (String) request.getAttribute("viewName");
+        return new ModelAndView(viewName);
+    }
+    
     // 어드민 - FAQ 작성 화면
     @RequestMapping(value = "/adminWriteFaqForm.do", method = RequestMethod.GET)
     public ModelAndView adminWriteForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
