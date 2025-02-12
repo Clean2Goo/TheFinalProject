@@ -26,7 +26,7 @@
 }
 
 .info-item:last-child {
-    border-bottom: none; /* 마지막 항목의 border-bottom 제거 */
+    border-bottom: none;
 }
 
 .info-item span {
@@ -36,12 +36,12 @@
 .info-item .label {
     color: #888;
     font-weight: bold;
-    width: 70px;  /* 항목명 고정 너비 */
+    width: 70px;
 }
 
 .info-item .value {
     color: #333;
-    width: calc(100% - 140px);  /* 항목명 너비를 제외한 나머지 공간을 value에 할당 */
+    width: calc(100% - 140px);
     text-align: left;
 }
 
@@ -54,7 +54,8 @@
     text-decoration: underline;
 }
 
-.user-image img {
+/* img 스타일 */
+img {
     width: 60px;
     height: 60px;
 }
@@ -89,74 +90,81 @@
     outline: none;
 }
 
-
-
-/* 모달 스타일 */
+/* 모달 팝업 스타일 */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
     padding: 20px;
-    border: 1px solid #888;
-    width: 40%;
     border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1100;
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+}
+
+.close-btn {
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
+.form-group {
+    margin-bottom: 20px;
 }
 
-/* 폼 스타일 */
-form label {
+.form-group label {
     display: block;
-    margin-bottom: 8px;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
-form textarea, form input {
+.form-group input {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
+    padding: 10px;
+    border: 1px solid #ddd;
     border-radius: 4px;
 }
 
-form button {
-    background-color: #009879;
+.submit-btn {
+    width: 100%;
+    background: #28a745;
     color: white;
-    font-size: 16px;
-    padding: 10px 20px;
+    border: none;
+    padding: 10px;
     border-radius: 4px;
     cursor: pointer;
-    border: none;
 }
 
-form button:hover {
-    background-color: #007960;
+.submit-btn:hover {
+    background: #218838;
 }
 
-
-/* 임시 재정의*/
-.user-info {width:100%;}
-
+.user-info {
+    width: 100%;
+}

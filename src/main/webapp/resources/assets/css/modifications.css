@@ -1,0 +1,22 @@
+@charset "utf-8";
+/* 즐겨찾기 */
+.myPage-container main.ui-favorites > section > article div:not(.ui-page-desc) {width: auto;}
+.favorite-list {display: flex;justify-content: flex-start;flex-wrap: wrap;gap: 24px; }
+.favorite-item {
+	width: calc(100% / 4 - 18px);
+	border: 1px solid var(--line-02); border-radius: 16px;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+}
+
+.favorite-card {}
+.favorite-card .card-content {
+	display: flex; flex-direction: column;gap: 16px;
+	padding: 16px; cursor: pointer; transition: background-color 0.3s ease;
+}
+.favorite-card .card-content:hover { background-color: var(--bg-01);}
+
+.favorite-card .favorite-img {border-radius: 16px;overflow: hidden;}
+.favorite-card .favorite-img img {display: block;width: 100%; height: 200px; object-fit: cover;}
+.favorite-card .favorite-info h5 {margin-bottom: 12px;}
+
+.favorite-card .ux-button-bar {padding: 16px;border-top: 1px solid var(--line-02);}

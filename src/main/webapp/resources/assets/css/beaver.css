@@ -80,7 +80,7 @@ main.ui-index .section1 .section-title h3{font-size: 4.75rem;font-weight: 700;}
 
 /* ************************************  서브페이지 ************************************ */
 /* ************************************  서브페이지 ************************************ */
-
+.ui-page-desc { width: 100%;}
 /* 서브페이지  */
 .ux-divider:first-of-type {margin: 0 0 20px;}
 main.ui-subpage section > article > .h4-title {align-items: flex-start;}
@@ -170,6 +170,11 @@ main.ui-subpage .h4.subpage-custom {flex-direction: row;}
 
 /* ************************************ 테이블 ************************************ */
 /* ************************************ 테이블 ************************************ */
+.col-8 { width: 8%;}
+.col-auto {width: auto;}
+.col-10 {width: 10%;}
+.col-16 {width: 16%;}
+
 .table-flex-box {display: flex;align-items: center;justify-content: center;gap: 12px;}
 
 .data-grid {width: 100%;border-top: 1px solid #000;}
@@ -179,25 +184,29 @@ main.ui-subpage .h4.subpage-custom {flex-direction: row;}
 .data-grid table th,
 .data-grid table td {font-size: 1rem;color: #111; border-bottom: 1px solid rgba(0, 0, 0, .12);}
 
-.data-grid table th {padding: 16px 16px;font-weight: 700;color: var(--fc-111);background-color: var(--bg-01);}
+.data-grid table th {padding: 16px 16px;font-weight: 700;color: var(--fc-111);background-color: rgba(36,103,191,.04);}
 .data-grid table td {padding: 24px 16px;border-bottom: 1px solid rgba(0, 0, 0, .12);}
+.data-grid table tbody tr:nth-child(even) {background-color: rgba(0,0,0,.01);}
 
 
 /* ************************************ 게시판 ************************************ */
 /* ************************************ 게시판 ************************************ */
 /* 목록 */
-.data-grid table td.subject {text-align: left}
+.data-grid table td.subject {text-align: left;font-weight: 700;transition: all .3s ease;}
+.data-grid table td.subject:hover {color: var(--primary-blue);}
 
 /* 상세 */
 .bbs-read {width: 100%;}
-.bbs-read .bbs-title { display: flex;flex-direction: column;gap: 20px;padding: 20px 40px;
+.bbs-read .bbs-title { display: flex;flex-direction: column;gap: 32px;padding: 40px 40px 32px;
 	color: var(--fc-111);border-top: 1px solid var(--line-01); border-bottom: 1px solid var(--line-02);
 }
 
 .bbs-read .bbs-title .subject{text-align: left; font-weight: bold;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.bbs-read .bbs-title .info-list {display: flex;justify-content: space-between;gap: 12px;color: var(--fc-666);}
+.bbs-read .bbs-title .info-list li {display: flex;gap: 24px;}
+.bbs-read .bbs-title .number{}
 .bbs-read .bbs-title .author{}
 .bbs-read .bbs-title .date{}
-.bbs-read .bbs-title .info-list {display: flex;justify-content: space-between;gap: 12px;color: var(--fc-333);}
 
 .bbs-read .bbs-content {min-height:250px;padding: 40px; line-height: 160%;border-bottom: 1px solid var(--line-02);}
 
@@ -220,6 +229,7 @@ main.ui-subpage .h4.subpage-custom {flex-direction: row;}
 	flex-basis: auto;flex-grow: 1;flex-shrink: 1;
 	text-overflow: ellipsis;white-space: nowrap;overflow: hidden;font-weight: 400;color: var(--fc-333);  transition: all .3s ease;
 }
+.bbs-navigation .subject:not(.none) {font-weight: 700;}
 .bbs-navigation .subject:not(.none):hover {color:var(--primary-blue);}
 .bbs-navigation .subject.none {color:var(--fc-666);}
 .bbs-navigation .date {flex-basis: 160px;flex-grow: 0;flex-shrink: 0;color:var(--fc-888);text-align: center;}

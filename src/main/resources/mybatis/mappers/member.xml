@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.member">
-	<resultMap id="memResult" type="memberVO">
-		<result property="id" column="USERID" />
+    <resultMap id="memResult" type="memberVO">
+        <result property="id" column="USERID" />
         <result property="pwd" column="USERPWD" />
         <result property="name" column="USERNAME" />
         <result property="email" column="USEREMAIL" />
@@ -15,8 +13,8 @@
         <result property="img" column="USERIMG" />
         <result property="rank" column="RANK" />
         <result property="dob" column="DOB" />
-	</resultMap> 
-	
+    </resultMap>
+
     <!-- 회원 전체 목록 조회 -->
     <select id="selectAllMemberList" resultMap="memResult">
         <![CDATA[
@@ -25,59 +23,86 @@
             ORDER BY JOINDATE DESC
         ]]>
     </select>
-    
+
     <!-- 회원 가입 -->
     <insert id="insertMember" parameterType="memberVO">
         <![CDATA[
-            INSERT INTO USERS (USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE, USERIMG, RANK, DOB)
-            VALUES (#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{userType}, SYSDATE, , #{joinDate}, #{img}, #{rank}, #{dob})
+            INSERT INTO USERS (
+                USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE
+            ) VALUES (
+                #{id, jdbcType=VARCHAR}, 
+                #{pwd, jdbcType=VARCHAR}, 
+                #{name, jdbcType=VARCHAR}, 
+                #{email, jdbcType=VARCHAR}, 
+                #{phone, jdbcType=VARCHAR}, 
+                #{userType, jdbcType=VARCHAR}, 
+                SYSDATE
+            )
         ]]>
     </insert>
-    
+
     <!-- 회원 정보 수정 -->
     <update id="updateMember" parameterType="memberVO">
         <![CDATA[
             UPDATE USERS
-            SET USERPWD = #{pwd}, 
-                USERNAME = #{name}, 
-                USEREMAIL = #{email}, 
-                USERPHONE = #{phone},
-                USERTYPE = #{userType},
-                USERIMG = #{img}, 
-                RANK = #{rank},
-                DOB = #{dob}
-            WHERE USERID = #{id}
+            SET USERPWD = #{pwd, jdbcType=VARCHAR},
+                USERNAME = #{name, jdbcType=VARCHAR},
+                USEREMAIL = #{email, jdbcType=VARCHAR},
+                USERPHONE = #{phone, jdbcType=VARCHAR},
+                USERTYPE = #{userType, jdbcType=VARCHAR},
+                USERIMG = #{img, jdbcType=VARCHAR},
+                RANK = #{rank, jdbcType=VARCHAR},
+                DOB = #{dob, jdbcType=DATE}
+            WHERE USERID = #{id, jdbcType=VARCHAR}
         ]]>
     </update>
-     
+
     <!-- 회원 삭제 -->
     <delete id="deleteMember" parameterType="String">
         <![CDATA[
             DELETE FROM USERS
-            WHERE USERID = #{id}
+            WHERE USERID = #{id, jdbcType=VARCHAR}
         ]]>
     </delete>
-    
+
     <!-- 로그인 체크 -->
     <select id="loginById" resultMap="memResult" parameterType="memberVO">
         <![CDATA[
             SELECT USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE, USERIMG, RANK, DOB
             FROM USERS
-            WHERE USERID = #{id} AND USERPWD = #{pwd}
+            WHERE USERID = #{id, jdbcType=VARCHAR} AND USERPWD = #{pwd, jdbcType=VARCHAR}
         ]]>
     </select>
-	
-	
-	<!-- 현재 비밀번호 확인 -->
-    <select id="checkPassword" resultType="String">
-        SELECT USERPWD FROM USERS WHERE USERID = #{id}
+
+    <!-- 현재 비밀번호 확인 -->
+    <select id="checkPassword" resultType="String" parameterType="String">
+        SELECT USERPWD 
+        FROM USERS 
+        WHERE USERID = #{id, jdbcType=VARCHAR}
     </select>
 
     <!-- 비밀번호 업데이트 -->
-    <update id="updatePassword">
+    <update id="updatePassword" parameterType="map">
         UPDATE USERS
-        SET USERPWD = #{newPassword}
-        WHERE USERID = #{id}
+        SET USERPWD = #{newPassword, jdbcType=VARCHAR}
+        WHERE USERID = #{id, jdbcType=VARCHAR}
     </update>
-    
+
+    <update id="updateMemberInfo" parameterType="map">
+    UPDATE USERS
+    SET 
+    <if test="field == 'email'">
+        USEREMAIL = #{value, jdbcType=VARCHAR}
+    </if>
+    <if test="field == 'phone'">
+        USERPHONE = #{value, jdbcType=VARCHAR}
+    </if>
+    <if test="field == 'dob'">
+        DOB = #{value, jdbcType=DATE}
+    </if>
+    WHERE USERID = #{userId, jdbcType=VARCHAR}
+</update>
+
+
+
 </mapper>
