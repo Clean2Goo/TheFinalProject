@@ -129,9 +129,6 @@
                     <c:if test="${member != null && member.userType != 'customer'}">
                         <a href="${contextPath}/faq/adminQuestionForm.do" class="btn btn-primary">질문 작성</a>
                     </c:if>
-                    <c:if test="${member != null && member.userType == 'systemOperator'}">
-                        <a href="${contextPath}/faq/adminWriteFaqForm.do" class="btn btn-secondary">FAQ 작성</a>
-                    </c:if>
                 </div>
 
                 <table class="faq-table">
