@@ -43,7 +43,7 @@
 							</li>
 							<li>
 								<div class="ux-button-bar">
-									<a href="${contextPath}/notice/adminListNotices.do" onclick="return confirmNavigation(event)" class="ux-button outlined" role="button">
+									<a href="${contextPath}/notice/adminListNotices.do" onclick="confirmNavigation(event)" class="ux-button outlined" role="button">
 										<span class="label">등록 취소</span>
 									</a>
 									<button class="ux-button contained primary" type="submit">
@@ -53,20 +53,20 @@
 							</li>
 						</ul>
 					</fieldset>
-					<script>
-						function confirmNavigation(event) {
-							const userConfirmed = confirm(
-								"작성을 취소하고 목록으로 이동하시겠습니까?"
-							);
-							if (!userConfirmed) {
-								event.preventDefault();
-							}
-							return userConfirmed;
-						}
-					</script>
 				</form>
 			</div>
 		</article>
 	</section>
 </main>
 
+<script>
+	function confirmNavigation(event) {
+		const userConfirmed = confirm(
+			"작성을 취소하고 목록으로 이동하시겠습니까?"
+		);
+		if (!userConfirmed) {
+			event.preventDefault();
+		}
+		return userConfirmed;
+	}
+</script>

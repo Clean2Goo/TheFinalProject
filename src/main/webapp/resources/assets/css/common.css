@@ -173,7 +173,7 @@ textarea {min-height: 170px;}
 .ui-form {width: 100%;}
 .ui-form.sign {width: 540px;} /* 회원가입, 로그인 */
 
-.ui-form ul {display: flex;flex-direction: column;gap: 20px;}
+.ui-form ul:not(.info-list) {display: flex;flex-direction: column;gap: 20px;}
 .ui-form ul li {display: flex;flex-wrap: nowrap;gap: 16px;}
 .ui-form ul li .ux-button-bar:only-of-type{margin-top: 20px;}
 
