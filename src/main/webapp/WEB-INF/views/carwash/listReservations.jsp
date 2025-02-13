@@ -7,14 +7,8 @@
 <c:set var="hasPastReservation" value="false" /> <!-- //beaver 지난 이용내역 초기화 -->
 
 <!DOCTYPE html>
-<html lang="ko">
 <head>
-    <link rel="stylesheet" href="${contextPath}/resources/assets/css/reservation.css" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="contextPath" content="${contextPath}">
     <meta name="sessionMember" content="${sessionScope.member.id}">
-    <title>예약 내역</title>
 </head>
 <body>
 <main class="ui-subpage">
@@ -37,7 +31,7 @@
 									<col width="18.5%">
 									<col width="18.5%">
 									<col width="20.5%">
-									<col width="auto">
+									<!-- <col width="auto"> -->
 									<col width="22.5%">
 								</colgroup>
 								<thead>
@@ -46,14 +40,14 @@
 										<th scope="col">세차장명</th>
 										<th scope="col">세차일시</th>
 										<th scope="col">세차옵션</th>
-										<th scope="col">세차전문가</th>
+										<!-- <th scope="col">세차전문가</th> -->
 										<th scope="col">예약상태</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:if test="${empty reservations}">
 										<tr>
-											<td colspan="6" style="text-align: center;"><p>예약내역이 없습니다.</p></td>
+											<td colspan="5" style="text-align: center;"><p>예약내역이 없습니다.</p></td>
 										</tr>
 									</c:if>
 									<c:if test="${not empty reservations}">
@@ -74,7 +68,7 @@
 															</c:otherwise>
 														</c:choose>
 													</td>
-													<td>
+													<!-- <td>
 														<c:choose>
 															<c:when test="${empty reservation.userName}">
 																선택안함
@@ -83,7 +77,7 @@
 																${reservation.userName}
 															</c:otherwise>
 														</c:choose>
-													</td>
+													</td> -->
 													<td>
 													 	<div class="table-flex-box">
 															${reservation.status}
@@ -102,7 +96,7 @@
 										</c:forEach>
 										<c:if test="${!hasActiveReservation}">
 												<tr>
-													<td colspan="6" style="text-align: center;"><p> 최근 예약내역이 없습니다.</p></td>
+													<td colspan="5" style="text-align: center;"><p> 최근 예약내역이 없습니다.</p></td>
 												</tr>
 											</c:if>
 										</c:if>
@@ -126,7 +120,7 @@
 										<col width="18.5%">
 										<col width="18.5%">
 										<col width="20.5%">
-										<col width="auto">
+										<!-- <col width="auto"> -->
 										<col width="22.5%">
 									</colgroup>
 									<thead>
@@ -135,7 +129,7 @@
 											<th scope="col">세차장명</th>
 											<th scope="col">세차일시</th>
 											<th scope="col">세차옵션</th>
-											<th scope="col">세차전문가</th>
+											<!-- <th scope="col">세차전문가</th> -->
 											<th scope="col">예약상태</th>
 										</tr>
 									</thead>
@@ -158,7 +152,7 @@
 															</c:otherwise>
 														</c:choose>
 													</td>
-													<td>
+													<!-- <td>
 														<c:choose>
 															<c:when test="${empty reservation.userName}">
 																선택안함
@@ -167,17 +161,16 @@
 																${reservation.userName}
 															</c:otherwise>
 														</c:choose>
-													</td>
+													</td> -->
 													<td>
 														<div class="table-flex-box">
 															${reservation.status}
 															<c:if test="${reservation.status == '이용완료'}">
-																<button class="review-button"
-    data-reservation-id2="${reservation.rsvnId}"
-    data-wash-name="${reservation.washName}">
-    리뷰 작성
-</button>
-
+																<button class="ux-button contained primary button-table review-button"
+																	data-reservation-id2="${reservation.rsvnId}"
+																	data-wash-name="${reservation.washName}">
+																	<span class="label">리뷰 작성</span>
+																</button>
 															</c:if>
 														</div>
 													</td>
@@ -187,7 +180,7 @@
 										<!-- 지난 예약이 없을 경우 -->
 										<c:if test="${!hasPastReservation}">
 											<tr>
-												<td colspan="6" style="text-align: center;"><p>지난 예약내역이 없습니다.</p></td>
+												<td colspan="5" style="text-align: center;"><p>지난 예약내역이 없습니다.</p></td>
 											</tr>
 										</c:if>
 									</tbody>
@@ -202,31 +195,63 @@
 </main>
 
 <!-- 리뷰 팝업 -->
-<div id="review-popup" class="model" style="display:none;">
-    <div class="model-content">
-        <span class="close-btn" id="close-review-popup">×</span>
-        <h2 id="popup-wash-name">리뷰 작성</h2>
-        <ul id="review-list"></ul>
-        <div id="review-pagination">
-            <button id="prev-review-button" disabled>이전</button>
-            <span id="review-page-info">1 / 1</span>
-            <button id="next-review-button" disabled>다음</button>
-        </div>
-        <form id="review-form">
-            <textarea id="review-content" placeholder="리뷰를 작성하세요..."></textarea>
-            <select id="review-score">
-                <option value="">점수 선택</option>
-                <option value="1">1점</option>
-                <option value="2">2점</option>
-                <option value="3">3점</option>
-                <option value="4">4점</option>
-                <option value="5">5점</option>
-            </select>
-            <input type="hidden" id="popup-reservation-id">
-            <input type="hidden" id="popup-wash-id">
-            <button type="submit">리뷰 저장</button>
-        </form>
-    </div>
+<div id="review-popup" class="popup rsvn-review" style="display:none;">
+	<div class="popup-container">
+		<div class="popup-header">
+			<div class="popup-title">
+				<h5 id="popup-wash-name">리뷰 작성</h5>
+			</div>
+			<button id="close-review-popup" class="ux-button icon-menu popup-close-button">
+				<span class="icon"><i class="fa-solid fa-xmark"></i></span><span class="label">팝업 닫기</span>
+			</button>
+		</div>
+		<div class="popup-content">
+			<ul id="review-list"></ul>
+			<div id="review-pagination">
+				<button id="prev-review-button" disabled>이전</button>
+				<span id="review-page-info">1 / 1</span>
+				<button id="next-review-button" disabled>다음</button>
+			</div>
+			<form class="ui-form write dialog" id="review-form">
+				<input type="hidden" id="popup-reservation-id">
+				<input type="hidden" id="popup-wash-id">
+				<ul>
+					<li>
+						<div class="field ">
+							<label class="label" for="review-content">내용</label>
+							<div class="ui-input">
+								<div class="input outlined">
+									<textarea id="review-content" name="review-content" class="custom-textarea" placeholder="리뷰를 입력하세요"></textarea>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="field">
+							<label class="label">평점 선택</label>
+							<div class="ui-input">
+								<div class="input outlined">
+									<select name="review-score" class="selectmenu" id="review-score">
+										<option value="">점수 선택</option>
+											<option value="1">1점</option>
+											<option value="2">2점</option>
+											<option value="3">3점</option>
+											<option value="4">4점</option>
+											<option value="5">5점</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="ux-button-bar">
+							<button class="ux-button contained primary" type="submit"><span class="label">리뷰 저장</span></button>
+						</div>
+					</li>
+				</ul>
+			</form>
+		</div>
+	</div>
 </div>
 
 <script src="${contextPath}/resources/js/reservation.js"></script>
