@@ -36,6 +36,13 @@ public class FaqDAOImpl implements FaqDAO {
         return sqlSession.selectOne("com.mySpring.myapp.faq.dao.FaqDAO.selectFaq", faqNo);
     }
 
+    // 특정 사용자의 FAQ 조회 (본인 확인)
+    @Override
+    public FaqVO selectFaqByUserId(int faqNo, String userId) throws DataAccessException {
+        Map<String, Object> params = Map.of("faqNo", faqNo, "userId", userId);
+        return sqlSession.selectOne("com.mySpring.myapp.faq.dao.FaqDAO.selectFaqByUserId", params);
+    }
+
     // FAQ 수정 (질문 또는 답변)
     @Override
     public void updateFaq(Map<String, Object> faqMap) throws DataAccessException {
@@ -58,9 +65,10 @@ public class FaqDAOImpl implements FaqDAO {
     private int selectNewFaqNo() throws DataAccessException {
         return sqlSession.selectOne("com.mySpring.myapp.faq.dao.FaqDAO.selectNewFaqNo");
     }
+
+    // 질문 등록
     @Override
     public int insertQuestion(FaqVO faqVO) throws DataAccessException {
         return sqlSession.insert("com.mySpring.myapp.faq.dao.FaqDAO.insertFaq", faqVO.toMap());
     }
-
 }
