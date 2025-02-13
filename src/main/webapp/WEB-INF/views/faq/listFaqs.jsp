@@ -62,14 +62,12 @@
                                                         <span>답변이 아직 등록되지 않았습니다.</span>
                                                     </c:if>
                                                 </p>
-
-<c:if test="${member != null && faq.userId == member.id}">
-    <form action="${contextPath}/faq/deleteFaq.do" method="post" style="display: inline;">
-        <input type="hidden" name="faqNo" value="${faq.faqNo}" />
-        <button type="submit" class="btn-delete" onclick="return confirm('정말 삭제하시겠습니까?');">질문 삭제</button>
-    </form>
-</c:if>
-
+                                                <c:if test="${member != null && faq.userId == member.id}">
+                                                    <form action="${contextPath}/faq/deleteFaq.do" method="post" style="display: inline;">
+                                                        <input type="hidden" name="faqNo" value="${faq.faqNo}" />
+                                                        <button type="submit" class="btn-delete" onclick="return confirm('정말 삭제하시겠습니까?');">질문 삭제</button>
+                                                    </form>
+                                                </c:if>
                                                 <!-- 시스템 운영자일 경우 답변 등록 폼 표시 -->
                                                 <c:if test="${member != null && member.userType == 'systemOperator'}">
                                                     <form action="${contextPath}/faq/addAnswer.do" method="post">
@@ -91,21 +89,6 @@
                         </c:choose>
                     </tbody>
                 </table>
-
-                <!-- 페이지네이션 -->
-                <div class="pagination">
-                    <c:if test="${pagination.currentPage > 1}">
-                        <a href="${contextPath}/faq/listFaqs.do?page=${pagination.prevPage}&searchKeyword=${param.searchKeyword}" class="prev">이전</a>
-                    </c:if>
-                    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
-                        <a href="${contextPath}/faq/listFaqs.do?page=${i}&searchKeyword=${param.searchKeyword}" class="${i == pagination.currentPage ? 'active' : ''}">
-                            ${i}
-                        </a>
-                    </c:forEach>
-                    <c:if test="${pagination.currentPage < pagination.totalPages}">
-                        <a href="${contextPath}/faq/listFaqs.do?page=${pagination.nextPage}&searchKeyword=${param.searchKeyword}" class="next">다음</a>
-                    </c:if>
-                </div>
             </div>
         </article>
     </section>
