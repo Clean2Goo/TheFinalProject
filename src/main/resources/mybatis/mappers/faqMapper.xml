@@ -26,6 +26,18 @@
     ]]>
     </select>
 
+    <!-- 특정 사용자의 faq 조회 -->
+    <select id="selectFaqByUserId" parameterType="map" resultType="com.mySpring.myapp.faq.vo.FaqVO">
+    <![CDATA[
+    SELECT USERID AS userId, TITLE AS title, QUESTION AS question, 
+           ANSWER AS answer, CRTDATE AS crtDate, FAQNO AS faqNo, 
+           FAQIMG AS faqImg
+    FROM FAQS
+    WHERE FAQNO = #{faqNo}
+      AND USERID = #{userId}
+    ]]>
+    </select>
+
     <!-- faq 등록 -->
     <insert id="insertFaq" parameterType="map">
     <![CDATA[

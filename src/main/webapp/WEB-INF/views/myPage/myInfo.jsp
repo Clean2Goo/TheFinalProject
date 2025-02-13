@@ -25,17 +25,32 @@
                         </div>
                         <div class="info-item">
                             <span class="label">생년월일</span>
-                            <span class="value" id="dob-value">${member.dob}</span>
+                            <span class="value" id="dob-value">
+                                <c:choose>
+                                    <c:when test="${empty member.dob}">정보 없음</c:when>
+                                    <c:otherwise>${member.dob}</c:otherwise>
+                                </c:choose>
+                            </span>
                             <button class="edit-btn" onclick="openEditPopup('dob')">수정</button>
                         </div>
                         <div class="info-item">
                             <span class="label">휴대전화</span>
-                            <span class="value" id="phone-value">${member.phone}</span>
+                            <span class="value" id="phone-value">
+                                <c:choose>
+                                    <c:when test="${empty member.phone}">정보 없음</c:when>
+                                    <c:otherwise>${member.phone}</c:otherwise>
+                                </c:choose>
+                            </span>
                             <button class="edit-btn" onclick="openEditPopup('phone')">수정</button>
                         </div>
                         <div class="info-item">
                             <span class="label">이메일</span>
-                            <span class="value" id="email-value">${member.email}</span>
+                            <span class="value" id="email-value">
+                                <c:choose>
+                                    <c:when test="${empty member.email}">정보 없음</c:when>
+                                    <c:otherwise>${member.email}</c:otherwise>
+                                </c:choose>
+                            </span>
                             <button class="edit-btn" onclick="openEditPopup('email')">수정</button>
                         </div>
                     </div>
@@ -89,7 +104,8 @@
         document.getElementById('edit-label').textContent = fieldMap[field];
         document.getElementById('edit-field').value = field;
 
-        const currentValue = document.getElementById(field + '-value').textContent;
+        let currentValue = document.getElementById(field + '-value').textContent.trim();
+        if (currentValue === '정보 없음') currentValue = '';  // 정보 없음일 경우 빈 값으로 초기화
         if (field === 'dob') {
             document.getElementById('edit-value').type = 'date';
         } else {
@@ -106,12 +122,7 @@
 
     function updateField() {
         const field = document.getElementById('edit-field').value;
-        const value = document.getElementById('edit-value').value;
-
-        if (!value) {
-            alert('값을 입력해 주세요.');
-            return;
-        }
+        const value = document.getElementById('edit-value').value || '정보 없음'; // 빈 값일 경우 정보 없음으로 설정
 
         fetch(`${contextPath}/member/updateMemberInfo`, {
             method: 'POST',
@@ -123,12 +134,7 @@
                 value: value
             })
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(result => {
             if (result.success) {
                 document.getElementById(field + '-value').textContent = value;
@@ -143,7 +149,6 @@
             alert('수정 중 오류가 발생했습니다.');
         });
     }
-
 
     function openPasswordPopup() {
         document.getElementById('password-modal').style.display = 'block';
@@ -162,7 +167,7 @@
             return;
         }
 
-        fetch('${contextPath}/member/updatePassword', {
+        fetch(`${contextPath}/member/updatePassword`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
