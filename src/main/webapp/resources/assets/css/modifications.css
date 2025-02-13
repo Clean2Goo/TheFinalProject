@@ -1,5 +1,6 @@
 @charset "utf-8";
-/* 즐겨찾기 */
+/* ************************************ 즐겨찾기 *************************************/
+/* ************************************ 즐겨찾기 *************************************/
 .myPage-container main.ui-favorites > section > article div:not(.ui-page-desc) {width: auto;}
 .favorite-list {display: flex;justify-content: flex-start;flex-wrap: wrap;gap: 24px; }
 .favorite-item {
@@ -20,3 +21,51 @@
 .favorite-card .favorite-info h5 {margin-bottom: 12px;}
 
 .favorite-card .ux-button-bar {padding: 16px;border-top: 1px solid var(--line-02);}
+
+
+
+
+/* ************************************ 팝업 공통  *************************************/
+/* ************************************ 팝업 공통  *************************************/
+
+
+#review-popup,
+#edit-modal {
+	display: none;
+	position: fixed; top: 0; left: 0;
+	width: 100%;height: 100%;background-color: var(--bg-dim-black);
+	z-index: 100;
+}
+
+.popup-container {
+	display: flex;flex-direction: column;gap: 24px;
+	position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);
+	min-width: 400px; max-width: 540px;padding: 24px 32px 32px;
+	background-color: var(--bg-01); border-radius: 24px;box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.popup-container textarea {min-height: 100px;}
+
+
+.popup-header {position: relative;}
+
+/* 팝업닫기 버튼 */
+.ux-button.icon-menu.popup-close-button{position: absolute;top: -2px;right:-12px;}
+.ux-button.icon-menu.popup-close-button .icon{color: var(--fc-111);}
+
+.popup-content { }
+
+.ui-form.write.dialog {width: 100%;}
+.ui-form.write.dialog ul {gap: 16px;}
+.ui-form.write.dialog ul li .ux-button-bar:only-of-type {margin-top: 16px;}
+
+
+/* ************************************ 마이페이지: 예약내역 리뷰작성 팝업*/
+.popup.rsvn-review {}
+.popup.rsvn-review #review-list,
+.popup.rsvn-review #review-pagination{display: none;}
+
+
+
+
+/* ************************************ 마이페이지: 리뷰내역 리뷰수정 팝업*/
+.popup.modify-review {}
