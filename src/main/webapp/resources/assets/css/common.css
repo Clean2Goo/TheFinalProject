@@ -41,7 +41,7 @@
 	--bg-fff: #fff;
 	--bg-white: #FFFFFF;
 	--bg-dim-white: rgba(255, 255, 255, 80%);
-	--bg-dim-black: rgba(0, 0, 0, 80%);
+	--bg-dim-black: rgba(0, 0, 0, 40%);
 }
 
 /* 태그 초기화 css */
@@ -306,7 +306,7 @@ textarea {font-size: 1rem;font-weight: 500;flex-grow: 1;flex-shrink: 1;flex-basi
 	min-width: 0;padding: 0 8px;font-size: 1rem;line-height: normal;text-transform:none;
 	background: none;background-color: transparent;border-radius: 8px;cursor: pointer;overflow: hidden;
 }
-.ux-button:focus {outline: auto;outline-offset: -2px;}
+.ux-button:focus {outline: 0;}
 .ux-button .icon,
 .ux-button .label {position: relative;}
 .ux-button .label {color: var(--fc-01);white-space: nowrap;}
@@ -325,7 +325,8 @@ textarea {font-size: 1rem;font-weight: 500;flex-grow: 1;flex-shrink: 1;flex-basi
 
 /* 버튼 컨테인드 */
 .ux-button.contained,
-.ux-button.contained .lavel,
+.ux-button.contained:hover,
+.ux-button.contained .label,
 .ux-button.contained:hover .label{color: var(--fc-fff)!important;}
 .ux-button.contained:before {
 	position: absolute;top: 0;right: 0;bottom: 0;left: 0;overflow: hidden;border-radius: 8px;content: "";

@@ -27,6 +27,7 @@
 												<option value="washVisitor">출장세차업자</option>
 												<!-- <option value="systemOperator">시스템운영자</option> -->
 											</select>
+										</div>
 									</div>
 								</div>
 							</li>

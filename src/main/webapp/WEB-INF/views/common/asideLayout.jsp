@@ -57,10 +57,6 @@
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/myInfo.css">
 	<link rel="stylesheet" href="${contextPath}/resources/assets/css/aside.css">
 
-
-
-
-	<!-- <link rel="stylesheet" href="${contextPath}/resources/assets/css/explore.css"> 임시주석 : 현재 expolore.jsp에서 다이렉트 로드 중 추후 병합예정 -->
 </head>
 <style>
 .myPage-container #content {display:flex;min-height: calc(100vh - 168px);padding :112px 0 0;}
