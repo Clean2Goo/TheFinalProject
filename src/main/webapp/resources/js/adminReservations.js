@@ -5,15 +5,15 @@ document.addEventListener('DOMContentLoaded', function () {
             const status = event.target.dataset.status;
 
             if (status === '이용완료') {
-                updateStatus(rsvnId, status);
+                updateStatus(rsvnId, status, event.target);
             } else if (status === '예약취소') {
-                cancelReservation(rsvnId);
+                cancelReservation(rsvnId, status, event.target);
             }
         }
     });
 });
 
-function updateStatus(rsvnId, status) {
+function updateStatus(rsvnId, status, button) {
     fetch(`/myapp/admin/updateStatus`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -24,6 +24,10 @@ function updateStatus(rsvnId, status) {
         if (result === 'success') {
             document.getElementById(`status-${rsvnId}`).innerText = status;
             alert(`'${status}'로 상태가 성공적으로 변경되었습니다.`);
+            
+            // 상태 변경 후 버튼 숨기기
+            const buttonContainer = button.parentElement;
+            buttonContainer.innerHTML = ''; // 버튼 제거
         } else {
             alert('상태 변경에 실패했습니다.');
         }
@@ -33,18 +37,21 @@ function updateStatus(rsvnId, status) {
     });
 }
 
-function cancelReservation(rsvnId) {
+function cancelReservation(rsvnId, status, button) {
     fetch(`/myapp/admin/updateStatus`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `rsvnId=${rsvnId}&status=예약취소`
+        body: `rsvnId=${rsvnId}&status=${status}`
     })
     .then(response => response.text())
     .then(result => {
         if (result === 'success') {
-            document.getElementById(`status-${rsvnId}`).innerText = '예약취소';
-            document.getElementById(`cancel-${rsvnId}`).innerText = '취소됨';
+            document.getElementById(`status-${rsvnId}`).innerText = status;
             alert("예약이 성공적으로 취소되었습니다.");
+            
+            // 상태 변경 후 버튼 숨기기
+            const buttonContainer = button.parentElement;
+            buttonContainer.innerHTML = ''; // 버튼 제거
         } else {
             alert("예약 취소에 실패했습니다.");
         }
