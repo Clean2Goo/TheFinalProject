@@ -27,7 +27,7 @@
 				</li>
 				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
 					<li>
-						<a href="${contextPath}/notice/adminWriteForm.do" class="ux-button text-button"><span class="label">공지사항 작성</span></a>
+						<a href="${contextPath}/notice/adminWriteForm.do" class="ux-button text-button"><span class="label">공지사항 등록</span></a>
 					</li>
 				</c:if>
 				<li>
@@ -35,7 +35,7 @@
 				</li>
 				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
 					<li>
-						<a href="${contextPath}/board/adminArticleForm.do" class="ux-button text-button"><span class="label">이벤트 작성</span></a>
+						<a href="${contextPath}/board/adminArticleForm.do" class="ux-button text-button"><span class="label">이벤트 등록</span></a>
 					</li>
 				</c:if>
 				<li>
@@ -46,7 +46,7 @@
 				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
 				    <li>
 				        <a href="${contextPath}/faq/adminQuestionForm.do" class="ux-button text-button">
-				            <span class="label">Q&A 작성</span>
+				            <span class="label">Q&A 등록</span>
 				        </a>
 				    </li>
 				</c:if>
