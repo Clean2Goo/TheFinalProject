@@ -96,11 +96,11 @@
 													<span class="icon"><i class="fa-regular fa-calendar-check"></i></span><span class="label">예약내역</span>
 												</a>
 											</li>
-											<!-- <li>
-												<a href="#" role="button" class="ux-button icon-button">
-													<span class="icon"><i class="fa-regular fa-bell"></i></span><span class="label">알림</span>
+											<li>
+												<a href="${contextPath}/myReviews.do" role="button" class="ux-button icon-button">
+													<span class="icon"><i class="fa-solid fa-pencil"></i></span><span class="label">리뷰내역</span>
 												</a>
-											</li> -->
+											</li>
 											<li>
 												<a href="${contextPath}/member/logout.do" role="button" class="ux-button icon-button">
 													<span class="icon"><i class="icon fa-solid fa-arrow-right-from-bracket"></i></span><span class="label">로그아웃</span>

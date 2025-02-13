@@ -85,23 +85,23 @@
 				<div class="swiper-container event-swiper">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide event-slide s1">
-							<a class="event" href="#">
+							<a class="event" href="${contextPath}/board/viewArticle.do?articleNO=1">
 								<div class="item-image">
-									<img class="img" src="${contextPath}/resources/assets/images/temp/temp.jpg" alt="이벤트배너">
+									<img class="img" src="${contextPath}/resources/assets/images/event/event1banner.jpg" alt="신규회원혜택 이벤트 배너">
 								</div>
 							</a>
 						</div>
 						<div class="swiper-slide event-slide s2">
-							<a class="event" href="#">
+							<a class="event" href="${contextPath}/board/viewArticle.do?articleNO=4">
 								<div class="item-image">
-									<img class="img" src="${contextPath}/resources/assets/images/temp/temp.jpg" alt="이벤트배너">
+									<img class="img" src="${contextPath}/resources/assets/images/event/event6banner.jpg" alt="봄맞이 세차 이벤트 배너">
 								</div>
 							</a>
 						</div>
 						<div class="swiper-slide event-slide s3">
-							<a class="event" href="#">
+							<a class="event" href="${contextPath}/board/viewArticle.do?articleNO=6">
 								<div class="item-image">
-									<img class="img" src="${contextPath}/resources/assets/images/temp/temp.jpg" alt="이벤트배너">
+									<img class="img" src="${contextPath}/resources/assets/images/event/event12banner.jpg" alt="클린투고">
 								</div>
 							</a>
 						</div>
@@ -114,7 +114,7 @@
 	<section class="section5">
 		<article >
 			<div class="section-title fdr">
-				<h3>FAQ top3</h3>
+				<h3>Q&A</h3>
 				<a href="${contextPath}/faq/listFaqs.do" role="button" class="ux-button text-button more-view-button" >
 					<span class="label">더보기</span><span class="icon rang"></span>
 				</a>
