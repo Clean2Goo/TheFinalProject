@@ -28,7 +28,16 @@ public class FaqServiceImpl implements FaqService {
     public int addNewFaq(Map<String, Object> faqMap) throws Exception {
         return faqDAO.insertFaq(faqMap);
     }
-    
+    @Override
+    public boolean deleteFaq(int faqNo, String userId) throws Exception {
+        FaqVO faq = faqDAO.selectFaq(faqNo);
+        if (faq != null && faq.getUserId().equals(userId)) {
+            faqDAO.deleteFaq(faqNo);
+            return true;
+        }
+        return false;
+    }
+
     // 특정 FAQ 조회
     @Override
     public FaqVO viewFaq(int faqNo) throws Exception {

@@ -13,5 +13,7 @@ public interface FaqService {
     public void removeFaq(int faqNo) throws Exception;             // FAQ 삭제
     public void updateAnswer(int faqNo, String answer) throws Exception; // FAQ 답변 등록/수정
     public int addUserQuestion(FaqVO faqVO) throws Exception;
+    boolean deleteFaq(int faqNo, String userId) throws Exception;
+
 
 }
