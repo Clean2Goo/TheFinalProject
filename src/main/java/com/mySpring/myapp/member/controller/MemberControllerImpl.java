@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -347,11 +348,36 @@ public class MemberControllerImpl implements MemberController {
 		}
 		return viewName;
 	}
-	@Override
-	public ResponseEntity<?> updatePassword(String currentPassword, String newPassword, HttpSession session) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	
+    @PostMapping("/member/updateMemberInfo")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateMemberInfo(
+            @RequestParam("field") String field,
+            @RequestParam("value") String value,
+            HttpSession session) {
+        
+        Map<String, Object> response = new HashMap<>();
+        String userId = (String) session.getAttribute("userId");
+
+        if (userId == null) {
+            response.put("success", false);
+            response.put("message", "로그인이 필요합니다.");
+            return ResponseEntity.status(403).body(response);
+        }
+
+        try {
+            memberService.updateMemberInfo(userId, field, value);
+            response.put("success", true);
+            response.put("message", "정보가 성공적으로 수정되었습니다.");
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "수정 실패: " + e.getMessage());
+        }
+
+        return ResponseEntity.ok(response);
+    }
+
 
 
 

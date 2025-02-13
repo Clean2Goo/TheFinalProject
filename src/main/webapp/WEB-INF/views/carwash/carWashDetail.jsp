@@ -35,7 +35,7 @@
 								<div class="group">
 									<div class="flex">
 										<h4>${carWashDetail.washName}</h4>
-										<button class="ux-button icon-menu mt8">
+										<button class="ux-button icon-menu">
 											<span class="icon"><i class="fa-regular fa-star"></i></span><span class="label">즐겨찾기</span>
 										</button>
 									</div>

@@ -27,7 +27,7 @@
 						<li><a href="${contextPath}/about/info.do" role="button" class="gnb-menu"><span class="label">회사소개</span></a></li>
 						<li><a href="${contextPath}/notice/listNotices.do" role="button" class="gnb-menu"><span class="label">공지사항</span></a></li>
 						<li><a href="${contextPath}/board/listArticles.do" role="button" class="gnb-menu"><span class="label">이벤트</span></a></li>
-						<li><a href="${contextPath}/faq/listFaqs.do" role="button" class="gnb-menu"><span class="label">FAQ</span></a></li>
+						<li><a href="${contextPath}/faq/listFaqs.do" role="button" class="gnb-menu"><span class="label">Q&A</span></a></li>
 					</ul>
 				</nav>
 				<div class="menu-bar">
@@ -96,11 +96,11 @@
 													<span class="icon"><i class="fa-regular fa-calendar-check"></i></span><span class="label">예약내역</span>
 												</a>
 											</li>
-											<!-- <li>
-												<a href="#" role="button" class="ux-button icon-button">
-													<span class="icon"><i class="fa-regular fa-bell"></i></span><span class="label">알림</span>
+											<li>
+												<a href="${contextPath}/myReviews.do" role="button" class="ux-button icon-button">
+													<span class="icon"><i class="fa-solid fa-pencil"></i></span><span class="label">리뷰내역</span>
 												</a>
-											</li> -->
+											</li>
 											<li>
 												<a href="${contextPath}/member/logout.do" role="button" class="ux-button icon-button">
 													<span class="icon"><i class="icon fa-solid fa-arrow-right-from-bracket"></i></span><span class="label">로그아웃</span>

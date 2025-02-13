@@ -1,104 +1,192 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<%request.setCharacterEncoding("UTF-8");%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<% request.setCharacterEncoding("UTF-8"); %>
 
 <main>
     <section>
-	    <article>
-		    <div class="h3-title">
-				<h3>개인정보</h3>
-			</div>
-		    <div class="content">
-		        <div class="mypage-container">
-		       		<div class="h4-title">
-						<h4>기본 정보</h4>
-					</div>
-			        <div class="content">
-				    	<div class="profile-item">
-						    <span class="user-image">
-						        <img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
-						    </span>
-						    <span class="user-name">${member.name}</span>
-						    <button type="button" class="edit-btn" onclick="openPasswordModal()">비밀번호 변경</button>
-						</div>
-			            <div class="info-item">
-			                <span class="label">생년월일</span>
-			                <span class="value">${member.dob}</span>
-			                <!-- 수정 버튼 추가 -->
-			                <button class="edit-btn"
-			                    onclick="location.href='${contextPath}/editProfile?id=${member.id}'">수정</button>
-			            </div>
-			            <div class="info-item">
-			                <span class="label">휴대전화</span>
-			                <span class="value">${member.phone}</span>
-			                <!-- 수정 버튼 추가 -->
-			                <button class="edit-btn"
-			                    onclick="location.href='${contextPath}/editProfile?id=${member.id}'">수정</button>
-			            </div>
-			            <div class="info-item">
-			                <span class="label">이메일</span>
-			                <span class="value">${member.email}</span>
-			                <!-- 수정 버튼 추가 -->
-			                <button class="edit-btn"
-			                    onclick="location.href='${contextPath}/editProfile?id=${member.id}'">수정</button>
-			            </div>
-					</div>
-		        </div>
-		        
-		        <div class="mypage-container">
-		       		<div class="h4-title">
-						<h4>차량</h4>
-					</div>
-			        <div class="content">
-			            <div class="info-item">
-			                <span class="label">생년월일</span>
-			                <span class="value">${member.dob}</span>
-			                <!-- 수정 버튼 추가 -->
-			                <button class="edit-btn"
-			                    onclick="location.href='${contextPath}/editProfile?id=${member.id}'">수정</button>
-			            </div>      
-					</div>
-		        </div>
-		        
-		        <div class="mypage-container">
-		       		<div class="h4-title">
-						<h4>주소</h4>
-					</div>
-			        <div class="content">
-			            <div class="info-item">
-			                <span class="label">생년월일</span>
-			                <span class="value">${member.dob}</span>
-			                <!-- 수정 버튼 추가 -->
-			                <button class="edit-btn"
-			                    onclick="location.href='${contextPath}/editProfile?id=${member.id}'">수정</button>
-			            </div>
-					</div>
-		        </div>
-	        </div>
-	    </article>
+        <article>
+            <div class="h3-title">
+                <h3>개인정보</h3>
+            </div>
+            <div class="content">
+                <div class="mypage-container">
+                    <div class="h4-title">
+                        <h4>기본 정보</h4>
+                    </div>
+                    <div class="content">
+                        <div class="profile-item">
+                            <span class="user-image">
+                                <img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
+                            </span>
+                            <span class="user-name">${member.name}</span>
+                            <button type="button" class="edit-btn" onclick="openPasswordPopup()">비밀번호 변경</button>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">생년월일</span>
+                            <span class="value" id="dob-value">
+                                <c:choose>
+                                    <c:when test="${empty member.dob}">정보 없음</c:when>
+                                    <c:otherwise>${member.dob}</c:otherwise>
+                                </c:choose>
+                            </span>
+                            <button class="edit-btn" onclick="openEditPopup('dob')">수정</button>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">휴대전화</span>
+                            <span class="value" id="phone-value">
+                                <c:choose>
+                                    <c:when test="${empty member.phone}">정보 없음</c:when>
+                                    <c:otherwise>${member.phone}</c:otherwise>
+                                </c:choose>
+                            </span>
+                            <button class="edit-btn" onclick="openEditPopup('phone')">수정</button>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">이메일</span>
+                            <span class="value" id="email-value">
+                                <c:choose>
+                                    <c:when test="${empty member.email}">정보 없음</c:when>
+                                    <c:otherwise>${member.email}</c:otherwise>
+                                </c:choose>
+                            </span>
+                            <button class="edit-btn" onclick="openEditPopup('email')">수정</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
     </section>
 </main>
 
-<!-- 비밀번호 변경 모달 -->
+<!-- 필드 수정 모달 팝업 -->
 <div id="edit-modal" class="modal">
     <div class="modal-content">
-        <span id="close-edit-modal" class="close">&times;</span>
-        <h2>비밀번호 변경</h2>
+        <span class="close-btn" onclick="closeEditPopup()">&times;</span>
         <form id="edit-form">
-            <label for="current-password">현재 비밀번호</label>
-            <input type="password" id="current-password" required>
-            
-            <label for="new-password">새 비밀번호</label>
-            <input type="password" id="new-password" required>
-            
-            <label for="confirm-password">새 비밀번호 확인</label>
-            <input type="password" id="confirm-password" required>
-            
-            <button type="submit">적용</button>
+            <input type="hidden" id="edit-field">
+            <div class="form-group">
+                <label id="edit-label"></label>
+                <input type="text" id="edit-value" required>
+            </div>
+            <button type="button" class="submit-btn" onclick="updateField()">수정</button>
         </form>
     </div>
 </div>
 
-<script src="${contextPath}/resources/js/myInfo.js"></script>
+<!-- 비밀번호 변경 모달 팝업 -->
+<div id="password-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closePasswordPopup()">&times;</span>
+        <form id="password-form">
+            <div class="form-group">
+                <label for="current-password">현재 비밀번호</label>
+                <input type="password" id="current-password" required>
+            </div>
+            <div class="form-group">
+                <label for="new-password">새 비밀번호</label>
+                <input type="password" id="new-password" required>
+            </div>
+            <button type="button" class="submit-btn" onclick="updatePassword()">비밀번호 변경</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openEditPopup(field) {
+        const fieldMap = {
+            "dob": "생년월일",
+            "phone": "휴대전화",
+            "email": "이메일"
+        };
+
+        document.getElementById('edit-label').textContent = fieldMap[field];
+        document.getElementById('edit-field').value = field;
+
+        let currentValue = document.getElementById(field + '-value').textContent.trim();
+        if (currentValue === '정보 없음') currentValue = '';  // 정보 없음일 경우 빈 값으로 초기화
+        if (field === 'dob') {
+            document.getElementById('edit-value').type = 'date';
+        } else {
+            document.getElementById('edit-value').type = 'text';
+        }
+        document.getElementById('edit-value').value = currentValue;
+
+        document.getElementById('edit-modal').style.display = 'block';
+    }
+
+    function closeEditPopup() {
+        document.getElementById('edit-modal').style.display = 'none';
+    }
+
+    function updateField() {
+        const field = document.getElementById('edit-field').value;
+        const value = document.getElementById('edit-value').value || '정보 없음'; // 빈 값일 경우 정보 없음으로 설정
+
+        fetch(`${contextPath}/member/updateMemberInfo`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                field: field,
+                value: value
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                document.getElementById(field + '-value').textContent = value;
+                closeEditPopup();
+                alert('정보가 성공적으로 수정되었습니다.');
+            } else {
+                alert('수정 실패: ' + result.message);
+            }
+        })
+        .catch(error => {
+            console.error('수정 오류:', error);
+            alert('수정 중 오류가 발생했습니다.');
+        });
+    }
+
+    function openPasswordPopup() {
+        document.getElementById('password-modal').style.display = 'block';
+    }
+
+    function closePasswordPopup() {
+        document.getElementById('password-modal').style.display = 'none';
+    }
+
+    function updatePassword() {
+        const currentPassword = document.getElementById('current-password').value;
+        const newPassword = document.getElementById('new-password').value;
+
+        if (!currentPassword || !newPassword) {
+            alert('현재 비밀번호와 새 비밀번호를 모두 입력해 주세요.');
+            return;
+        }
+
+        fetch(`${contextPath}/member/updatePassword`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                currentPassword: currentPassword,
+                newPassword: newPassword
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            alert(result.message);
+            if (result.success) {
+                closePasswordPopup();
+            }
+        })
+        .catch(error => {
+            console.error('비밀번호 변경 오류:', error);
+            alert('비밀번호 변경 중 오류가 발생했습니다.');
+        });
+    }
+</script>

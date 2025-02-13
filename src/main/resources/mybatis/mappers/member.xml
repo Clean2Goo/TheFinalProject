@@ -28,7 +28,7 @@
     <insert id="insertMember" parameterType="memberVO">
         <![CDATA[
             INSERT INTO USERS (
-                USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE, USERIMG, RANK, DOB
+                USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE
             ) VALUES (
                 #{id, jdbcType=VARCHAR}, 
                 #{pwd, jdbcType=VARCHAR}, 
@@ -36,10 +36,7 @@
                 #{email, jdbcType=VARCHAR}, 
                 #{phone, jdbcType=VARCHAR}, 
                 #{userType, jdbcType=VARCHAR}, 
-                SYSDATE, 
-                #{img, jdbcType=VARCHAR}, 
-                #{rank, jdbcType=VARCHAR}, 
-                #{dob, jdbcType=DATE}
+                SYSDATE
             )
         ]]>
     </insert>
@@ -78,20 +75,34 @@
     </select>
 
     <!-- 현재 비밀번호 확인 -->
-    <select id="checkPassword" resultType="String">
-        <![CDATA[
-            SELECT USERPWD 
-            FROM USERS 
-            WHERE USERID = #{id, jdbcType=VARCHAR}
-        ]]>
+    <select id="checkPassword" resultType="String" parameterType="String">
+        SELECT USERPWD 
+        FROM USERS 
+        WHERE USERID = #{id, jdbcType=VARCHAR}
     </select>
 
     <!-- 비밀번호 업데이트 -->
-    <update id="updatePassword">
-        <![CDATA[
-            UPDATE USERS
-            SET USERPWD = #{newPassword, jdbcType=VARCHAR}
-            WHERE USERID = #{id, jdbcType=VARCHAR}
-        ]]>
+    <update id="updatePassword" parameterType="map">
+        UPDATE USERS
+        SET USERPWD = #{newPassword, jdbcType=VARCHAR}
+        WHERE USERID = #{id, jdbcType=VARCHAR}
     </update>
+
+    <update id="updateMemberInfo" parameterType="map">
+    UPDATE USERS
+    SET 
+    <if test="field == 'email'">
+        USEREMAIL = #{value, jdbcType=VARCHAR}
+    </if>
+    <if test="field == 'phone'">
+        USERPHONE = #{value, jdbcType=VARCHAR}
+    </if>
+    <if test="field == 'dob'">
+        DOB = #{value, jdbcType=DATE}
+    </if>
+    WHERE USERID = #{userId, jdbcType=VARCHAR}
+</update>
+
+
+
 </mapper>

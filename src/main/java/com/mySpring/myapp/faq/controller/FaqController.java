@@ -88,7 +88,29 @@ public class FaqController {
 
         return new ModelAndView("redirect:/faq/listFaqs.do");
     }
+    
+ // 본인 질문 삭제 처리
+    @RequestMapping(value = "/deleteFaq.do", method = RequestMethod.POST)
+    public ModelAndView deleteFaq(@RequestParam("faqNo") int faqNo, HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
+        MemberVO memberVO = (MemberVO) session.getAttribute("member");
 
+        if (memberVO == null) {
+            return new ModelAndView("redirect:/member/loginForm.do").addObject("errorMessage", "로그인이 필요합니다.");
+        }
+
+        try {
+            boolean isDeleted = faqService.deleteFaq(faqNo, memberVO.getId());
+            if (isDeleted) {
+                return new ModelAndView("redirect:/faq/listFaqs.do").addObject("successMessage", "질문이 삭제되었습니다.");
+            } else {
+                return new ModelAndView("redirect:/faq/listFaqs.do").addObject("errorMessage", "삭제 권한이 없습니다.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ModelAndView("redirect:/faq/listFaqs.do").addObject("errorMessage", "삭제 중 오류가 발생했습니다.");
+        }
+    }
 
 
     // 어드민 - FAQ 목록
@@ -104,6 +126,15 @@ public class FaqController {
         return mav;
     }
 
+ // 어드민 - 질문 등록 화면
+    @RequestMapping(value = "/adminQuestionForm.do", method = RequestMethod.GET)
+    public ModelAndView adminQuestionForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("adminQuestionForm 요청 수신");
+
+        String viewName = (String) request.getAttribute("viewName");
+        return new ModelAndView(viewName);
+    }
+    
     // 어드민 - FAQ 작성 화면
     @RequestMapping(value = "/adminWriteFaqForm.do", method = RequestMethod.GET)
     public ModelAndView adminWriteForm(HttpServletRequest request, HttpServletResponse response) throws Exception {

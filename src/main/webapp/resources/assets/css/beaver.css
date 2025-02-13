@@ -12,7 +12,7 @@ main.ui-index section article .section-title.fdr {
 	display: flex;flex-direction: row;justify-content: space-between;align-items: center;
 }
 
-main.ui-index article {width: calc(100vw - 380px);align-items: flex-start;gap: 40px;outline: 1px solid #0ff;}
+main.ui-index article {width: calc(100vw - 380px);align-items: flex-start;gap: 40px;}
 main.ui-index article.has-swiper {width: calc(100vw - 120px);}
 main.ui-index article.has-swiper .section-title {padding-left: 260px;}
 
@@ -36,17 +36,17 @@ main.ui-index .section1 .section-title h3{font-size: 4.75rem;font-weight: 700;}
 
 @media (min-width: 768px) and (max-width: 1440px) {
     .recommand-swiper .recommand .item-image {
-        height: 300px;border: 1px solid green;
+        height: 300px;
     }
 }
 @media (min-width: 1441px) and (max-width: 1920px) {
     .recommand-swiper .recommand .item-image {
-        height: 400px;border: 1px solid red;
+        height: 400px;
     }
 }
 @media (min-width: 1921px) and (max-width: 2560px) {
     .recommand-swiper .recommand .item-image {
-        height: 540px;border: 1px solid blue;
+        height: 540px;
     }
 }
 
@@ -80,7 +80,7 @@ main.ui-index .section1 .section-title h3{font-size: 4.75rem;font-weight: 700;}
 
 /* ************************************  서브페이지 ************************************ */
 /* ************************************  서브페이지 ************************************ */
-
+.ui-page-desc { width: 100%;}
 /* 서브페이지  */
 .ux-divider:first-of-type {margin: 0 0 20px;}
 main.ui-subpage section > article > .h4-title {align-items: flex-start;}
@@ -108,14 +108,14 @@ main.ui-subpage .h4.subpage-custom {flex-direction: row;}
 .item-photo-book img {width: 100%;height: 100%;object-fit: cover;}
 @media (min-width: 768px) and (max-width: 1920px) {
    .item-photo-book {
-		min-height: 400px;border: 1px solid red;
-		max-height: 400px;border: 1px solid red;
+		min-height: 400px;
+		max-height: 400px;
     }
 }
 @media (min-width: 1921px) and (max-width: 2560px) {
     .item-photo-book {
-        min-height: 460px;border: 1px solid blue;
-        max-height: 460px;border: 1px solid blue;
+        min-height: 460px;
+        max-height: 460px;
     }
 }
 
@@ -170,6 +170,11 @@ main.ui-subpage .h4.subpage-custom {flex-direction: row;}
 
 /* ************************************ 테이블 ************************************ */
 /* ************************************ 테이블 ************************************ */
+.col-8 { width: 8%;}
+.col-auto {width: auto;}
+.col-10 {width: 10%;}
+.col-16 {width: 16%;}
+
 .table-flex-box {display: flex;align-items: center;justify-content: center;gap: 12px;}
 
 .data-grid {width: 100%;border-top: 1px solid #000;}
@@ -179,58 +184,10 @@ main.ui-subpage .h4.subpage-custom {flex-direction: row;}
 .data-grid table th,
 .data-grid table td {font-size: 1rem;color: #111; border-bottom: 1px solid rgba(0, 0, 0, .12);}
 
-.data-grid table th {padding: 16px 16px;font-weight: 700;color: var(--fc-111);background-color: var(--bg-01);}
+.data-grid table th {padding: 16px 16px;font-weight: 700;color: var(--fc-111);background-color: rgba(36,103,191,.04);}
 .data-grid table td {padding: 24px 16px;border-bottom: 1px solid rgba(0, 0, 0, .12);}
+.data-grid table tbody tr:nth-child(even) {background-color: rgba(0,0,0,.01);}
 
-
-/* ************************************ 게시판 ************************************ */
-/* ************************************ 게시판 ************************************ */
-/* 목록 */
-.data-grid table td.subject {text-align: left}
-
-/* 상세 */
-.bbs-read {width: 100%;}
-.bbs-read .bbs-title { display: flex;flex-direction: column;gap: 20px;padding: 20px 40px;
-	color: var(--fc-111);border-top: 1px solid var(--line-01); border-bottom: 1px solid var(--line-02);
-}
-
-.bbs-read .bbs-title .subject{text-align: left; font-weight: bold;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-.bbs-read .bbs-title .author{}
-.bbs-read .bbs-title .date{}
-.bbs-read .bbs-title .info-list {display: flex;justify-content: space-between;gap: 12px;color: var(--fc-333);}
-
-.bbs-read .bbs-content {min-height:250px;padding: 40px; line-height: 160%;border-bottom: 1px solid var(--line-02);}
-
-/* 네비 */
-.bbs-navigation .nav {
-	display: flex;justify-content: flex-start;align-items: center;
-	padding: 18px 0;border-bottom: 1px solid var(--line-02);
-}
-.bbs-navigation .label .icon {
-	width: 20px;height: 20px;margin-left: 8px;
-	background-image: url("../images/common/icn_dang_select.svg");background-repeat: no-repeat;
-	background-position: 0 0;background-size: 100%;opacity: 0.6;
-}
-.bbs-navigation .prev .label .icon {transform: rotate(180deg);}
-.bbs-navigation .label {
-	display: flex;justify-content: center;align-items: center;flex-basis: 152px;flex-grow: 0;flex-shrink: 0;
-	color:var(--fc-666);
-}
-.bbs-navigation .subject {
-	flex-basis: auto;flex-grow: 1;flex-shrink: 1;
-	text-overflow: ellipsis;white-space: nowrap;overflow: hidden;font-weight: 400;color: var(--fc-333);  transition: all .3s ease;
-}
-.bbs-navigation .subject:not(.none):hover {color:var(--primary-blue);}
-.bbs-navigation .subject.none {color:var(--fc-666);}
-.bbs-navigation .date {flex-basis: 160px;flex-grow: 0;flex-shrink: 0;color:var(--fc-888);text-align: center;}
-
-
-/* 작성 */
-.ui-form.write {width:70%;}
-.ui-form.write .field{flex-direction: column;}
-.ui-form.write .field > .label{flex-basis: auto;}
-.ui-form.write .field .label:not(.clipped) + .ui-input {width: 100%;margin-left: 0;}
-.ui-form.write ul li:has(.ux-button-bar) {display: flex;justify-content:flex-end;}
 
 
 
@@ -306,6 +263,7 @@ main.ui-reservation .ui-stepper + h3 {margin-top: 16px;}
 .custom-radio.contained .icon {display: none;}
 .custom-radio.contained .icon + .label {margin: 0;}
 .custom-radio.contained .label {display: inline-flex;align-items: center;height: 44px;color: var(--fc-666);font-size: 1rem;padding: 0 24px;border: 1px solid var(--line-02);border-radius: 26px;}
+
 .custom-radio.contained input[type="radio"]:checked ~ .label,
 .custom-radio.contained input[type="checkbox"]:checked ~ .label {font-weight: bold;color: var(--fc-fff);border-color: var(--primary-blue); background: var(--primary-blue);
   animation-name: filter-motion;
@@ -321,6 +279,99 @@ main.ui-reservation .ui-stepper + h3 {margin-top: 16px;}
 
 
 
+/* ************************************ 게시판 ************************************ */
+/* ************************************ 게시판 ************************************ */
+/* 목록 */
+.data-grid table td.subject {text-align: left;font-weight: 700;transition: all .3s ease;}
+.data-grid table td.subject:hover {color: var(--primary-blue);}
+
+/* 상세 */
+.bbs-read {width: calc(100vw - 640px);}
+.bbs-read .bbs-title { display: flex;flex-direction: column;gap: 32px;padding: 40px 40px 32px;
+	color: var(--fc-111);border-top: 1px solid var(--line-01); border-bottom: 1px solid var(--line-02);
+}
+
+.bbs-read .bbs-title .subject{text-align: left; font-weight: bold;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.bbs-read .bbs-title .info-list {display: flex;justify-content: space-between;gap: 12px;color: var(--fc-666);}
+.bbs-read .bbs-title .info-list li {display: flex;gap: 24px;}
+.bbs-read .bbs-title .number{}
+.bbs-read .bbs-title .author{}
+.bbs-read .bbs-title .date{}
+
+.bbs-read .bbs-content {min-height:250px;padding: 40px; line-height: 160%;border-bottom: 1px solid var(--line-02);}
+
+/* 네비 */
+.bbs-navigation .nav {
+	display: flex;justify-content: flex-start;align-items: center;
+	padding: 18px 0;border-bottom: 1px solid var(--line-02);
+}
+.bbs-navigation .label .icon {
+	width: 20px;height: 20px;margin-left: 8px;
+	background-image: url("../images/common/icn_dang_select.svg");background-repeat: no-repeat;
+	background-position: 0 0;background-size: 100%;opacity: 0.6;
+}
+.bbs-navigation .prev .label .icon {transform: rotate(180deg);}
+.bbs-navigation .label {
+	display: flex;justify-content: center;align-items: center;flex-basis: 152px;flex-grow: 0;flex-shrink: 0;
+	color:var(--fc-666);
+}
+.bbs-navigation .subject {
+	flex-basis: auto;flex-grow: 1;flex-shrink: 1;
+	text-overflow: ellipsis;white-space: nowrap;overflow: hidden;font-weight: 400;color: var(--fc-333);  transition: all .3s ease;
+}
+.bbs-navigation .subject:not(.none) {font-weight: 700;}
+.bbs-navigation .subject:not(.none):hover {color:var(--primary-blue);}
+.bbs-navigation .subject.none {color:var(--fc-666);}
+.bbs-navigation .date {flex-basis: 160px;flex-grow: 0;flex-shrink: 0;color:var(--fc-888);text-align: center;}
+
+
+/* 작성 */
+.ui-form.write {width: 70%;}
+.ui-form.write .field{flex-direction: column;}
+.ui-form.write .field > .label{flex-basis: auto;}
+.ui-form.write .field .label:not(.clipped) + .ui-input {width: 100%;margin-left: 0;}
+.ui-form.write ul li:has(.ux-button-bar) {display: flex;justify-content:flex-end;}
+
+
+
+/* 이벤트 상세 */
+.ui-form.ui-bbs {width: calc(100vw - 640px);}
+.ui-form.ui-bbs ul li:has(.ux-button-bar) {display: flex;justify-content:flex-end;}
+
+#modify_controller,
+#file_upload,
+#modify_upload_file{display:none;}
+
+#file_upload,
+#modify_upload_file{margin-top: 32px;padding: 16px;border: 1px solid var(--line-02);border-radius: 8px;}
+
+#file_upload .desc,
+#modify_upload_file .desc{margin-right: 12px;}
+
+.upload-preview {margin-top: 16px;}
+.upload-preview img {margin-top: 12px;}
+
+.bbs-read.event {}
+.bbs-read.event .bbs-title {padding: 24px 40px 32px;gap: 16px;}
+
+.bbs-read input.i-title,
+.bbs-read input.i-title:disabled,
+.bbs-read textarea.i-content,
+.bbs-read textarea.i-content:disabled {width: 100%;color: var(--fc-black);background-color: transparent;border-color: transparent;}
+.bbs-read input.i-title {height: auto;padding: 16px 0;font-size: 1.5rem;}
+.bbs-read textarea.i-content {min-height: 100px;}
+
+.bbs-read input.i-title:focus-visible,
+.bbs-read textarea.i-content:focus-visible {outline: 1px solid transparent;}
+
+.ui-form.ui-bbs .ui-input .input > input[type="text"] {font-size: 1.5rem;font-weight: 700;}
+
+.ui-form.ui-bbs .ui-input .input {transition: box-shadow .2s ease;}
+.ui-form.ui-bbs .ui-input .input.outlined:before { box-shadow: 0 0 0 1px transparent inset;}
+
+.ui-form.ui-bbs .ui-input .input.outlined:focus-within:before {box-shadow: 0 0 0 2px rgba(36,103,191, .9) inset;}
 
 /* 개발완료시 삭제  */
 .posa { display: none;position: absolute;left: 0;top: 0;border: 1px solid var(--primary-blue);border-radius: 24px;background-color:var(--bg-02);padding:24px;transform: translateX(-100%);}
+
+

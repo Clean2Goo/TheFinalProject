@@ -19,24 +19,18 @@
                 <div class="alert alert-danger">${errorMessage}</div>
             </c:if>
 
+            <!-- FAQ 리스트 -->
             <div class="faq-list-container content">
                 <div class="faq-actions">
                     <!-- 질문 작성 버튼 -->
-                    <c:if test="${member != null}">
+                    <c:if test="${member != null && member.userType == 'customer'}">
                         <a href="${contextPath}/faq/userQuestionForm.do" class="btn btn-primary">질문 작성</a>
                     </c:if>
-                    <c:if test="${member != null && member.userType == 'systemOperator'}">
-                        <a href="${contextPath}/faq/adminWriteFaqForm.do" class="btn btn-secondary">FAQ 작성</a>
+                    <c:if test="${member != null && member.userType != 'customer'}">
+                        <a href="${contextPath}/faq/adminQuestionForm.do" class="btn btn-primary">질문 작성</a>
                     </c:if>
                 </div>
 
-                <!-- 검색 필드 -->
-                <form action="${contextPath}/faq/listFaqs.do" method="get" class="search-form">
-                    <input type="text" name="searchKeyword" placeholder="검색어 입력" value="${param.searchKeyword}" />
-                    <button type="submit" class="btn btn-search">검색</button>
-                </form>
-
-                <!-- FAQ 테이블 -->
                 <table class="faq-table">
                     <thead>
                         <tr>
@@ -56,11 +50,11 @@
                                         <td>${faq.userId}</td>
                                         <td>${faq.crtDate}</td>
                                     </tr>
-                                    <tr class="faq-answer-row">
+                                    <tr class="faq-answer-row" style="display: none;">
                                         <td colspan="4">
                                             <div class="faq-answer-row-content">
                                                 <p><strong>질문:</strong> ${faq.question}</p>
-                                                <p><strong>답변:</strong> 
+                                                <p><strong>답변:</strong>
                                                     <c:if test="${faq.answer != null && faq.answer != ''}">
                                                         ${faq.answer}
                                                     </c:if>
@@ -68,7 +62,15 @@
                                                         <span>답변이 아직 등록되지 않았습니다.</span>
                                                     </c:if>
                                                 </p>
-                                                <!-- 답변 작성 폼 (관리자만 보임) -->
+
+<c:if test="${member != null && faq.userId == member.id}">
+    <form action="${contextPath}/faq/deleteFaq.do" method="post" style="display: inline;">
+        <input type="hidden" name="faqNo" value="${faq.faqNo}" />
+        <button type="submit" class="btn-delete" onclick="return confirm('정말 삭제하시겠습니까?');">질문 삭제</button>
+    </form>
+</c:if>
+
+                                                <!-- 시스템 운영자일 경우 답변 등록 폼 표시 -->
                                                 <c:if test="${member != null && member.userType == 'systemOperator'}">
                                                     <form action="${contextPath}/faq/addAnswer.do" method="post">
                                                         <input type="hidden" name="faqNo" value="${faq.faqNo}" />
@@ -89,6 +91,21 @@
                         </c:choose>
                     </tbody>
                 </table>
+
+                <!-- 페이지네이션 -->
+                <div class="pagination">
+                    <c:if test="${pagination.currentPage > 1}">
+                        <a href="${contextPath}/faq/listFaqs.do?page=${pagination.prevPage}&searchKeyword=${param.searchKeyword}" class="prev">이전</a>
+                    </c:if>
+                    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+                        <a href="${contextPath}/faq/listFaqs.do?page=${i}&searchKeyword=${param.searchKeyword}" class="${i == pagination.currentPage ? 'active' : ''}">
+                            ${i}
+                        </a>
+                    </c:forEach>
+                    <c:if test="${pagination.currentPage < pagination.totalPages}">
+                        <a href="${contextPath}/faq/listFaqs.do?page=${pagination.nextPage}&searchKeyword=${param.searchKeyword}" class="next">다음</a>
+                    </c:if>
+                </div>
             </div>
         </article>
     </section>
@@ -98,7 +115,8 @@
     $(document).ready(function() {
         $(".faq-row").on("click", function() {
             const answerRow = $(this).next(".faq-answer-row");
-            answerRow.slideToggle(300);  // 부드러운 슬라이딩 효과
+            $(".faq-answer-row").not(answerRow).slideUp(300); // 다른 열린 답변은 닫기
+            answerRow.stop(true, true).slideToggle(300);      // 선택한 답변 토글
         });
     });
 </script>

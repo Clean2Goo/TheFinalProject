@@ -15,10 +15,11 @@
 						<h4 class="subject">${notice.title}</h4>
 						<ul class="info-list">
 							<li>
-								<p>작성자 : <span class="author">${notice.id}</span></p>
+								<p class="info">번호 : <span class="number">${notice.noticeno}</span></p>
 							</li>
 							<li>
-								<p>등록일 : <span class="date">${notice.writedate}</span></p>
+								<p class="info">작성자 : <span class="author">${notice.userName}</span></p>
+								<p class="info">등록일 : <span class="date">${notice.writedate}</span></p>
 							</li>
 						</ul>
 					</div>
