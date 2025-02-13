@@ -88,7 +88,29 @@ public class FaqController {
 
         return new ModelAndView("redirect:/faq/listFaqs.do");
     }
+    
+ // 본인 질문 삭제 처리
+    @RequestMapping(value = "/deleteFaq.do", method = RequestMethod.POST)
+    public ModelAndView deleteFaq(@RequestParam("faqNo") int faqNo, HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
+        MemberVO memberVO = (MemberVO) session.getAttribute("member");
 
+        if (memberVO == null) {
+            return new ModelAndView("redirect:/member/loginForm.do").addObject("errorMessage", "로그인이 필요합니다.");
+        }
+
+        try {
+            boolean isDeleted = faqService.deleteFaq(faqNo, memberVO.getId());
+            if (isDeleted) {
+                return new ModelAndView("redirect:/faq/listFaqs.do").addObject("successMessage", "질문이 삭제되었습니다.");
+            } else {
+                return new ModelAndView("redirect:/faq/listFaqs.do").addObject("errorMessage", "삭제 권한이 없습니다.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ModelAndView("redirect:/faq/listFaqs.do").addObject("errorMessage", "삭제 중 오류가 발생했습니다.");
+        }
+    }
 
 
     // 어드민 - FAQ 목록

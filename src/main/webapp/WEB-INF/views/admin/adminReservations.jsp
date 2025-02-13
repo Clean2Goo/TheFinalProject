@@ -47,7 +47,6 @@
                     <th>예약 시간</th>
                     <th>차량 유형/비용</th>
                     <th>상태</th>
-                    <th>취소 여부</th>
                     <th>관리</th>
                 </tr>
             </thead>
@@ -62,10 +61,11 @@
                         <td>${reservation.rsvnTime}</td>
                         <td>${reservation.carTypeCost}</td>
                         <td id="status-${reservation.rsvnId}">${reservation.status}</td>
-                        <td id="cancel-${reservation.rsvnId}">${reservation.cancelYn == 'Y' ? '취소됨' : '정상'}</td>
                         <td>
-                            <button type="button" class="update-status" data-rsvnid="${reservation.rsvnId}" data-status="이용완료">이용완료</button>
-                            <button type="button" class="update-status" data-rsvnid="${reservation.rsvnId}" data-status="예약취소">예약 취소</button>
+                            <c:if test="${reservation.status == '예약중'}">
+						        <button type="button" class="update-status" data-rsvnid="${reservation.rsvnId}" data-status="이용완료">이용완료</button>
+						        <button type="button" class="update-status" data-rsvnid="${reservation.rsvnId}" data-status="예약취소">예약취소</button>
+						    </c:if>
                         </td>
                     </tr>
                 </c:forEach>

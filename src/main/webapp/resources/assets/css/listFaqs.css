@@ -67,32 +67,41 @@
 }
 
 .faq-answer-row {
-    display: none;
+    display: table-row;
     background-color: #f8f9fa;
-    padding: 20px;
-    border-left: 4px solid #007bff;
-    border-radius: 0 0 8px 8px;
-    width: 215%;  /* 테이블 너비에 맞춤 */
-    box-sizing: border-box;
-    margin-top: -1px;
+    padding: 10px 20px;
 }
 
 .faq-answer-row-content {
-    max-width: 100%; /* 전체 너비 사용 */
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.btn-delete {
+    background-color: #dc3545; 
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: #c82333; 
 }
 
 .faq-answer-row p {
-    margin: 10px auto;
-    padding: 15px;
+    margin: 5px 0;
+    padding: 10px;
     background-color: #ffffff;
     border: 1px solid #ced4da;
     border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     font-size: 14px;
-    max-width: 800px;
-    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
 
 .faq-answer-row p strong {
     color: #007bff;
@@ -128,4 +137,29 @@
 
 .btn-secondary:hover {
     background-color: #5a6268;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination a:hover {
+    background-color: #f8f9fa;
 }
