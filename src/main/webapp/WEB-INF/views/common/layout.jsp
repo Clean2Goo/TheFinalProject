@@ -54,8 +54,6 @@
 
 	<!-- 로티추가 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
-
-	<!-- <link rel="stylesheet" href="${contextPath}/resources/assets/css/explore.css"> 임시주석 : 현재 expolore.jsp에서 다이렉트 로드 중 추후 병합예정 -->
 </head>
 
 <body>
