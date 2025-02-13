@@ -13,12 +13,13 @@
         <result property="img" column="USERIMG" />
         <result property="rank" column="RANK" />
         <result property="dob" column="DOB" />
+        <result property="totalRSVN" column="TOTALRSVN" />
     </resultMap>
 
     <!-- 회원 전체 목록 조회 -->
     <select id="selectAllMemberList" resultMap="memResult">
         <![CDATA[
-            SELECT USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE, USERIMG, RANK, DOB
+            SELECT USERID, USERPWD, USERNAME, USEREMAIL, USERPHONE, USERTYPE, JOINDATE, USERIMG, RANK, DOB, TOTALRSVN
             FROM USERS 
             ORDER BY JOINDATE DESC
         ]]>

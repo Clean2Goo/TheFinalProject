@@ -11,7 +11,7 @@
 
 .company-overview .text-content {
   flex: 1;
-  text-align: left;
+  text-align: center;
   margin-top: 20px;
   font-size: 1rem; /* 기본 폰트 크기 */
 }
@@ -74,6 +74,8 @@ main.ui-history  {
 }
 
 
+
+
 /* 페이지 설명 */
 .description {
   text-align: center;
@@ -119,29 +121,31 @@ main.ui-history  {
 /* 링크 스타일 */
 .nav-links {
   position: absolute;
-  color: white;
-  bottom: 10px; /* 배경의 하단에 위치 */
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
   text-align: center;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
 }
 
 .nav-links a {
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
   font-weight: bold;
   color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  font-size: 1.1rem;
+  transition: color 0.3s ease-in-out;
 }
 
 .nav-links a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
 }
+
 
 
 .value {

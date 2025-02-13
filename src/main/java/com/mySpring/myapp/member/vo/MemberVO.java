@@ -17,12 +17,13 @@ public class MemberVO {
     private String rank; 
     private Date dob;
     private String newPassword;
+    private int totalRSVN; 
 
 	public MemberVO() {
 		
 	}
 
-	public MemberVO(String id, String pwd, String name, String email, String phone, String userType, String img, String rank) {
+	public MemberVO(String id, String pwd, String name, String email, String phone, String userType, String img, String rank, int totalRSVN) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;
@@ -31,7 +32,7 @@ public class MemberVO {
         this.userType = userType;
         this.img = img;
         this.rank = rank;
-        
+        this.totalRSVN = totalRSVN;
     }
 
 	public String getId() {
@@ -119,4 +120,12 @@ public class MemberVO {
     public void setDob(Date dob) {
         this.dob = dob;
     }
+    
+    public int getTotalRSVN() {
+		return totalRSVN;
+	}
+
+	public void setTotalRSVN(int totalRSVN) {
+		this.totalRSVN = totalRSVN;
+	}
 }
