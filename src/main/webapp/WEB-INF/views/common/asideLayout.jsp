@@ -54,36 +54,24 @@
 	<!-- 로티추가 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
 	<!-- 백엔드 취합 후 수정 필요한 css -->
-	<link rel="stylesheet" href="${contextPath}/resources/assets/css/myInfo.css">
-	<link rel="stylesheet" href="${contextPath}/resources/assets/css/aside.css">
-
 </head>
-<style>
-.myPage-container #content {display:flex;min-height: calc(100vh - 168px);padding :112px 0 0;}
 
-aside section article {width: auto;}
-
-.myPage-container main {padding:40px 210px 40px 80px;}
-.myPage-container main.ui-sign {justify-content: center;}
-.myPage-container main > section,
-.myPage-container main:not(.ui-sign) > section > article {min-width: 100% !important;}
-.myPage-container main > section > article div {width:100%}
-
-</style>
 <body>
 	<div id="container" class="myPage-container">
 		<div id="header">
 			<tiles:insertAttribute name="header" />
 		</div>
 		<div id="content">
-            <c:choose>
-                <c:when test="${isLogOn == true}">
-                    <aside id="aside">
-                        <tiles:insertAttribute name="aside" />
-                    </aside>
-                </c:when>
-            </c:choose>
-			<tiles:insertAttribute name="body" />
+			<div class="content-inner">
+				<c:choose>
+					<c:when test="${isLogOn == true}">
+						<aside id="aside">
+							<tiles:insertAttribute name="aside" />
+						</aside>
+					</c:when>
+				</c:choose>
+				<tiles:insertAttribute name="body" />
+			</div>
         </div>
 		<div id="footer">
 			<tiles:insertAttribute name="footer" />

@@ -11,48 +11,50 @@
                 <h3>개인정보</h3>
             </div>
             <div class="content">
-                <div class="mypage-container">
-                    <div class="h4-title">
+                <div class="h4">
+                    <!-- <div class="h4-title">
                         <h4>기본 정보</h4>
-                    </div>
+                    </div> -->
                     <div class="content">
-                        <div class="profile-item">
-                            <span class="user-image">
-                                <img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
-                            </span>
-                            <span class="user-name">${member.name}</span>
-                            <button type="button" class="edit-btn" onclick="openPasswordPopup()">비밀번호 변경</button>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">생년월일</span>
-                            <span class="value" id="dob-value">
-                                <c:choose>
-                                    <c:when test="${empty member.dob}">정보 없음</c:when>
-                                    <c:otherwise>${member.dob}</c:otherwise>
-                                </c:choose>
-                            </span>
-                            <button class="edit-btn" onclick="openEditPopup('dob')">수정</button>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">휴대전화</span>
-                            <span class="value" id="phone-value">
-                                <c:choose>
-                                    <c:when test="${empty member.phone}">정보 없음</c:when>
-                                    <c:otherwise>${member.phone}</c:otherwise>
-                                </c:choose>
-                            </span>
-                            <button class="edit-btn" onclick="openEditPopup('phone')">수정</button>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">이메일</span>
-                            <span class="value" id="email-value">
-                                <c:choose>
-                                    <c:when test="${empty member.email}">정보 없음</c:when>
-                                    <c:otherwise>${member.email}</c:otherwise>
-                                </c:choose>
-                            </span>
-                            <button class="edit-btn" onclick="openEditPopup('email')">수정</button>
-                        </div>
+						<div class="personal-info-list">
+							<div class="profile-item">
+								<span class="user-image">
+									<img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필이미지">
+								</span>
+								<span class="user-name">${member.name}</span>
+								<button type="button" class="ux-button contained button-table primary edit-btn" onclick="openPasswordPopup()"><span class="label">비밀번호 변경</span></button>
+							</div>
+							<div class="info-item">
+								<span class="dt">생년월일</span>
+								<span class="dd" id="dob-value">
+									<c:choose>
+										<c:when test="${empty member.dob}">정보 없음</c:when>
+										<c:otherwise>${member.dob}</c:otherwise>
+									</c:choose>
+								</span>
+								<button class="ux-button contained button-table primary edit-btn" onclick="openEditPopup('dob')"><span class="label">수정</span></button>
+							</div>
+							<div class="info-item">
+								<span class="dt">휴대전화</span>
+								<span class="dd" id="phone-value">
+									<c:choose>
+										<c:when test="${empty member.phone}">정보 없음</c:when>
+										<c:otherwise>${member.phone}</c:otherwise>
+									</c:choose>
+								</span>
+								<button class="ux-button contained button-table primary edit-btn" onclick="openEditPopup('phone')"><span class="label">수정</span></button>
+							</div>
+							<div class="info-item">
+								<span class="dt">이메일</span>
+								<span class="dd" id="email-value">
+									<c:choose>
+										<c:when test="${empty member.email}">정보 없음</c:when>
+										<c:otherwise>${member.email}</c:otherwise>
+									</c:choose>
+								</span>
+								<button class="ux-button contained button-table primary edit-btn" onclick="openEditPopup('email')"><span class="label">수정</span></button>
+							</div>
+						</div>
                     </div>
                 </div>
             </div>
@@ -63,14 +65,28 @@
 <!-- 필드 수정 모달 팝업 -->
 <div id="edit-modal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeEditPopup()">&times;</span>
-        <form id="edit-form">
+		<button class="ux-button icon-menu popup-close-button" onclick="closeEditPopup()">
+			<span class="icon"><i class="fa-solid fa-xmark"></i></span><span class="label">팝업 닫기</span>
+		</button>
+        <form class="ui-form write dialog" id="edit-form">
             <input type="hidden" id="edit-field">
-            <div class="form-group">
-                <label id="edit-label"></label>
-                <input type="text" id="edit-value" required>
-            </div>
-            <button type="button" class="submit-btn" onclick="updateField()">수정</button>
+			<ul>
+				<li>
+					<div class="field">
+						<label class="label" id="edit-label"></label>
+						<div class="ui-input">
+							<div class="input outlined">
+								<input type="text" id="edit-value" required>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="ux-button-bar">
+						<button type="button" class="ux-button contained primary" onclick="updateField()"><span class="label">수정</span></button>
+					</div>
+				</li>
+			</ul>
         </form>
     </div>
 </div>
@@ -78,17 +94,37 @@
 <!-- 비밀번호 변경 모달 팝업 -->
 <div id="password-modal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closePasswordPopup()">&times;</span>
-        <form id="password-form">
-            <div class="form-group">
-                <label for="current-password">현재 비밀번호</label>
-                <input type="password" id="current-password" required>
-            </div>
-            <div class="form-group">
-                <label for="new-password">새 비밀번호</label>
-                <input type="password" id="new-password" required>
-            </div>
-            <button type="button" class="submit-btn" onclick="updatePassword()">비밀번호 변경</button>
+		<button class="ux-button icon-menu popup-close-button" onclick="closePasswordPopup()">
+			<span class="icon"><i class="fa-solid fa-xmark"></i></span><span class="label">팝업 닫기</span>
+		</button>
+        <form class="ui-form write dialog" id="password-form">
+			<ul>
+				<li>
+					<div class="field">
+						<label class="label" for="current-password">현재 비밀번호</label>
+						<div class="ui-input">
+							<div class="input outlined">
+								<input type="password" id="current-password" required>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="field">
+						<label class="label" for="new-password">새 비밀번호</label>
+						<div class="ui-input">
+							<div class="input outlined">
+								<input type="password" id="new-password" required>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="ux-button-bar">
+						<button type="button" class="ux-button contained primary" onclick="updatePassword()"><span class="label">비밀번호 변경</span></button>
+					</div>
+				</li>
+			</ul>
         </form>
     </div>
 </div>

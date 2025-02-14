@@ -36,13 +36,13 @@ function renderFavorites(favorites) {
 					</div>
 					<div class="favorite-info">
 						<h5>${favorite.washName || "이름 없음"}</h5>
-						<p class="desc">주소: ${favorite.washAddr || "주소 없음"}</p>
-						<p class="desc">전화번호: ${favorite.washTel || "전화번호 없음"}</p>
+						<p class="desc">${favorite.washAddr || "주소 없음"}</p>
+						<p class="desc">${favorite.washTel || "전화번호 없음"}</p>
 					</div>
 				</div>
 				<div class="ux-button-bar">
-					<button class="ux-button contained remove" onclick="removeFavorite('${favorite.washId}')"><span class=label>즐겨찾기 해제</span></button>
-					<button class="ux-button contained primary" onclick="redirectToReservationPage('${favorite.washId}')"><span class="label">바로 예약</span></button>
+					<button class="ux-button button-table contained remove" onclick="removeFavorite('${favorite.washId}')"><span class=label>즐겨찾기 해제</span></button>
+					<button class="ux-button button-table contained primary" onclick="redirectToReservationPage('${favorite.washId}')"><span class="label">바로 예약 하기</span></button>
 				</div>
 			</div>
 		`;
