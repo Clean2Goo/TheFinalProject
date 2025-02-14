@@ -7,10 +7,8 @@
 <main class="ui-favorites">
 	<section>
 		<article>
-			<div class="h3-title">
+			<div class="h3-title col">
 				<h3>즐겨찾기</h3>
-			</div>
-			<div class="content">
 				<div class="ui-page-desc">
 					<div class="middot-list">
 						<ul>
@@ -19,6 +17,8 @@
 						</ul>
 					</div>
 				</div>
+			</div>
+			<div class="content">
 				<ul id="favorite-list" class="favorite-list"></ul>
 			</div>
 		</article>

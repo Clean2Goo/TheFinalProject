@@ -11,8 +11,8 @@
 	<section class="section1">
 		<article >
 			<div class="section-title">
-				<h3>세차, 이제 더 스마트하게</h3>
-				<h3>원하는 시간에 간편하게</h3>
+				<h3>세차, 이제 더 <em>스마트</em>하게</h3>
+				<h3><em>원하는 시간</em>에 간편하게</h3>
 				<h3>언제 어디서든 웨이팅없이!</h3>
 				<h4>당신의 일상에 여유를 더합니다.</h4>
 				<h4>Clean 2 go로 빠르게 예약하세요</h4>
