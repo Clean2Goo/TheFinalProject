@@ -7,20 +7,22 @@
 
 <section>
 	<article>
-		<div class="myPage-menu">
-			<div class="menu-list">
-				<div class="aside-user-info">
-                    <div class="aside-user-image">
-                        <img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필 이미지">
-                    </div>
-                    <c:choose>
-                        <c:when test="${isLogOn == true && member != null}">
-                            <h4>${member.id}</h4>
-                            <p class="user-type">${member.userType}</p>
-                            <p class="user-rank">${member.rank}</p>
-                        </c:when>
-                    </c:choose>
-                </div>
+		<div class="mypage-aside-menu">
+			<div class="aside-user-info">
+				<div class="aside-user-image">
+					<img src="${contextPath}/resources/assets/images/profile/default.png" alt="프로필 이미지">
+				</div>
+				<c:choose>
+					<c:when test="${isLogOn == true && member != null}">
+						<div class="user-info-list">
+							<h4>${member.id}</h4>
+							<p class="user-type">${member.userType}</p>
+							<p class="user-rank">${member.rank}</p>
+						</div>
+					</c:when>
+				</c:choose>
+			</div>
+			<div class="aside-menu-list">
 				<ul>
 					<li>
 						<a href="${contextPath}/myPage/myInfo.do" class="ux-link ${activeMenu == 'myInfo' ? 'active' : ''}">개인정보</a>

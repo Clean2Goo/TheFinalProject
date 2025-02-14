@@ -14,8 +14,16 @@
 <main class="ui-subpage">
 	<section>
 		<article>
-			<div class="h3-title">
+			<div class="h3-title col">
 				<h3>예약내역</h3>
+				<div class="ui-page-desc">
+					<div class="middot-list">
+						<ul>
+							<li>진행중인 예약과 지난 예약내역을 확인 할 수 있습니다.</li>
+							<li>이용이 종료된 예약건에 대해 리뷰를 작성 할 수 있으며, 작성한 리뷰는 리뷰내역에서 확인 가능합니다.</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 			<div class="content">
 				<div class="h4">
@@ -27,16 +35,16 @@
 							<table>
 								<caption>이용중인 예약 테이블</caption>
 								<colgroup>
-									<col width="120px">
-									<col width="18.5%">
-									<col width="18.5%">
-									<col width="20.5%">
-									<!-- <col width="auto"> -->
-									<col width="22.5%">
+									<col class="col-8">
+									<col class="col-16">
+									<col class="col-16">
+									<col class="col-auto">
+									<!-- <col class="auto"> -->
+									<col class="col-auto">
 								</colgroup>
 								<thead>
 									<tr>
-										<th scope="col">예약번호</th>
+										<th scope="col">No.</th>
 										<th scope="col">세차장명</th>
 										<th scope="col">세차일시</th>
 										<th scope="col">세차옵션</th>
@@ -116,16 +124,16 @@
 								<table>
 									<caption>지난 이용내역 테이블</caption>
 									<colgroup>
-										<col width="120px">
-										<col width="18.5%">
-										<col width="18.5%">
-										<col width="20.5%">
-										<!-- <col width="auto"> -->
-										<col width="22.5%">
+										<col class="col-8">
+										<col class="col-16">
+										<col class="col-16">
+										<col class="col-auto">
+										<!-- <col class="auto"> -->
+										<col class="col-auto">
 									</colgroup>
 									<thead>
 										<tr>
-											<th scope="col">예약번호</th>
+											<th scope="col">No.</th>
 											<th scope="col">세차장명</th>
 											<th scope="col">세차일시</th>
 											<th scope="col">세차옵션</th>
