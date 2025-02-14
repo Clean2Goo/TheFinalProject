@@ -3,7 +3,7 @@
 /* ************************************ 메인페이지 ************************************ */
 /* ************************************ 메인페이지 ************************************ */
 
-main.ui-index {gap: 100px;}
+main.ui-index {gap: 120px;padding: 232px 0 100px;}
 main.ui-index section {min-height: 30vh;}
 main.ui-index section > article,
 main.ui-index section article .section-title,
@@ -17,9 +17,13 @@ main.ui-index article.has-swiper {width: calc(100vw - 120px);}
 main.ui-index article.has-swiper .section-title {padding-left: 260px;}
 
 main.ui-index .section-title {width: 100%;}
-main.ui-index .section1 .section-title h3{font-size: 4.75rem;font-weight: 700;}
 
 /* 섹션1 카피라이트*/
+main.ui-index .section1 .section-title h3{font-size: 4.75rem;font-weight: 700;}
+main.ui-index .section1 .section-title h4:first-of-type{margin-top: 80px;}
+main.ui-index .section1 .section-title h4{margin-top: 16px;color:var(--fc-333);font-size: 1.75rem;}
+main.ui-index .section1 .content {align-items: flex-end;}
+main.ui-index .section1 .ux-button-bar {width: 260px;}
 
 /* 섹션2 신규세차장 */
 
@@ -180,7 +184,7 @@ main.ui-subpage .h4.subpage-custom {flex-direction: row;}
 .data-grid {width: 100%;border-top: 1px solid #000;}
 .data-grid table {width: 100%;}
 .data-grid {width: 100%;}
-.data-grid table {width: 100%;text-align: center;}
+.data-grid table {width: 100%;text-align: center;background-color: var(--bg-fff);}
 .data-grid table th,
 .data-grid table td {font-size: 1rem;color: #111; border-bottom: 1px solid rgba(0, 0, 0, .12);}
 
@@ -277,6 +281,16 @@ main.ui-reservation .ui-stepper + h3 {margin-top: 16px;}
 .custom-radio .icon,
 .custom-radio .label {z-index: 11;}
 
+
+/* ************************************ 인풋: 체크박스 ************************************ */
+/* ************************************ 인풋: 체크박스 ************************************ */
+.custom-checkbox .icon {flex-shrink: 0;background-image: url("../images/common/icns_checkbox_01_m.svg");background-repeat: no-repeat;background-position: 0 -24px;}
+.custom-checkbox input[type="checkbox"]:disabled + .icon {background-position: -24px -24px;}
+.custom-checkbox input[type="checkbox"]:checked:disabled + .icon {background-position: -24px 0;}
+.custom-checkbox.large .icon {background-image: url("../images/common/icns_checkbox_01_l.svg");background-repeat: no-repeat;background-position: 0 -28px;}
+.custom-checkbox.large input[type="checkbox"]:checked + .icon {background-position: 0 0;}
+.custom-checkbox.large input[type="checkbox"]:disabled + .icon {background-position: -28px -28px;}
+.custom-checkbox.large input[type="checkbox"]:checked:disabled + .icon {background-position: -28px 0;}
 
 
 /* ************************************ 게시판 ************************************ */
