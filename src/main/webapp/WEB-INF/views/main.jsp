@@ -11,13 +11,13 @@
 	<section class="section1">
 		<article >
 			<div class="section-title">
-				<h3>세차, 이제 더 <em>스마트</em>하게</h3>
-				<h3><em>원하는 시간</em>에 간편하게</h3>
-				<h3>언제 어디서든 웨이팅없이!</h3>
-				<h4>당신의 일상에 여유를 더합니다.</h4>
-				<h4>Clean 2 go로 빠르게 예약하세요</h4>
+				<h3 class="animate-line">세차, 이제 더 <em>스마트</em>하게</h3>
+				<h3 class="animate-line"><em>원하는 시간</em>에 간편하게</h3>
+				<h3 class="animate-line">언제 어디서든 웨이팅없이!</h3>
+				<h4 class="animate-line">당신의 일상에 여유를 더합니다.</h4>
+				<h4 class="animate-line">Clean 2 go로 빠르게 예약하세요</h4>
 			</div>
-			<div class="content">
+			<div class="content sec1 animate-line">
 				<div class="ux-button-bar">
 					<a href="${contextPath}/explore.do" class="ux-button contained primary" role="button">
 						<span class="label">세차장 검색</span>
@@ -27,7 +27,7 @@
 		</article>
 	</section>
 	<!-- 섹션 2 -->
-	<section class="section2">
+	<section class="section2 sec2 animate-line">
 		<article class="has-swiper">
 			<div class="section-title">
 				<h3>강남구 추천 세차장</h3>
@@ -50,7 +50,6 @@
 									</div>
 								</a>
 							</div>
-
 							</c:forEach>
 						</c:if>
 					</div>
@@ -73,7 +72,7 @@
 		</article>
 	</section> -->
 	<!-- 섹션 4 -->
-	<section class="section4">
+	<section class="section4 sec4 animate-line">
 		<article >
 			<div class="section-title fdr">
 				<h3>Events</h3>
@@ -111,7 +110,7 @@
 		</article>
 	</section>
 	<!-- 섹션 5 -->
-	<section class="section5">
+	<section class="section5 sec5 animate-line">
 		<article >
 			<div class="section-title fdr">
 				<h3>Q&A</h3>
