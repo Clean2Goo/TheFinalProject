@@ -8,7 +8,7 @@
     <section>
         <article>
             <div class="h3-title">
-                <h3>자주 묻는 질문</h3>
+                <h3>고객센터</h3>
             </div>
 
             <!-- 메시지 표시 -->
