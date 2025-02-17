@@ -92,8 +92,7 @@ h6 {font-size: 1rem;} 		/* 16px */
 
 /* display shortcut*/
 em {color: var(--primary-blue);font-style: normal;}
-.gsb-0 {flex-grow: 0;flex-shrink: 0;flex-basis: 0;}
-.gsb-1 {flex-grow: 1;flex-shrink: 1;flex-basis: auto;}
+
 .basis-0{flex-basis: 0 !important;}
 .strong,
 .bold {font-weight: 700;}
@@ -115,8 +114,8 @@ em {color: var(--primary-blue);font-style: normal;}
 .aifs {align-items: flex-start !important;}
 .aife {align-items: flex-end !important;}
 .gap-0 {display: flex;}
-.gsb-0 {flex-grow: 0;flex-shrink: 0;flex-basis: 0;}
-.gsb-1 {flex-grow: 1;flex-shrink: 1;flex-basis: auto;}
+.gsb-0 {flex-grow: 0!important;flex-shrink: 0!important;flex-basis: 0!important;}
+.gsb-1 {flex-grow: 1!important;flex-shrink: 1!important;flex-basis: auto!important;}
 
 
 span.icon,
@@ -338,7 +337,9 @@ textarea {font-size: 1rem;font-weight: 500;flex-grow: 1;flex-shrink: 1;flex-basi
 .ux-button.contained.remove {background-color: var(--negative);}
 .ux-button.contained.cancel {background-color: orange;}
 .ux-button.contained.edit {background-color:#4CAF50;}
+.ux-button.contained:disabled,
 .ux-button.contained.disabled {color: var(--fc-666);background-color: var(--contained-disabled);background-image: none;pointer-events: none;}
+.ux-button.contained:disabled:before,
 .ux-button.contained.disabled:before {display: none;}
 
 /* 버튼 아웃라인 */
@@ -687,14 +688,18 @@ footer .copyright-info {opacity: .8;}
 .admin-container footer article {align-items: center;gap: 12px;padding: 40px 0;}
 .admin-container footer .company-info .h1{font-size: 1.25rem;}
 
-aside {padding:40px;background-color: var(--bg-01);border: 1px solid var(--line-02);}
-aside section article {width: auto;}
+.admin-container aside {padding:40px;background-color: var(--bg-02);border: 1px solid var(--line-02);}
+.admin-container aside section article {width: auto;}
 
-aside .admin-menu {display: flex;flex-direction: column;gap: 32px;}
-aside .admin-menu .user-info-wrap {}
-aside .admin-menu .menu-list .ux-button.text-button {padding: 0;font-weight: 700;}
-aside .admin-menu .menu-list.depth2 {padding-left: 16px;font-size: 0.9rem;}
-aside .admin-menu .menu-list.depth2 .ux-button.text-button{height: 32px;font-weight: 400;}
+.admin-container aside .admin-menu {display: flex;flex-direction: column;gap: 32px;}
+.admin-container aside .admin-menu .user-info-wrap {}
+.admin-container aside .admin-menu .menu-list {
+	display: flex;flex-direction: column;gap: 8px;
+	min-width:220px;padding: 16px 0;border-top: 1px solid var(--line-02);border-bottom: 1px solid var(--line-02);
+}
+.admin-container aside .admin-menu .menu-list .ux-button.text-button {padding: 0;font-weight: 700;}
+.admin-container aside .admin-menu .menu-list.depth2 {padding-left: 16px;font-size: 0.9rem;}
+.admin-container aside .admin-menu .menu-list.depth2 .ux-button.text-button{height: 32px;font-weight: 400;}
 
 
 .admin-container main {padding:40px 40px 80px;}

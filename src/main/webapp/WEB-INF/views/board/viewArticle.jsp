@@ -74,7 +74,7 @@
 					<ul>
 						<li>
 							<div  id="modify_button">
-								<c:if test="${member.id == article.id }">
+								<c:if test="${member.userType == 'systemOperator'}">
 									<div class="ux-button-bar">
 										<button class="ux-button contained primary" type=button  onClick="fn_enable(this.form)"><span class="label">게시글 수정</span></button>
 									</div>
