@@ -28,7 +28,7 @@
 								<th>등록일</th>
 								<!-- 게시글 삭제 (슈퍼 관리자만 보임) -->
 								 <c:if test="${member.userType == 'systemOperator'}">
-									 <th>게시물관리</th>
+									 <th>관리</th>
 								 </c:if>
 							 </tr>
 						 </thead>

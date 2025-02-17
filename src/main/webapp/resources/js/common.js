@@ -83,6 +83,15 @@ const publish = (function () {
 				slidesPerView: 3,
 				spaceBetween: 40,
 			});
+			var eventSwiperAdmin = new Swiper(".event-swiper.view-admin", {
+				slidesPerView: 1,
+				spaceBetween: 0,
+				autoplay: {
+					delay: 2000,
+					disableOnInteraction: false,
+					loop: true,
+				},
+			});
 		},
 		setAccordion: function () {
 			$('.ui-accordion:not(".accordion-initiated")').each(function () {
@@ -271,6 +280,14 @@ const publish = (function () {
 				loop: false,
 				autoplay: true,
 				path: contextPath + "/resources/assets/animation/lottie-check.json",
+			});
+
+			var graph = lottie.loadAnimation({
+				container: document.getElementById("lottie-graph"),
+				renderer: "svg",
+				loop: false,
+				autoplay: true,
+				path: contextPath + "/resources/assets/animation/lottie-graph.json",
 			});
 		},
 	};

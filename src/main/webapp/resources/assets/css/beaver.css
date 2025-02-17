@@ -25,7 +25,32 @@ main.ui-index .section1 .section-title h4{margin-top: 16px;color:var(--fc-333);f
 main.ui-index .section1 .content {align-items: flex-end;}
 main.ui-index .section1 .ux-button-bar {width: 260px;}
 
+.animate-line {
+    opacity: 0;
+    transform: translateY(60px);
+    animation: slide-up 0.6s forwards;
+}
+
+@keyframes slide-up {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-line:nth-child(1) { animation-delay: 0.2s; }
+.animate-line:nth-child(2) { animation-delay: 0.6s; }
+.animate-line:nth-child(3) { animation-delay: 1s; }
+.animate-line:nth-child(4) { animation-delay: 1.4s; }
+.animate-line:nth-child(5) { animation-delay: 1.6s; }
+
+.sec1.animate-line { animation-delay: 2.2s; }
+.sec2.animate-line { animation-delay: 3s; }
+.sec4.animate-line { animation-delay: 4.2s; }
+.sec5.animate-line { animation-delay: 4.8s; }
+
 /* 섹션2 신규세차장 */
+
 
 .recommand-swiper {position: relative;width: 100%;height: auto;}
 .swiper-slide.recommand-slide {width: calc(100vw - 80px);height: auto;}
@@ -388,4 +413,85 @@ main.ui-reservation .ui-stepper + h3 {margin-top: 16px;}
 /* 개발완료시 삭제  */
 .posa { display: none;position: absolute;left: 0;top: 0;border: 1px solid var(--primary-blue);border-radius: 24px;background-color:var(--bg-02);padding:24px;transform: translateX(-100%);}
 
+
+/* ************************************ 어드민 ************************************ */
+/* ************************************ 어드민 ************************************ */
+main.ui-index-admin {}
+
+main.ui-index-admin .h4 {
+	flex-grow:1;flex-shrink:1;flex-basis:auto ;
+	display: flex;flex-direction: column; gap: 16px;
+	position: relative;
+	height: 100%; padding: 24px 32px;border: 1px solid var(--line-02);border-radius: 24px;
+}
+main.ui-index-admin .h4 .h4-title{display: flex; justify-content: space-between;border-bottom: 1px solid var(--line-02);padding-bottom: 8px;}
+main.ui-index-admin .h4 .h4-title h4{ font-size: 1.25rem;}
+
+main.ui-index-admin .h4 .content{flex-grow:1;display: flex;align-items: center;justify-content: center;}
+
+main.ui-index-admin .data-grid{height: 100%; border-top: none;}
+main.ui-index-admin .data-grid table {height: 100%;}
+main.ui-index-admin .data-grid table tr:last-of-type td {border-bottom: none;}
+.admin-container  main.ui-index-admin .data-grid table .faq-answer-row td {padding-left: 32px;background-color: var(--bg-02);}
+.admin-container  main.ui-index-admin .data-grid table .faq-answer-row td .tal{max-width:80%;}
+
+
+.grid-container {
+	display: grid;
+	width: 100%;
+	grid-template-columns: 400px 400px auto;
+	grid-gap: 24px;
+	grid-template-areas:
+		'a b c c'
+		'd e c c'
+	;
+  }
+.item1 {grid-area: a;}
+.item2 {grid-area: b;}
+.item3 {grid-area: c;}
+.item4 {grid-area: d;}
+.item5 {grid-area: e;}
+
+@media screen and (max-width: 768px) {
+}
+@media (min-width: 768px) and (max-width: 1920px) {
+
+	main.ui-index-admin .h4 {height: 100%;}
+	.event-swiper.view-admin {width: 306px;}
+	.grid-container{
+		grid-template-columns: 400px 400px auto;
+	}
+}
+@media (min-width: 1921px) and (max-width: 2560px) {
+
+	main.ui-index-admin .h4 {height: 100%;}
+	.event-swiper.view-admin {width: 500px;}
+	.grid-container{
+		grid-template-columns: 400px 500px auto;
+	}
+}
+
+/* 기간별 예약건수  */
+.ui-graph {position: relative; height: 226px;width: 240px;margin: auto;}
+.ui-graph .lottie{width: 126%; height:auto;margin-left:-7%;}
+.ui-graph .graph-text{position: absolute;}
+.ui-graph .graph-text.month{left: -8px;bottom: -2px;width: 94%;padding-top:4px;border-top: 1px solid var(--line-02);}
+.ui-graph .graph-text.count{left: -6px;top: 10px;width: auto;height: 86%;}
+.ui-graph .graph-text.count ul{display: flex; flex-direction:column;align-items: center;height: 100%;}
+.ui-graph .graph-text ul {display: flex;justify-content: space-between;align-items:flex-start;}
+.ui-graph .graph-text ul p {text-align: center;color: var(--fc-666);font-size: 0.75rem;}
+
+/* faq */
+.ui-form.faq{margin-top: 16px;}
+.ui-form.faq ul:not(.info-list) {gap: 0;}
+.ui-form.faq ul li .ux-button-bar:only-of-type {margin-top: 12px;}
+.ui-form.faq ul li:has(.ux-button-bar) .ux-button-bar{justify-content: flex-end;width: 100%;}
+
+
+/* 진행중인 이벤트 */
+.event-swiper.view-admin {width: 306px;height: auto;overflow: hidden;}
+.event-swiper.view-admin .event {display: flex;flex-direction: column;gap:20px;}
+.event-swiper.view-admin .event .item-image {border-radius: 8px;overflow: hidden;transition: all 0.3s ease;}
+.event-swiper.view-admin .event .item-image .img {width: 100%; height: 100%;object-fit: cover;transition: all 0.3s ease;}
+.event-swiper.view-admin .event:hover .item-image .img {transform: scale(1.2);}
 

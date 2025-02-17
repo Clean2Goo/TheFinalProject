@@ -63,13 +63,9 @@
 		</div>
 		<div id="content">
 			<div class="content-inner">
-				<c:choose>
-					<c:when test="${isLogOn == true}">
-						<aside id="aside">
-							<tiles:insertAttribute name="aside" />
-						</aside>
-					</c:when>
-				</c:choose>
+				<aside id="aside">
+					<tiles:insertAttribute name="aside" />
+				</aside>
 				<tiles:insertAttribute name="body" />
 			</div>
         </div>

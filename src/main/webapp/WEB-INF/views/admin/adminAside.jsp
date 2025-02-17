@@ -16,12 +16,7 @@
 					</div>
 				</c:when>
 			</c:choose>
-			<ul class="menu-list depth1">
-				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
-					<li>
-						<a href="${contextPath}/member/adminListMembers.do" class="ux-button text-button"><span class="label">전체회원 리스트</span></a>
-					</li>
-				</c:if>
+			<ul class="menu-list">
 				<li>
 					<a href="${contextPath}/notice/adminListNotices.do" class="ux-button text-button"><span class="label">공지사항</span></a>
 				</li>
@@ -50,7 +45,11 @@
 				        </a>
 				    </li>
 				</c:if>
-
+				<c:if test="${isLogOn && member.userType == 'systemOperator'}">
+					<li>
+						<a href="${contextPath}/member/adminListMembers.do" class="ux-button text-button"><span class="label">전체회원 리스트</span></a>
+					</li>
+				</c:if>
 
 				<!-- 세자창 관리자 메뉴 -->
 				<c:if test="${isLogOn && member.userType == 'washAdmin'}">
@@ -71,7 +70,7 @@
 			<div class="ux-button-bar">
 				<button type="button" class="ux-button outlined"
 					onclick="location.href='${contextPath}/member/adminLogout.do'">
-					<span class="label">어드민-로그아웃</span>
+					<span class="label">로그아웃</span>
 				</button>
 			</div>
 		</div>
