@@ -53,7 +53,7 @@
         </div>
         <div id="main">
             <c:choose>
-                <c:when test="${isLogOn == true}">
+                <c:when test="${isLogOn == true  && member!= null}">
                     <aside id="aside">
                         <tiles:insertAttribute name="aside" />
                     </aside>

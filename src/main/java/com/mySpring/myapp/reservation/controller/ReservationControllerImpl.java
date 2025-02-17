@@ -166,8 +166,8 @@ public class ReservationControllerImpl implements ReservationController {
 
 
 
-	
-	
+
+
 	@RequestMapping(value = "/carwash/reservationStep2.do", method = RequestMethod.POST)
 	public ModelAndView reservationStep2(@RequestParam Map<String, String> params,
 										HttpServletRequest request,HttpServletResponse response) throws Exception {

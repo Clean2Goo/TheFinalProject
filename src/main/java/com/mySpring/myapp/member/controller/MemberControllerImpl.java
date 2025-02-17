@@ -34,6 +34,15 @@ import com.mySpring.myapp.member.vo.MemberVO;
 import com.mySpring.myapp.carwash.service.CarWashService;
 import com.mySpring.myapp.carwash.model.CarWash;
 
+import com.mySpring.myapp.board.service.BoardService;
+import com.mySpring.myapp.board.vo.ArticleVO;
+import com.mySpring.myapp.board.vo.ImageVO;
+
+import com.mySpring.myapp.notice.service.NoticeService;
+import com.mySpring.myapp.notice.vo.NoticeVO;
+
+import com.mySpring.myapp.faq.service.FaqService;
+import com.mySpring.myapp.faq.vo.FaqVO;
 
 @Controller("memberController")
 //@EnableAspectJAutoProxy
@@ -46,45 +55,93 @@ public class MemberControllerImpl implements MemberController {
 	@Autowired
 	private CarWashService carWashService;
 
+	@Autowired
+	private BoardService boardService;
+	@Autowired
+	private ArticleVO articleVO;
+
+	@Autowired
+    private NoticeService noticeService;
+
+	@Autowired
+    private FaqService faqService;
 
 	// 어드민 메인
-	@RequestMapping(value = "/admin.do", method = RequestMethod.GET)
-    public ModelAndView adminMain(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
-        Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
+	@RequestMapping(value = "/admin.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView adminMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession(false); // false를 주어 세션이 없을 경우 null 반환
         ModelAndView mav = new ModelAndView();
-        if (isLogOn != null && isLogOn) {
-        	 // 로그인정보 가져오기
-            MemberVO member = (MemberVO) session.getAttribute("member");
-            mav.addObject("member", member);
 
-            mav.setViewName("adminAfter");
-        } else {
-            mav.setViewName("adminBefore");
-        }
+        List articlesList = boardService.listArticles();
+        mav.addObject("articlesList", articlesList);
+        System.out.println("어드민 메인 이벤트리스트 로드");
+
+        List noticesList = noticeService.listNotices();
+        mav.addObject("noticesList", noticeService.listNotices());
+        System.out.println("어드민 메인 공지사항리스트 로드");
+
+        List faqList = faqService.listFaqs();
+		mav.addObject("faqList", faqService.listFaqs());
+        System.out.println("어드민 메인 faq리스트 로드");
+
+		if(session != null){
+			Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
+			MemberVO member = (MemberVO) session.getAttribute("member");
+
+			if (isLogOn != null && isLogOn && member != null) {
+
+				mav.addObject("member", member);
+				mav.addObject("isLogOn", true);
+
+
+				mav.setViewName("adminAfter");
+				System.out.println("/admin.do  로그인 후 adminAfter");
+			} else {
+				mav.setViewName("adminBefore");
+				System.out.println("/admin.do  로그인 전 adminBefore");
+			}
+		}else {
+			mav.setViewName("adminBefore");
+			System.out.println("세션이 없으므로 어드민 로그인화면으로 설정");
+		}
+
         return mav;
     }
+
 	// 어드민 로그인
 	@RequestMapping(value = "/member/adminLoginForm.do", method = RequestMethod.POST)
 	public ModelAndView adminLoginForm(@ModelAttribute("member") MemberVO member,
 	                                   RedirectAttributes rAttr,
-	                                   HttpServletRequest request, 
+	                                   HttpServletRequest request,
 	                                   HttpServletResponse response) throws Exception {
 	    ModelAndView mav = new ModelAndView();
+
 	    memberVO = memberService.login(member);
 
 	    if (memberVO != null) {
-	        
+
 	        HttpSession oldSession = request.getSession(false);
 	        if (oldSession != null) {
 	            oldSession.invalidate();
 	        }
 
-	  
+
 	        HttpSession session = request.getSession(true);
 	        session.setAttribute("member", memberVO);
 	        session.setAttribute("isLogOn", true);
 	        session.setAttribute("userId", memberVO.getId()); // userId 저장
+
+			List articlesList = boardService.listArticles();
+			mav.addObject("articlesList", articlesList);
+			System.out.println("로그인하자마자 이벤트리스트 더해");
+
+			List noticesList = noticeService.listNotices();
+			mav.addObject("noticesList", noticeService.listNotices());
+			System.out.println("로그인하자마자 공지사항리스트 더해");
+
+			List faqList = faqService.listFaqs();
+			mav.addObject("faqList", faqService.listFaqs());
+			System.out.println("로그인하자마자 faq리스트 더해");
 
 	        mav.addObject("member", memberVO);
 	        mav.setViewName("adminAfter");
@@ -175,7 +232,7 @@ public class MemberControllerImpl implements MemberController {
 		mav.addObject("activeMenu", "myInfo");
 		return mav;
 	}
-	
+
 	//비밀번호 변경
 	@PostMapping("/member/updatePassword")
 	public ResponseEntity<Map<String, Object>> updatePassword(
@@ -203,7 +260,7 @@ public class MemberControllerImpl implements MemberController {
 	        return ResponseEntity.status(400).body(response);
 	    }
 	}
-	
+
 	@RequestMapping(value =  "/myPage/benefit.do", method = RequestMethod.GET)
 	private ModelAndView benefit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -215,7 +272,7 @@ public class MemberControllerImpl implements MemberController {
 		mav.addObject("activeMenu", "benefit");
 		return mav;
 	}
-	
+
 	//페이지 이동
 	@RequestMapping("/myPage/{menu}.do")
 	public String myPageMenu(@PathVariable String menu, Model model) {
@@ -348,15 +405,15 @@ public class MemberControllerImpl implements MemberController {
 		}
 		return viewName;
 	}
-	
-	
+
+
     @PostMapping("/member/updateMemberInfo")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> updateMemberInfo(
             @RequestParam("field") String field,
             @RequestParam("value") String value,
             HttpSession session) {
-        
+
         Map<String, Object> response = new HashMap<>();
         String userId = (String) session.getAttribute("userId");
 

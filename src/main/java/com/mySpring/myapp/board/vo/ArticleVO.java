@@ -20,7 +20,7 @@ public class ArticleVO {
 	private String userName; // 작성자 이름
 
 	public ArticleVO() {
-		System.out.println("ArticleVO 생성자호출");
+		//System.out.println("ArticleVO 생성자호출");
 	}
 
 	public int getArticleNO() {
