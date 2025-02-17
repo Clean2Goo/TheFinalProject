@@ -191,7 +191,7 @@
 						<div class="h4">
 							<div class="h4-title">
 								<h4>공지사항</h4>
-								<a href="${contextPath}/notice/adminViewNotice.do" role="button" class="ux-button text-button more-view-button" >
+								<a href="${contextPath}/notice/adminListNotices.do" role="button" class="ux-button text-button more-view-button" >
 									<span class="label">
 										<c:choose>
 											<c:when test="${member != null && member.userType == 'systemOperator'}">
