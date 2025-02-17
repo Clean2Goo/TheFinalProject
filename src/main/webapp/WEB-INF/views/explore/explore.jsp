@@ -36,6 +36,11 @@
 										<span class="label">자동세차</span>
 									</label>
 									<label class="custom-radio custom-checkbox">
+										<input type="checkbox" value="셀프세차">
+										<span class="icon"></span>
+										<span class="label">셀프세차</span>
+									</label>
+									<label class="custom-radio custom-checkbox">
 										<input type="checkbox" value="전문세차">
 										<span class="icon"></span>
 										<span class="label">전문세차</span>
@@ -44,11 +49,6 @@
 										<input type="checkbox" value="출장세차">
 										<span class="icon"></span>
 										<span class="label">출장세차</span>
-									</label>
-									<label class="custom-radio custom-checkbox">
-										<input type="checkbox" value="셀프세차">
-										<span class="icon"></span>
-										<span class="label">셀프세차</span>
 									</label>
 								</div>
 							</div>
