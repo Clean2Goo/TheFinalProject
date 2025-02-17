@@ -1,7 +1,12 @@
 package com.mySpring.myapp.carwash.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "CARWASHES") // 테이블 이름 매핑
@@ -54,9 +59,6 @@ public class CarWash {
     @Column(name = "NEWYN", length = 1)
     private String newYn; // 새 필드
 
-    @Column(name = "FAVYN", length = 1)
-    private String favYn; // 새 필드
-
     @Column(name = "RVWCOUNT")
     private Integer rvwCount; // 새 필드
 
@@ -65,6 +67,10 @@ public class CarWash {
 
     @Column(name = "CRTDATE")
     private java.sql.Date crtDate;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JsonIgnore // JSON 직렬화 시 제외
+    private List<Staff> staffList;
 
     // Getter와 Setter
     public String getWashId() {
@@ -187,14 +193,6 @@ public class CarWash {
         this.newYn = newYn;
     }
 
-    public String getFavYn() {
-        return favYn;
-    }
-
-    public void setFavYn(String favYn) {
-        this.favYn = favYn;
-    }
-
     public Integer getRvwCount() {
         return rvwCount;
     }
@@ -218,4 +216,16 @@ public class CarWash {
     public void setCrtDate(java.sql.Date crtDate) {
         this.crtDate = crtDate;
     }
+
+    public List<Staff> getStaffList() {
+    	 if (staffList == null) {
+             staffList = new ArrayList<>(); // 기본 빈 리스트 리턴
+         }
+        return staffList;
+    }
+
+    public void setStaffList(List<Staff> staffList) {
+        this.staffList = staffList;
+    }
+
 }

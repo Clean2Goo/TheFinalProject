@@ -1,81 +1,90 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-     pageEncoding="UTF-8"
-    isELIgnored="false" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<%
-  request.setCharacterEncoding("UTF-8");
-%>
+<%request.setCharacterEncoding("UTF-8");%>
 
-<head>
-<meta charset="UTF-8">
-<title>글쓰기창</title>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script  src="${contextPath}/resources/lib/jquery-3.1.1.min.js"></script>
-<script  src="<c:url value='/resources/lib/jquery-3.1.1.min.js' />" ></script>
+<main>
+	<section>
+		<article>
+			<div class="h3-title">
+				<h3>이벤트 등록</h3>
+			</div>
+			<div class="content">
+				<form class="ui-form write" name="articleForm" method="post" action="${contextPath}/board/addNewArticle.do" enctype="multipart/form-data">
+					<fieldset>
+						<ul>
+							<li>
+								<div class="field ">
+									<label class="label" for="title">제목</label>
+									<div class="ui-input">
+										<div class="input outlined">
+											<input type="text" name="title" id="title" class="custom-text" placeholder="제목을 입력하세요" required>
+										</div>
+										<div class="msg">
+											<p>최대 100자 이내</p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="field ">
+									<label class="label" for="content">내용</label>
+									<div class="ui-input">
+										<div class="input outlined">
+											<textarea name="content" id="content" rows="10" class="custom-textarea" maxlength="4000" placeholder="내용을 입력하세요"></textarea>
+										</div>
+										<div class="msg">
+											<p>최대 4000자 이내</p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div id="field">
+									<span class="label">첨부 파일 선택</span>
+										<input class="" type="file" name="imageFileName" onchange="readURL(this);"/>
+										<input type= "hidden" name="originalFileName" value="${article.imageFileName }" />
+									<div class="upload-preview">
+										<p class="desc">업로드 이미지 미리보기:</p>
+										<img id="preview" width="600" height="auto"/>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="ux-button-bar">
+									<a href="${contextPath}/board/adminListArticles.do" onclick="confirmNavigation(event)" class="ux-button outlined" role="button">
+										<span class="label">등록 취소</span>
+									</a>
+									<button class="ux-button contained primary" type="submit">
+										<span class="label">이벤트 등록</span>
+									</button>
+								</div>
+							</li>
+						</ul>
+					</fieldset>
+				</form>
+			</div>
+		</article>
+	</section>
+</main>
 <script type="text/javascript">
-   function readURL(input) {
-      if (input.files && input.files[0]) {
-	      var reader = new FileReader();
-	      reader.onload = function (e) {
-	        $('#preview').attr('src', e.target.result);
-          }
-         reader.readAsDataURL(input.files[0]);
-      }
-  }
-  function backToList(obj){
-    obj.action="${contextPath}/board/listArticles.do";
-    obj.submit();
-  }
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$('#preview').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 
-  var cnt=1;
-  function fn_addFile(){
-	  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
-	  cnt++;
-  }
-
+	function confirmNavigation(event) {
+		const userConfirmed = confirm(
+			"작성을 취소하고 목록으로 이동하시겠습니까?"
+		);
+		if (!userConfirmed) {
+			event.preventDefault();
+		}
+		return userConfirmed;
+	}
 </script>
- <title>글쓰기창</title>
-</head>
-<body>
-<h1 style="text-align:center">글쓰기</h1>
-  <form name="articleForm" method="post"   action="${contextPath}/board/addNewArticle.do"   enctype="multipart/form-data">
-    <table border="0" align="center">
-      <tr>
-					<td align="right"> 작성자</td>
-					<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${member.name }" readonly/> </td>
-			</tr>
-	     <tr>
-			   <td align="right">글제목: </td>
-			   <td colspan="2"><input type="text" size="67"  maxlength="500" name="title" /></td>
-		 </tr>
-	 		<tr>
-				<td align="right" valign="top"><br>글내용: </td>
-				<td colspan=2><textarea name="content" rows="10" cols="65" maxlength="4000"></textarea> </td>
-     </tr>
-     <tr>
-			  <td align="right">이미지파일 첨부:  </td>
-			  <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
-			  <td><img  id="preview" src="#"   width=200 height=200/></td>
-
-
-			  <td align="right">이미지파일 첨부</td>
-				<td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
-
-
-	   </tr>
-	   <tr>
-	      <td colspan="4"><div id="d_file"></div></td>
-	   </tr>
-	    <tr>
-	      <td align="right"> </td>
-	      <td colspan="2">
-	       <input type="submit" value="글쓰기" />
-	       <input type=button value="목록보기"onClick="backToList(this.form)" />
-	      </td>
-     </tr>
-    </table>
-  </form>
-</body>
-</html>

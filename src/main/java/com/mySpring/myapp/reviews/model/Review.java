@@ -8,29 +8,42 @@ import java.util.Date;
 public class Review {
 
     @Id
-    @Column(name = "RVWID") // 스크린샷에서 RVWID로 확인
-    private String rwId; // 리뷰 ID
+    @Column(name = "RVWID")
+    private String rwId;
 
-    @Column(name = "RSVNID") // 예약 ID
+    @Column(name = "RSVNID", nullable = false)
     private String rsvId;
 
-    @Column(name = "RVWSCORE") // 리뷰 점수
+    // 예약 건별 예약 ID (RESERVATIONS 테이블의 RSVNID)
+    @Column(name = "RSVNID2", nullable = true)
+    private String rsvId2;
+
+    @Column(name = "USERID", nullable = false)
+    private String userId;
+
+    @Column(name = "RVWSCORE")
     private int rwvScore;
 
-    @Column(name = "TITLE") // 리뷰 제목
+    @Column(name = "TITLE")
     private String title;
 
-    @Column(name = "CONTENT") // 리뷰 내용
+    @Column(name = "CONTENT")
     private String content;
 
-    @Column(name = "RVWIMG") // 리뷰 이미지
+    @Column(name = "RVWIMG")
     private String rwvImg;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CRTDATE") // 리뷰 작성일
+    @Column(name = "CRTDATE")
     private Date crtDate;
 
-    // Getters and Setters
+    @Column(name = "WASHID", insertable = false, updatable = false)
+    private String washId;
+
+    @Transient
+    private String washName;
+
+    // Getters & Setters
     public String getRwId() {
         return rwId;
     }
@@ -45,6 +58,22 @@ public class Review {
 
     public void setRsvId(String rsvId) {
         this.rsvId = rsvId;
+    }
+
+    public String getRsvId2() {
+        return rsvId2;
+    }
+
+    public void setRsvId2(String rsvId2) {
+        this.rsvId2 = rsvId2;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public int getRwvScore() {
@@ -85,5 +114,21 @@ public class Review {
 
     public void setCrtDate(Date crtDate) {
         this.crtDate = crtDate;
+    }
+
+    public String getWashId() {
+        return washId;
+    }
+
+    public void setWashId(String washId) {
+        this.washId = washId;
+    }
+
+    public String getWashName() {
+        return washName;
+    }
+
+    public void setWashName(String washName) {
+        this.washName = washName;
     }
 }

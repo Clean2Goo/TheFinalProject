@@ -1,6 +1,8 @@
 package com.mySpring.myapp.carwash.service;
 
+import com.mySpring.myapp.carwash.dao.CarWashDAO;
 import com.mySpring.myapp.carwash.model.CarWash;
+import com.mySpring.myapp.carwash.model.Staff;
 import com.mySpring.myapp.carwash.repository.CarWashRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.springframework.transaction.annotation.Transactional;
+
+
 @Service
 public class CarWashService {
 
@@ -26,16 +31,49 @@ public class CarWashService {
     @Autowired
     private RestTemplate restTemplate;
 
+    //beaver
+    @Autowired
+    private CarWashDAO carWashDAO;
+
     // 모든 세차장 데이터를 조회
+    @Transactional(readOnly = true)
     public List<CarWash> getAllCarWashes() {
         logger.info("Fetching all car washes from database.");
-        return carWashRepository.findAll();
+        return carWashRepository.findAll();  // staffList는 지연 로딩 상태로 남음
     }
 
     // 주소로 세차장 검색
     public List<CarWash> findCarWashesByAddr(String addr) {
         logger.info("Searching for car washes with address containing: " + addr);
         return carWashRepository.findByWashAddrContaining(addr);
+    }
+
+	//beaver 추가 강남구 특정 조건 세차장 조회
+	 public List<CarWash> selectCarWashesInGangnam() {
+        return carWashDAO.selectCarWashesInGangnam();
+    }
+	//beaver 추가 해당 아이디 세차장 정보 조회
+	@Transactional
+	public CarWash selectCarWasheById(int washId) {
+		logger.info("Fetching car wash details for ID: " + washId);
+        CarWash carWash = carWashDAO.selectCarWasheById(washId);
+        if (carWash == null) {
+            logger.warning("No car wash found for ID: " + washId);
+            return null;
+        }
+
+     // 스태프 정보 가져오기
+        List<Staff> staffList = carWashDAO.selectStaffByWashId(washId);
+        logger.info("Staff list: " + staffList); // 로그 추가
+
+        // 세차장 객체에 스태프 리스트 설정
+        if (staffList != null && !staffList.isEmpty()) {
+            carWash.setStaffList(staffList);
+        } else {
+            carWash.setStaffList(new ArrayList<>()); // 빈 리스트 설정
+        }
+
+        return carWash;
     }
 
     // 카카오 API로 데이터 요청
@@ -91,7 +129,6 @@ public class CarWashService {
                     carWash.setMaxCar(10);
                     carWash.setVacancy(5);
                     carWash.setNewYn("Y");
-                    carWash.setFavYn("N");
                     carWash.setRvwCount(0);
                     carWash.setRating(new BigDecimal("0.0"));
                     carWash.setCrtDate(new java.sql.Date(System.currentTimeMillis()));
@@ -184,4 +221,7 @@ public class CarWashService {
 
         return imageUrls;
     }
+
+
+
 }

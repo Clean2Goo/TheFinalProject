@@ -1,6 +1,8 @@
 package com.mySpring.myapp.carwash.dao;
 
 import com.mySpring.myapp.carwash.model.CarWash;
+import com.mySpring.myapp.carwash.model.Staff;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,5 +25,20 @@ public class CarWashDAOImpl implements CarWashDAO {
     @Override
     public List<CarWash> getAllCarWashes() {
         return sqlSession.selectList(NAMESPACE + ".getAllCarWashes");
+    }
+
+	@Override
+    public List<CarWash> selectCarWashesInGangnam() {
+        return sqlSession.selectList(NAMESPACE + ".selectCarWashesInGangnam");
+    }
+
+	@Override
+    public CarWash selectCarWasheById(int washId) {
+        return sqlSession.selectOne(NAMESPACE + ".selectCarWasheById",washId);
+    }
+
+	@Override
+    public List<Staff> selectStaffByWashId(int washId) {
+        return sqlSession.selectList(NAMESPACE + ".selectStaffByWashId", washId);
     }
 }

@@ -13,18 +13,26 @@ public class MemberVO {
 	private String phone; 
     private String userType; 
     private Date joinDate; 
+    private String img; 
+    private String rank; 
+    private Date dob;
+    private String newPassword;
+    private int totalRSVN; 
 
 	public MemberVO() {
 		
 	}
 
-	public MemberVO(String id, String pwd, String name, String email, String phone, String userType) {
+	public MemberVO(String id, String pwd, String name, String email, String phone, String userType, String img, String rank, int totalRSVN) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.userType = userType;
+        this.img = img;
+        this.rank = rank;
+        this.totalRSVN = totalRSVN;
     }
 
 	public String getId() {
@@ -34,7 +42,13 @@ public class MemberVO {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public String getNewPassword() {
+        return newPassword;
+    }
 
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
 	public String getPwd() {
 		return pwd;
 	}
@@ -82,4 +96,36 @@ public class MemberVO {
     public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
     }
+    
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+    
+    public String getRank() {
+		return rank;
+	}
+
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
+	
+	public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+    
+    public int getTotalRSVN() {
+		return totalRSVN;
+	}
+
+	public void setTotalRSVN(int totalRSVN) {
+		this.totalRSVN = totalRSVN;
+	}
 }

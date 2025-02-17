@@ -16,10 +16,11 @@ public class ArticleVO {
 	private String imageFileName;
 	private String id;
 	private Date  writeDate;
-	
-	
+
+	private String userName; // 작성자 이름
+
 	public ArticleVO() {
-		System.out.println("ArticleVO 생성자호출");
+		//System.out.println("ArticleVO 생성자호출");
 	}
 
 	public int getArticleNO() {
@@ -76,8 +77,8 @@ public class ArticleVO {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
 
 	public String getId() {
 		return id;
@@ -95,7 +96,13 @@ public class ArticleVO {
 		this.writeDate = writeDate;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
 
-	
-	
+	public void setUserhName(String userName) {
+		this.userName = userName;
+	}
+
+
 }

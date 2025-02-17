@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+   
+   <!-- 고객 asideLayout -->
+   <definition name="asideLayout"  template="/WEB-INF/views/common/asideLayout.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+      <put-attribute name="aside" value="/WEB-INF/views/common/aside.jsp" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+
+   <definition name="myInfo" extends="asideLayout">
+      <put-attribute name="title" value="나의정보" />
+      <put-attribute name="body" value="/WEB-INF/views/myPage/myInfo.jsp" />
+   </definition>
+   
+   <definition name="favorites" extends="asideLayout">
+      <put-attribute name="title" value="즐겨찾기" />
+      <put-attribute name="body" value="/WEB-INF/views/myPage/favorites.jsp" />
+   </definition>
+   
+   <definition name="benefit" extends="asideLayout">
+      <put-attribute name="title" value="등급혜택" />
+      <put-attribute name="body" value="/WEB-INF/views/myPage/benefit.jsp" />
+   </definition>
+
+</tiles-definitions>
